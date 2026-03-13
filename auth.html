@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in · ToniPR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --glass-bg: #fafafa;
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --border: rgba(0, 0, 0, 0.08);
+      --text-primary: #0a0a0a;
+      --text-secondary: #525252;
+      --text-muted: #737373;
+      --accent: #D7263D;
+      --accent-emerald: #22c55e;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .auth-page {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .auth-back-wrapper {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .auth-back-link {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .auth-back-link:hover {
+      color: var(--accent);
+    }
+
+    .auth-wrap {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .auth-logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .auth-header h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 600;
+      font-size: 1.75rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .auth-header p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .auth-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .auth-card:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .auth-tab:hover {
+      color: var(--text-secondary);
+    }
+
+    .auth-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-primary);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: all 0.3s;
+    }
+
+    .input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(215, 38, 61, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      margin-top: 8px;
+    }
+
+    .btn-primary:hover {
+      background: #c21f35;
+      transform: translateY(-1px);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+      gap: 16px;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth-divider span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .auth-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-back-wrapper">
+      <a href="#" class="auth-back-link" id="authBackLink">← Back</a>
+    </div>
+    <div class="auth-wrap">
+    <header class="auth-header">
+      <a href="index.html" class="auth-logo">ToniPR</a>
+      <h1>Log in or create an account</h1>
+      <p>Continue to start your AI interview</p>
+    </header>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" data-tab="login">Log in</button>
+        <button type="button" class="auth-tab" data-tab="signup">Create account</button>
+      </div>
+
+      <form class="auth-form active" id="formLogin" data-form="login">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="input" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="input" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
+
+      <form class="auth-form" id="formSignup" data-form="signup">
+        <div class="form-group">
+          <label for="signupName">Full name</label>
+          <input type="text" id="signupName" class="input" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" class="input" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" class="input" placeholder="••••••••" required minlength="8" />
+          <p class="form-hint">At least 8 characters</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Create account</button>
+      </form>
+    </div>
+
+    <p class="auth-footer">
+      By continuing, you agree to ToniPR's <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+    </p>
+  </div>
+  </div>
+
+  <script>
+    (function () {
+      document.getElementById('authBackLink').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (window.history.length > 1) {
+          history.back();
+        } else {
+          window.location.href = 'index.html';
+        }
+      });
+
+      const tabs = document.querySelectorAll('.auth-tab');
+      const forms = document.querySelectorAll('.auth-form');
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          const target = tab.dataset.tab;
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          forms.forEach(function (f) { f.classList.remove('active'); });
+          tab.classList.add('active');
+          document.getElementById('form' + target.charAt(0).toUpperCase() + target.slice(1)).classList.add('active');
+        });
+      });
+
+      document.getElementById('formLogin').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const params = new URLSearchParams(window.location.search);
+        const qs = params.toString();
+        window.location.href = 'onboarding.html' + (qs ? '?' + qs : '');
+      });
+
+      document.getElementById('formSignup').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const params = new URLSearchParams(window.location.search);
+        const qs = params.toString();
+        window.location.href = 'onboarding.html' + (qs ? '?' + qs : '');
+      });
+    })();
+  </script>
+</body>
+</html>

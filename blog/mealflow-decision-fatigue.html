@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Everyone Talks About Meal Prep, But Nobody Talks About Decision Fatigue | ToniPR Blog</title>
+  <meta name="description" content="At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-card: #fafafa;
+      --text-primary: #0a0a0a;
+      --text-secondary: #525252;
+      --text-muted: #737373;
+      --accent: #D7263D;
+      --border: rgba(0, 0, 0, 0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo-toni { width: 32px; height: auto; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .back-link-wrapper { text-align: left; margin-bottom: 24px; }
+    .back-link {
+      display: inline-block;
+      font-size: 0.9rem; color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .article-hero { padding: 140px 0 48px; }
+    .article-tag { display: block; font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
+    .example-notice {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 40px;
+    }
+    .interview-block {
+      margin: 40px 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .interview-block h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 16px 24px;
+      background: rgba(215, 38, 61, 0.06);
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+    .interview-qa {
+      padding: 24px;
+    }
+    .interview-qa-item {
+      margin-bottom: 24px;
+    }
+    .interview-qa-item:last-child { margin-bottom: 0; }
+    .interview-question {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .interview-question .qa-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .interview-answer {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      padding-left: 0;
+      line-height: 1.6;
+    }
+    .interview-answer .qa-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .article-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.25; margin-bottom: 20px; }
+    .article-meta { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px; }
+    .linkedin-callout {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      padding: 24px;
+      margin: 32px 0;
+      font-size: 1.05rem;
+    }
+    .article-body { padding: 0 0 80px; }
+    .article-body p { margin-bottom: 24px; color: var(--text-secondary); }
+    .article-body h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 600; margin: 48px 0 16px; }
+    .article-cta {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 48px;
+      border: 1px solid var(--border);
+    }
+    .article-cta h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; margin-bottom: 12px; }
+    .article-cta p { margin-bottom: 20px; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; background: var(--accent); color: white; }
+    .btn:hover { transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /> ToniPR</a>
+      <div class="nav-links">
+        <a href="index.html">Blog</a>
+        <a href="../pricing.html">Pricing</a>
+      </div>
+    </div>
+  </nav>
+
+  <article>
+    <header class="article-hero">
+      <div class="container">
+        <div class="back-link-wrapper">
+          <a href="index.html" class="back-link back-to-blog">← Back to blog</a>
+        </div>
+        <span class="article-tag">Example · LinkedIn Post</span>
+        <h1>Everyone Talks About Meal Prep, But Nobody Talks About Decision Fatigue</h1>
+        <p class="article-meta">March 2025 · Generated from a ToniPR interview</p>
+      </div>
+    </header>
+    <div class="article-body">
+      <div class="container">
+        <p class="example-notice">This is an example of content generated from a single ToniPR interview. Based on the product (a meal planning app), Toni's AI generated questions tailored to the founder's company. Below you'll see the Q&A and the LinkedIn post that was created.</p>
+
+        <div class="interview-block">
+          <h3>The interview</h3>
+          <div class="interview-qa">
+            <div class="interview-qa-item">
+              <p class="interview-question"><span class="qa-label">Toni</span> What are you building?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> A meal planning app for busy families.</div>
+            </div>
+            <div class="interview-qa-item">
+              <p class="interview-question"><span class="qa-label">Toni</span> What problem does it solve?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> We take the stress out of dinner. Weekly recipes in 30 seconds.</div>
+            </div>
+            <div class="interview-qa-item">
+              <p class="interview-question"><span class="qa-label">Toni</span> What's the biggest dinner-time pain point families tell you about?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> Deciding what to make. We found they spend 3 hours a week just on that.</div>
+            </div>
+            <div class="interview-qa-item">
+              <p class="interview-question"><span class="qa-label">Toni</span> What's the biggest insight you've learned from your users?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> Families spend 3 hours a week just deciding what to cook. We cut that to under 2 minutes.</div>
+            </div>
+            <div class="interview-qa-item">
+              <p class="interview-question"><span class="qa-label">Toni</span> What would you say to someone skeptical about meal planning apps?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> That's not just time saved. That's less stress at the dinner table.</div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Generated content</h2>
+        <div class="linkedin-callout">
+          <strong>Everyone talks about "meal prep," but nobody talks about decision fatigue.</strong> At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.
+        </div>
+
+        <p>That paragraph started as a 10-minute conversation. A founder sat down with Toni, answered a few questions about what they're building and why, and out came this LinkedIn post. Plus a full case study, press quotes, and more.</p>
+
+        <h2>The hidden cost of "what's for dinner?"</h2>
+        <p>Meal prep advice usually focuses on the cooking. Batch your proteins. Chop your veggies on Sunday. But the real friction for busy families isn't the cooking. It's the deciding. The back and forth. The mental load of figuring out what to make when you're already tired.</p>
+
+        <h2>What MealFlow does differently</h2>
+        <p>MealFlow takes preferences, dietary needs, and what's in your pantry, then suggests weekly recipes in under 30 seconds. No more scrolling. No more "I don't know, you pick." The decision fatigue goes away because the app makes the call.</p>
+
+        <div class="article-cta">
+          <h3>Get content like this from one interview</h3>
+          <p>One 10-minute Toni interview. LinkedIn posts, blog articles, press quotes. Ready to publish.</p>
+          <a href="../pricing.html" class="btn">Start your AI interview</a>
+        </div>
+      </div>
+    </div>
+  </article>
+  <script>
+    document.querySelector('.back-to-blog')?.addEventListener('click', function (e) {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  </script>
+</body>
+</html>
