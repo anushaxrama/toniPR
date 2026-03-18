@@ -29,12 +29,37 @@
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
+      background-color: #ffffff;
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
+      z-index: 999;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      border-top: 2px solid rgba(215, 38, 61, 0.15);
+      border-left: 2px solid rgba(215, 38, 61, 0.15);
+      border-radius: 16px 0 0 0;
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* Layout */
@@ -150,6 +175,17 @@
       font-size: 1rem;
       margin-bottom: 32px;
     }
+    .step-goal-badge {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(215, 38, 61, 0.08);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+    .step-goal-badge:empty { display: none; }
 
     /* Cards */
     .goal-grid {
@@ -165,10 +201,12 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-md);
       padding: 20px;
+      min-height: 120px;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       text-align: left;
       color: var(--text-primary);
+      -webkit-tap-highlight-color: transparent;
     }
     .goal-card:hover {
       transform: translateY(-4px);
@@ -515,12 +553,19 @@
       .welcome-wrap { grid-template-columns: 1fr; }
       .welcome-hero { text-align: center; }
       .welcome-desc { margin-left: auto; margin-right: auto; }
-      .goal-grid { grid-template-columns: 1fr 1fr; }
+      .goal-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .goal-card { min-height: 110px; padding: 24px; }
     }
-    @media (max-width: 520px) {
-      .goal-grid { grid-template-columns: 1fr; }
-      .btn-row { flex-direction: column; align-items: stretch; }
+    @media (max-width: 600px) {
+      .onboarding { padding: 24px 20px 40px; }
+      .goal-grid { grid-template-columns: 1fr; gap: 12px; }
+      .goal-card { min-height: 100px; padding: 20px 24px; }
+      .step-title { font-size: 1.5rem; }
+      .step-desc { font-size: 0.95rem; margin-bottom: 24px; }
+      .btn-row { flex-direction: column; align-items: stretch; gap: 8px; }
+      .btn-row .btn { min-height: 48px; }
       .btn-row .btn-secondary { order: 2; }
+      .btn-row .btn-link { order: 3; }
     }
   </style>
 </head>
@@ -607,6 +652,7 @@
 
       <!-- Step 2: Details (optional) -->
       <section class="step" data-step="2" id="step2">
+        <p class="step-goal-badge" id="step2GoalBadge"></p>
         <h2 class="step-title">Quick details (optional)</h2>
         <p class="step-desc">Helps Toni personalize your interview. You can refine everything when you chat.</p>
         <div class="form-group">
@@ -674,6 +720,13 @@
         });
       }
 
+      const goalLabels = {
+        fundraising: 'Fundraising',
+        launch: 'Product launch',
+        hiring: 'Hiring',
+        'thought-leadership': 'Thought leadership'
+      };
+
       function goToStep(next) {
         const prev = currentStep;
         if (next < 0 || next >= totalSteps) return;
@@ -687,6 +740,11 @@
           currentStep = next;
           steps[currentStep].classList.add('active');
           updateProgress();
+
+          if (next === 2 && state.goal) {
+            const badge = document.getElementById('step2GoalBadge');
+            if (badge) badge.textContent = "We'll tailor your interview for " + (goalLabels[state.goal] || state.goal);
+          }
         }, 320);
       }
 

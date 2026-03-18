@@ -20,7 +20,38 @@
       --transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #ffffff;
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
+      z-index: 999;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      border-top: 2px solid rgba(215, 38, 61, 0.15);
+      border-left: 2px solid rgba(215, 38, 61, 0.15);
+      border-radius: 20px 0 0 0;
+      pointer-events: none;
+      z-index: 0;
+    }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -77,7 +108,26 @@
     .pricing-btn { width: 100%; justify-content: center; }
     .pricing-savings { font-size: 0.75rem; color: var(--accent-emerald); font-weight: 600; margin-bottom: 8px; }
     .pricing-guarantee { text-align: center; font-size: 0.9rem; color: var(--text-muted); padding: 48px 0; }
-    footer { padding: 48px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; background: var(--bg); }
+    .token-badge { display: inline-block; font-size: 0.75rem; font-weight: 600; color: var(--accent); background: rgba(215, 38, 61, 0.08); padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
+    .pricing-tokens { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+    .token-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 48px;
+    }
+    .token-section h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 16px; }
+    .token-section p { color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; }
+    .token-usage { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .token-usage-item { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-size: 0.9rem; }
+    .token-usage-item strong { color: var(--text-primary); }
+    .token-usage-item span { color: var(--accent); font-weight: 600; }
+    .addon-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .addon-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .addon-card .tokens { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    .addon-card .price { font-size: 0.95rem; color: var(--text-secondary); margin: 4px 0 12px; }
+    footer { padding: 48px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; background: #fafafa; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; text-align: center; }
     .footer-logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; }
     .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-bottom: 16px; }
@@ -108,7 +158,7 @@
         <a href="index.html" class="back-link">← Back to home</a>
       </div>
       <h1>Simple, transparent pricing</h1>
-      <p>Choose a plan that fits your needs. Each plan includes different outputs. See what comes with each subscription below.</p>
+      <p>Subscribe and get tokens every month. Use them for AI interviews and PR content. Start with a free trial—no credit card required.</p>
       <div class="pricing-hero-divider"></div>
     </div>
   </header>
@@ -116,86 +166,86 @@
   <section class="pricing-section">
     <div class="container">
       <div class="pricing-model">
-        <p class="pricing-model-label">Pay as you go</p>
-        <p class="pricing-model-desc">No commitment. One interview = one full PR kit. Credits never expire.</p>
+        <p class="pricing-model-label">Subscription plans</p>
+        <p class="pricing-model-desc">Every plan includes everything. The more you pay, the more content you get. All plans come with a 7-day free trial.</p>
+        <div class="pricing-includes" style="background: rgba(215, 38, 61, 0.04); border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; text-align: center;">
+          <p style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Every plan includes</p>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">AI interviews · LinkedIn posts · Blog articles · Press quotes · Founder bio · Full PR kit</p>
+        </div>
         <div class="pricing-cards pricing-cards--3">
           <div class="pricing-card">
-            <h3>Single</h3>
-            <p class="pricing-desc">Try it for one campaign.</p>
-            <div class="pricing-price"><span class="price">$29</span> one-time</div>
+            <h3>Starter</h3>
+            <p class="pricing-desc">Less content, same features.</p>
+            <span class="token-badge">500 tokens/month</span>
+            <div class="pricing-price"><span class="price">$39</span>/month</div>
             <ul class="pricing-features">
-              <li>1 AI Interview</li>
-              <li>5 LinkedIn posts</li>
-              <li>1 Blog article</li>
-              <li>24h turnaround</li>
-            </ul>
-            <a href="auth.html" class="btn btn-secondary pricing-btn">Get started</a>
-          </div>
-          <div class="pricing-card pricing-card-popular">
-            <span class="popular-badge">Best value</span>
-            <h3>3-pack</h3>
-            <p class="pricing-desc">For launch season or quarterly pushes.</p>
-            <div class="pricing-price"><span class="price">$69</span> one-time</div>
-            <p class="pricing-savings">Save $18</p>
-            <ul class="pricing-features">
-              <li>3 AI Interviews</li>
-              <li>15 LinkedIn posts</li>
-              <li>3 Blog articles</li>
-              <li>24h turnaround</li>
-            </ul>
-            <a href="auth.html" class="btn btn-primary pricing-btn">Get 3-pack</a>
-          </div>
-          <div class="pricing-card">
-            <h3>5-pack</h3>
-            <p class="pricing-desc">For founders who need consistent presence.</p>
-            <div class="pricing-price"><span class="price">$99</span> one-time</div>
-            <p class="pricing-savings">Save $46</p>
-            <ul class="pricing-features">
-              <li>5 AI Interviews</li>
-              <li>25 LinkedIn posts</li>
-              <li>5 Blog articles</li>
-              <li>24h turnaround</li>
-            </ul>
-            <a href="auth.html" class="btn btn-secondary pricing-btn">Get 5-pack</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pricing-model">
-        <p class="pricing-model-label">Monthly subscription</p>
-        <p class="pricing-model-desc">Unlock interviews every month. Includes priority support and extras.</p>
-        <div class="pricing-cards pricing-cards--2">
-          <div class="pricing-card">
-            <h3>Growth</h3>
-            <p class="pricing-desc">Consistent monthly presence. 7-day free trial.</p>
-            <div class="pricing-price"><span class="price">$79</span>/month</div>
-            <ul class="pricing-features">
-              <li>2 AI Interviews / month</li>
-              <li>12 LinkedIn posts</li>
-              <li>2 Blog articles</li>
-              <li>Founder bio refresh</li>
-              <li>Priority support</li>
+              <li>~5 interviews or ~10 posts</li>
+              <li>Everything included</li>
+              <li>7-day free trial</li>
             </ul>
             <a href="auth.html" class="btn btn-secondary pricing-btn">Start free trial</a>
           </div>
           <div class="pricing-card pricing-card-popular">
-            <span class="popular-badge">Most Popular</span>
-            <h3>Pro</h3>
-            <p class="pricing-desc">For aggressive growth. 7-day free trial.</p>
-            <div class="pricing-price"><span class="price">$149</span>/month</div>
+            <span class="popular-badge">Best value</span>
+            <h3>Growth</h3>
+            <p class="pricing-desc">More content, same features.</p>
+            <span class="token-badge">1,000 tokens/month</span>
+            <div class="pricing-price"><span class="price">$79</span>/month</div>
+            <p class="pricing-savings">2x the content</p>
             <ul class="pricing-features">
-              <li>4 AI Interviews / month</li>
-              <li>20+ LinkedIn posts</li>
-              <li>4 Blog articles</li>
-              <li>Press kit generation</li>
-              <li>Custom strategy</li>
+              <li>~10 interviews or ~20 posts</li>
+              <li>Everything included</li>
+              <li>7-day free trial</li>
             </ul>
             <a href="auth.html" class="btn btn-primary pricing-btn">Start free trial</a>
+          </div>
+          <div class="pricing-card">
+            <h3>Pro</h3>
+            <p class="pricing-desc">Most content, same features.</p>
+            <span class="token-badge">2,000 tokens/month</span>
+            <div class="pricing-price"><span class="price">$149</span>/month</div>
+            <p class="pricing-savings">4x the content</p>
+            <ul class="pricing-features">
+              <li>~20 interviews or ~40 posts</li>
+              <li>Everything included</li>
+              <li>7-day free trial</li>
+            </ul>
+            <a href="auth.html" class="btn btn-secondary pricing-btn">Start free trial</a>
           </div>
         </div>
       </div>
 
-      <p class="pricing-guarantee">30-day money-back guarantee. No questions asked.</p>
+      <div class="token-section">
+        <h3>How tokens work</h3>
+        <p>Use tokens for AI interviews and content generation. One interview gives you a full PR kit—LinkedIn posts, blog article, press quotes, and more.</p>
+        <div class="token-usage">
+          <div class="token-usage-item">1 AI interview (full PR kit) = <span>100 tokens</span></div>
+          <div class="token-usage-item">1 LinkedIn post (individual) = <span>50 tokens</span></div>
+          <div class="token-usage-item">1 Blog article = <span>50 tokens</span></div>
+          <div class="token-usage-item">1 Press quote pack = <span>50 tokens</span></div>
+        </div>
+        <h3 style="margin-top: 32px; margin-bottom: 12px;">Run out of tokens?</h3>
+        <p style="margin-bottom: 20px;">Buy more anytime. 10 tokens = $1. Tokens never expire.</p>
+        <div class="addon-cards">
+          <div class="addon-card">
+            <div class="tokens">100 tokens</div>
+            <div class="price">$10 · 1 interview</div>
+            <a href="auth.html" class="btn btn-secondary" style="width:100%;padding:8px 16px;font-size:0.85rem">Add tokens</a>
+          </div>
+          <div class="addon-card">
+            <div class="tokens">500 tokens</div>
+            <div class="price">$50 · 5 interviews</div>
+            <a href="auth.html" class="btn btn-secondary" style="width:100%;padding:8px 16px;font-size:0.85rem">Add tokens</a>
+          </div>
+          <div class="addon-card">
+            <div class="tokens">1,000 tokens</div>
+            <div class="price">$100 · 10 interviews</div>
+            <a href="auth.html" class="btn btn-secondary" style="width:100%;padding:8px 16px;font-size:0.85rem">Add tokens</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="pricing-guarantee">7-day free trial on all plans. 30-day money-back guarantee. Cancel anytime.</p>
     </div>
   </section>
 
@@ -209,7 +259,7 @@
         <a href="blog/index.html">Blog</a>
         <a href="auth.html">Get started</a>
       </div>
-      <p class="footer-copy">© 2024 ToniPR by Tunepact. All rights reserved.</p>
+      <p class="footer-copy">© 2025 ToniPR by Tunepact. All rights reserved.</p>
     </div>
   </footer>
 </body>

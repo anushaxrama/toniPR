@@ -24,10 +24,35 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
+      background-color: #ffffff;
+      position: relative;
       color: var(--text-primary);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
+      z-index: 999;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      border-top: 2px solid rgba(215, 38, 61, 0.15);
+      border-left: 2px solid rgba(215, 38, 61, 0.15);
+      border-radius: 20px 0 0 0;
+      pointer-events: none;
+      z-index: 0;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     nav {
@@ -47,7 +72,7 @@
     .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
     .nav-links a:hover { color: var(--accent); }
-    .back-link-wrapper { text-align: left; margin-bottom: 24px; }
+    .back-link-wrapper { text-align: left; margin-bottom: 40px; }
     .back-link {
       display: inline-block;
       font-size: 0.9rem; color: var(--text-secondary); text-decoration: none;
@@ -62,12 +87,11 @@
     .btn-primary:hover { transform: translateY(-1px); }
 
     .blog-hero {
-      padding: 140px 0 120px;
+      padding: 160px 0 140px;
       text-align: center;
-      background: var(--bg);
+      background: #ffffff;
     }
-    .blog-hero img { width: 80px; height: auto; margin-bottom: 32px; opacity: 0.9; }
-    .blog-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 28px; }
+    .blog-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 36px; }
     .blog-hero-desc {
       font-size: 1.35rem;
       color: var(--text-secondary);
@@ -77,7 +101,7 @@
     }
 
     .featured-spotlight {
-      padding: 60px 0 80px;
+      padding: 80px 0 100px;
     }
     .section-label {
       font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
@@ -90,10 +114,24 @@
       border-radius: 16px;
       padding: 48px;
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
+      grid-template-columns: 200px 1fr 1.2fr;
       gap: 48px;
       align-items: center;
       box-shadow: 0 24px 56px rgba(215, 38, 61, 0.08);
+    }
+    .spotlight-image {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-elevated);
+    }
+    .spotlight-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 1;
+      object-fit: cover;
     }
     .spotlight-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
     .spotlight-card h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.75rem; font-weight: 700; margin-bottom: 16px; }
@@ -109,12 +147,12 @@
     .spotlight-preview blockquote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); line-height: 1.65; }
 
     .example-section {
-      padding: 60px 0 80px;
-      background: linear-gradient(180deg, rgba(215, 38, 61, 0.04) 0%, transparent 100%);
+      padding: 80px 0 100px;
+      background: #ffffff;
     }
     .example-banner {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
     .example-badge {
       display: inline-block;
@@ -144,7 +182,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 32px;
+      overflow: hidden;
       text-decoration: none;
       color: inherit;
       display: flex;
@@ -152,6 +190,18 @@
       transition: all 0.3s ease;
       border-left: 4px solid var(--accent);
     }
+    .example-card-image {
+      height: 140px;
+      background: var(--bg-elevated);
+      overflow: hidden;
+    }
+    .example-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .example-card-body { padding: 24px; }
     .example-card:hover {
       transform: translateY(-4px);
       border-color: rgba(215, 38, 61, 0.3);
@@ -164,6 +214,7 @@
       letter-spacing: 0.08em;
       margin-bottom: 12px;
     }
+    .example-card-body .example-card-tag { margin-bottom: 8px; }
     .example-card h3 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 1.15rem;
@@ -185,13 +236,13 @@
     }
 
     .articles-grid {
-      padding: 60px 0 100px;
+      padding: 80px 0 120px;
     }
     .articles-grid h2 { margin-bottom: 32px; }
     .article-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 32px;
+      gap: 40px;
     }
     .article-card {
       background: var(--bg-card);
@@ -209,11 +260,14 @@
     .article-card-image {
       height: 180px;
       background: var(--bg-elevated);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
     }
-    .article-card-image img { width: 64px; height: auto; opacity: 0.8; }
+    .article-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
     .article-card-body { padding: 24px; }
     .article-card-tag { font-size: 0.7rem; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; }
     .article-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; line-height: 1.35; }
@@ -248,6 +302,7 @@
 
     @media (max-width: 768px) {
       .spotlight-card { grid-template-columns: 1fr; }
+      .spotlight-image { max-width: 120px; margin: 0 auto; }
       .article-cards { grid-template-columns: 1fr; }
       .example-cards { grid-template-columns: 1fr; }
       .nav-links { display: none; }
@@ -273,7 +328,6 @@
       <div class="back-link-wrapper">
         <a href="../index.html" class="back-link">← Back to home</a>
       </div>
-      <img src="../assets/toni.png" alt="Toni" />
       <h1>Blog</h1>
       <p class="blog-hero-desc">See what other founders are doing. Real examples of LinkedIn posts, blog articles, and press quotes from Toni interviews. Learn how they tell their story and get inspired for your own.</p>
     </div>
@@ -288,22 +342,37 @@
       </div>
       <div class="example-cards">
         <a href="mealflow-decision-fatigue.html" class="example-card">
-          <span class="example-card-tag">LinkedIn Post</span>
-          <h3>Everyone talks about "meal prep," but nobody talks about decision fatigue</h3>
-          <p>At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.</p>
-          <span class="example-card-link">View full example →</span>
+          <div class="example-card-image">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Family meal planning" />
+          </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">LinkedIn Post</span>
+            <h3>Everyone talks about "meal prep," but nobody talks about decision fatigue</h3>
+            <p>At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.</p>
+            <span class="example-card-link">View full example →</span>
+          </div>
         </a>
         <a href="mealflow-planning-article.html" class="example-card">
-          <span class="example-card-tag">Article</span>
-          <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
-          <p>A family of five was spending hours each week on dinner decisions. After trying MealFlow, they cut meal planning to under 2 minutes.</p>
-          <span class="example-card-link">Read full article →</span>
+          <div class="example-card-image">
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80" alt="Meal prep and planning" />
+          </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">Article</span>
+            <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
+            <p>A family of five was spending hours each week on dinner decisions. After trying MealFlow, they cut meal planning to under 2 minutes.</p>
+            <span class="example-card-link">Read full article →</span>
+          </div>
         </a>
         <a href="mealflow-press-quote.html" class="example-card">
-          <span class="example-card-tag">Press Quote</span>
-          <h3>"That's not just time saved. That's less stress at the dinner table."</h3>
-          <p>Ready-to-use for parenting blogs, podcasts, and influencer decks.</p>
-          <span class="example-card-link">See full example →</span>
+          <div class="example-card-image">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Family dinner at the table" />
+          </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">Press Quote</span>
+            <h3>"That's not just time saved. That's less stress at the dinner table."</h3>
+            <p>Ready-to-use for parenting blogs, podcasts, and influencer decks.</p>
+            <span class="example-card-link">See full example →</span>
+          </div>
         </a>
       </div>
     </div>
@@ -314,6 +383,9 @@
       <span class="section-label">Featured Founder</span>
       <h2 class="section-title">Founder Spotlight</h2>
       <div class="spotlight-card">
+        <div class="spotlight-image">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80" alt="Developer at work" />
+        </div>
         <div>
           <span class="spotlight-badge">Spotlight</span>
           <h2>Building AI Tools for Developers</h2>
@@ -336,7 +408,7 @@
       <div class="article-cards">
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Family meal planning" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">Example</span>
@@ -350,7 +422,7 @@
         </div>
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80" alt="Meal prep and planning" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">Example</span>
@@ -364,7 +436,7 @@
         </div>
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Family dinner at the table" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">Example</span>
@@ -378,7 +450,7 @@
         </div>
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Founder and team" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">Founder Guide</span>
@@ -392,7 +464,7 @@
         </div>
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="Developer at laptop" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">Spotlight</span>
@@ -406,7 +478,7 @@
         </div>
         <div class="article-card">
           <div class="article-card-image">
-            <img src="../assets/toni.png" alt="" />
+            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80" alt="Microphone and podcast" />
           </div>
           <div class="article-card-body">
             <span class="article-card-tag">PR Tips</span>

@@ -27,7 +27,7 @@
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
+      background-color: #ffffff;
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
@@ -36,6 +36,31 @@
       justify-content: center;
       padding: 24px;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
+      z-index: 999;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      border-top: 2px solid rgba(215, 38, 61, 0.15);
+      border-left: 2px solid rgba(215, 38, 61, 0.15);
+      border-radius: 16px 0 0 0;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .auth-page {
@@ -336,14 +361,14 @@
         e.preventDefault();
         const params = new URLSearchParams(window.location.search);
         const qs = params.toString();
-        window.location.href = 'onboarding.html' + (qs ? '?' + qs : '');
+        window.location.href = 'dashboard.html' + (qs ? '?' + qs : '');
       });
 
       document.getElementById('formSignup').addEventListener('submit', function (e) {
         e.preventDefault();
         const params = new URLSearchParams(window.location.search);
         const qs = params.toString();
-        window.location.href = 'onboarding.html' + (qs ? '?' + qs : '');
+        window.location.href = 'dashboard.html' + (qs ? '?' + qs : '');
       });
     })();
   </script>
