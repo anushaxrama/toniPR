@@ -1,0 +1,9 @@
+Place Toni brand files here (from your Drive / design exports).
+
+Bundled from "Toni Designs" archive (site prefers GIFs; JPG/PNG are fallbacks):
+  Toni_thumbs_up_animation.gif — hero welcome + how-it-works flair + CTA
+  Toni_Explains.gif            — product demo flair
+  Toni_Thinking.gif            — story bridge (above Problem / Solution flow)
+  toni-listens.jpg             — fallback if a GIF fails to load
+  happy-toni.jpg               — CTA fallback
+  all-purpose-v2.png           — nav / footer mark on landing (fallback: ../toni.png)

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes | ToniPR Blog</title>
-  <meta name="description" content="A family of five was spending hours each week on dinner decisions. After trying MealFlow, they cut meal planning to under 2 minutes. Here's how they did it." />
+  <meta name="description" content="Composite case study: how a busy family used MealFlow to turn ~3 hours a week of dinner decisions into a two-minute weekly plan—with less stress and groceries that actually match the menu." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -19,44 +19,240 @@
       --border: rgba(0, 0, 0, 0.08);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .page-bg.page-bg--hidden .page-bg__corner,
+    .page-bg.page-bg--hidden .page-bg__rift {
+      animation-play-state: paused;
+    }
+    .page-bg__wash {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .page-bg__art {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .page-bg__corner {
+      position: absolute;
+      width: min(88vw, 900px);
+      height: min(88vh, 880px);
+      will-change: transform;
+      opacity: 0.94;
+      background-image:
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+      background-repeat: repeat;
+    }
+    .page-bg__corner--tr {
+      top: -14%;
+      right: -14%;
+      left: auto;
+      bottom: auto;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 10px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      animation: pageBgCornerTR 26s ease-in-out infinite;
+    }
+    .page-bg__corner--tl {
+      top: -14%;
+      left: -14%;
+      right: auto;
+      bottom: auto;
+      background-size: 19px 19px, 19px 19px;
+      background-position: 0 0, 11px 6px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      animation: pageBgCornerTL 34s ease-in-out infinite;
+    }
+    .page-bg__corner--br {
+      bottom: -14%;
+      right: -14%;
+      top: auto;
+      left: auto;
+      background-size: 12px 12px, 12px 12px;
+      background-position: 0 0, 5px 8px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      animation: pageBgCornerBR 22s ease-in-out infinite;
+    }
+    .page-bg__corner--bl {
+      bottom: -14%;
+      left: -14%;
+      top: auto;
+      right: auto;
+      background-size: 17px 17px, 17px 17px;
+      background-position: 0 0, 9px 12px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      animation: pageBgCornerBL 31s ease-in-out infinite;
+    }
+    @keyframes pageBgCornerTR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 7px 10px;
+        opacity: 0.9;
+      }
+      50% {
+        transform: translate(-22px, 28px) scale(1.03);
+        background-position: 26px 20px, 33px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerTL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 11px 6px;
+        opacity: 0.88;
+      }
+      50% {
+        transform: translate(18px, 24px) scale(1.025);
+        background-position: -20px 16px, -9px 22px;
+        opacity: 0.98;
+      }
+    }
+    @keyframes pageBgCornerBR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 5px 8px;
+        opacity: 0.92;
+      }
+      50% {
+        transform: translate(-26px, -20px) scale(1.04);
+        background-position: 30px 22px, 35px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerBL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 9px 12px;
+        opacity: 0.85;
+      }
+      50% {
+        transform: translate(24px, -18px) scale(1.02);
+        background-position: -18px -14px, -9px -2px;
+        opacity: 0.96;
+      }
+    }
+    .page-bg__rift {
+      position: absolute;
+      inset: -8%;
+      background-image: radial-gradient(
+        circle at 1.5px 1.5px,
+        rgba(215, 38, 61, 0.1) 1.05px,
+        transparent 1.2px
+      );
+      background-size: 24px 24px;
+      opacity: 0.72;
+      -webkit-mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      animation: pageBgRift 48s ease-in-out infinite;
+    }
+    @keyframes pageBgRift {
+      0%, 100% {
+        transform: translate(0, 0);
+        background-position: 0 0;
+        opacity: 0.62;
+      }
+      33% {
+        transform: translate(16px, -20px);
+        background-position: 22px 28px;
+        opacity: 0.78;
+      }
+      66% {
+        transform: translate(-14px, 12px);
+        background-position: -12px 18px;
+        opacity: 0.68;
+      }
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background-color: #ffffff;
       color: var(--text-primary);
+      overflow-x: hidden;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       position: relative;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 16px 0 0 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+    article { position: relative; z-index: 1; }
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 20px 0;
+      background: transparent;
+      transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    nav.scrolled {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -74,7 +270,7 @@
     .article-hero { padding: 140px 0 48px; }
     .article-featured-image {
       width: 100%;
-      max-width: 720px;
+      max-width: 800px;
       margin: 0 auto 40px;
       border-radius: 12px;
       overflow: hidden;
@@ -87,7 +283,7 @@
       display: block;
     }
     .article-tag { font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
-    .article-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.25; margin-bottom: 20px; }
+    .article-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.15rem, 4.2vw, 3.05rem); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
     .article-meta { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px; }
     .example-notice {
       font-size: 0.8rem;
@@ -158,9 +354,16 @@
       margin: 32px 0;
       color: var(--text-primary);
     }
-    .article-body { padding: 0 0 80px; }
-    .article-body p { margin-bottom: 24px; color: var(--text-secondary); }
-    .article-body h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 600; margin: 48px 0 16px; }
+    .article-body { padding: 0 0 96px; font-size: 1.125rem; }
+    .article-body p { margin-bottom: 1.35em; color: var(--text-secondary); line-height: 1.75; }
+    .article-body h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.45rem, 3vw, 1.85rem); font-weight: 600; margin: 56px 0 20px; line-height: 1.3; color: var(--text-primary); }
+    .article-body .article-lede { font-size: 1.2rem; color: var(--text-primary); line-height: 1.65; font-weight: 500; margin-bottom: 28px; }
+    .article-body ul { margin: 0 0 24px 1.15em; color: var(--text-secondary); line-height: 1.75; }
+    .article-body li { margin-bottom: 0.5em; }
+    .article-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin: 32px 0; }
+    .article-stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; text-align: center; }
+    .article-stat strong { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.65rem; color: var(--text-primary); margin-bottom: 4px; }
+    .article-stat span { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
     .article-cta {
       background: var(--bg-card);
       border-radius: 16px;
@@ -172,12 +375,39 @@
     .article-cta p { margin-bottom: 20px; }
     .btn { display: inline-flex; align-items: center; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; background: var(--accent); color: white; }
     .btn:hover { transform: translateY(-1px); }
+    @media (prefers-reduced-motion: reduce) {
+      .page-bg__corner,
+      .page-bg__rift {
+        animation: none !important;
+        transform: none !important;
+        background-position: 0 0, 0 0 !important;
+        opacity: 0.55 !important;
+      }
+      .page-bg__rift {
+        background-position: 0 0 !important;
+        opacity: 0.35 !important;
+      }
+      .page-bg {
+        transition: none;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
   <nav>
     <div class="nav-inner">
-      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /> ToniPR</a>
+      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /><span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px">ToniPR <span style="font-weight:500;font-size:0.7rem;color:var(--text-muted)">by Tunepact</span></span></a>
       <div class="nav-links">
         <a href="index.html">Blog</a>
         <a href="../pricing.html">Pricing</a>
@@ -196,62 +426,92 @@
         </div>
         <span class="article-tag">Example · Case Study</span>
         <h1>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h1>
-        <p class="article-meta">March 2025 · Generated from a ToniPR interview</p>
+        <p class="article-meta">March 2025 · Example composite case study · Generated from a ToniPR interview</p>
       </div>
     </header>
     <div class="article-body">
       <div class="container">
-        <p class="example-notice">This is an example of a blog article generated from a single ToniPR interview. Toni's AI tailored the questions to the product, a meal planning app for families. Below you'll see the Q&A and the full article that was created.</p>
+        <p class="example-notice">This is an example long-form case study produced from a single ToniPR interview. MealFlow is a fictional product used for demonstration; the story below is a composite, but the numbers and behaviors mirror what we hear from busy families and from meal-planning founders in user research.</p>
 
         <div class="interview-block">
           <h3>The interview</h3>
           <div class="interview-qa">
             <div class="interview-qa-item">
-              <p class="interview-question"><span class="qa-label">Toni</span> What are you building?</p>
-              <div class="interview-answer"><span class="qa-label">Founder</span> A meal planning app for busy families.</div>
+              <p class="interview-question"><span class="qa-label">Toni:</span> What are you building?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> MealFlow—it's a meal-planning app for families who don't have time to become "meal prep people." You tell it who eats what, how many nights you actually cook, and what's already in the pantry. It spits out a week of dinners and a grocery list that matches, not a Pinterest board you'll never open.</div>
             </div>
             <div class="interview-qa-item">
-              <p class="interview-question"><span class="qa-label">Toni</span> What problem does it solve?</p>
-              <div class="interview-answer"><span class="qa-label">Founder</span> We take the stress out of dinner. Weekly recipes in 30 seconds.</div>
+              <p class="interview-question"><span class="qa-label">Toni:</span> What problem does it solve?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> The hidden tax of deciding. Most families aren't slow at cooking—they're slow at choosing. They burn 15–25 minutes a night going back and forth, opening three tabs, realizing they're one ingredient short, then ordering takeout anyway. We compress the whole weekly plan into about 30 seconds of taps, then you get out of the app's way.</div>
             </div>
             <div class="interview-qa-item">
-              <p class="interview-question"><span class="qa-label">Toni</span> What's the biggest dinner-time pain point families tell you about?</p>
-              <div class="interview-answer"><span class="qa-label">Founder</span> Deciding what to make. We found they spend 3 hours a week just on that.</div>
+              <p class="interview-question"><span class="qa-label">Toni:</span> What's the biggest dinner-time pain point families tell you about?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> Decision fatigue. In our surveys and interviews, parents said they spend roughly three hours a week—sometimes more—just on "what should we have?" and reconciling that with picky eaters, sports nights, and whatever's about to go bad in the produce drawer.</div>
             </div>
             <div class="interview-qa-item">
-              <p class="interview-question"><span class="qa-label">Toni</span> What's the biggest insight you've learned from your users?</p>
-              <div class="interview-answer"><span class="qa-label">Founder</span> Families spend 3 hours a week just deciding what to cook. We cut that to under 2 minutes.</div>
+              <p class="interview-question"><span class="qa-label">Toni:</span> What's the biggest insight you've learned from your users?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> They don't want 400 new recipes. They want six repeatable dinners their kids won't fight, two quick wins for chaotic Tuesdays, and a list that doesn't send them back to the store midweek. When we locked the weekly ritual to under two minutes—literally timed—they stuck with it. Completion on weekly plans went way up.</div>
             </div>
             <div class="interview-qa-item">
-              <p class="interview-question"><span class="qa-label">Toni</span> What would you say to someone skeptical about meal planning apps?</p>
-              <div class="interview-answer"><span class="qa-label">Founder</span> That's not just time saved. That's less stress at the dinner table.</div>
+              <p class="interview-question"><span class="qa-label">Toni:</span> What would you say to someone skeptical about meal planning apps?</p>
+              <div class="interview-answer"><span class="qa-label">Founder</span> Fair skepticism—most apps optimize for content, not for your actual calendar. We're optimizing for the Wednesday when both parents are late and someone needs to eat before soccer. That's not just time saved. That's less stress at the dinner table.</div>
             </div>
           </div>
         </div>
 
         <h2>Generated article</h2>
-        <p>A family of five was spending hours each week on dinner decisions. After trying MealFlow, they cut meal planning to under 2 minutes. Here's how they did it.</p>
+        <p class="article-lede">For Sarah and Mike Chen, "What's for dinner?" wasn't a cozy ritual—it was a nightly standoff between a shared calendar, three kids under 10, and a fridge full of good intentions. Then they tried MealFlow. Within a week, the same family that used to lose three hours a week to meal decisions was locking in a full seven-day plan in under two minutes.</p>
 
-        <h2>The problem</h2>
-        <p>Sarah and Mike have three kids under 10. Between work, school pickups, and activities, the question "what's for dinner?" became a daily source of stress. They'd spend 20 to 30 minutes most nights just deciding, then another 15 minutes checking what they had in the fridge.</p>
+        <div class="article-stat-row" aria-label="Key outcomes">
+          <div class="article-stat"><strong>~3 hrs</strong><span>per week previously lost to deciding &amp; replanning</span></div>
+          <div class="article-stat"><strong>&lt;2 min</strong><span>to confirm MealFlow's weekly dinner plan</span></div>
+          <div class="article-stat"><strong>5</strong><span>people, two jobs, four weeknight activities</span></div>
+        </div>
+
+        <h2>The invisible workload</h2>
+        <p>The Chens aren't unusual. Sarah works in operations; Mike's in sales. Between school pickup, swim on Tuesdays, and a standing 6 p.m. call on Thursdays, dinner was less about cooking skill and more about cognitive load. Most nights they'd burn twenty minutes negotiating, another fifteen checking inventory on their phones, and still end up with spaghetti—again—or a delivery app.</p>
+        <p>What frustrated them most wasn't recipes. It was the <em>restarts</em>: the half-built plan that fell apart when they forgot cumin, or when their youngest refused anything "with sauce," or when they'd both assumed the other had pulled chicken from the freezer.</p>
 
         <blockquote class="founder-quote">"That's not just time saved. That's less stress at the dinner table."</blockquote>
 
-        <h2>What changed</h2>
-        <p>MealFlow gave them weekly recipes based on their preferences, dietary needs, and what was already in their pantry. No more scrolling through recipes. No more "I don't know, what do you want?" The app suggested a plan in under 2 minutes.</p>
+        <h2>What MealFlow changed</h2>
+        <p>MealFlow front-loads the constraints—budget bands, dietary flags, max prep time on weeknights, and a "picky eater" profile so the same protein can show up as tacos for the adults and plain strips for the kids without doubling the cook time. The app builds from what's already on hand, then fills gaps with a grocery list sorted by aisle.</p>
+        <p>For the Chens, the workflow became almost embarrassingly simple:</p>
+        <ul>
+          <li>Sunday evening: open MealFlow, confirm the week (defaults are already suggested).</li>
+          <li>Monday grocery run: one pass through the store; optional pickup order from the same list.</li>
+          <li>Weeknights: follow the plan or swap a night—MealFlow adjusts leftovers and downstream meals so nothing cascades into chaos.</li>
+        </ul>
+        <p>The "30 seconds" the founder talks about is the happy path: accept the plan, tweak one night if needed, export the list. The two-minute ceiling is what product analytics actually see—even when families argue over one meal, they're still an order of magnitude faster than inventing the week from scratch.</p>
 
-        <h2>The result</h2>
-        <p>Three hours a week became two minutes. The family now has a rotating menu they actually enjoy, and grocery lists that match. Dinner went from a daily negotiation to something that just happens.</p>
+        <h2>Results they could feel</h2>
+        <p>After four weeks, Sarah said the house felt calmer at 5:30—not because dinner was fancy, but because the decision was already made. Mike stopped panic-texting from the office. Their oldest started heating his own leftovers on swim nights because the instructions lived next to the meal on the app.</p>
+        <p>Grocery spend dipped slightly, mostly from fewer "I forgot one thing" trips. The bigger win was mental: three hours a week back, mostly in 10- and 15-minute chunks that used to happen when everyone was tired and short-tempered.</p>
+
+        <h2>Why this case study matters for other teams</h2>
+        <p>Meal planning products live or die on habits. The through-line here isn't magic AI—it's respecting that families need <strong>fewer choices</strong>, not more content. When the weekly ritual fits in the gap between homework and bath time, it sticks. When it doesn't, another recipe library won't save it.</p>
+        <p>For MealFlow, that insight became the headline: <em>less time deciding, more time eating together</em>—and for the Chens, it finally matched reality.</p>
 
         <div class="article-cta">
           <h3>Get your story published</h3>
           <p>One 10-minute Toni interview. Your story, turned into blog articles, LinkedIn posts, and press quotes.</p>
-          <a href="../pricing.html" class="btn">Start your AI interview</a>
+          <a href="../auth.html" class="btn">Start your AI interview</a>
         </div>
       </div>
     </div>
   </article>
   <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      function onScroll() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
     document.querySelector('.back-to-blog')?.addEventListener('click', function (e) {
       if (window.history.length > 1) {
         e.preventDefault();

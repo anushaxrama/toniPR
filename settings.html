@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings · ToniPR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/dashboard-layout.css" />
+  <style>
+    :root { --bg:#fff; --bg-card:#fafafa; --bg-warm:#f5f5f5; --bg-elevated:#f5f5f5; --border:rgba(0,0,0,0.08); --text-primary:#0a0a0a; --text-secondary:#525252; --text-muted:#737373; --accent:#D7263D; --accent-soft:#E85A6F; --radius-sm:12px; --radius-md:16px; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text-primary); min-height:100vh; -webkit-font-smoothing:antialiased; }
+    body { background: linear-gradient(135deg, #fffbfa 0%, #ffffff 40%, #f8f7ff 100%); background-attachment: fixed; }
+    body::before { content:''; position:fixed; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle 400px at 10% 20%, rgba(215,38,61,0.06), transparent 50%), radial-gradient(circle 300px at 90% 80%, rgba(100,80,180,0.04), transparent 45%), radial-gradient(circle 250px at 50% 50%, rgba(255,180,170,0.03), transparent 40%); pointer-events:none; z-index:0; }
+    .dashboard-layout { display:flex; min-height:100vh; }
+    .sidebar { width:260px; min-width:260px; background:var(--bg); border-right:1px solid var(--border); padding:24px 20px; display:flex; flex-direction:column; }
+    .sidebar-logo { font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:1.25rem; color:var(--text-primary); text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom:32px; }
+    .sidebar-logo-brand { display:flex; flex-direction:column; gap:0; }
+    .sidebar-logo-by { font-weight:500; font-size:0.7rem; color:var(--text-muted); }
+    .sidebar-logo img { width:32px; height:auto; }
+    .credits-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:32px; }
+    .credits-card-label { font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+    .credits-card-suffix { font-size:0.8rem; font-weight:500; color:var(--text-muted); margin-bottom:12px; }
+    .credits-card-value { font-family:'Bricolage Grotesque',sans-serif; font-size:1.75rem; font-weight:700; color:var(--accent); margin-bottom:4px; }
+    .credits-card .btn { width:100%; justify-content:center; padding:8px 16px; font-size:0.85rem; }
+    .sidebar-nav { flex:1; }
+    .sidebar-nav a { display:flex; align-items:center; gap:12px; padding:10px 12px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:var(--radius-sm); margin-bottom:4px; transition:all 0.2s; }
+    .sidebar-nav a:hover { background:var(--bg-elevated); color:var(--text-primary); }
+    .sidebar-nav a.active { background:rgba(215,38,61,0.08); color:var(--accent); }
+    .sidebar-nav-icon { width:20px; height:20px; opacity:0.7; }
+    .sidebar-nav a.active .sidebar-nav-icon { opacity:1; }
+    .sidebar-divider { height:1px; background:var(--border); margin:20px 0; }
+    .sidebar-plan-name { font-family:'Bricolage Grotesque',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text-primary); margin-bottom:6px; }
+    .sidebar-plan-link { font-size:0.85rem; font-weight:600; color:var(--accent); text-decoration:none; display:inline-block; margin-bottom:2px; }
+    .sidebar-plan-link:hover { text-decoration:underline; }
+    .credits-card-divider { height:1px; background:var(--border); margin:14px 0; }
+    .sidebar-user-link { margin-top:auto; text-decoration:none; color:inherit; display:block; border-top:1px solid var(--border); padding-top:16px; border-radius:var(--radius-sm); transition:background 0.2s; }
+    .sidebar-user-link:hover { background:var(--bg-warm); }
+    .sidebar-user-link:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .sidebar-user { padding-top:0; border-top:none; }
+    .sidebar-user-info { display:flex; align-items:center; gap:10px; padding:12px 0; }
+    .sidebar-user-avatar { width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:0.9rem; }
+    .sidebar-user-name { font-size:0.9rem; font-weight:500; }
+    .sidebar-user-company { font-size:0.8rem; color:var(--text-muted); }
+    .main { flex:1; padding:32px 40px 48px; overflow-y:auto; }
+    .main h1 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.5rem; font-weight:600; margin-bottom:32px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 24px; border-radius:var(--radius-sm); font-weight:600; font-size:0.9rem; cursor:pointer; text-decoration:none; border:none; font-family:inherit; transition:all 0.2s; }
+    .btn-primary { background:var(--accent); color:white; }
+    .btn-primary:hover { background:var(--accent-soft); transform:translateY(-1px); }
+    .btn-secondary { background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border); }
+    .btn-secondary:hover { background:#ebebeb; }
+    .settings-section { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:24px; margin-bottom:24px; max-width:560px; }
+    .settings-section h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:20px; }
+    .settings-lead { font-size:0.95rem; color:var(--text-secondary); line-height:1.55; margin-bottom:16px; }
+    .settings-actions-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .settings-note { font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin-top:12px; }
+    .settings-mini-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+    .settings-mini-row:last-child { border-bottom:none; padding-bottom:0; }
+    .btn-compact { padding:8px 14px; font-size:0.85rem; }
+    .settings-row { display:flex; align-items:center; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--border); }
+    .settings-row:last-child { border-bottom:none; padding-bottom:0; }
+    .settings-row:first-of-type { padding-top:0; }
+    .settings-label { font-size:0.95rem; font-weight:500; }
+    .settings-desc { font-size:0.85rem; color:var(--text-muted); margin-top:4px; }
+    .toggle { width:44px; height:24px; background:var(--border); border-radius:12px; cursor:pointer; position:relative; transition:background 0.2s; }
+    .toggle.on { background:var(--accent); }
+    .toggle::after { content:''; position:absolute; width:20px; height:20px; background:white; border-radius:50%; top:2px; left:2px; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; }
+    .toggle.on::after { transform:translateX(20px); }
+    .form-actions { margin-top:24px; }
+    .toast { position:fixed; bottom:24px; right:24px; background:var(--text-primary); color:white; padding:12px 20px; border-radius:var(--radius-sm); font-size:0.9rem; opacity:0; transform:translateY(10px); transition:all 0.3s; z-index:1000; }
+    .toast.show { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="app-frame">
+  <header class="dashboard-topbar">
+    <button type="button" class="nav-drawer-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni.png" alt="" /> ToniPR</a>
+    <nav class="topbar-util">
+      <a href="support.html">Support</a>
+      <a href="profile.html">Profile</a>
+      <a href="settings.html" aria-current="page">Settings</a>
+      <a href="auth.html">Sign out</a>
+    </nav>
+  </header>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+  <div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="sidebar-logo"><img src="assets/toni.png" alt="Toni" /><span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span></a>
+      <div class="credits-card">
+        <div class="credits-card-label">Your plan</div>
+        <div class="sidebar-plan-name" id="sidebarPlanName">Founder plan</div>
+        <a href="pricing.html" class="sidebar-plan-link">View pricing &amp; plans</a>
+        <div class="credits-card-divider"></div>
+        <div class="credits-card-label">Sessions</div>
+        <div class="credits-card-value" id="creditsValue">11</div>
+        <div class="credits-card-suffix" id="creditsSuffix">remaining this year — use anytime</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html"><span class="sidebar-nav-icon">⌂</span> Dashboard</a>
+        <a href="interviews.html"><span class="sidebar-nav-icon">🎙</span> My Interviews</a>
+        <a href="linkedin-posts.html"><span class="sidebar-nav-icon">in</span> LinkedIn Posts</a>
+        <a href="x-threads.html"><span class="sidebar-nav-icon">𝕏</span> X Threads</a>
+        <a href="founder-kit.html"><span class="sidebar-nav-icon">📁</span> Founder Kit</a>
+        <a href="blog-articles.html"><span class="sidebar-nav-icon">📄</span> Blog Articles</a>
+      </nav>
+      <a href="profile.html" class="sidebar-user-link" aria-label="Open profile">
+        <div class="sidebar-user">
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-avatar" id="sidebarAvatar">AR</div>
+            <div>
+              <div class="sidebar-user-name" id="sidebarName">Anusha Ramachandran</div>
+              <div class="sidebar-user-company" id="sidebarCompany">flowops</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </aside>
+    <main class="main">
+      <h1>Settings</h1>
+
+      <div class="settings-section">
+        <h2>Plan &amp; billing</h2>
+        <p class="settings-lead">You're on the <strong id="settingsPlanLabel">Founder plan</strong>. Upgrade, change renewal, or compare bundles on the pricing page.</p>
+        <div class="settings-actions-row">
+          <a href="pricing.html" class="btn btn-primary">Manage subscription</a>
+          <button type="button" class="btn btn-secondary" id="btnBillingPortal">Open billing portal</button>
+        </div>
+        <div class="settings-mini-row">
+          <div>
+            <div class="settings-label">Payment method</div>
+            <div class="settings-desc">Card on file (demo)</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-compact" id="btnUpdatePayment">Update</button>
+        </div>
+        <div class="settings-mini-row">
+          <div>
+            <div class="settings-label">Invoices</div>
+            <div class="settings-desc">Download past receipts</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-compact" id="btnInvoices">View</button>
+        </div>
+        <p class="settings-note">In production, Manage subscription and the billing portal connect to your payment provider. Here they confirm the flow is wired in the product.</p>
+      </div>
+
+      <div class="settings-section">
+        <h2>Privacy &amp; data</h2>
+        <div class="settings-mini-row">
+          <div>
+            <div class="settings-label">Export my interview data</div>
+            <div class="settings-desc">JSON summary of saved sessions and generated assets (demo)</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-compact" id="btnExportData">Export</button>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Product analytics</div>
+            <div class="settings-desc">Help improve ToniPR with anonymous usage stats</div>
+          </div>
+          <div class="toggle on" id="toggleAnalytics" role="button" tabindex="0" aria-pressed="true"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>Notifications</h2>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Email notifications</div>
+            <div class="settings-desc">Get notified when your PR kit is ready</div>
+          </div>
+          <div class="toggle" id="toggleEmail" role="button" tabindex="0" aria-pressed="false"></div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Weekly digest</div>
+            <div class="settings-desc">Tips and content ideas in your inbox</div>
+          </div>
+          <div class="toggle" id="toggleDigest" role="button" tabindex="0" aria-pressed="false"></div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary" id="btnSave">Save settings</button>
+        <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+      </div>
+    </main>
+  </div>
+  </div>
+  <div class="toast" id="toast">Settings saved</div>
+  <script src="js/dashboard-shell.js"></script>
+  <script src="js/app-sidebar.js"></script>
+  <script>
+    (function() {
+      var KEY = 'tonipr_settings';
+      var defaults = { emailNotif: false, digest: false, analytics: true };
+      function load() {
+        var s = JSON.parse(localStorage.getItem(KEY) || '{}');
+        setToggle('toggleEmail', s.hasOwnProperty('emailNotif') ? s.emailNotif : defaults.emailNotif);
+        setToggle('toggleDigest', s.hasOwnProperty('digest') ? s.digest : defaults.digest);
+        setToggle('toggleAnalytics', s.hasOwnProperty('analytics') ? s.analytics : defaults.analytics);
+      }
+      function setToggle(id, on) {
+        var t = document.getElementById(id);
+        if (!t) return;
+        t.classList.toggle('on', on);
+        t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      function getToggle(id) {
+        var t = document.getElementById(id);
+        return t ? t.classList.contains('on') : false;
+      }
+      function save() {
+        var s = { emailNotif: getToggle('toggleEmail'), digest: getToggle('toggleDigest'), analytics: getToggle('toggleAnalytics') };
+        localStorage.setItem(KEY, JSON.stringify(s));
+      }
+      function bindToggle(id) {
+        var t = document.getElementById(id);
+        t.addEventListener('click', function() {
+          var on = !t.classList.contains('on');
+          setToggle(id, on);
+        });
+        t.addEventListener('keydown', function(e) {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); t.click(); }
+        });
+      }
+      load();
+      bindToggle('toggleEmail');
+      bindToggle('toggleDigest');
+      bindToggle('toggleAnalytics');
+      function toast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function() { t.classList.remove('show'); }, 2500);
+      }
+      document.getElementById('btnSave').addEventListener('click', function() {
+        save();
+        toast('Settings saved');
+      });
+      document.getElementById('btnBillingPortal').addEventListener('click', function() {
+        toast('Billing portal opens here when checkout is connected.');
+      });
+      document.getElementById('btnUpdatePayment').addEventListener('click', function() {
+        toast('Update payment — connect your provider in production.');
+      });
+      document.getElementById('btnInvoices').addEventListener('click', function() {
+        toast('Invoice history — connect your provider in production.');
+      });
+      document.getElementById('btnExportData').addEventListener('click', function() {
+        var blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), note: 'Connect backend to export real sessions.' }, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'tonipr-export-demo.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast('Demo export downloaded');
+      });
+    })();
+  </script>
+</body>
+</html>

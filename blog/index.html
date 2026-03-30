@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog | ToniPR</title>
-  <meta name="description" content="See what other founders are doing. Real examples, promotion guides, and articles from Toni interviews." />
+  <meta name="description" content="See how other people use ToniPR—stories, examples, and founder guides. Real LinkedIn posts, articles, press quotes, and AI-led PR kit examples from Toni interviews." />
   <link rel="canonical" href="https://tunepact.com/blog" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,44 +22,328 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* Fixed halftone corners + rift — same treatment as index.html */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .page-bg.page-bg--hidden .page-bg__corner,
+    .page-bg.page-bg--hidden .page-bg__rift {
+      animation-play-state: paused;
+    }
+    .page-bg__wash {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .page-bg__art {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .page-bg__corner {
+      position: absolute;
+      width: min(88vw, 900px);
+      height: min(88vh, 880px);
+      will-change: transform;
+      opacity: 0.94;
+      background-image:
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+      background-repeat: repeat;
+    }
+    .page-bg__corner--tr {
+      top: -14%;
+      right: -14%;
+      left: auto;
+      bottom: auto;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 10px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      animation: pageBgCornerTR 26s ease-in-out infinite;
+    }
+    .page-bg__corner--tl {
+      top: -14%;
+      left: -14%;
+      right: auto;
+      bottom: auto;
+      background-size: 19px 19px, 19px 19px;
+      background-position: 0 0, 11px 6px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      animation: pageBgCornerTL 34s ease-in-out infinite;
+    }
+    .page-bg__corner--br {
+      bottom: -14%;
+      right: -14%;
+      top: auto;
+      left: auto;
+      background-size: 12px 12px, 12px 12px;
+      background-position: 0 0, 5px 8px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      animation: pageBgCornerBR 22s ease-in-out infinite;
+    }
+    .page-bg__corner--bl {
+      bottom: -14%;
+      left: -14%;
+      top: auto;
+      right: auto;
+      background-size: 17px 17px, 17px 17px;
+      background-position: 0 0, 9px 12px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      animation: pageBgCornerBL 31s ease-in-out infinite;
+    }
+    @keyframes pageBgCornerTR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 7px 10px;
+        opacity: 0.9;
+      }
+      50% {
+        transform: translate(-22px, 28px) scale(1.03);
+        background-position: 26px 20px, 33px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerTL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 11px 6px;
+        opacity: 0.88;
+      }
+      50% {
+        transform: translate(18px, 24px) scale(1.025);
+        background-position: -20px 16px, -9px 22px;
+        opacity: 0.98;
+      }
+    }
+    @keyframes pageBgCornerBR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 5px 8px;
+        opacity: 0.92;
+      }
+      50% {
+        transform: translate(-26px, -20px) scale(1.04);
+        background-position: 30px 22px, 35px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerBL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 9px 12px;
+        opacity: 0.85;
+      }
+      50% {
+        transform: translate(24px, -18px) scale(1.02);
+        background-position: -18px -14px, -9px -2px;
+        opacity: 0.96;
+      }
+    }
+    .page-bg__rift {
+      position: absolute;
+      inset: -8%;
+      background-image: radial-gradient(
+        circle at 1.5px 1.5px,
+        rgba(215, 38, 61, 0.1) 1.05px,
+        transparent 1.2px
+      );
+      background-size: 24px 24px;
+      opacity: 0.72;
+      -webkit-mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      animation: pageBgRift 48s ease-in-out infinite;
+    }
+    @keyframes pageBgRift {
+      0%, 100% {
+        transform: translate(0, 0);
+        background-position: 0 0;
+        opacity: 0.62;
+      }
+      33% {
+        transform: translate(16px, -20px);
+        background-position: 22px 28px;
+        opacity: 0.78;
+      }
+      66% {
+        transform: translate(-14px, 12px);
+        background-position: -12px 18px;
+        opacity: 0.68;
+      }
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background-color: #ffffff;
-      position: relative;
       color: var(--text-primary);
+      overflow-x: hidden;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* How people use ToniPR (full-width) */
+    .use-tonipr-section {
+      padding: 0 0 72px;
+      margin-bottom: 8px;
     }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 100px;
-      height: 100px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 20px 0 0 0;
-      pointer-events: none;
-      z-index: 0;
+    .use-tonipr-section .section-title {
+      margin-bottom: 10px;
     }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .use-tonipr-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .use-tonipr-intro {
+      font-size: 1.02rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 42rem;
+      margin-bottom: 28px;
+    }
+    .use-tonipr-intro a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .use-tonipr-intro a:hover { text-decoration: underline; }
+    .use-tonipr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .use-tonipr-card {
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      border-left: 4px solid var(--accent);
+    }
+    .use-tonipr-card:hover {
+      border-color: rgba(215, 38, 61, 0.25);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+    .use-tonipr-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .use-tonipr-card-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .use-tonipr-card h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .use-tonipr-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .use-tonipr-cta {
+      display: inline-flex;
+    }
+    .blog-hero,
+    .featured-spotlight,
+    .example-section,
+    .articles-grid,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 20px 0;
+      background: transparent;
+      transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    nav.scrolled {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -89,7 +373,6 @@
     .blog-hero {
       padding: 160px 0 140px;
       text-align: center;
-      background: #ffffff;
     }
     .blog-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 36px; }
     .blog-hero-desc {
@@ -148,7 +431,6 @@
 
     .example-section {
       padding: 80px 0 100px;
-      background: #ffffff;
     }
     .example-banner {
       text-align: center;
@@ -213,6 +495,17 @@
       color: var(--accent);
       letter-spacing: 0.08em;
       margin-bottom: 12px;
+    }
+    .example-card-tag--linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .example-card-tag--linkedin img {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: block;
     }
     .example-card-body .example-card-tag { margin-bottom: 8px; }
     .example-card h3 {
@@ -300,6 +593,23 @@
     .footer-logo { display: inline-flex; align-items: center; gap: 8px; color: var(--text-primary); text-decoration: none; font-weight: 600; margin-bottom: 16px; }
     .footer-toni { width: 28px; height: auto; }
 
+    @media (prefers-reduced-motion: reduce) {
+      .page-bg__corner,
+      .page-bg__rift {
+        animation: none !important;
+        transform: none !important;
+        background-position: 0 0, 0 0 !important;
+        opacity: 0.55 !important;
+      }
+      .page-bg__rift {
+        background-position: 0 0 !important;
+        opacity: 0.35 !important;
+      }
+      .page-bg {
+        transition: none;
+      }
+    }
+
     @media (max-width: 768px) {
       .spotlight-card { grid-template-columns: 1fr; }
       .spotlight-image { max-width: 120px; margin: 0 auto; }
@@ -310,20 +620,30 @@
   </style>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
   <nav>
     <div class="nav-inner">
-      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /> ToniPR</a>
+      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /><span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px">ToniPR <span style="font-weight:500;font-size:0.7rem;color:var(--text-muted)">by Tunepact</span></span></a>
       <div class="nav-links">
         <a href="../index.html">Home</a>
         <a href="../index.html#story">Story</a>
-        <a href="../index.html#outputs">Outputs</a>
+        <a href="../index.html#demo">Demo</a>
         <a href="../pricing.html">Pricing</a>
-        <a href="../pricing.html" class="btn btn-primary">Get Started</a>
+        <a href="../auth.html" class="btn btn-primary">Get Started</a>
       </div>
     </div>
   </nav>
 
-  <header class="blog-hero">
+  <header class="blog-hero" id="blog-top">
     <div class="container">
       <div class="back-link-wrapper">
         <a href="../index.html" class="back-link">← Back to home</a>
@@ -333,7 +653,35 @@
     </div>
   </header>
 
-  <section class="example-section">
+  <section id="how-people-use-tonipr" class="use-tonipr-section" aria-labelledby="use-tonipr-heading">
+    <div class="container">
+      <h2 id="use-tonipr-heading" class="section-title">See how other people use ToniPR</h2>
+      <p class="use-tonipr-sub">Stories, examples, and founder guides from the blog</p>
+      <p class="use-tonipr-intro">
+        Wondering what a ToniPR interview actually produces? Explore real-style examples: LinkedIn posts and articles from founder conversations, press-ready quotes, and founder spotlights. The ToniPR blog is where we share how teams use AI-led PR kits to ship social content, SEO-friendly posts, and media lines—without starting from a blank page.
+      </p>
+      <div class="use-tonipr-grid">
+        <a class="use-tonipr-card" href="mealflow-planning-article.html">
+          <div class="use-tonipr-card-tag">Case study</div>
+          <h3>From one interview to a full article</h3>
+          <p>How a MealFlow-style session becomes long-form SEO content and narrative.</p>
+        </a>
+        <a class="use-tonipr-card" href="how-founders-promote-themselves.html">
+          <div class="use-tonipr-card-tag">Guide</div>
+          <h3>Build your founder narrative</h3>
+          <p>Practical guidance on promoting yourself and your company with clarity.</p>
+        </a>
+        <a class="use-tonipr-card" href="spotlight-founder.html">
+          <div class="use-tonipr-card-tag">Spotlight</div>
+          <h3>Founder spotlight &amp; PR kit flow</h3>
+          <p>A deeper look at founder story output from a Toni-style interview.</p>
+        </a>
+      </div>
+      <a href="#latest-articles" class="btn btn-primary use-tonipr-cta">Browse all articles &amp; examples</a>
+    </div>
+  </section>
+
+  <section id="example-mealflow" class="example-section">
     <div class="container">
       <div class="example-banner">
         <span class="example-badge">Example</span>
@@ -346,7 +694,7 @@
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Family meal planning" />
           </div>
           <div class="example-card-body">
-            <span class="example-card-tag">LinkedIn Post</span>
+            <span class="example-card-tag example-card-tag--linkedin"><img src="../assets/icons/linkedin.svg" alt="" width="16" height="16" /> LinkedIn Post</span>
             <h3>Everyone talks about "meal prep," but nobody talks about decision fatigue</h3>
             <p>At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.</p>
             <span class="example-card-link">View full example →</span>
@@ -359,7 +707,7 @@
           <div class="example-card-body">
             <span class="example-card-tag">Article</span>
             <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
-            <p>A family of five was spending hours each week on dinner decisions. After trying MealFlow, they cut meal planning to under 2 minutes.</p>
+            <p>Longer composite case study: real-feel family routines, stats, and how MealFlow turns weekly planning into a two-minute ritual.</p>
             <span class="example-card-link">Read full article →</span>
           </div>
         </a>
@@ -378,7 +726,7 @@
     </div>
   </section>
 
-  <section class="featured-spotlight">
+  <section id="founder-spotlight" class="featured-spotlight">
     <div class="container">
       <span class="section-label">Featured Founder</span>
       <h2 class="section-title">Founder Spotlight</h2>
@@ -401,7 +749,7 @@
     </div>
   </section>
 
-  <section class="articles-grid">
+  <section id="latest-articles" class="articles-grid">
     <div class="container">
       <span class="section-label">Guides & Articles</span>
       <h2 class="section-title">Latest from the blog</h2>
@@ -427,7 +775,7 @@
           <div class="article-card-body">
             <span class="article-card-tag">Example</span>
             <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
-            <p>A full case study article generated from one interview. Includes the Q&A and the complete article.</p>
+            <p>Expanded example case study with interview transcript, metrics row, and full narrative—generated from one ToniPR conversation.</p>
             <div class="article-card-footer">
               <span class="article-card-date">Mar 2025</span>
               <a href="mealflow-planning-article.html" class="article-card-read-more">Read more</a>
@@ -500,5 +848,18 @@
       <p>© 2025 ToniPR by Tunepact. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      if (nav) {
+        function onScrollNav() {
+          if (window.scrollY > 50) nav.classList.add('scrolled');
+          else nav.classList.remove('scrolled');
+        }
+        onScrollNav();
+        window.addEventListener('scroll', onScrollNav, { passive: true });
+      }
+    })();
+  </script>
 </body>
 </html>

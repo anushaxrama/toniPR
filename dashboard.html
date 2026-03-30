@@ -4,51 +4,251 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard · ToniPR</title>
+  <meta name="description" content="Your ToniPR dashboard: AI founder interviews, LinkedIn posts, blog content, press quotes, and a full PR kit. See how other founders use ToniPR—examples, spotlights, and guides on the ToniPR blog." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/dashboard-layout.css" />
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-card: #fafafa;
-      --bg-elevated: #f5f5f5;
-      --border: rgba(0, 0, 0, 0.08);
-      --text-primary: #0a0a0a;
-      --text-secondary: #525252;
-      --text-muted: #737373;
-      --accent: #D7263D;
-      --accent-soft: #E85A6F;
-      --radius-sm: 12px;
-      --radius-md: 16px;
+      --bg: #FBF8F5;
+      --bg-warm: #F7F3EE;
+      --bg-elevated: #F0EBE5;
+      --bg-card: #FFFFFF;
+      --border: rgba(45, 38, 32, 0.08);
+      --text-primary: #1C1816;
+      --text-secondary: #4A423C;
+      --text-muted: #7A736C;
+      --accent: #C44B3A;
+      --accent-soft: #D96B5C;
+      --ink: #1C1816;
+      --radius-sm: 8px;
+      --radius-lg: 24px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Fixed halftone corners + rift — same as index.html / marketing */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .page-bg.page-bg--hidden .page-bg__corner,
+    .page-bg.page-bg--hidden .page-bg__rift {
+      animation-play-state: paused;
+    }
+    .page-bg__wash {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .page-bg__art {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .page-bg__corner {
+      position: absolute;
+      width: min(88vw, 900px);
+      height: min(88vh, 880px);
+      will-change: transform;
+      opacity: 0.94;
+      background-image:
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+      background-repeat: repeat;
+    }
+    .page-bg__corner--tr {
+      top: -14%;
+      right: -14%;
+      left: auto;
+      bottom: auto;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 10px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      animation: pageBgCornerTR 26s ease-in-out infinite;
+    }
+    .page-bg__corner--tl {
+      top: -14%;
+      left: -14%;
+      right: auto;
+      bottom: auto;
+      background-size: 19px 19px, 19px 19px;
+      background-position: 0 0, 11px 6px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      animation: pageBgCornerTL 34s ease-in-out infinite;
+    }
+    .page-bg__corner--br {
+      bottom: -14%;
+      right: -14%;
+      top: auto;
+      left: auto;
+      background-size: 12px 12px, 12px 12px;
+      background-position: 0 0, 5px 8px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      animation: pageBgCornerBR 22s ease-in-out infinite;
+    }
+    .page-bg__corner--bl {
+      bottom: -14%;
+      left: -14%;
+      top: auto;
+      right: auto;
+      background-size: 17px 17px, 17px 17px;
+      background-position: 0 0, 9px 12px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      animation: pageBgCornerBL 31s ease-in-out infinite;
+    }
+    @keyframes pageBgCornerTR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 7px 10px;
+        opacity: 0.9;
+      }
+      50% {
+        transform: translate(-22px, 28px) scale(1.03);
+        background-position: 26px 20px, 33px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerTL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 11px 6px;
+        opacity: 0.88;
+      }
+      50% {
+        transform: translate(18px, 24px) scale(1.025);
+        background-position: -20px 16px, -9px 22px;
+        opacity: 0.98;
+      }
+    }
+    @keyframes pageBgCornerBR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 5px 8px;
+        opacity: 0.92;
+      }
+      50% {
+        transform: translate(-26px, -20px) scale(1.04);
+        background-position: 30px 22px, 35px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerBL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 9px 12px;
+        opacity: 0.85;
+      }
+      50% {
+        transform: translate(24px, -18px) scale(1.02);
+        background-position: -18px -14px, -9px -2px;
+        opacity: 0.96;
+      }
+    }
+    .page-bg__rift {
+      position: absolute;
+      inset: -8%;
+      background-image: radial-gradient(
+        circle at 1.5px 1.5px,
+        rgba(215, 38, 61, 0.1) 1.05px,
+        transparent 1.2px
+      );
+      background-size: 24px 24px;
+      opacity: 0.72;
+      -webkit-mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      animation: pageBgRift 48s ease-in-out infinite;
+    }
+    @keyframes pageBgRift {
+      0%, 100% {
+        transform: translate(0, 0);
+        background-position: 0 0;
+        opacity: 0.62;
+      }
+      33% {
+        transform: translate(16px, -20px);
+        background-position: 22px 28px;
+        opacity: 0.78;
+      }
+      66% {
+        transform: translate(-14px, 12px);
+        background-position: -12px 18px;
+        opacity: 0.68;
+      }
+    }
+
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg);
+      font-family: 'Nunito', sans-serif;
+      background-color: #ffffff;
       color: var(--text-primary);
       min-height: 100vh;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0; right: 0;
-      width: 100px; height: 100px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 20px 0 0 0;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .dashboard-layout {
@@ -56,56 +256,78 @@
       min-height: 100vh;
     }
 
-    /* Sidebar */
+    /* Sidebar — refined rail */
     .sidebar {
-      width: 260px;
-      min-width: 260px;
-      background: var(--bg);
+      width: 240px;
+      min-width: 240px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
       border-right: 1px solid var(--border);
-      padding: 24px 20px;
+      padding: 28px 20px;
       display: flex;
       flex-direction: column;
     }
     .sidebar-logo {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.4rem;
       color: var(--text-primary);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 32px;
+      gap: 12px;
+      margin-bottom: 36px;
+      letter-spacing: -0.02em;
     }
-    .sidebar-logo img { width: 32px; height: auto; }
+    .sidebar-logo img { width: 36px; height: auto; }
+    .sidebar-logo-brand { display: flex; flex-direction: column; gap: 0; }
+    .sidebar-logo-by { font-family: 'Nunito', sans-serif; font-weight: 500; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px; }
     .credits-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 16px;
-      margin-bottom: 32px;
+      padding: 20px;
+      margin-bottom: 36px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
     .credits-card-label {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
     }
-    .credits-card-suffix { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; }
     .credits-card-value {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.75rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem;
+      font-weight: 600;
       color: var(--accent);
-      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
-    .credits-card .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 8px 16px;
-      font-size: 0.85rem;
+    .credits-card-suffix { font-size: 0.75rem; font-weight: 500; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+    .credits-card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+    .sidebar-plan-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .sidebar-plan-link:hover { text-decoration: underline; }
+    .sidebar-plan-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
     }
     .sidebar-nav {
       flex: 1;
@@ -113,48 +335,65 @@
     .sidebar-nav a {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
+      gap: 14px;
+      padding: 12px 14px;
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
       border-radius: var(--radius-sm);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       transition: all 0.2s;
     }
     .sidebar-nav a:hover {
-      background: var(--bg-elevated);
+      background: var(--bg-warm);
       color: var(--text-primary);
     }
     .sidebar-nav a.active {
-      background: rgba(215, 38, 61, 0.08);
+      background: rgba(196, 75, 58, 0.08);
       color: var(--accent);
     }
     .sidebar-nav-icon {
-      width: 20px;
-      height: 20px;
-      opacity: 0.7;
+      width: 18px;
+      height: 18px;
+      opacity: 0.75;
     }
     .sidebar-nav a.active .sidebar-nav-icon { opacity: 1; }
     .sidebar-divider {
       height: 1px;
       background: var(--border);
-      margin: 20px 0;
+      margin: 16px 0;
+    }
+    .sidebar-user-link {
+      margin-top: auto;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+    }
+    .sidebar-user-link:hover {
+      background: var(--bg-warm);
+    }
+    .sidebar-user-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
     .sidebar-user {
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
+      padding-top: 0;
+      border-top: none;
     }
     .sidebar-user-info {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 12px 0;
     }
     .sidebar-user-avatar {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--accent);
       color: white;
@@ -162,149 +401,449 @@
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
-    .sidebar-user-name { font-size: 0.9rem; font-weight: 500; }
+    .sidebar-user-name { font-size: 0.9rem; font-weight: 600; }
     .sidebar-user-company { font-size: 0.8rem; color: var(--text-muted); }
 
     /* Main */
     .main {
       flex: 1;
-      padding: 32px 40px 48px;
+      padding: 48px 56px 64px;
       overflow-y: auto;
+      max-width: min(1180px, 100%);
+      scroll-padding-top: 24px;
     }
-    .main h1 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 32px;
+    #dash-section-bundle,
+    #dash-section-blog,
+    #dash-section-interviews {
+      scroll-margin-top: 20px;
+    }
+    .main-header {
+      margin-bottom: 48px;
+    }
+    .main-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0;
     }
 
-    /* Ready card */
+    .dash-welcome {
+      display: none;
+      position: relative;
+      padding: 18px 44px 18px 20px;
+      margin-bottom: 28px;
+      background: rgba(196, 75, 58, 0.08);
+      border: 1px solid rgba(196, 75, 58, 0.18);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .dash-welcome.is-visible { display: block; }
+    .dash-welcome strong { color: var(--text-primary); }
+    .dash-welcome a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .dash-welcome a:hover { text-decoration: underline; }
+    .dash-welcome-dismiss {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    .dash-welcome-dismiss:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--text-primary);
+    }
+
+    /* Ready card — light hero strip */
     .ready-card {
-      background: linear-gradient(135deg, rgba(215, 38, 61, 0.06) 0%, rgba(215, 38, 61, 0.02) 100%);
-      border: 1px solid rgba(215, 38, 61, 0.15);
-      border-radius: var(--radius-md);
-      padding: 32px 40px;
-      margin-bottom: 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(251, 248, 245, 0.98) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(196, 75, 58, 0.12);
+      color: var(--text-primary);
+      border-radius: var(--radius-lg);
+      padding: 48px 52px;
+      margin-bottom: 56px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: clamp(28px, 4vw, 48px);
+      flex-wrap: nowrap;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.04);
+      width: 100%;
     }
-    .ready-card-content { flex: 1; min-width: 280px; }
+    .ready-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(196, 75, 58, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ready-card-content {
+      flex: 1 1 auto;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
     .ready-card h2 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
       font-weight: 600;
-      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
     }
-    .ready-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 12px; }
+    .ready-card p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 14px; }
     .ready-card-badge {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: var(--text-muted);
-      background: var(--bg-card);
-      padding: 6px 12px;
-      border-radius: 8px;
+      background: var(--bg-warm);
+      padding: 8px 14px;
+      border-radius: 100px;
     }
-    .ready-card-badge.has-credits { color: var(--accent); background: rgba(215, 38, 61, 0.08); }
-    .ready-card-actions { display: flex; gap: 12px; flex-shrink: 0; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; border: none; font-family: inherit; transition: all 0.2s; }
+    .ready-card-badge.has-credits { color: var(--accent); background: rgba(196, 75, 58, 0.08); }
+    .ready-card-actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      margin-left: auto;
+      position: relative;
+      z-index: 1;
+      align-self: center;
+    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.95rem; cursor: pointer; text-decoration: none; border: none; font-family: 'Nunito', sans-serif; transition: all 0.2s; }
     .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { background: var(--accent-soft); transform: translateY(-1px); }
-    .btn-secondary { background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border); }
+    .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); }
+    .btn-record {
+      position: relative;
+      overflow: visible;
+      animation: btnRecordGlow 2s ease-in-out infinite;
+    }
+    .btn-record::before,
+    .btn-record::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      opacity: 0;
+      animation: micPulseRing 1.5s ease-out infinite;
+      pointer-events: none;
+    }
+    .ready-card .btn-record::before,
+    .ready-card .btn-record::after {
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .btn-record::after {
+      animation-delay: 0.75s;
+    }
+    .btn-record .btn-mic {
+      display: inline-flex;
+      align-items: center;
+      animation: micPulse 1.2s ease-in-out infinite;
+    }
+    @keyframes micPulseRing {
+      0% { transform: scale(0.8); opacity: 0.6; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+    @keyframes micPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    @keyframes btnRecordGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.15); }
+    }
+    .btn-secondary { background: var(--bg-warm); color: var(--text-primary); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #ebebeb; border-color: var(--text-muted); }
     .btn svg { width: 18px; height: 18px; margin-right: 8px; }
 
-    /* What you'll get */
-    .section-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
-    .section-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; }
-    .output-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
+    /* What you'll get — editorial table of contents */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
-    .output-card {
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .section-bundle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      max-width: 42rem;
+    }
+    .section-bundle strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .ready-card-toni {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .ready-card-toni img {
+      width: min(200px, 42vw);
+      height: auto;
+      display: block;
+      border-radius: var(--radius-md);
+    }
+    .output-flow {
+      margin-bottom: 56px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .output-flow-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .output-flow-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .output-flow-item:not(:last-child)::after {
+      content: '·';
+      margin-left: 16px;
+      margin-right: 4px;
+      color: var(--border);
+      font-weight: 300;
+    }
+    .output-flow-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    @media (max-width: 640px) {
+      .output-flow-item:not(:last-child)::after { margin-left: 12px; content: '·'; }
+      .output-flow-inner { font-size: 0.95rem; }
+    }
+
+    /* Blog teaser — SEO + discovery */
+    .dash-blog-section {
+      margin-bottom: 56px;
+      padding-bottom: 8px;
+    }
+    .dash-blog-seo-intro {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 42rem;
+      margin-bottom: 24px;
+    }
+    .dash-blog-seo-intro a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .dash-blog-seo-intro a:hover {
+      text-decoration: underline;
+    }
+    .dash-blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .dash-blog-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 20px;
-      text-align: center;
-      transition: all 0.2s;
+      padding: 20px 22px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
-    .output-card:hover { border-color: rgba(215, 38, 61, 0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-    .output-card-icon {
-      width: 40px;
-      height: 40px;
-      margin: 0 auto 12px;
-      background: rgba(215, 38, 61, 0.08);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
+    .dash-blog-card:hover {
+      border-color: rgba(196, 75, 58, 0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
     }
-    .output-card span { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); }
+    .dash-blog-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .dash-blog-card-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .dash-blog-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .dash-blog-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .dash-blog-cta {
+      margin-top: 4px;
+    }
 
-    /* Recent interviews */
+    /* Recent interviews — poetic invite */
     .empty-state {
-      background: var(--bg-card);
+      background: transparent;
       border: 1px dashed var(--border);
-      border-radius: var(--radius-md);
-      padding: 64px 40px;
+      border-radius: var(--radius-lg);
+      padding: 80px 56px;
       text-align: center;
     }
     .empty-state-icon {
       width: 64px;
       height: 64px;
-      margin: 0 auto 24px;
-      background: var(--bg-elevated);
+      margin: 0 auto 28px;
+      background: transparent;
+      border: 2px solid var(--border);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.75rem;
+      font-size: 1.6rem;
     }
     .empty-state h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
     }
     .empty-state p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-      max-width: 400px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      max-width: 360px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.7;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-bg__corner,
+      .page-bg__rift {
+        animation: none !important;
+        transform: none !important;
+        background-position: 0 0, 0 0 !important;
+        opacity: 0.55 !important;
+      }
+      .page-bg__rift {
+        background-position: 0 0 !important;
+        opacity: 0.35 !important;
+      }
+      .page-bg {
+        transition: none;
+      }
     }
 
     @media (max-width: 900px) {
-      .dashboard-layout { flex-direction: column; }
-      .sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 16px; }
-      .sidebar-logo { margin-bottom: 16px; }
-      .credits-card { margin-bottom: 16px; margin-right: 16px; }
-      .sidebar-nav { display: none; }
-      .main { padding: 24px 20px; }
+      .ready-card {
+        padding: 32px 28px;
+        flex-wrap: wrap;
+      }
+      .ready-card-actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+    @media (min-width: 901px) {
+      .ready-card-toni { flex-shrink: 0; }
     }
   </style>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
+  <div class="app-frame">
+  <header class="dashboard-topbar">
+    <button type="button" class="nav-drawer-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni.png" alt="" /> ToniPR</a>
+    <nav class="topbar-util">
+      <a href="support.html">Support</a>
+      <a href="profile.html">Profile</a>
+      <a href="settings.html">Settings</a>
+      <a href="auth.html">Sign out</a>
+    </nav>
+  </header>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
   <div class="dashboard-layout">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <a href="index.html" class="sidebar-logo">
-        <img src="assets/toni.png" alt="Toni" /> ToniPR
+        <img src="assets/toni.png" alt="Toni" />
+        <span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span>
       </a>
       <div class="credits-card">
-        <div class="credits-card-label">Tokens</div>
-        <div class="credits-card-value" id="creditsValue">500</div>
-        <div class="credits-card-suffix">tokens this month</div>
-        <a href="pricing.html" class="btn btn-secondary">Buy More</a>
+        <div class="credits-card-label">Your plan</div>
+        <div class="sidebar-plan-name" id="sidebarPlanName">Founder plan</div>
+        <a href="pricing.html" class="sidebar-plan-link">View pricing &amp; plans</a>
+        <div class="credits-card-divider"></div>
+        <div class="credits-card-label">Sessions</div>
+        <div class="credits-card-value" id="creditsValue">11</div>
+        <div class="credits-card-suffix" id="creditsSuffix">remaining this year; use anytime</div>
       </div>
       <nav class="sidebar-nav">
         <a href="dashboard.html" class="active">
@@ -323,95 +862,141 @@
           <span class="sidebar-nav-icon">𝕏</span>
           X Threads
         </a>
-        <a href="blog-articles.html">
-          <span class="sidebar-nav-icon">📄</span>
-          Blog Articles
-        </a>
         <a href="founder-kit.html">
           <span class="sidebar-nav-icon">📁</span>
           Founder Kit
         </a>
+        <a href="blog-articles.html">
+          <span class="sidebar-nav-icon">📄</span>
+          Blog Articles
+        </a>
       </nav>
-      <div class="sidebar-divider"></div>
-      <nav class="sidebar-nav">
-        <a href="#">Profile</a>
-        <a href="#">Settings</a>
-        <a href="auth.html">Sign out</a>
-      </nav>
-      <div class="sidebar-user">
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-avatar">AR</div>
-          <div>
-            <div class="sidebar-user-name">Anusha Ramachandran</div>
-            <div class="sidebar-user-company">flowops</div>
+      <a href="profile.html" class="sidebar-user-link" aria-label="Open profile">
+        <div class="sidebar-user">
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-avatar">AR</div>
+            <div>
+              <div class="sidebar-user-name">Anusha Ramachandran</div>
+              <div class="sidebar-user-company">flowops</div>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     </aside>
 
     <main class="main">
-      <h1>Dashboard</h1>
+      <header class="main-header">
+        <h1>Dashboard</h1>
+      </header>
+
+      <div id="dashWelcome" class="dash-welcome" role="status">
+        <button type="button" class="dash-welcome-dismiss" id="dashWelcomeDismiss" aria-label="Dismiss">×</button>
+        <p><strong>Welcome.</strong> Adjust your plan anytime on <a href="pricing.html">Pricing</a>. When you're ready, use <strong>Chat with Toni</strong> below. You'll add company details first so Toni can personalize your interview.</p>
+      </div>
 
       <div class="ready-card">
+        <div class="ready-card-toni" aria-hidden="true">
+          <img src="assets/toni/Toni_thumbs_up_animation.gif" alt="" width="200" height="200" loading="lazy" />
+        </div>
         <div class="ready-card-content">
-          <h2>Ready to record?</h2>
-          <p>Start an AI interview to generate your PR content.</p>
-          <span class="ready-card-badge has-credits" id="creditsBadge">500 tokens remaining this month</span>
+          <h2>Ready to chat?</h2>
+          <p>Have a casual Chat with Toni. No script, no prep. Get visual + written content for social in minutes.</p>
+          <span class="ready-card-badge has-credits" id="creditsBadge">11 sessions remaining this year</span>
         </div>
         <div class="ready-card-actions">
-          <a href="interview.html" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-            Start Interview
+          <a href="onboarding.html" class="btn btn-primary btn-record">
+            <span class="btn-mic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></span>
+            Chat with Toni
           </a>
-          <a href="pricing.html" class="btn btn-secondary">Buy Credits</a>
         </div>
       </div>
 
-      <h2 class="section-title">What You'll Get</h2>
+      <section id="dash-section-bundle" class="dash-page-block" aria-labelledby="dash-bundle-heading">
+      <span class="section-num">01</span>
+      <h2 class="section-title" id="dash-bundle-heading">What You'll Get</h2>
       <p class="section-desc">From each 10-minute interview session</p>
-      <div class="output-grid">
-        <div class="output-card">
-          <div class="output-card-icon">🎬</div>
-          <span>Full Video Interview</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">✂</div>
-          <span>Short-Form Video Clips</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">📄</div>
-          <span>Founder Story Article</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">in</div>
-          <span>10 LinkedIn Posts</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">🌐</div>
-          <span>SEO Blog Post</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">𝕏</div>
-          <span>3 X Threads</span>
-        </div>
-        <div class="output-card">
-          <div class="output-card-icon">📋</div>
-          <span>Startup Boilerplate</span>
+      <p class="section-bundle">Every session ships the <strong>full bundle</strong> below. Jump to any format from the sidebar when you are ready to edit.</p>
+      <div class="output-flow" aria-label="What one interview session includes">
+        <div class="output-flow-inner">
+          <span class="output-flow-item"><span class="output-flow-icon">🎬</span> Full video interview</span>
+          <span class="output-flow-item"><span class="output-flow-icon">✂</span> Short-form clips</span>
+          <span class="output-flow-item"><span class="output-flow-icon">💬</span> Press-ready quotes</span>
+          <span class="output-flow-item"><span class="output-flow-icon">in</span> ~10 LinkedIn posts</span>
+          <span class="output-flow-item"><span class="output-flow-icon">🌐</span> SEO blog post</span>
+          <span class="output-flow-item"><span class="output-flow-icon">📄</span> Founder story</span>
+          <span class="output-flow-item"><span class="output-flow-icon">𝕏</span> 3 X threads</span>
+          <span class="output-flow-item"><span class="output-flow-icon">📁</span> PR kit &amp; boilerplate</span>
         </div>
       </div>
+      </section>
 
-      <h2 class="section-title">Recent Interviews</h2>
+      <section id="dash-section-blog" class="dash-blog-section dash-page-block" aria-labelledby="dash-blog-heading">
+        <span class="section-num">02</span>
+        <h2 class="section-title" id="dash-blog-heading">See how other people use ToniPR</h2>
+        <p class="section-desc">Stories, examples, and founder guides from the blog</p>
+        <p class="dash-blog-seo-intro">
+          Wondering what a ToniPR interview actually produces? Explore real-style examples: LinkedIn posts and articles from founder conversations, press-ready quotes, and founder spotlights. The <a href="blog/index.html">ToniPR blog</a> is where we share how teams use AI-led PR kits to ship social content, SEO-friendly posts, and media lines, without starting from a blank page.
+        </p>
+        <div class="dash-blog-grid">
+          <a class="dash-blog-card" href="blog/mealflow-planning-article.html">
+            <div class="dash-blog-card-tag">Case study</div>
+            <h3>From one interview to a full article</h3>
+            <p>How a MealFlow-style session becomes long-form SEO content and narrative.</p>
+          </a>
+          <a class="dash-blog-card" href="blog/how-founders-promote-themselves.html">
+            <div class="dash-blog-card-tag">Guide</div>
+            <h3>Build your founder narrative</h3>
+            <p>Practical guidance on promoting yourself and your company with clarity.</p>
+          </a>
+          <a class="dash-blog-card" href="blog/spotlight-founder.html">
+            <div class="dash-blog-card-tag">Spotlight</div>
+            <h3>Founder spotlight &amp; PR kit flow</h3>
+            <p>A deeper look at founder story output from a Toni-style interview.</p>
+          </a>
+        </div>
+        <a href="blog/index.html" class="btn btn-secondary dash-blog-cta">Browse all articles &amp; examples</a>
+      </section>
+
+      <section id="dash-section-interviews" class="dash-page-block" aria-labelledby="dash-interviews-heading">
+      <span class="section-num">03</span>
+      <h2 class="section-title" id="dash-interviews-heading">Recent Interviews</h2>
       <p class="section-desc">Your recorded interviews will appear here</p>
       <div class="empty-state">
         <div class="empty-state-icon">🎙</div>
-        <h3>No Interviews Yet</h3>
-        <p>Start your first AI interview and we'll generate professional video clips, blog posts, and social content automatically.</p>
-        <a href="interview.html" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-          Record Your First Interview
+        <h3>Your first interview awaits</h3>
+        <p>Ten minutes. One conversation. A full PR kit ready to share. Start recording when you're ready.</p>
+        <a href="onboarding.html" class="btn btn-primary btn-record">
+          <span class="btn-mic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></span>
+          Chat with Toni
         </a>
       </div>
+      </section>
     </main>
   </div>
+  </div>
+  <script src="js/dashboard-shell.js"></script>
+  <script src="js/app-sidebar.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('dashWelcome');
+      if (!el) return;
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('welcome') === '1' || localStorage.getItem('tonipr_new_signup') === '1') {
+        el.classList.add('is-visible');
+        localStorage.removeItem('tonipr_new_signup');
+        if (params.get('welcome') === '1') {
+          try {
+            history.replaceState(null, '', 'dashboard.html');
+          } catch (e) {}
+        }
+      }
+      var dismiss = document.getElementById('dashWelcomeDismiss');
+      if (dismiss) {
+        dismiss.addEventListener('click', function () {
+          el.classList.remove('is-visible');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

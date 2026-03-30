@@ -29,7 +29,8 @@
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: #ffffff;
+      background: linear-gradient(135deg, #fffbfa 0%, #ffffff 40%, #f8f7ff 100%);
+      background-attachment: fixed;
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
@@ -40,24 +41,8 @@
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 16px 0 0 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle 400px at 10% 20%, rgba(215, 38, 61, 0.06), transparent 50%), radial-gradient(circle 300px at 90% 80%, rgba(100, 80, 180, 0.04), transparent 45%), radial-gradient(circle 250px at 50% 50%, rgba(255, 180, 170, 0.03), transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -82,6 +67,10 @@
       font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 700;
       font-size: 1.35rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
       letter-spacing: -0.02em;
       color: var(--text-primary);
       text-decoration: none;
@@ -175,109 +164,6 @@
       font-size: 1rem;
       margin-bottom: 32px;
     }
-    .step-goal-badge {
-      display: inline-block;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--accent);
-      background: rgba(215, 38, 61, 0.08);
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 20px;
-    }
-    .step-goal-badge:empty { display: none; }
-
-    /* Cards */
-    .goal-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .goal-card {
-      position: relative;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      min-height: 120px;
-      cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      text-align: left;
-      color: var(--text-primary);
-      -webkit-tap-highlight-color: transparent;
-    }
-    .goal-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(215, 38, 61, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5);
-    }
-    .goal-card.selected {
-      border-color: rgba(215, 38, 61, 0.3);
-      box-shadow: 0 20px 40px rgba(215, 38, 61, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.6);
-    }
-    .goal-card .icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-muted);
-    }
-    .goal-card.selected .icon {
-      background: var(--accent);
-      color: white;
-    }
-    .goal-card .label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-      color: var(--text-primary);
-    }
-    .goal-card .hint {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-    .goal-card .check {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: transparent;
-      transition: all 0.3s;
-    }
-    .goal-card .check::after {
-      content: '';
-      position: absolute;
-      left: 6px;
-      top: 2px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .goal-card.selected .check {
-      background: var(--accent-emerald);
-      border-color: var(--accent-emerald);
-    }
-    .goal-card.selected .check::after {
-      opacity: 1;
-      border-color: white;
-    }
-
     /* Form */
     .form-group {
       margin-bottom: 20px;
@@ -553,13 +439,9 @@
       .welcome-wrap { grid-template-columns: 1fr; }
       .welcome-hero { text-align: center; }
       .welcome-desc { margin-left: auto; margin-right: auto; }
-      .goal-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-      .goal-card { min-height: 110px; padding: 24px; }
     }
     @media (max-width: 600px) {
       .onboarding { padding: 24px 20px 40px; }
-      .goal-grid { grid-template-columns: 1fr; gap: 12px; }
-      .goal-card { min-height: 100px; padding: 20px 24px; }
       .step-title { font-size: 1.5rem; }
       .step-desc { font-size: 0.95rem; margin-bottom: 24px; }
       .btn-row { flex-direction: column; align-items: stretch; gap: 8px; }
@@ -572,7 +454,7 @@
 <body>
   <div class="onboarding">
     <header class="logo-row">
-      <a href="index.html" class="logo">ToniPR</a>
+      <a href="index.html" class="logo">ToniPR <span style="font-weight:500;font-size:0.75rem;color:var(--text-muted)">by Tunepact</span></a>
     </header>
 
     <div class="progress-wrap">
@@ -581,9 +463,8 @@
       </div>
       <div class="progress-steps">
         <span class="progress-step" data-step="0">Welcome</span>
-        <span class="progress-step" data-step="1">Your goal</span>
-        <span class="progress-step" data-step="2">Details</span>
-        <span class="progress-step" data-step="3">Ready</span>
+        <span class="progress-step" data-step="1">Details</span>
+        <span class="progress-step" data-step="2">Ready</span>
       </div>
     </div>
 
@@ -614,47 +495,10 @@
         </div>
       </section>
 
-      <!-- Step 1: Goal -->
+      <!-- Step 1: Details -->
       <section class="step" data-step="1" id="step1">
-        <h2 class="step-title">What are you here for?</h2>
-        <p class="step-desc">Pick one and Toni will tailor your interview and everything you get from it.</p>
-        <div class="goal-grid">
-          <button type="button" class="goal-card" data-goal="fundraising">
-            <span class="check"></span>
-            <div class="icon">F</div>
-            <div class="label">Fundraising</div>
-            <div class="hint">Investor narratives, pitch angles</div>
-          </button>
-          <button type="button" class="goal-card" data-goal="launch">
-            <span class="check"></span>
-            <div class="icon">L</div>
-            <div class="label">Product launch</div>
-            <div class="hint">Launch story, press kit</div>
-          </button>
-          <button type="button" class="goal-card" data-goal="hiring">
-            <span class="check"></span>
-            <div class="icon">H</div>
-            <div class="label">Hiring</div>
-            <div class="hint">Employer brand, talent magnet</div>
-          </button>
-          <button type="button" class="goal-card" data-goal="thought-leadership">
-            <span class="check"></span>
-            <div class="icon">T</div>
-            <div class="label">Thought leadership</div>
-            <div class="hint">Bylines, podcasts, authority</div>
-          </button>
-        </div>
-        <div class="btn-row">
-          <button type="button" class="btn btn-primary" id="btnGoalNext" disabled>Continue</button>
-          <button type="button" class="btn btn-link" id="btnGoalBack">Back</button>
-        </div>
-      </section>
-
-      <!-- Step 2: Details (optional) -->
-      <section class="step" data-step="2" id="step2">
-        <p class="step-goal-badge" id="step2GoalBadge"></p>
         <h2 class="step-title">Quick details (optional)</h2>
-        <p class="step-desc">Helps Toni personalize your interview. You can refine everything when you chat.</p>
+        <p class="step-desc">Tell Toni about your company so your interview can start in context. You can refine everything when you chat.</p>
         <div class="form-group">
           <label for="company">Company or project name</label>
           <input type="text" id="company" class="input" placeholder="e.g. FlowOps" autocomplete="organization" />
@@ -671,10 +515,10 @@
         </div>
       </section>
 
-      <!-- Step 3: Ready -->
-      <section class="step" data-step="3" id="step3">
+      <!-- Step 2: Ready -->
+      <section class="step" data-step="2" id="step2">
         <h2 class="step-title">You're all set</h2>
-        <p class="step-desc">Toni's AI will generate questions tailored to what you're promoting. Block about 10 minutes and you're done.</p>
+        <p class="step-desc">Toni's AI will generate questions tailored to your company. Block about 10 minutes and you're done.</p>
         <div class="ready-card">
           <h3>After the interview you get</h3>
           <ul class="ready-list">
@@ -701,11 +545,10 @@
       const steps = document.querySelectorAll('.step');
       const progressFill = document.getElementById('progressFill');
       const progressSteps = document.querySelectorAll('.progress-step');
-      const totalSteps = 4;
+      const totalSteps = 3;
 
       let currentStep = 0;
       const state = {
-        goal: null,
         company: '',
         oneliner: ''
       };
@@ -720,13 +563,6 @@
         });
       }
 
-      const goalLabels = {
-        fundraising: 'Fundraising',
-        launch: 'Product launch',
-        hiring: 'Hiring',
-        'thought-leadership': 'Thought leadership'
-      };
-
       function goToStep(next) {
         const prev = currentStep;
         if (next < 0 || next >= totalSteps) return;
@@ -740,20 +576,7 @@
           currentStep = next;
           steps[currentStep].classList.add('active');
           updateProgress();
-
-          if (next === 2 && state.goal) {
-            const badge = document.getElementById('step2GoalBadge');
-            if (badge) badge.textContent = "We'll tailor your interview for " + (goalLabels[state.goal] || state.goal);
-          }
         }, 320);
-      }
-
-      function setGoal(goal) {
-        state.goal = goal;
-        document.querySelectorAll('.goal-card').forEach(function (card) {
-          card.classList.toggle('selected', card.dataset.goal === goal);
-        });
-        document.getElementById('btnGoalNext').disabled = !goal;
       }
 
       // Step 0
@@ -761,43 +584,31 @@
         goToStep(1);
       });
 
-      // Step 1
-      document.querySelectorAll('.goal-card').forEach(function (card) {
-        card.addEventListener('click', function () {
-          setGoal(card.dataset.goal);
-        });
-      });
-      document.getElementById('btnGoalNext').addEventListener('click', function () {
-        goToStep(2);
-      });
-      document.getElementById('btnGoalBack').addEventListener('click', function () {
-        goToStep(0);
-      });
-
-      // Step 2
+      // Step 1 — company details
       document.getElementById('btnDetailsNext').addEventListener('click', function () {
         state.company = document.getElementById('company').value.trim();
         state.oneliner = document.getElementById('oneliner').value.trim();
-        goToStep(3);
+        goToStep(2);
       });
       document.getElementById('btnDetailsBack').addEventListener('click', function () {
-        goToStep(1);
+        goToStep(0);
       });
       document.getElementById('btnDetailsSkip').addEventListener('click', function () {
-        goToStep(3);
+        state.company = document.getElementById('company').value.trim();
+        state.oneliner = document.getElementById('oneliner').value.trim();
+        goToStep(2);
       });
 
-      // Step 3
+      // Step 2 — ready
       document.getElementById('btnStartInterview').addEventListener('click', function () {
         const params = new URLSearchParams();
-        if (state.goal) params.set('goal', state.goal);
         if (state.company) params.set('company', state.company);
         if (state.oneliner) params.set('oneliner', state.oneliner);
         const qs = params.toString();
-        window.location.href = 'auth.html' + (qs ? '?' + qs : '');
+        window.location.href = 'interview.html' + (qs ? '?' + qs : '');
       });
       document.getElementById('btnReadyBack').addEventListener('click', function () {
-        goToStep(2);
+        goToStep(1);
       });
 
       updateProgress();

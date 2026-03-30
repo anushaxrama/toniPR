@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Interview · ToniPR</title>
+  <title>Chat with Toni · ToniPR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -23,7 +23,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg);
+      background: linear-gradient(135deg, #fffbfa 0%, #ffffff 40%, #f8f7ff 100%);
+      background-attachment: fixed;
       color: var(--text-primary);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
@@ -32,20 +33,8 @@
     body::before {
       content: '';
       position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0; right: 0;
-      width: 100px; height: 100px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 20px 0 0 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle 400px at 10% 20%, rgba(215, 38, 61, 0.06), transparent 50%), radial-gradient(circle 300px at 90% 80%, rgba(100, 80, 180, 0.04), transparent 45%), radial-gradient(circle 250px at 50% 50%, rgba(255, 180, 170, 0.03), transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -184,6 +173,17 @@
       padding: 24px;
       margin-bottom: 20px;
     }
+    .result-card-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .result-card-heading img {
+      flex-shrink: 0;
+      display: block;
+    }
+    .result-card-heading h4 { margin-bottom: 0; }
     .result-card h4 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 0.9rem;
@@ -216,8 +216,8 @@
     }
     .chat-msg {
       display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      gap: 14px;
+      align-items: center;
       max-width: 90%;
       animation: msgIn 0.35s ease;
     }
@@ -230,8 +230,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .chat-msg-avatar {
-      width: 40px;
-      height: 40px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
@@ -242,7 +242,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.9rem;
       font-weight: 600;
       font-family: inherit;
     }
@@ -294,11 +294,7 @@
       line-height: 1.5;
     }
     .chat-transcript::placeholder { color: var(--text-muted); }
-    .chat-transcript.recording {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(215, 38, 61, 0.15);
-    }
-    .btn-mic {
+    .btn-send {
       width: 48px;
       height: 48px;
       min-width: 48px;
@@ -310,26 +306,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(215, 38, 61, 0.35);
     }
-    .btn-mic:hover {
+    .btn-send:hover {
       background: var(--accent-soft);
       transform: scale(1.05);
     }
-    .btn-mic.recording {
-      background: #dc3545;
-      animation: micPulse 1s ease-in-out infinite;
+    .btn-send:active {
+      transform: scale(0.98);
     }
-    @keyframes micPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
-      50% { box-shadow: 0 0 0 12px rgba(220, 53, 69, 0); }
+    .btn-send svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 2px;
     }
-    .btn-mic svg { width: 22px; height: 22px; }
-    .chat-mic-hint {
+    .chat-input-hint {
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-top: 8px;
+      line-height: 1.45;
+    }
+    .chat-hint-kbd {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
     }
     .chat-actions {
       display: flex;
@@ -337,19 +340,107 @@
       margin-top: 16px;
       flex-wrap: wrap;
     }
-    .btn-replay {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px 0;
+    .chat-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
     }
-    .btn-replay:hover { color: var(--accent); }
-    .voice-fallback {
+    .chat-toolbar-hint {
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-top: 8px;
+      max-width: 420px;
+      line-height: 1.45;
+    }
+    .btn-redo {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(215, 38, 61, 0.08);
+      border: 1px solid rgba(215, 38, 61, 0.2);
+      border-radius: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-redo:hover {
+      background: rgba(215, 38, 61, 0.14);
+      transform: translateY(-1px);
+    }
+    .interview-toni-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .interview-toni-chip img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .step2-header-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .step2-header-wrap .step-header-text {
+      width: 100%;
+      max-width: 36rem;
+    }
+    .step2-header-wrap .step-title { margin-top: 0; }
+    .step2-header-wrap .step-desc { margin-bottom: 0; }
+    .step2-toni {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+      display: block;
+    }
+    .bundle-callout {
+      background: rgba(215, 38, 61, 0.06);
+      border: 1px solid rgba(215, 38, 61, 0.15);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .bundle-callout strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    .bundle-callout ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+    .bundle-callout li { margin-bottom: 6px; }
+    .bundle-callout li:last-child { margin-bottom: 0; }
+    .generating-toni {
+      width: min(140px, 40vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: var(--radius-md);
+    }
+    @media (max-width: 540px) {
+      .interview-wrap { padding: 32px 16px 64px; }
+      .chat-toolbar { flex-direction: column; align-items: stretch; }
+      .btn-redo { width: 100%; }
     }
   </style>
 </head>
@@ -359,8 +450,9 @@
 
     <!-- Step 1: Company info -->
     <section class="step active" id="step1">
+      <div class="interview-toni-chip"><img src="assets/toni/Toni_thumbs_up_animation.gif" alt="" /> Chat with Toni</div>
       <h1 class="step-title">Tell us about your company</h1>
-      <p class="step-desc">We'll use this to tailor your AI interview. Toni will ask questions specific to your product and what you're promoting.</p>
+      <p class="step-desc">A few details so Toni can tailor your chat: no script, no prep. Just you and a relaxed conversation that becomes social-ready content.</p>
       <form id="formCompany">
         <div class="form-group">
           <label for="companyName">Company or product name</label>
@@ -374,27 +466,42 @@
           <label for="promoting">What are you promoting right now?</label>
           <input type="text" id="promoting" class="input" placeholder="e.g. Product launch, fundraising, thought leadership" />
         </div>
-        <button type="submit" class="btn btn-primary">Start your tailored interview</button>
+        <button type="submit" class="btn btn-primary">Continue to chat with Toni</button>
       </form>
     </section>
 
     <!-- Step 2: Chat-style interview -->
     <section class="step" id="step2">
-      <h1 class="step-title">Your tailored interview</h1>
-      <p class="step-desc">Toni has questions just for <strong id="companyDisplay"></strong>. He'll ask out loud—click the mic and speak your answer. It feels like texting.</p>
+      <div class="step2-header-wrap">
+        <img src="assets/toni/Toni_Explains.gif" alt="" class="step2-toni" width="88" height="88" loading="lazy" />
+        <div class="step-header-text">
+          <h1 class="step-title">Chat with Toni</h1>
+          <p class="step-desc">Casual back-and-forth about <strong id="companyDisplay"></strong>. Toni asks questions in chat. You type your answers. Not a formal interview, just a comfortable exchange.</p>
+        </div>
+      </div>
+      <div class="bundle-callout">
+        <strong>What you get in the full bundle (after this chat)</strong>
+        <ul>
+          <li>Guided interview session + short clips</li>
+          <li>LinkedIn post drafts · Blog ideas &amp; article copy</li>
+          <li>Press-ready quotes · Founder story · Complete PR kit download</li>
+        </ul>
+      </div>
+      <div class="chat-toolbar">
+        <p class="chat-toolbar-hint">Want a do-over? Redo clears this chat so you can try again from the first question.</p>
+        <button type="button" class="btn-redo" id="btnRedoInterview">Redo chat</button>
+      </div>
       <form id="formInterview">
         <div class="chat-thread" id="chatThread"></div>
         <div class="chat-input-area">
           <div class="chat-input-row">
-            <textarea class="chat-transcript" id="chatTranscript" placeholder="Your answer will appear here when you speak, or type here..." data-id=""></textarea>
-            <button type="button" class="btn-mic" id="btnMic" title="Record your answer" aria-label="Record"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V21h-2v-5.07z"/></svg></button>
+            <textarea class="chat-transcript" id="chatTranscript" placeholder="Type your answer here..." data-id=""></textarea>
+            <button type="button" class="btn-send" id="btnSend" title="Send your answer" aria-label="Send answer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
           </div>
-          <div class="chat-mic-hint" id="micHint">Click the mic and speak your answer</div>
-          <p class="voice-fallback" id="voiceFallback" style="display:none">Voice input not supported. Type your answer above.</p>
+          <div class="chat-input-hint" id="chatInputHint">Press <span class="chat-hint-kbd">⌘/Ctrl + Enter</span> to send, or use Send and Continue below.</div>
           <div class="chat-actions">
-            <button type="button" class="btn-replay" id="btnReplay" style="display:none">🔊 Replay question</button>
             <button type="button" class="btn btn-primary" id="btnNext">Continue →</button>
-            <button type="submit" class="btn btn-primary" id="btnSubmit" style="display:none">I'm done — Generate my PR kit</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit" style="display:none">I'm done: Generate my PR kit</button>
           </div>
         </div>
       </form>
@@ -403,20 +510,21 @@
     <!-- Step 3: Generating -->
     <section class="step" id="step3">
       <div class="generating-wrap">
+        <img src="assets/toni/Toni_Thinking.gif" alt="" class="generating-toni" loading="lazy" />
         <div class="generating-spinner"></div>
-        <h2 class="generating-title">Generating PR kit...</h2>
-        <p class="generating-desc">Creating your LinkedIn posts, blog article, and press quotes. This usually takes about 30 seconds.</p>
+        <h2 class="generating-title">Turning your chat into content…</h2>
+        <p class="generating-desc">Creating visual and written assets for social, plus your article and press quotes. Usually about 30 seconds.</p>
       </div>
     </section>
 
     <!-- Step 4: Result -->
     <section class="step" id="step4">
-      <h1 class="step-title">Your PR kit is ready</h1>
-      <p class="step-desc">Here's what we generated from your interview. Copy, edit, and publish.</p>
+      <h1 class="step-title">Your content kit is ready</h1>
+      <p class="step-desc">Here's what we generated from your chat with Toni. Copy, edit, and publish, especially to social.</p>
       <div id="resultContainer"></div>
       <div class="result-actions">
         <a href="dashboard.html" class="btn btn-primary">Back to dashboard</a>
-        <a href="interview.html" class="btn btn-secondary">Start another interview</a>
+        <a href="interview.html" class="btn btn-secondary">Chat with Toni again</a>
       </div>
     </section>
   </div>
@@ -429,53 +537,42 @@
         promoting: '',
         answers: {},
         tailoredQuestions: [],
-        currentIndex: 0,
-        recognition: null,
-        isRecording: false,
-        maleVoice: null
+        currentIndex: 0
       };
 
-      const MALE_VOICES = [
-        'Alex', 'Daniel', 'Google US English Male', 'Microsoft David', 'Microsoft Mark',
-        'Fred', 'Ralph', 'Bruce', 'Paul', 'Natural', 'Premium'
-      ];
-
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const synth = window.speechSynthesis;
+      (function prefillFromOnboarding() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var company = params.get('company');
+          var oneliner = params.get('oneliner');
+          var goal = params.get('goal');
+          var goalLabels = {
+            fundraising: 'Fundraising',
+            launch: 'Product launch',
+            hiring: 'Hiring',
+            'thought-leadership': 'Thought leadership'
+          };
+          if (company) {
+            var cn = document.getElementById('companyName');
+            if (cn) cn.value = company;
+            state.companyName = company;
+          }
+          if (oneliner) {
+            var ol = document.getElementById('oneliner');
+            if (ol) ol.value = oneliner;
+            state.oneliner = oneliner;
+          }
+          if (goal && goalLabels[goal]) {
+            var pr = document.getElementById('promoting');
+            if (pr && !pr.value.trim()) pr.value = goalLabels[goal];
+            state.promoting = goalLabels[goal];
+          }
+        } catch (e) {}
+      })();
 
       function goToStep(stepId) {
         document.querySelectorAll('.step').forEach(function (s) { s.classList.remove('active'); });
         document.getElementById(stepId).classList.add('active');
-      }
-
-      function getMaleVoice() {
-        if (state.maleVoice) return state.maleVoice;
-        const voices = synth.getVoices();
-        var male = voices.filter(function (v) {
-          if (!v.lang.startsWith('en')) return false;
-          var name = v.name.toLowerCase();
-          if (name.indexOf('female') !== -1) return false;
-          return MALE_VOICES.some(function (n) { return v.name.indexOf(n) !== -1; });
-        });
-        if (male.length) {
-          state.maleVoice = male.find(function (v) { return v.localService; }) || male[0];
-          return state.maleVoice;
-        }
-        state.maleVoice = voices.find(function (v) { return v.lang.startsWith('en') && v.localService; }) ||
-          voices.find(function (v) { return v.lang.startsWith('en'); }) || voices[0];
-        return state.maleVoice;
-      }
-
-      function speakQuestion(text) {
-        if (!synth) return;
-        synth.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        u.rate = 0.92;
-        u.pitch = 1;
-        u.volume = 1;
-        const voice = getMaleVoice();
-        if (voice) u.voice = voice;
-        synth.speak(u);
       }
 
       function generateTailoredQuestions(company, oneliner, promoting) {
@@ -496,21 +593,27 @@
         else if (/productivity|work|task/i.test(o)) domainHint = 'work ';
 
         return [
-          { id: 'q1', text: "Hey, I'm really excited to hear about this! So tell me—what exactly is " + c + "? What are you building?" },
+          { id: 'q1', text: "So tell me: what exactly is " + c + "? What are you building?" },
           { id: 'q2', text: "That sounds great! So what's the biggest " + domainHint + "problem that " + c + " solves? I'd love to hear the story behind it." },
           { id: 'q3', text: "When " + userWord + " try " + c + ", what do they tell you is the biggest pain point? What keeps coming up?" },
           { id: 'q4', text: "What's the most surprising or valuable insight you've learned from your " + userWord + "? Something that really stuck with you?" },
-          { id: 'q5', text: "Last one—if someone's skeptical about " + c + " or what you're doing, what would you say to them? How do you win them over?" }
+          { id: 'q5', text: "Last one: if someone's skeptical about " + c + " or what you're doing, what would you say to them? How do you win them over?" }
         ];
       }
 
-      function initSpeechRecognition() {
-        if (!SpeechRecognition) return null;
-        const r = new SpeechRecognition();
-        r.continuous = true;
-        r.interimResults = true;
-        r.lang = 'en-US';
-        return r;
+      function escChatHtml(t) {
+        return (t || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+      }
+
+      function getUserInitials() {
+        try {
+          var p = JSON.parse(localStorage.getItem('tonipr_profile') || '{}');
+          var name = (p.name || '').trim();
+          if (!name) return 'U';
+          return name.split(/\s+/).map(function (x) { return x[0]; }).join('').substring(0, 2).toUpperCase() || 'U';
+        } catch (e) {
+          return 'U';
+        }
       }
 
       function appendChatMsg(role, text) {
@@ -518,13 +621,13 @@
         const div = document.createElement('div');
         div.className = 'chat-msg' + (role === 'user' ? ' user' : '');
         const avatar = role === 'user'
-          ? '<div class="chat-msg-avatar chat-msg-avatar-user">U</div>'
-          : '<img src="assets/toni.png" alt="" class="chat-msg-avatar" />';
-        div.innerHTML =
-          avatar +
-          '<div class="chat-msg-bubble">' +
-          '<div class="chat-msg-role">' + (role === 'user' ? 'You' : 'Toni') + '</div>' +
-          '<div>' + (text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>') + '</div></div>';
+          ? '<div class="chat-msg-avatar chat-msg-avatar-user">' + escChatHtml(getUserInitials()) + '</div>'
+          : '<img src="assets/toni/Toni_Explains.gif" alt="" class="chat-msg-avatar" />';
+        var bubbleInner =
+          role === 'user'
+            ? '<div class="chat-msg-role">You</div><div>' + escChatHtml(text) + '</div>'
+            : '<div>Toni: ' + escChatHtml(text) + '</div>';
+        div.innerHTML = avatar + '<div class="chat-msg-bubble">' + bubbleInner + '</div>';
         thread.appendChild(div);
         thread.scrollTop = thread.scrollHeight;
       }
@@ -536,55 +639,34 @@
 
         var msg = q.text;
         if (idx === 0) {
-          msg = "Hey! I'm so excited to learn about " + state.companyName + ". Let's get into it. " + q.text;
+          msg = "Hey! I'm excited to learn about " + state.companyName + ". So tell me: what exactly is " + state.companyName + "? What are you building?";
         }
         appendChatMsg('toni', msg);
-        speakQuestion(msg);
 
         document.getElementById('chatTranscript').value = '';
         document.getElementById('chatTranscript').dataset.id = q.id;
-        document.getElementById('btnReplay').style.display = 'inline-block';
-        document.getElementById('btnReplay').onclick = function () { speakQuestion(msg); };
 
         document.getElementById('btnNext').style.display = idx < state.tailoredQuestions.length - 1 ? 'inline-flex' : 'none';
         document.getElementById('btnSubmit').style.display = idx === state.tailoredQuestions.length - 1 ? 'inline-flex' : 'none';
       }
 
-      function stopRecording() {
-        if (!state.recognition || !state.isRecording) return;
-        state.isRecording = false;
-        state.recognition.stop();
-        document.getElementById('btnMic').classList.remove('recording');
-        document.getElementById('chatTranscript').classList.remove('recording');
-        document.getElementById('micHint').textContent = 'Click the mic and speak your answer';
-      }
-
-      function startRecording() {
-        if (!state.recognition) return;
-        stopRecording();
-        state.isRecording = true;
-        const transcriptEl = document.getElementById('chatTranscript');
-        transcriptEl.classList.add('recording');
-        document.getElementById('btnMic').classList.add('recording');
-        document.getElementById('micHint').textContent = 'Listening... Click mic again to stop';
-
-        var lastFinal = transcriptEl.value;
-        state.recognition.onresult = function (e) {
-          var full = '', interim = '';
-          for (var j = e.resultIndex; j < e.results.length; j++) {
-            var r = e.results[j];
-            var t = r[0].transcript;
-            if (r.isFinal) full += t;
-            else interim += t;
-          }
-          if (full) lastFinal += full;
-          transcriptEl.value = lastFinal + interim;
-          state.answers[state.tailoredQuestions[state.currentIndex].id] = lastFinal.trim();
-        };
-        state.recognition.onend = function () {
-          if (state.isRecording) state.recognition.start();
-        };
-        state.recognition.start();
+      function handleSendAnswer() {
+        var transcriptEl = document.getElementById('chatTranscript');
+        var id = transcriptEl.dataset.id;
+        var val = transcriptEl.value ? transcriptEl.value.trim() : '';
+        if (!id || !val) {
+          transcriptEl.focus();
+          return;
+        }
+        var isLast = state.currentIndex === state.tailoredQuestions.length - 1;
+        if (isLast) {
+          document.getElementById('formInterview').requestSubmit();
+          return;
+        }
+        state.answers[id] = val;
+        appendChatMsg('user', val);
+        state.currentIndex++;
+        showNextQuestion();
       }
 
       document.getElementById('formCompany').addEventListener('submit', function (e) {
@@ -602,40 +684,25 @@
         );
         state.answers = {};
         state.currentIndex = 0;
-        state.recognition = initSpeechRecognition();
 
         document.getElementById('chatThread').innerHTML = '';
-        document.getElementById('btnMic').style.display = state.recognition ? 'flex' : 'none';
-        document.getElementById('voiceFallback').style.display = state.recognition ? 'none' : 'block';
 
         showNextQuestion();
-
-        document.getElementById('btnMic').onclick = function () {
-          if (state.isRecording) stopRecording();
-          else startRecording();
-        };
-
-        document.getElementById('btnNext').onclick = function () {
-          stopRecording();
-          const transcriptEl = document.getElementById('chatTranscript');
-          const id = transcriptEl.dataset.id;
-          const val = transcriptEl.value ? transcriptEl.value.trim() : '';
-          if (id && val) {
-            state.answers[id] = val;
-            appendChatMsg('user', val);
-          }
-          state.currentIndex++;
-          if (state.currentIndex < state.tailoredQuestions.length) {
-            showNextQuestion();
-          }
-        };
 
         goToStep('step2');
       });
 
+      document.getElementById('btnSend').addEventListener('click', handleSendAnswer);
+      document.getElementById('btnNext').addEventListener('click', handleSendAnswer);
+      document.getElementById('chatTranscript').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          handleSendAnswer();
+        }
+      });
+
       document.getElementById('formInterview').addEventListener('submit', function (e) {
         e.preventDefault();
-        stopRecording();
         const transcriptEl = document.getElementById('chatTranscript');
         const id = transcriptEl.dataset.id;
         const val = transcriptEl.value ? transcriptEl.value.trim() : '';
@@ -649,23 +716,25 @@
         setTimeout(function () {
           const result = document.getElementById('resultContainer');
           result.innerHTML =
-            '<div class="result-card"><h4>LinkedIn Post</h4><p>' +
+            '<div class="result-card result-card--linkedin"><div class="result-card-heading"><img src="assets/icons/linkedin.svg" alt="" width="22" height="22" /><h4>LinkedIn Post</h4></div><p>' +
             (state.answers.q1 || '') + '. ' + (state.answers.q2 || '') + ' ' + state.companyName + ' helps with this. ' +
             (state.answers.q3 ? 'We found that ' + state.answers.q3 + '. ' : '') +
             (state.answers.q4 ? state.answers.q4 : '') + '</p></div>' +
             '<div class="result-card"><h4>Blog Headline</h4><p>How ' + state.companyName + ' ' + (state.oneliner || 'solves a key problem') + ': A founder\'s perspective</p></div>' +
-            '<div class="result-card"><h4>Press Quote</h4><p>"' + (state.answers.q5 || state.answers.q4 || state.answers.q2 || 'We\'re building something that matters.') + '"</p></div>';
+            '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quote</h4></div><p>"' + (state.answers.q5 || state.answers.q4 || state.answers.q2 || 'We\'re building something that matters.') + '"</p></div>';
           goToStep('step4');
         }, 3500);
       });
 
-      if (synth) {
-        synth.getVoices();
-        window.speechSynthesis.onvoiceschanged = function () {
-          state.maleVoice = null;
-          getMaleVoice();
-        };
-      }
+      document.getElementById('btnRedoInterview').addEventListener('click', function () {
+        state.currentIndex = 0;
+        state.answers = {};
+        document.getElementById('chatThread').innerHTML = '';
+        var te = document.getElementById('chatTranscript');
+        te.value = '';
+        te.dataset.id = '';
+        if (state.tailoredQuestions.length) showNextQuestion();
+      });
     })();
   </script>
 </body>

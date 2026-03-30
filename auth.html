@@ -27,7 +27,8 @@
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: #ffffff;
+      background: linear-gradient(135deg, #fffbfa 0%, #ffffff 40%, #f8f7ff 100%);
+      background-attachment: fixed;
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
@@ -41,24 +42,8 @@
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 16px 0 0 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle 400px at 10% 20%, rgba(215, 38, 61, 0.06), transparent 50%), radial-gradient(circle 300px at 90% 80%, rgba(100, 80, 180, 0.04), transparent 45%), radial-gradient(circle 250px at 50% 50%, rgba(255, 180, 170, 0.03), transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -101,6 +86,10 @@
     .auth-logo {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 700;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
       font-size: 1.5rem;
       color: var(--text-primary);
       text-decoration: none;
@@ -277,6 +266,33 @@
       color: var(--text-muted);
       margin-top: 6px;
     }
+
+    .auth-existing-account {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .auth-existing-account button {
+      display: inline;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .auth-existing-account button:hover {
+      color: #c21f35;
+    }
   </style>
 </head>
 <body>
@@ -286,18 +302,18 @@
     </div>
     <div class="auth-wrap">
     <header class="auth-header">
-      <a href="index.html" class="auth-logo">ToniPR</a>
+      <a href="index.html" class="auth-logo">ToniPR <span style="font-weight:500;font-size:0.75rem;color:var(--text-muted)">by Tunepact</span></a>
       <h1>Log in or create an account</h1>
-      <p>Continue to start your AI interview</p>
+      <p>Next you'll open your dashboard. New accounts see pricing first, then a short company quiz when you start Chat with Toni.</p>
     </header>
 
     <div class="auth-card">
       <div class="auth-tabs">
-        <button type="button" class="auth-tab active" data-tab="login">Log in</button>
-        <button type="button" class="auth-tab" data-tab="signup">Create account</button>
+        <button type="button" class="auth-tab active" data-tab="signup">Create account</button>
+        <button type="button" class="auth-tab" data-tab="login">Log in</button>
       </div>
 
-      <form class="auth-form active" id="formLogin" data-form="login">
+      <form class="auth-form" id="formLogin" data-form="login">
         <div class="form-group">
           <label for="loginEmail">Email</label>
           <input type="email" id="loginEmail" class="input" placeholder="you@company.com" required />
@@ -309,7 +325,7 @@
         <button type="submit" class="btn btn-primary">Log in</button>
       </form>
 
-      <form class="auth-form" id="formSignup" data-form="signup">
+      <form class="auth-form active" id="formSignup" data-form="signup">
         <div class="form-group">
           <label for="signupName">Full name</label>
           <input type="text" id="signupName" class="input" placeholder="Jane Smith" required />
@@ -325,6 +341,11 @@
         </div>
         <button type="submit" class="btn btn-primary">Create account</button>
       </form>
+
+      <div class="auth-existing-account">
+        Already have an account?
+        <button type="button" id="btnExistingLogin">Log in</button>
+      </div>
     </div>
 
     <p class="auth-footer">
@@ -347,29 +368,53 @@
       const tabs = document.querySelectorAll('.auth-tab');
       const forms = document.querySelectorAll('.auth-form');
 
+      function activateTab(name) {
+        tabs.forEach(function (t) {
+          t.classList.toggle('active', t.dataset.tab === name);
+        });
+        forms.forEach(function (f) {
+          f.classList.toggle('active', f.dataset.form === name);
+        });
+        var focusId = name === 'login' ? 'loginEmail' : 'signupName';
+        var el = document.getElementById(focusId);
+        if (el) setTimeout(function () { el.focus(); }, 50);
+      }
+
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
-          const target = tab.dataset.tab;
-          tabs.forEach(function (t) { t.classList.remove('active'); });
-          forms.forEach(function (f) { f.classList.remove('active'); });
-          tab.classList.add('active');
-          document.getElementById('form' + target.charAt(0).toUpperCase() + target.slice(1)).classList.add('active');
+          activateTab(tab.dataset.tab);
         });
       });
 
+      document.getElementById('btnExistingLogin').addEventListener('click', function () {
+        activateTab('login');
+      });
+
+      function buildDashboardUrl() {
+        var params = new URLSearchParams(window.location.search);
+        params.delete('mode');
+        var qs = params.toString();
+        return 'dashboard.html' + (qs ? '?' + qs : '');
+      }
+
       document.getElementById('formLogin').addEventListener('submit', function (e) {
         e.preventDefault();
-        const params = new URLSearchParams(window.location.search);
-        const qs = params.toString();
-        window.location.href = 'dashboard.html' + (qs ? '?' + qs : '');
+        localStorage.setItem('tonipr_session', '1');
+        localStorage.removeItem('tonipr_new_signup');
+        window.location.href = buildDashboardUrl();
       });
 
       document.getElementById('formSignup').addEventListener('submit', function (e) {
         e.preventDefault();
-        const params = new URLSearchParams(window.location.search);
-        const qs = params.toString();
-        window.location.href = 'dashboard.html' + (qs ? '?' + qs : '');
+        localStorage.setItem('tonipr_session', '1');
+        localStorage.setItem('tonipr_new_signup', '1');
+        window.location.href = 'pricing.html?from=signup';
       });
+
+      var searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('mode') === 'login' || window.location.hash === '#login') {
+        activateTab('login');
+      }
     })();
   </script>
 </body>

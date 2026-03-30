@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinkedIn Posts · ToniPR</title>
+  <title>Profile · ToniPR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -24,7 +24,6 @@
     .credits-card-label { font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
     .credits-card-suffix { font-size:0.8rem; font-weight:500; color:var(--text-muted); margin-bottom:12px; }
     .credits-card-value { font-family:'Bricolage Grotesque',sans-serif; font-size:1.75rem; font-weight:700; color:var(--accent); margin-bottom:4px; }
-    .credits-card .btn { width:100%; justify-content:center; padding:8px 16px; font-size:0.85rem; }
     .sidebar-nav { flex:1; }
     .sidebar-nav a { display:flex; align-items:center; gap:12px; padding:10px 12px; color:var(--text-secondary); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:var(--radius-sm); margin-bottom:4px; transition:all 0.2s; }
     .sidebar-nav a:hover { background:var(--bg-elevated); color:var(--text-primary); }
@@ -32,7 +31,14 @@
     .sidebar-nav-icon { width:20px; height:20px; opacity:0.7; }
     .sidebar-nav a.active .sidebar-nav-icon { opacity:1; }
     .sidebar-divider { height:1px; background:var(--border); margin:20px 0; }
-    .sidebar-user { padding-top:16px; border-top:1px solid var(--border); }
+    .sidebar-plan-name { font-family:'Bricolage Grotesque',sans-serif; font-size:1.05rem; font-weight:600; color:var(--text-primary); margin-bottom:6px; }
+    .sidebar-plan-link { font-size:0.85rem; font-weight:600; color:var(--accent); text-decoration:none; display:inline-block; margin-bottom:2px; }
+    .sidebar-plan-link:hover { text-decoration:underline; }
+    .credits-card-divider { height:1px; background:var(--border); margin:14px 0; }
+    .sidebar-user-link { margin-top:auto; text-decoration:none; color:inherit; display:block; border-top:1px solid var(--border); padding-top:16px; border-radius:var(--radius-sm); transition:background 0.2s; }
+    .sidebar-user-link:hover { background:var(--bg-warm); }
+    .sidebar-user-link:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .sidebar-user { padding-top:0; border-top:none; }
     .sidebar-user-info { display:flex; align-items:center; gap:10px; padding:12px 0; }
     .sidebar-user-avatar { width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:0.9rem; }
     .sidebar-user-name { font-size:0.9rem; font-weight:500; }
@@ -44,11 +50,15 @@
     .btn-primary:hover { background:var(--accent-soft); transform:translateY(-1px); }
     .btn-secondary { background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border); }
     .btn-secondary:hover { background:#ebebeb; }
-    .btn svg { width:18px; height:18px; margin-right:8px; }
-    .empty-state { background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-md); padding:64px 40px; text-align:center; }
-    .empty-state-icon { width:64px; height:64px; margin:0 auto 24px; background:var(--bg-elevated); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.75rem; }
-    .empty-state h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.2rem; font-weight:600; margin-bottom:8px; }
-    .empty-state p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:24px; max-width:400px; margin-left:auto; margin-right:auto; }
+    .profile-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-md); padding:32px; max-width:480px; }
+    .profile-avatar { width:80px; height:80px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:1.5rem; margin-bottom:24px; }
+    .form-group { margin-bottom:20px; }
+    .form-group label { display:block; font-size:0.9rem; font-weight:500; color:var(--text-secondary); margin-bottom:8px; }
+    .form-group input { width:100%; padding:12px 16px; font-size:1rem; font-family:inherit; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); }
+    .form-group input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(215,38,61,0.1); }
+    .form-actions { display:flex; gap:12px; margin-top:24px; }
+    .toast { position:fixed; bottom:24px; right:24px; background:var(--text-primary); color:white; padding:12px 20px; border-radius:var(--radius-sm); font-size:0.9rem; opacity:0; transform:translateY(10px); transition:all 0.3s; z-index:1000; }
+    .toast.show { opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body>
@@ -58,7 +68,7 @@
     <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni.png" alt="" /> ToniPR</a>
     <nav class="topbar-util">
       <a href="support.html">Support</a>
-      <a href="profile.html">Profile</a>
+      <a href="profile.html" aria-current="page">Profile</a>
       <a href="settings.html">Settings</a>
       <a href="auth.html">Sign out</a>
     </nav>
@@ -68,43 +78,96 @@
     <aside class="sidebar" id="sidebar">
       <a href="index.html" class="sidebar-logo"><img src="assets/toni.png" alt="Toni" /><span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span></a>
       <div class="credits-card">
+        <div class="credits-card-label">Your plan</div>
+        <div class="sidebar-plan-name" id="sidebarPlanName">Founder plan</div>
+        <a href="pricing.html" class="sidebar-plan-link">View pricing &amp; plans</a>
+        <div class="credits-card-divider"></div>
         <div class="credits-card-label">Sessions</div>
-        <div class="credits-card-value">11</div>
-        <div class="credits-card-suffix">remaining this year — use anytime</div>
-        <a href="pricing.html" class="btn btn-secondary">Add sessions</a>
+        <div class="credits-card-value" id="creditsValue">11</div>
+        <div class="credits-card-suffix" id="creditsSuffix">remaining this year — use anytime</div>
       </div>
       <nav class="sidebar-nav">
         <a href="dashboard.html"><span class="sidebar-nav-icon">⌂</span> Dashboard</a>
         <a href="interviews.html"><span class="sidebar-nav-icon">🎙</span> My Interviews</a>
-        <a href="linkedin-posts.html" class="active"><span class="sidebar-nav-icon">in</span> LinkedIn Posts</a>
+        <a href="linkedin-posts.html"><span class="sidebar-nav-icon">in</span> LinkedIn Posts</a>
         <a href="x-threads.html"><span class="sidebar-nav-icon">𝕏</span> X Threads</a>
         <a href="founder-kit.html"><span class="sidebar-nav-icon">📁</span> Founder Kit</a>
         <a href="blog-articles.html"><span class="sidebar-nav-icon">📄</span> Blog Articles</a>
       </nav>
       <div class="sidebar-user">
         <div class="sidebar-user-info">
-          <div class="sidebar-user-avatar">AR</div>
+          <div class="sidebar-user-avatar" id="sidebarAvatar">AR</div>
           <div>
-            <div class="sidebar-user-name">Anusha Ramachandran</div>
-            <div class="sidebar-user-company">flowops</div>
+            <div class="sidebar-user-name" id="sidebarName">Anusha Ramachandran</div>
+            <div class="sidebar-user-company" id="sidebarCompany">flowops</div>
           </div>
         </div>
       </div>
     </aside>
     <main class="main">
-      <h1>LinkedIn Posts</h1>
-      <div class="empty-state">
-        <div class="empty-state-icon">in</div>
-        <h3>No content yet</h3>
-        <p>Chat with Toni to generate LinkedIn-ready posts and visuals. Your posts will appear here.</p>
-        <a href="auth.html" class="btn btn-primary">Chat with Toni</a>
+      <h1>Profile</h1>
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">AR</div>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" />
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Your company" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+          </div>
+        </form>
       </div>
     </main>
   </div>
   </div>
+  <div class="toast" id="toast">Profile saved</div>
   <script src="js/dashboard-shell.js"></script>
+  <script src="js/app-sidebar.js"></script>
   <script>
-    (function(){var p=JSON.parse(localStorage.getItem('tonipr_profile')||'{}');if(p.name){var n=document.querySelector('.sidebar-user-name');var c=document.querySelector('.sidebar-user-company');var a=document.querySelector('.sidebar-user-avatar');if(n)n.textContent=p.name;if(c)c.textContent=p.company||'';if(a)a.textContent=(p.name.split(' ').map(function(x){return x[0];}).join('')||'U').substring(0,2).toUpperCase();}})();
+    (function() {
+      var KEY = 'tonipr_profile';
+      var defaults = { name: 'Anusha Ramachandran', email: '', company: 'flowops' };
+      function load() {
+        var p = JSON.parse(localStorage.getItem(KEY) || '{}');
+        p = { name: p.name || defaults.name, email: p.email || defaults.email, company: p.company || defaults.company };
+        document.getElementById('name').value = p.name;
+        document.getElementById('email').value = p.email;
+        document.getElementById('company').value = p.company;
+        updateAvatars(p.name);
+      }
+      function updateAvatars(name) {
+        var initials = (name || '').split(' ').map(function(n) { return n[0]; }).join('').substring(0, 2).toUpperCase() || 'U';
+        var a = document.getElementById('profileAvatar');
+        var s = document.getElementById('sidebarAvatar');
+        if (a) a.textContent = initials;
+        if (s) s.textContent = initials;
+      }
+      function save(p) {
+        localStorage.setItem(KEY, JSON.stringify(p));
+        document.getElementById('sidebarName').textContent = p.name;
+        document.getElementById('sidebarCompany').textContent = p.company || '';
+        updateAvatars(p.name);
+      }
+      load();
+      document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var p = { name: document.getElementById('name').value.trim(), email: document.getElementById('email').value.trim(), company: document.getElementById('company').value.trim() };
+        save(p);
+        var t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(function() { t.classList.remove('show'); }, 2500);
+      });
+    })();
   </script>
 </body>
 </html>

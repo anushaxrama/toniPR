@@ -20,44 +20,240 @@
       --border: rgba(0, 0, 0, 0.08);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .page-bg.page-bg--hidden .page-bg__corner,
+    .page-bg.page-bg--hidden .page-bg__rift {
+      animation-play-state: paused;
+    }
+    .page-bg__wash {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+    }
+    .page-bg__art {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .page-bg__corner {
+      position: absolute;
+      width: min(88vw, 900px);
+      height: min(88vh, 880px);
+      will-change: transform;
+      opacity: 0.94;
+      background-image:
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+      background-repeat: repeat;
+    }
+    .page-bg__corner--tr {
+      top: -14%;
+      right: -14%;
+      left: auto;
+      bottom: auto;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 10px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 100% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.55) 42%,
+        transparent 72%
+      );
+      animation: pageBgCornerTR 26s ease-in-out infinite;
+    }
+    .page-bg__corner--tl {
+      top: -14%;
+      left: -14%;
+      right: auto;
+      bottom: auto;
+      background-size: 19px 19px, 19px 19px;
+      background-position: 0 0, 11px 6px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 0%,
+        #000 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        transparent 71%
+      );
+      animation: pageBgCornerTL 34s ease-in-out infinite;
+    }
+    .page-bg__corner--br {
+      bottom: -14%;
+      right: -14%;
+      top: auto;
+      left: auto;
+      background-size: 12px 12px, 12px 12px;
+      background-position: 0 0, 5px 8px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      mask-image: radial-gradient(
+        ellipse 105% 105% at 100% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.62) 44%,
+        transparent 73%
+      );
+      animation: pageBgCornerBR 22s ease-in-out infinite;
+    }
+    .page-bg__corner--bl {
+      bottom: -14%;
+      left: -14%;
+      top: auto;
+      right: auto;
+      background-size: 17px 17px, 17px 17px;
+      background-position: 0 0, 9px 12px;
+      -webkit-mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      mask-image: radial-gradient(
+        ellipse 100% 100% at 0% 100%,
+        #000 0%,
+        rgba(0, 0, 0, 0.48) 41%,
+        transparent 71%
+      );
+      animation: pageBgCornerBL 31s ease-in-out infinite;
+    }
+    @keyframes pageBgCornerTR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 7px 10px;
+        opacity: 0.9;
+      }
+      50% {
+        transform: translate(-22px, 28px) scale(1.03);
+        background-position: 26px 20px, 33px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerTL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 11px 6px;
+        opacity: 0.88;
+      }
+      50% {
+        transform: translate(18px, 24px) scale(1.025);
+        background-position: -20px 16px, -9px 22px;
+        opacity: 0.98;
+      }
+    }
+    @keyframes pageBgCornerBR {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 5px 8px;
+        opacity: 0.92;
+      }
+      50% {
+        transform: translate(-26px, -20px) scale(1.04);
+        background-position: 30px 22px, 35px 30px;
+        opacity: 1;
+      }
+    }
+    @keyframes pageBgCornerBL {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        background-position: 0 0, 9px 12px;
+        opacity: 0.85;
+      }
+      50% {
+        transform: translate(24px, -18px) scale(1.02);
+        background-position: -18px -14px, -9px -2px;
+        opacity: 0.96;
+      }
+    }
+    .page-bg__rift {
+      position: absolute;
+      inset: -8%;
+      background-image: radial-gradient(
+        circle at 1.5px 1.5px,
+        rgba(215, 38, 61, 0.1) 1.05px,
+        transparent 1.2px
+      );
+      background-size: 24px 24px;
+      opacity: 0.72;
+      -webkit-mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        75% 70% at 50% 45%,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.85) 48%,
+        rgba(0, 0, 0, 0.35) 62%,
+        transparent 76%
+      );
+      animation: pageBgRift 48s ease-in-out infinite;
+    }
+    @keyframes pageBgRift {
+      0%, 100% {
+        transform: translate(0, 0);
+        background-position: 0 0;
+        opacity: 0.62;
+      }
+      33% {
+        transform: translate(16px, -20px);
+        background-position: 22px 28px;
+        opacity: 0.78;
+      }
+      66% {
+        transform: translate(-14px, 12px);
+        background-position: -12px 18px;
+        opacity: 0.68;
+      }
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background-color: #ffffff;
       color: var(--text-primary);
+      overflow-x: hidden;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       position: relative;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, rgba(215, 38, 61, 0.3) 20%, var(--accent) 50%, rgba(215, 38, 61, 0.3) 80%, transparent 100%);
-      z-index: 999;
-      pointer-events: none;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
-      border-top: 2px solid rgba(215, 38, 61, 0.15);
-      border-left: 2px solid rgba(215, 38, 61, 0.15);
-      border-radius: 16px 0 0 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    article { position: relative; z-index: 1; }
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 20px 0;
+      background: transparent;
+      transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    nav.scrolled {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -107,12 +303,39 @@
     .article-cta p { margin-bottom: 20px; }
     .btn { display: inline-flex; align-items: center; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; background: var(--accent); color: white; }
     .btn:hover { transform: translateY(-1px); }
+    @media (prefers-reduced-motion: reduce) {
+      .page-bg__corner,
+      .page-bg__rift {
+        animation: none !important;
+        transform: none !important;
+        background-position: 0 0, 0 0 !important;
+        opacity: 0.55 !important;
+      }
+      .page-bg__rift {
+        background-position: 0 0 !important;
+        opacity: 0.35 !important;
+      }
+      .page-bg {
+        transition: none;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
   <nav>
     <div class="nav-inner">
-      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /> ToniPR</a>
+      <a href="../index.html" class="logo"><img src="../assets/toni.png" alt="Toni" class="logo-toni" /><span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px">ToniPR <span style="font-weight:500;font-size:0.7rem;color:var(--text-muted)">by Tunepact</span></span></a>
       <div class="nav-links">
         <a href="index.html">Blog</a>
         <a href="../pricing.html">Pricing</a>
@@ -154,12 +377,23 @@
         <div class="article-cta">
           <h3>Get your narrative in 10 minutes</h3>
           <p>ToniPR's AI generates questions tailored to your product and company, then turns your answers into LinkedIn posts, blog articles, and press quotes. One conversation, a full PR kit.</p>
-          <a href="../pricing.html" class="btn">Start your AI interview</a>
+          <a href="../auth.html" class="btn">Start your AI interview</a>
         </div>
       </div>
     </div>
   </article>
   <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      function onScroll() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
     document.querySelector('.back-to-blog')?.addEventListener('click', function (e) {
       if (window.history.length > 1) {
         e.preventDefault();
