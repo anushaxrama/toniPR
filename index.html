@@ -736,6 +736,50 @@
       text-wrap: balance;
       opacity: 0;
     }
+    .hero-splash .hero-sub-structured {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: min(36rem, 100%);
+      text-align: center;
+    }
+    .hero-sub-lead {
+      margin: 0 0 0.65rem;
+      width: 100%;
+      text-wrap: balance;
+    }
+    .hero-sub-list {
+      list-style: none;
+      margin: 0 0 0.85rem;
+      padding: 0;
+      width: 100%;
+      max-width: min(28rem, 100%);
+      text-align: left;
+    }
+    .hero-sub-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.45;
+    }
+    .hero-sub-list li:last-child {
+      margin-bottom: 0;
+    }
+    .hero-sub-ico {
+      flex-shrink: 0;
+      width: 1.45rem;
+      text-align: center;
+      line-height: 1.45;
+      font-size: 1.05em;
+    }
+    .hero-sub-close {
+      margin: 0.15rem 0 0;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-wrap: balance;
+      width: 100%;
+    }
     .hero-splash.hero-phase-title .hero-sub {
       animation: heroTitleFadeIn 0.6s var(--ease-out-expo) 0.52s forwards;
     }
@@ -2089,12 +2133,18 @@
     <div class="hero-splash-inner">
       <div class="hero-brand hero-copy">
         <h1 class="hero-title">
-          <span class="hero-headline">Talk to Toni like a journalist.<br />Get your PR kit in minutes.</span>
+          <span class="hero-headline">Get your full PR kit &mdash; instantly</span>
         </h1>
-        <p class="hero-sub" id="heroSub">
-          A relaxed 10-minute conversation. No prep needed.<br />
-          Toni turns your answers into videos, posts, articles, and your full PR kit &mdash; ready to publish.
-        </p>
+        <div class="hero-sub hero-sub-structured" id="heroSub">
+          <p class="hero-sub-lead">From one conversation, you get:</p>
+          <ul class="hero-sub-list">
+            <li><span class="hero-sub-ico" aria-hidden="true">🎥</span> Full interview video + short clips</li>
+            <li><span class="hero-sub-ico" aria-hidden="true">✍️</span> Founder story + SEO blog post</li>
+            <li><span class="hero-sub-ico" aria-hidden="true">💼</span> Press quotes + startup boilerplate</li>
+            <li><span class="hero-sub-ico" aria-hidden="true">📱</span> LinkedIn posts + X threads</li>
+          </ul>
+          <p class="hero-sub-close">Copy, paste, and publish the same day.</p>
+        </div>
         <div class="hero-cta-block">
           <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
         </div>
