@@ -1514,7 +1514,7 @@
     }
     .story-step-toni {
       flex-shrink: 0;
-      width: min(240px, 52vw);
+      width: min(300px, 65vw);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1522,7 +1522,7 @@
     .story-step-toni-gif {
       width: 100%;
       height: auto;
-      max-width: 232px;
+      max-width: 290px;
       animation: none;
     }
     .story-step-accent {
@@ -1581,6 +1581,47 @@
       color: var(--text-secondary);
       line-height: 1.72;
       text-wrap: pretty;
+    }
+    .story-desc-structured {
+      margin: 0;
+      text-align: left;
+    }
+    .story-transform-lead {
+      margin: 0 0 0.65rem;
+      text-wrap: pretty;
+    }
+    .story-transform-list {
+      list-style: none;
+      margin: 0 0 0.85rem;
+      padding: 0;
+    }
+    .story-transform-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+      line-height: 1.55;
+    }
+    .story-transform-list li:last-child {
+      margin-bottom: 0;
+    }
+    .story-transform-ico {
+      flex-shrink: 0;
+      width: 1.45rem;
+      text-align: center;
+      line-height: 1.55;
+      font-size: 1.05em;
+    }
+    .story-transform-close {
+      margin: 0.15rem 0 0;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-wrap: pretty;
+    }
+    .story-step.reveal-from-right .story-desc-structured,
+    .story-step.reveal-from-right .story-desc-structured .story-transform-lead,
+    .story-step.reveal-from-right .story-desc-structured .story-transform-close {
+      text-align: left;
     }
     .story-connector {
       font-size: 2rem;
@@ -2178,10 +2219,10 @@
         gap: 10px;
       }
       .story-step-toni {
-        width: min(176px, 44vw);
+        width: min(220px, 55vw);
       }
       .story-step-toni-gif {
-        max-width: 168px;
+        max-width: 210px;
       }
       .story-step-accent {
         min-height: 96px;
@@ -2314,8 +2355,8 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Problem</span>
-              <h2 class="story-title">As a founder, you know what makes you different.<br />The&nbsp;world&nbsp;doesn't.</h2>
-              <p class="story-desc">You know your story. Turning it into posts, articles, and press quotes is what eats time and money. Toni helps you share it faster, in your own voice.</p>
+              <h2 class="story-title">You know what makes your startup different.<br />The world doesn&rsquo;t see it.</h2>
+              <p class="story-desc">Turning your story into content, posts, and press takes time you don&rsquo;t have.<br />Toni turns one conversation into everything you need to be seen.</p>
             </div>
           </div>
         </div>
@@ -2336,8 +2377,8 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Solution</span>
-              <h2 class="story-title">Chat with Toni like a journalist, without the stress</h2>
-              <p class="story-desc">One relaxed 10-minute chat. No prep. Toni asks questions tailored to you, then helps turn your words into ready-to-post visual and written content for social.</p>
+              <h2 class="story-title">Talk to Toni like a journalist.<br />Get your PR kit in minutes.</h2>
+              <p class="story-desc">A relaxed 10-minute conversation. No prep needed.<br />Toni turns your answers into videos, posts, articles, and your full PR kit &mdash; ready to publish.</p>
             </div>
           </div>
         </div>
@@ -2358,8 +2399,17 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Transformation</span>
-              <h2 class="story-title">You instantly get a full PR kit</h2>
-              <p class="story-desc">LinkedIn and X-ready visuals and copy. Short clips, blog ideas, press quotes, founder bio. Copy, paste, publish the same day.</p>
+              <h2 class="story-title">Get your full PR kit &mdash; instantly</h2>
+              <div class="story-desc story-desc-structured">
+                <p class="story-transform-lead">From one conversation, you get:</p>
+                <ul class="story-transform-list">
+                  <li><span class="story-transform-ico" aria-hidden="true">🎥</span> Full interview video + short clips</li>
+                  <li><span class="story-transform-ico" aria-hidden="true">✍️</span> Founder story + SEO blog post</li>
+                  <li><span class="story-transform-ico" aria-hidden="true">💼</span> Press quotes + startup boilerplate</li>
+                  <li><span class="story-transform-ico" aria-hidden="true">📱</span> LinkedIn posts + X threads</li>
+                </ul>
+                <p class="story-transform-close">Copy, paste, and publish the same day.</p>
+              </div>
             </div>
           </div>
         </div>
