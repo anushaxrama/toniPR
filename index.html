@@ -25,6 +25,9 @@
       --accent: #D7263D;
       --accent-soft: #E85A6F;
       --accent-emerald: #22c55e;
+      /* Toni mascot headphone blue — story section labels & accents */
+      --toni-blue: #3985dc;
+      --toni-blue-muted: #4f96e6;
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
       --transition: 0.5s var(--ease-out-expo);
@@ -1524,7 +1527,7 @@
       flex-shrink: 0;
       align-self: stretch;
       min-height: 7rem;
-      background: var(--accent);
+      background: linear-gradient(180deg, var(--toni-blue-muted) 0%, var(--toni-blue) 100%);
       border-radius: 2px;
     }
     .story-step-copy {
@@ -1555,7 +1558,7 @@
     .story-label {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--toni-blue);
       letter-spacing: 0.15em;
       text-transform: uppercase;
       display: block;
@@ -1596,6 +1599,9 @@
       line-height: 1.55;
       padding-left: 0.35rem;
     }
+    .story-transform-list li::marker {
+      color: var(--toni-blue);
+    }
     .story-transform-list li:last-child {
       margin-bottom: 0;
     }
@@ -1612,10 +1618,10 @@
     }
     .story-connector {
       font-size: 2rem;
-      color: var(--accent);
+      color: var(--toni-blue);
       text-align: center;
       padding: 24px 0;
-      opacity: 0.7;
+      opacity: 0.78;
     }
     /* Toni GIF stickers: no card, no fill; sits on page canvas */
     .toni-sticker {
