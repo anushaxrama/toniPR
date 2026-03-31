@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shape how people see your brand. One chat with Toni, posts ready to publish." />
-  <meta property="og:description" content="Shape how people see your brand. One chat with Toni, posts ready to publish." />
-  <meta name="twitter:description" content="Shape how people see your brand. One chat with Toni, posts ready to publish." />
+  <meta name="description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
+  <meta property="og:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
+  <meta name="twitter:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
   <title>ToniPR | PR for Founders Building the Future</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -595,7 +595,7 @@
     }
 
     .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
-    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
+    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-prose,
     .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta-block {
       opacity: 0;
       animation: none;
@@ -614,7 +614,7 @@
       gap: 24px;
     }
     .hero-copy .hero-title,
-    .hero-copy .hero-intro {
+    .hero-copy .hero-prose {
       width: 100%;
     }
     .hero-copy .hero-cta-block {
@@ -637,7 +637,7 @@
     .hero-splash .hero-copy .hero-title {
       font-size: unset !important;
     }
-    .hero-copy .hero-intro,
+    .hero-copy .hero-prose,
     .hero-copy .hero-cta-block {
       margin-left: 0;
       margin-right: 0;
@@ -685,7 +685,7 @@
         transform: none !important;
       }
       .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
-      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
+      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-prose,
       .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta-block,
       .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
         opacity: 1;
@@ -821,75 +821,39 @@
     @keyframes heroByCursorBlink {
       50% { opacity: 0; }
     }
-    .hero-splash .hero-intro {
-      font-family: 'Nunito', sans-serif;
-      font-size: clamp(1.2rem, 2.65vw, 1.55rem);
-      color: var(--text-primary);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      margin-top: 0;
-      margin-bottom: 0;
-      min-height: 2.9em;
-      width: 100%;
-      max-width: min(72rem, 100%);
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.45;
+    .hero-splash .hero-prose {
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(10px, 2vw, 16px);
+      margin: 0 auto;
+      max-width: min(42rem, 100%);
       opacity: 0;
     }
-    /* Invisible full line reserves width; live typing is layered and centered inside it (no horizontal creep). */
-    .hero-intro-slot {
-      position: relative;
-      display: block;
-      flex: 0 1 auto;
-      max-width: 100%;
-      text-align: center;
-    }
-    .hero-intro-measure {
-      display: block;
-      visibility: hidden;
-      pointer-events: none;
-      margin: 0;
-      padding: 0 6px 0 0;
-      font: inherit;
-      font-weight: inherit;
-      letter-spacing: inherit;
-      line-height: inherit;
-      white-space: nowrap;
-    }
-    .hero-intro-typed {
-      display: block;
-      text-align: center;
-      line-height: inherit;
-    }
-    @media (min-width: 1024px) {
-      .hero-intro-typed {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        white-space: nowrap;
-      }
-    }
-    @media (max-width: 1023px) {
-      .hero-intro-slot {
-        display: block;
-        width: 100%;
-      }
-      .hero-intro-measure {
-        display: none !important;
-      }
-      .hero-intro-typed {
-        position: static;
-        white-space: normal;
-        text-wrap: balance;
-      }
-    }
-    .hero-splash.hero-phase-title .hero-intro {
+    .hero-splash.hero-phase-title .hero-prose {
       animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.45s forwards;
+    }
+    .hero-splash .hero-tagline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.35rem, 3.4vw, 2.15rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin: 0;
+      text-wrap: balance;
+      text-align: center;
+    }
+    .hero-splash .hero-subtag {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1.02rem, 2.15vw, 1.32rem);
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+      margin: 0;
+      text-wrap: balance;
+      text-align: center;
     }
     .hero-splash .hero-cta-block {
       opacity: 0;
@@ -901,21 +865,6 @@
     }
     .hero-splash.hero-phase-title .hero-cta-block {
       animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.8s forwards;
-    }
-    .hero-splash .hero-intro .hero-intro-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--accent);
-      margin-left: 2px;
-      vertical-align: text-bottom;
-      animation: heroIntroCursorBlink 0.55s step-end infinite;
-    }
-    .hero-splash .hero-intro.typed .hero-intro-cursor {
-      display: none;
-    }
-    @keyframes heroIntroCursorBlink {
-      50% { opacity: 0; }
     }
     @keyframes heroWordIn {
       from { opacity: 0; transform: translateY(110px) scale(0.78); }
@@ -2210,6 +2159,9 @@
       .hero-splash .hero-title-words {
         font-size: clamp(4.85rem, min(23vw, 27vh), 13.5rem);
       }
+      .hero-splash .hero-tagline {
+        font-size: clamp(1.18rem, 4.8vw, 1.72rem);
+      }
     }
     @media (max-width: 540px) {
       .hero-splash .hero-title-lockup {
@@ -2276,7 +2228,7 @@
     <style>
       #heroOpenCurtain { display: none !important; }
       #heroStage.hero-splash .hero-copy > .hero-title,
-      #heroStage.hero-splash .hero-copy > .hero-intro,
+      #heroStage.hero-splash .hero-copy > .hero-prose,
       #heroStage.hero-splash .hero-copy > .hero-cta-block {
         opacity: 1 !important;
         pointer-events: auto !important;
@@ -2321,7 +2273,7 @@
   <header class="hero hero-splash" id="heroStage">
     <div class="hero-splash-inner">
       <div class="hero-brand hero-copy">
-        <h1 class="hero-title" aria-label="Toni PR by Tunepact">
+        <h1 class="hero-title" aria-label="Toni PR by Tunepact — Turn a 10-minute chat into your startup's PR kit">
           <span class="hero-title-lockup">
             <span class="hero-title-words">
               <span class="word">Toni</span>
@@ -2332,14 +2284,10 @@
             </span>
           </span>
         </h1>
-        <p class="hero-intro" id="heroIntro">
-          <span class="hero-intro-slot">
-            <span class="hero-intro-measure" id="heroIntroMeasure" aria-hidden="true"></span>
-            <span class="hero-intro-typed" aria-live="polite">
-              <span id="heroIntroText"></span><span class="hero-intro-cursor"></span>
-            </span>
-          </span>
-        </p>
+        <div class="hero-prose" id="heroProse">
+          <h2 class="hero-tagline">Turn a 10-minute chat into your startup&rsquo;s PR kit</h2>
+          <p class="hero-subtag">AI-generated videos, posts, blogs, and your founder story &mdash; ready to publish.</p>
+        </div>
         <div class="hero-cta-block">
           <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
           <p class="hero-cta-note">Takes 10 minutes. No prep needed.</p>
@@ -2763,10 +2711,6 @@
 
       const heroStage = document.getElementById('heroStage');
       const heroOpenCurtain = document.getElementById('heroOpenCurtain');
-      const heroIntro = document.getElementById('heroIntro');
-      const heroIntroText = document.getElementById('heroIntroText');
-      const heroIntroMeasure = document.getElementById('heroIntroMeasure');
-      const heroIntroContent = 'Shape how people see your brand. One chat with Toni, posts ready to publish.';
       const heroByline = document.getElementById('heroByline');
       const heroBylineText = document.getElementById('heroBylineText');
       const BYLINE_CONTENT = 'by Tunepact';
@@ -2803,36 +2747,15 @@
         typeByChar();
       }
 
-      function startHeroIntroTypewriter() {
-        if (!heroIntro || !heroIntroText) return;
-        if (heroIntroMeasure) heroIntroMeasure.textContent = heroIntroContent;
-        heroIntroText.textContent = '';
-        let idx = 0;
-        const delay = 32;
-        function typeChar() {
-          if (idx < heroIntroContent.length) {
-            heroIntroText.textContent += heroIntroContent[idx];
-            idx++;
-            setTimeout(typeChar, delay);
-          } else {
-            heroIntro.classList.add('typed');
-          }
-        }
-        typeChar();
-      }
-
       if (heroStage && !prefersReducedMotion) {
         setTimeout(function () {
           beginHeroMainReveal();
-          setTimeout(function () {
-            startHeroBylineTypewriter(startHeroIntroTypewriter);
-          }, BYLINE_START_MS);
+          setTimeout(startHeroBylineTypewriter, BYLINE_START_MS);
         }, WELCOME_MS);
       } else {
         beginHeroMainReveal();
         if (heroBylineText) heroBylineText.textContent = BYLINE_CONTENT;
         if (heroByline) heroByline.classList.add('hero-by-active', 'hero-by-done');
-        startHeroIntroTypewriter();
       }
 
       function updatePageBgForScroll() {
