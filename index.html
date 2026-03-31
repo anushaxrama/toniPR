@@ -592,14 +592,16 @@
     }
 
     .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
-    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-value,
-    .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
+    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
+    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta {
       opacity: 0;
       animation: none;
       pointer-events: none;
     }
     .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
+      opacity: 0;
       transform: translateY(80px) scale(0.85);
+      animation: none;
     }
     .hero-copy {
       display: flex;
@@ -609,39 +611,25 @@
       gap: 24px;
     }
     .hero-copy .hero-title,
-    .hero-copy .hero-value {
+    .hero-copy .hero-intro {
       width: 100%;
     }
-    .hero-copy .hero-cta-block {
-      align-self: center;
-      width: auto;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      margin-left: 0;
-      margin-right: 0;
-    }
     .hero-copy .hero-cta {
+      align-self: center;
       width: auto;
       max-width: 100%;
     }
     .hero-copy .hero-title {
       justify-content: center;
+      font-size: clamp(5.25rem, 17vw, 15rem) !important;
     }
-    .hero-splash .hero-value {
-      width: 100%;
-      max-width: min(40rem, 100%);
-      margin-left: auto;
-      margin-right: auto;
-      padding-top: clamp(1rem, 2.8vw, 1.85rem);
-      margin-top: clamp(0.35rem, 1.2vw, 0.85rem);
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(16px, 2.4vw, 24px);
+    .hero-splash .hero-copy .hero-title {
+      font-size: unset !important;
+    }
+    .hero-copy .hero-intro,
+    .hero-copy .hero-cta {
+      margin-left: 0;
+      margin-right: 0;
     }
     @media (max-width: 900px) {
       .hero-splash-inner {
@@ -674,12 +662,16 @@
         transform: none !important;
       }
       .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
-      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-value,
+      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
+      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta,
       .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
         opacity: 1;
         animation: none;
         pointer-events: auto;
         transform: none;
+      }
+      .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
+        opacity: 1;
       }
       .hero-splash:not(.hero-phase-title) .hero-scroll {
         opacity: 1;
@@ -701,12 +693,6 @@
       }
       .hero-splash.hero-phase-title .hero-title .hero-by .hero-by-cursor {
         display: none !important;
-      }
-      .hero-splash.hero-phase-title .hero-value-headline,
-      .hero-splash.hero-phase-title .hero-sub {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
       }
     }
     .hero-splash .hero-title {
@@ -730,6 +716,7 @@
       column-gap: 0;
       row-gap: 0.2rem;
       max-width: 100%;
+      /* Single centered row: “Toni PR” only uses intrinsic width until byline grows in */
       width: max-content;
     }
     .hero-splash .hero-title-lockup:has(.hero-by-active) {
@@ -765,6 +752,7 @@
     .hero-splash.hero-phase-title .hero-title .word {
       animation: heroWordIn 1.05s var(--ease-out-expo) forwards;
     }
+    /* Toni first, then PR; “by Tunepact” types in via JS (see startHeroBylineTypewriter) */
     .hero-splash.hero-phase-title .hero-title-words .word:nth-child(1) { animation-delay: 0.12s; }
     .hero-splash.hero-phase-title .hero-title-words .word:nth-child(2) { animation-delay: 0.58s; }
     .hero-splash .hero-title .word.accent { color: var(--accent); }
@@ -810,96 +798,103 @@
     @keyframes heroByCursorBlink {
       50% { opacity: 0; }
     }
+    .hero-splash .hero-intro {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1.2rem, 2.65vw, 1.55rem);
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-top: 0;
+      margin-bottom: 0;
+      min-height: 2.9em;
+      width: 100%;
+      max-width: min(72rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.45;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      opacity: 0;
+    }
+    /* Invisible full line reserves width; live typing is layered and centered inside it (no horizontal creep). */
+    .hero-intro-slot {
+      position: relative;
+      display: block;
+      flex: 0 1 auto;
+      max-width: 100%;
+      text-align: center;
+    }
+    .hero-intro-measure {
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      margin: 0;
+      padding: 0 6px 0 0;
+      font: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      white-space: nowrap;
+    }
+    .hero-intro-typed {
+      display: block;
+      text-align: center;
+      line-height: inherit;
+    }
+    @media (min-width: 1024px) {
+      .hero-intro-typed {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 1023px) {
+      .hero-intro-slot {
+        display: block;
+        width: 100%;
+      }
+      .hero-intro-measure {
+        display: none !important;
+      }
+      .hero-intro-typed {
+        position: static;
+        white-space: normal;
+        text-wrap: balance;
+      }
+    }
+    .hero-splash.hero-phase-title .hero-intro {
+      animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.45s forwards;
+    }
+    .hero-splash .hero-cta {
+      opacity: 0;
+      padding: 16px 32px;
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      margin-bottom: 56px;
+    }
+    .hero-splash.hero-phase-title .hero-cta {
+      animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.8s forwards;
+    }
+    .hero-splash .hero-intro .hero-intro-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: heroIntroCursorBlink 0.55s step-end infinite;
+    }
+    .hero-splash .hero-intro.typed .hero-intro-cursor {
+      display: none;
+    }
+    @keyframes heroIntroCursorBlink {
+      50% { opacity: 0; }
+    }
     @keyframes heroWordIn {
       from { opacity: 0; transform: translateY(110px) scale(0.78); }
       to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .hero-splash .hero-value-headline {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.35rem, 3.2vw, 2.1rem);
-      line-height: 1.22;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-      text-wrap: balance;
-      max-width: min(34rem, 100%);
-      margin: 0;
-      opacity: 0;
-    }
-    .hero-splash.hero-phase-title .hero-value-headline {
-      animation: heroTitleFadeIn 0.65s var(--ease-out-expo) 2.15s forwards;
-    }
-    .hero-splash .hero-sub {
-      font-family: 'Nunito', sans-serif;
-      font-size: clamp(1.05rem, 2.25vw, 1.38rem);
-      color: var(--text-secondary);
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      margin: 0;
-      line-height: 1.5;
-      max-width: min(38rem, 100%);
-      margin-left: auto;
-      margin-right: auto;
-      text-wrap: balance;
-      opacity: 0;
-    }
-    .hero-splash .hero-sub-structured {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: min(36rem, 100%);
-      text-align: center;
-    }
-    .hero-sub-lead {
-      margin: 0 0 0.65rem;
-      width: 100%;
-      text-wrap: balance;
-    }
-    .hero-sub-list {
-      list-style: none;
-      margin: 0 0 0.85rem;
-      padding: 0;
-      width: 100%;
-      max-width: min(28rem, 100%);
-      text-align: left;
-    }
-    .hero-sub-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.55rem;
-      margin-bottom: 0.4rem;
-      line-height: 1.45;
-    }
-    .hero-sub-list li:last-child {
-      margin-bottom: 0;
-    }
-    .hero-sub-ico {
-      flex-shrink: 0;
-      width: 1.45rem;
-      text-align: center;
-      line-height: 1.45;
-      font-size: 1.05em;
-    }
-    .hero-sub-close {
-      margin: 0.15rem 0 0;
-      font-weight: 700;
-      color: var(--text-primary);
-      text-wrap: balance;
-      width: 100%;
-    }
-    .hero-splash.hero-phase-title .hero-sub {
-      animation: heroTitleFadeIn 0.6s var(--ease-out-expo) 2.48s forwards;
-    }
-    .hero-splash .hero-cta-block {
-      opacity: 0;
-      margin-bottom: 56px;
-    }
-    .hero-splash .hero-cta {
-      padding: 16px 32px;
-      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
-    }
-    .hero-splash.hero-phase-title .hero-cta-block {
-      animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.88s forwards;
     }
     .hero-splash:not(.hero-phase-title) .hero-scroll {
       opacity: 0;
@@ -917,8 +912,8 @@
       z-index: 8;
     }
     .hero-splash.hero-phase-title .hero-scroll {
-      animation: heroScrollFadeIn 0.65s var(--ease-out-expo) 3.12s forwards,
-                 heroScrollBounce 2s ease-in-out 3.55s infinite;
+      animation: heroScrollFadeIn 0.65s var(--ease-out-expo) 2.65s forwards,
+                 heroScrollBounce 2s ease-in-out 3.15s infinite;
     }
     @keyframes heroScrollFadeIn {
       to { opacity: 1; }
@@ -1519,7 +1514,7 @@
     }
     .story-step-toni {
       flex-shrink: 0;
-      width: min(300px, 65vw);
+      width: min(240px, 52vw);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1527,7 +1522,7 @@
     .story-step-toni-gif {
       width: 100%;
       height: auto;
-      max-width: 290px;
+      max-width: 232px;
       animation: none;
     }
     .story-step-accent {
@@ -2152,9 +2147,6 @@
       .hero-splash .hero-title-words {
         font-size: clamp(4.85rem, min(23vw, 27vh), 13.5rem);
       }
-      .hero-splash .hero-value-headline {
-        font-size: clamp(1.2rem, 4.8vw, 1.85rem);
-      }
     }
     @media (max-width: 540px) {
       .hero-splash .hero-title-lockup {
@@ -2186,10 +2178,10 @@
         gap: 10px;
       }
       .story-step-toni {
-        width: min(220px, 55vw);
+        width: min(176px, 44vw);
       }
       .story-step-toni-gif {
-        max-width: 210px;
+        max-width: 168px;
       }
       .story-step-accent {
         min-height: 96px;
@@ -2218,7 +2210,8 @@
     <style>
       #heroOpenCurtain { display: none !important; }
       #heroStage.hero-splash .hero-copy > .hero-title,
-      #heroStage.hero-splash .hero-copy > .hero-value {
+      #heroStage.hero-splash .hero-copy > .hero-intro,
+      #heroStage.hero-splash .hero-copy > .hero-cta {
         opacity: 1 !important;
         pointer-events: auto !important;
       }
@@ -2233,11 +2226,6 @@
       }
       #heroBylineText:empty::after {
         content: 'by Tunepact';
-      }
-      #heroStage .hero-value-headline,
-      #heroStage .hero-sub {
-        opacity: 1 !important;
-        transform: none !important;
       }
       #heroStage .hero-scroll { opacity: 1 !important; }
     </style>
@@ -2259,7 +2247,7 @@
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
         <a href="auth.html?mode=login">Log in</a>
-        <a href="auth.html" class="btn btn-primary">Start Your PR Kit</a>
+        <a href="auth.html" class="btn btn-primary">Chat with Toni</a>
       </div>
     </div>
   </nav>
@@ -2278,22 +2266,15 @@
             </span>
           </span>
         </h1>
-        <div class="hero-value">
-          <h2 class="hero-value-headline">Get your full PR kit &mdash; instantly</h2>
-          <div class="hero-sub hero-sub-structured" id="heroSub">
-            <p class="hero-sub-lead">From one conversation, you get:</p>
-            <ul class="hero-sub-list">
-              <li><span class="hero-sub-ico" aria-hidden="true">🎥</span> Full interview video + short clips</li>
-              <li><span class="hero-sub-ico" aria-hidden="true">✍️</span> Founder story + SEO blog post</li>
-              <li><span class="hero-sub-ico" aria-hidden="true">💼</span> Press quotes + startup boilerplate</li>
-              <li><span class="hero-sub-ico" aria-hidden="true">📱</span> LinkedIn posts + X threads</li>
-            </ul>
-            <p class="hero-sub-close">Copy, paste, and publish the same day.</p>
-          </div>
-          <div class="hero-cta-block">
-            <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
-          </div>
-        </div>
+        <p class="hero-intro" id="heroIntro">
+          <span class="hero-intro-slot">
+            <span class="hero-intro-measure" id="heroIntroMeasure" aria-hidden="true"></span>
+            <span class="hero-intro-typed" aria-live="polite">
+              <span id="heroIntroText"></span><span class="hero-intro-cursor"></span>
+            </span>
+          </span>
+        </p>
+        <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Chat with Toni, no prep needed</a>
       </div>
     </div>
     <div class="hero-open-curtain" id="heroOpenCurtain" aria-hidden="false">
@@ -2389,23 +2370,23 @@
   <section id="features" class="problem-section">
     <div class="container">
       <span class="section-label reveal">The Challenge</span>
-      <h2 class="section-title reveal">Traditional PR is broken. Here&rsquo;s why founders are switching.</h2>
-      <p class="section-desc reveal">Expensive. Slow. Generic.<br />Traditional PR wasn&rsquo;t built for how startups move today.</p>
+      <h2 class="section-title reveal">Why people are switching from traditional PR</h2>
+      <p class="section-desc reveal">Traditional PR is expensive, slow, and sounds generic. ToniPR gives you great content in minutes.</p>
       <div class="problem-cards">
         <div class="problem-card reveal">
           <div class="problem-card-num">01</div>
-          <h3>$5K/month for content you barely use</h3>
-          <p>PR agencies charge thousands monthly.<br />ToniPR gives you everything you need for a fraction of the cost.</p>
+          <h3>Too expensive</h3>
+          <p>Agencies charge thousands per month. ToniPR gives you posts, articles, and quotes for a fraction of the cost.</p>
         </div>
         <div class="problem-card reveal">
           <div class="problem-card-num">02</div>
-          <h3>Weeks of back-and-forth</h3>
-          <p>Traditional PR takes weeks to produce content.<br />Toni delivers your full PR kit in minutes.</p>
+          <h3>Too slow</h3>
+          <p>Traditional PR takes weeks of back-and-forth. ToniPR delivers everything in minutes.</p>
         </div>
         <div class="problem-card reveal">
           <div class="problem-card-num">03</div>
-          <h3>Doesn&rsquo;t sound like you</h3>
-          <p>Most PR content feels templated.<br />Toni uses your real voice, so your story actually sounds like you.</p>
+          <h3>Sounds generic</h3>
+          <p>Most PR reads the same. ToniPR uses your real voice so your content feels like you.</p>
         </div>
       </div>
     </div>
@@ -2625,8 +2606,8 @@
           />
         </div>
         <h2>Ready to get started?</h2>
-        <p class="cta-desc">Try once with Starter or go annual with Founder. On both, you start with the same 10-minute flow with Toni.</p>
-        <a href="auth.html" class="btn btn-primary btn-lg">Start Your PR Kit</a>
+        <p class="cta-desc">Try once with Starter or go annual with Founder. On both, it's the same friendly Chat with Toni.</p>
+        <a href="auth.html" class="btn btn-primary btn-lg">Chat with Toni</a>
       </div>
     </div>
   </section>
@@ -2704,6 +2685,10 @@
 
       const heroStage = document.getElementById('heroStage');
       const heroOpenCurtain = document.getElementById('heroOpenCurtain');
+      const heroIntro = document.getElementById('heroIntro');
+      const heroIntroText = document.getElementById('heroIntroText');
+      const heroIntroMeasure = document.getElementById('heroIntroMeasure');
+      const heroIntroContent = 'Shape how people see your brand. One chat with Toni, posts ready to publish.';
       const heroByline = document.getElementById('heroByline');
       const heroBylineText = document.getElementById('heroBylineText');
       const BYLINE_CONTENT = 'by Tunepact';
@@ -2718,8 +2703,11 @@
         if (heroOpenCurtain) heroOpenCurtain.setAttribute('aria-hidden', 'true');
       }
 
-      function startHeroBylineTypewriter() {
-        if (!heroByline || !heroBylineText) return;
+      function startHeroBylineTypewriter(onDone) {
+        if (!heroByline || !heroBylineText) {
+          if (typeof onDone === 'function') onDone();
+          return;
+        }
         heroBylineText.textContent = '';
         heroByline.classList.remove('hero-by-done', 'hero-by-active');
         var idx = 0;
@@ -2731,20 +2719,42 @@
             setTimeout(typeByChar, BYLINE_CHAR_MS);
           } else {
             heroByline.classList.add('hero-by-done');
+            if (typeof onDone === 'function') onDone();
           }
         }
         typeByChar();
       }
 
+      function startHeroIntroTypewriter() {
+        if (!heroIntro || !heroIntroText) return;
+        if (heroIntroMeasure) heroIntroMeasure.textContent = heroIntroContent;
+        heroIntroText.textContent = '';
+        let idx = 0;
+        const delay = 32;
+        function typeChar() {
+          if (idx < heroIntroContent.length) {
+            heroIntroText.textContent += heroIntroContent[idx];
+            idx++;
+            setTimeout(typeChar, delay);
+          } else {
+            heroIntro.classList.add('typed');
+          }
+        }
+        typeChar();
+      }
+
       if (heroStage && !prefersReducedMotion) {
         setTimeout(function () {
           beginHeroMainReveal();
-          setTimeout(startHeroBylineTypewriter, BYLINE_START_MS);
+          setTimeout(function () {
+            startHeroBylineTypewriter(startHeroIntroTypewriter);
+          }, BYLINE_START_MS);
         }, WELCOME_MS);
       } else {
         beginHeroMainReveal();
         if (heroBylineText) heroBylineText.textContent = BYLINE_CONTENT;
         if (heroByline) heroByline.classList.add('hero-by-active', 'hero-by-done');
+        startHeroIntroTypewriter();
       }
 
       function updatePageBgForScroll() {
