@@ -1467,6 +1467,10 @@
       padding: 120px 0 100px;
       background: transparent;
     }
+    .story-section .container {
+      padding-left: clamp(10px, 2.2vw, 18px);
+      padding-right: clamp(10px, 2.2vw, 18px);
+    }
     .story-flow {
       max-width: 100%;
       margin: 0;
@@ -1487,10 +1491,12 @@
     .story-step.reveal-from-left .story-step-inner {
       flex-direction: row;
       justify-content: flex-start;
+      margin-left: clamp(-20px, -4.5vw, -56px);
     }
     .story-step.reveal-from-right .story-step-inner {
       flex-direction: row-reverse;
       justify-content: flex-start;
+      margin-right: clamp(-20px, -4.5vw, -56px);
     }
     .story-step-toni {
       flex-shrink: 0;
@@ -2193,6 +2199,12 @@
       }
       .story-step-inner {
         gap: 10px;
+      }
+      .story-step.reveal-from-left .story-step-inner {
+        margin-left: clamp(-10px, -2.5vw, -24px);
+      }
+      .story-step.reveal-from-right .story-step-inner {
+        margin-right: clamp(-10px, -2.5vw, -24px);
       }
       .story-step-toni {
         width: min(297px, 74vw);
