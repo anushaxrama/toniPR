@@ -81,11 +81,11 @@
       width: min(88vw, 900px);
       height: min(88vh, 880px);
       will-change: transform;
-      opacity: 0.94;
+      opacity: 1;
       /* Staggered two-scale halftone for depth */
       background-image:
-        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
-        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.46) 1.42px, transparent 1.55px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.26) 1.02px, transparent 1.15px);
       background-repeat: repeat;
     }
     .page-bg__corner--tr {
@@ -98,14 +98,14 @@
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 100% 0%,
         #000 0%,
-        rgba(0, 0, 0, 0.55) 42%,
-        transparent 72%
+        rgba(0, 0, 0, 0.68) 42%,
+        transparent 78%
       );
       mask-image: radial-gradient(
         ellipse 100% 100% at 100% 0%,
         #000 0%,
-        rgba(0, 0, 0, 0.55) 42%,
-        transparent 72%
+        rgba(0, 0, 0, 0.68) 42%,
+        transparent 78%
       );
       animation: pageBgCornerTR 26s ease-in-out infinite;
     }
@@ -119,14 +119,14 @@
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 0% 0%,
         #000 0%,
-        rgba(0, 0, 0, 0.5) 40%,
-        transparent 71%
+        rgba(0, 0, 0, 0.64) 40%,
+        transparent 78%
       );
       mask-image: radial-gradient(
         ellipse 100% 100% at 0% 0%,
         #000 0%,
-        rgba(0, 0, 0, 0.5) 40%,
-        transparent 71%
+        rgba(0, 0, 0, 0.64) 40%,
+        transparent 78%
       );
       animation: pageBgCornerTL 34s ease-in-out infinite;
     }
@@ -140,14 +140,14 @@
       -webkit-mask-image: radial-gradient(
         ellipse 105% 105% at 100% 100%,
         #000 0%,
-        rgba(0, 0, 0, 0.62) 44%,
-        transparent 73%
+        rgba(0, 0, 0, 0.74) 44%,
+        transparent 80%
       );
       mask-image: radial-gradient(
         ellipse 105% 105% at 100% 100%,
         #000 0%,
-        rgba(0, 0, 0, 0.62) 44%,
-        transparent 73%
+        rgba(0, 0, 0, 0.74) 44%,
+        transparent 80%
       );
       animation: pageBgCornerBR 22s ease-in-out infinite;
     }
@@ -161,14 +161,14 @@
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 0% 100%,
         #000 0%,
-        rgba(0, 0, 0, 0.48) 41%,
-        transparent 71%
+        rgba(0, 0, 0, 0.64) 41%,
+        transparent 78%
       );
       mask-image: radial-gradient(
         ellipse 100% 100% at 0% 100%,
         #000 0%,
-        rgba(0, 0, 0, 0.48) 41%,
-        transparent 71%
+        rgba(0, 0, 0, 0.64) 41%,
+        transparent 78%
       );
       animation: pageBgCornerBL 31s ease-in-out infinite;
     }
@@ -176,7 +176,7 @@
       0%, 100% {
         transform: translate(0, 0) scale(1);
         background-position: 0 0, 7px 10px;
-        opacity: 0.9;
+        opacity: 0.94;
       }
       50% {
         transform: translate(-22px, 28px) scale(1.03);
@@ -188,19 +188,19 @@
       0%, 100% {
         transform: translate(0, 0) scale(1);
         background-position: 0 0, 11px 6px;
-        opacity: 0.88;
+        opacity: 0.93;
       }
       50% {
         transform: translate(18px, 24px) scale(1.025);
         background-position: -20px 16px, -9px 22px;
-        opacity: 0.98;
+        opacity: 1;
       }
     }
     @keyframes pageBgCornerBR {
       0%, 100% {
         transform: translate(0, 0) scale(1);
         background-position: 0 0, 5px 8px;
-        opacity: 0.92;
+        opacity: 0.95;
       }
       50% {
         transform: translate(-26px, -20px) scale(1.04);
@@ -212,12 +212,12 @@
       0%, 100% {
         transform: translate(0, 0) scale(1);
         background-position: 0 0, 9px 12px;
-        opacity: 0.85;
+        opacity: 0.91;
       }
       50% {
         transform: translate(24px, -18px) scale(1.02);
         background-position: -18px -14px, -9px -2px;
-        opacity: 0.96;
+        opacity: 1;
       }
     }
     /* Soft “orbit” of dots around the middle fade — breaks up uniformity */
@@ -667,7 +667,9 @@
         animation: none !important;
         transform: none !important;
         background-position: 0 0, 0 0 !important;
-        opacity: 0.55 !important;
+      }
+      .page-bg__corner {
+        opacity: 0.78 !important;
       }
       .page-bg__rift {
         background-position: 0 0 !important;
