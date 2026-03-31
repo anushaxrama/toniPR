@@ -593,7 +593,7 @@
 
     .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
     .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
-    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta {
+    .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta-block {
       opacity: 0;
       animation: none;
       pointer-events: none;
@@ -614,8 +614,16 @@
     .hero-copy .hero-intro {
       width: 100%;
     }
-    .hero-copy .hero-cta {
+    .hero-copy .hero-cta-block {
       align-self: center;
+      width: auto;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-copy .hero-cta {
       width: auto;
       max-width: 100%;
     }
@@ -627,9 +635,21 @@
       font-size: unset !important;
     }
     .hero-copy .hero-intro,
-    .hero-copy .hero-cta {
+    .hero-copy .hero-cta-block {
       margin-left: 0;
       margin-right: 0;
+    }
+    .hero-cta-note {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(0.8125rem, 2.1vw, 0.9375rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      text-align: center;
+      text-wrap: balance;
+      max-width: 22em;
     }
     @media (max-width: 900px) {
       .hero-splash-inner {
@@ -663,7 +683,7 @@
       }
       .hero-splash:not(.hero-phase-title) .hero-copy > .hero-title,
       .hero-splash:not(.hero-phase-title) .hero-copy > .hero-intro,
-      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta,
+      .hero-splash:not(.hero-phase-title) .hero-copy > .hero-cta-block,
       .hero-splash:not(.hero-phase-title) .hero-copy .hero-title .word {
         opacity: 1;
         animation: none;
@@ -868,13 +888,15 @@
     .hero-splash.hero-phase-title .hero-intro {
       animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.45s forwards;
     }
-    .hero-splash .hero-cta {
+    .hero-splash .hero-cta-block {
       opacity: 0;
-      padding: 16px 32px;
-      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
       margin-bottom: 56px;
     }
-    .hero-splash.hero-phase-title .hero-cta {
+    .hero-splash .hero-cta {
+      padding: 16px 32px;
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+    }
+    .hero-splash.hero-phase-title .hero-cta-block {
       animation: heroTitleFadeIn 0.55s var(--ease-out-expo) 2.8s forwards;
     }
     .hero-splash .hero-intro .hero-intro-cursor {
@@ -2211,7 +2233,7 @@
       #heroOpenCurtain { display: none !important; }
       #heroStage.hero-splash .hero-copy > .hero-title,
       #heroStage.hero-splash .hero-copy > .hero-intro,
-      #heroStage.hero-splash .hero-copy > .hero-cta {
+      #heroStage.hero-splash .hero-copy > .hero-cta-block {
         opacity: 1 !important;
         pointer-events: auto !important;
       }
@@ -2274,7 +2296,10 @@
             </span>
           </span>
         </p>
-        <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
+        <div class="hero-cta-block">
+          <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
+          <p class="hero-cta-note">Takes 10 minutes. No prep needed.</p>
+        </div>
       </div>
     </div>
     <div class="hero-open-curtain" id="heroOpenCurtain" aria-hidden="false">
