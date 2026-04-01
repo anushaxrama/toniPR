@@ -50,8 +50,8 @@
       will-change: transform;
       opacity: 0.94;
       background-image:
-        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.32) 1.35px, transparent 1.48px),
-        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.14) 0.95px, transparent 1.08px);
+        radial-gradient(circle at 1.4px 1.4px, rgba(215, 38, 61, 0.44) 1.35px, transparent 1.48px),
+        radial-gradient(circle at 8px 8px, rgba(215, 38, 61, 0.22) 0.95px, transparent 1.08px);
       background-repeat: repeat;
     }
     .page-bg__corner--tr {
@@ -60,7 +60,7 @@
       left: auto;
       bottom: auto;
       background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 10px;
+      background-position: 0 0, 7px 8px;
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 100% 0%,
         #000 0%,
@@ -80,8 +80,8 @@
       left: -14%;
       right: auto;
       bottom: auto;
-      background-size: 19px 19px, 19px 19px;
-      background-position: 0 0, 11px 6px;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 8px;
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 0% 0%,
         #000 0%,
@@ -101,8 +101,8 @@
       right: -14%;
       top: auto;
       left: auto;
-      background-size: 12px 12px, 12px 12px;
-      background-position: 0 0, 5px 8px;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 8px;
       -webkit-mask-image: radial-gradient(
         ellipse 105% 105% at 100% 100%,
         #000 0%,
@@ -122,8 +122,8 @@
       left: -14%;
       top: auto;
       right: auto;
-      background-size: 17px 17px, 17px 17px;
-      background-position: 0 0, 9px 12px;
+      background-size: 15px 15px, 15px 15px;
+      background-position: 0 0, 7px 8px;
       -webkit-mask-image: radial-gradient(
         ellipse 100% 100% at 0% 100%,
         #000 0%,
@@ -141,48 +141,48 @@
     @keyframes pageBgCornerTR {
       0%, 100% {
         transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 10px;
+        background-position: 0 0, 7px 8px;
         opacity: 0.9;
       }
       50% {
         transform: translate(-22px, 28px) scale(1.03);
-        background-position: 26px 20px, 33px 30px;
+        background-position: 26px 20px, 33px 28px;
         opacity: 1;
       }
     }
     @keyframes pageBgCornerTL {
       0%, 100% {
         transform: translate(0, 0) scale(1);
-        background-position: 0 0, 11px 6px;
+        background-position: 0 0, 7px 8px;
         opacity: 0.88;
       }
       50% {
         transform: translate(18px, 24px) scale(1.025);
-        background-position: -20px 16px, -9px 22px;
+        background-position: 26px 20px, 33px 28px;
         opacity: 0.98;
       }
     }
     @keyframes pageBgCornerBR {
       0%, 100% {
         transform: translate(0, 0) scale(1);
-        background-position: 0 0, 5px 8px;
+        background-position: 0 0, 7px 8px;
         opacity: 0.92;
       }
       50% {
         transform: translate(-26px, -20px) scale(1.04);
-        background-position: 30px 22px, 35px 30px;
+        background-position: 26px 20px, 33px 28px;
         opacity: 1;
       }
     }
     @keyframes pageBgCornerBL {
       0%, 100% {
         transform: translate(0, 0) scale(1);
-        background-position: 0 0, 9px 12px;
+        background-position: 0 0, 7px 8px;
         opacity: 0.85;
       }
       50% {
         transform: translate(24px, -18px) scale(1.02);
-        background-position: -18px -14px, -9px -2px;
+        background-position: 26px 20px, 33px 28px;
         opacity: 0.96;
       }
     }
@@ -191,11 +191,11 @@
       inset: -8%;
       background-image: radial-gradient(
         circle at 1.5px 1.5px,
-        rgba(215, 38, 61, 0.1) 1.05px,
+        rgba(215, 38, 61, 0.16) 1.05px,
         transparent 1.2px
       );
       background-size: 24px 24px;
-      opacity: 0.72;
+      opacity: 0.84;
       -webkit-mask-image: radial-gradient(
         75% 70% at 50% 45%,
         transparent 0%,
@@ -218,17 +218,17 @@
       0%, 100% {
         transform: translate(0, 0);
         background-position: 0 0;
-        opacity: 0.62;
+        opacity: 0.74;
       }
       33% {
         transform: translate(16px, -20px);
         background-position: 22px 28px;
-        opacity: 0.78;
+        opacity: 0.9;
       }
       66% {
         transform: translate(-14px, 12px);
         background-position: -12px 18px;
-        opacity: 0.68;
+        opacity: 0.79;
       }
     }
 
@@ -378,11 +378,11 @@
         animation: none !important;
         transform: none !important;
         background-position: 0 0, 0 0 !important;
-        opacity: 0.55 !important;
+        opacity: 0.64 !important;
       }
       .page-bg__rift {
         background-position: 0 0 !important;
-        opacity: 0.35 !important;
+        opacity: 0.45 !important;
       }
       .page-bg {
         transition: none;
