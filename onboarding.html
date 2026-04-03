@@ -6,7 +6,8 @@
   <title>Get started · ToniPR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/page-bg.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -29,231 +30,8 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Fixed halftone — stays visible on every onboarding step (no scroll hide) */
-    .page-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      opacity: 1;
-    }
-    .page-bg__wash {
-      position: absolute;
-      inset: 0;
-      background: #ffffff;
-    }
-    .page-bg__art {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .page-bg__corner {
-      position: absolute;
-      width: min(88vw, 900px);
-      height: min(88vh, 880px);
-      will-change: transform;
-      opacity: 0.94;
-      background-image:
-        radial-gradient(circle at 1.4px 1.4px, rgb(from var(--accent) r g b / 44%) 1.35px, transparent 1.48px),
-        radial-gradient(circle at 8px 8px, rgb(from var(--accent) r g b / 22%) 0.95px, transparent 1.08px);
-      background-repeat: repeat;
-    }
-    .page-bg__corner--tr {
-      top: -14%;
-      right: -14%;
-      left: auto;
-      bottom: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 100% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.55) 42%,
-        transparent 72%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 100% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.55) 42%,
-        transparent 72%
-      );
-      animation: pageBgCornerTR 26s ease-in-out infinite;
-    }
-    .page-bg__corner--tl {
-      top: -14%;
-      left: -14%;
-      right: auto;
-      bottom: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.5) 40%,
-        transparent 71%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.5) 40%,
-        transparent 71%
-      );
-      animation: pageBgCornerTL 34s ease-in-out infinite;
-    }
-    .page-bg__corner--br {
-      bottom: -14%;
-      right: -14%;
-      top: auto;
-      left: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 105% 105% at 100% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.62) 44%,
-        transparent 73%
-      );
-      mask-image: radial-gradient(
-        ellipse 105% 105% at 100% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.62) 44%,
-        transparent 73%
-      );
-      animation: pageBgCornerBR 22s ease-in-out infinite;
-    }
-    .page-bg__corner--bl {
-      bottom: -14%;
-      left: -14%;
-      top: auto;
-      right: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.48) 41%,
-        transparent 71%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.48) 41%,
-        transparent 71%
-      );
-      animation: pageBgCornerBL 31s ease-in-out infinite;
-    }
-    @keyframes pageBgCornerTR {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.9;
-      }
-      50% {
-        transform: translate(-22px, 28px) scale(1.03);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 1;
-      }
-    }
-    @keyframes pageBgCornerTL {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.88;
-      }
-      50% {
-        transform: translate(18px, 24px) scale(1.025);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 0.98;
-      }
-    }
-    @keyframes pageBgCornerBR {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.92;
-      }
-      50% {
-        transform: translate(-26px, -20px) scale(1.04);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 1;
-      }
-    }
-    @keyframes pageBgCornerBL {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.85;
-      }
-      50% {
-        transform: translate(24px, -18px) scale(1.02);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 0.96;
-      }
-    }
-    .page-bg__rift {
-      position: absolute;
-      inset: -8%;
-      background-image: radial-gradient(
-        circle at 1.5px 1.5px,
-        rgb(from var(--accent) r g b / 16%) 1.05px,
-        transparent 1.2px
-      );
-      background-size: 24px 24px;
-      opacity: 0.84;
-      -webkit-mask-image: radial-gradient(
-        75% 70% at 50% 45%,
-        transparent 0%,
-        transparent 34%,
-        rgba(0, 0, 0, 0.85) 48%,
-        rgba(0, 0, 0, 0.35) 62%,
-        transparent 76%
-      );
-      mask-image: radial-gradient(
-        75% 70% at 50% 45%,
-        transparent 0%,
-        transparent 34%,
-        rgba(0, 0, 0, 0.85) 48%,
-        rgba(0, 0, 0, 0.35) 62%,
-        transparent 76%
-      );
-      animation: pageBgRift 48s ease-in-out infinite;
-    }
-    @keyframes pageBgRift {
-      0%, 100% {
-        transform: translate(0, 0);
-        background-position: 0 0;
-        opacity: 0.74;
-      }
-      33% {
-        transform: translate(16px, -20px);
-        background-position: 22px 28px;
-        opacity: 0.9;
-      }
-      66% {
-        transform: translate(-14px, 12px);
-        background-position: -12px 18px;
-        opacity: 0.79;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .page-bg__corner,
-      .page-bg__rift {
-        animation: none !important;
-        transform: none !important;
-        background-position: 0 0, 0 0 !important;
-        opacity: 0.64 !important;
-      }
-      .page-bg__rift {
-        background-position: 0 0 !important;
-        opacity: 0.45 !important;
-      }
-    }
-
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Nunito', sans-serif;
       background-color: #ffffff;
       color: var(--text-primary);
       min-height: 100vh;
@@ -712,41 +490,28 @@
       <section class="step active" data-step="0" id="step0">
         <div class="welcome-wrap">
           <div class="welcome-hero">
-            <div class="welcome-badge">
-              <span></span>
-              No prep needed · One interview, a month of PR · 30-day guarantee
-            </div>
-            <h1 class="welcome-title">Show up and talk.<br />Toni builds your PR kit.</h1>
-            <p class="welcome-desc">You don&rsquo;t need a deck, a doc, or talking points. Toni asks smart, tailored questions; you answer in plain language while Toni listens and takes notes. After about ten minutes of conversation—not homework—Toni drafts and formats everything for you. No agency, no retainers: you talk, Toni does the writing and packaging.</p>
-            <p class="welcome-includes"><span class="welcome-includes-lead">What&rsquo;s included:</span> ~10 LinkedIn posts, a founder story, an SEO blog post, X threads, your founder bio and press-ready quotes, plus short clips if you record.</p>
-            <button type="button" class="btn btn-primary welcome-cta" id="btnStart">Start Your PR Kit (~10 min)</button>
-          </div>
-          <div class="welcome-visual">
-            <h3>Same bundle, one conversation</h3>
-            <ul>
-              <li>~10 LinkedIn posts</li>
-              <li>Founder story article</li>
-              <li>SEO blog post</li>
-              <li>X threads</li>
-              <li>Founder bio and press quotes</li>
-              <li>Short clips (if you record)</li>
-            </ul>
+            <h1 class="welcome-title">Talk for 10 minutes.<br />Get a full PR kit.</h1>
+            <p class="welcome-desc">No prep needed. Toni asks the questions, you just answer.</p>
+            <button type="button" class="btn btn-primary welcome-cta" id="btnStart">Start Your PR Kit</button>
           </div>
         </div>
       </section>
 
-      <!-- Step 1: Details -->
+      <!-- Step 1: Tell us about your company -->
       <section class="step" data-step="1" id="step1">
-        <h2 class="step-title">Quick details (optional)</h2>
-        <p class="step-desc">Tell Toni about your company so your interview can start in context. You can refine everything when you chat.</p>
+        <h2 class="step-title">Tell us about your company</h2>
+        <p class="step-desc">Just a few quick details so Toni can personalize your interview.</p>
         <div class="form-group">
-          <label for="company">Company or project name</label>
-          <input type="text" id="company" class="input" placeholder="e.g. FlowOps" autocomplete="organization" />
+          <label for="company">Company or product name</label>
+          <input type="text" id="company" class="input" placeholder="e.g. MealFlow" autocomplete="organization" />
         </div>
         <div class="form-group">
           <label for="oneliner">One-liner (what you do)</label>
-          <input type="text" id="oneliner" class="input" placeholder="e.g. We help engineering teams ship 2x faster" autocomplete="off" />
-          <p class="form-hint">Short tagline. You can tweak it in the interview.</p>
+          <input type="text" id="oneliner" class="input" placeholder="e.g. A meal planning app for busy families" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="promoting">What are you promoting right now?</label>
+          <input type="text" id="promoting" class="input" placeholder="e.g. Product launch, fundraising, thought leadership" autocomplete="off" />
         </div>
         <div class="btn-row">
           <button type="button" class="btn btn-primary" id="btnDetailsNext">Continue</button>
@@ -758,21 +523,21 @@
       <!-- Step 2: Ready -->
       <section class="step" data-step="2" id="step2">
         <h2 class="step-title">You're all set</h2>
-        <p class="step-desc">Toni's AI will generate questions tailored to your company. Block about 10 minutes and you're done.</p>
+        <p class="step-desc">Block about 10 minutes. Toni handles the rest.</p>
         <div class="ready-card">
           <h3>After the interview you get</h3>
           <ul class="ready-list">
-            <li>10 LinkedIn posts</li>
+            <li>Full interview video + short clips</li>
+            <li>~10 LinkedIn posts</li>
             <li>Founder story article</li>
             <li>SEO blog post</li>
-            <li>3 Twitter threads</li>
-            <li>Founder bio and press quote bank</li>
-            <li>Short clips (if you record)</li>
+            <li>X threads</li>
+            <li>Founder bio + press quotes</li>
+            <li>Startup boilerplate</li>
           </ul>
           <p class="ready-note">Copy, paste, publish. No back and forth. 30-day money-back guarantee.</p>
         </div>
         <button type="button" class="btn btn-primary interview-cta" id="btnStartInterview">Start Your PR Kit (10 min)</button>
-        <p class="ready-price">Plans from $39. No credit card to start.</p>
         <div class="btn-row" style="margin-top: 16px;">
           <button type="button" class="btn btn-link" id="btnReadyBack">Back</button>
         </div>
@@ -828,6 +593,7 @@
       document.getElementById('btnDetailsNext').addEventListener('click', function () {
         state.company = document.getElementById('company').value.trim();
         state.oneliner = document.getElementById('oneliner').value.trim();
+        state.promoting = document.getElementById('promoting').value.trim();
         goToStep(2);
       });
       document.getElementById('btnDetailsBack').addEventListener('click', function () {
@@ -836,6 +602,7 @@
       document.getElementById('btnDetailsSkip').addEventListener('click', function () {
         state.company = document.getElementById('company').value.trim();
         state.oneliner = document.getElementById('oneliner').value.trim();
+        state.promoting = document.getElementById('promoting').value.trim();
         goToStep(2);
       });
 
@@ -844,6 +611,7 @@
         const params = new URLSearchParams();
         if (state.company) params.set('company', state.company);
         if (state.oneliner) params.set('oneliner', state.oneliner);
+        if (state.promoting) params.set('promoting', state.promoting);
         const qs = params.toString();
         window.location.href = 'interview.html' + (qs ? '?' + qs : '');
       });

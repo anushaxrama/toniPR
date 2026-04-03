@@ -6,7 +6,8 @@
   <title>Chat with Toni · ToniPR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/page-bg.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -17,26 +18,18 @@
       --text-muted: #737373;
       --accent: #D7263D;
       --accent-soft: #E85A6F;
+      --toni-cyan: #0cd3fd;
       --radius-sm: 12px;
       --radius-md: 16px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(135deg, #fffbfa 0%, #ffffff 40%, #f8f7ff 100%);
-      background-attachment: fixed;
+      font-family: 'Nunito', sans-serif;
+      background-color: #ffffff;
       color: var(--text-primary);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle 400px at 10% 20%, rgba(215, 38, 61, 0.06), transparent 50%), radial-gradient(circle 300px at 90% 80%, rgba(100, 80, 180, 0.04), transparent 45%), radial-gradient(circle 250px at 50% 50%, rgba(255, 180, 170, 0.03), transparent 40%);
-      pointer-events: none;
-      z-index: 0;
     }
 
     .interview-wrap {
@@ -184,6 +177,16 @@
       display: block;
     }
     .result-card-heading h4 { margin-bottom: 0; }
+    .result-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .result-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(215, 38, 61, 0.08);
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.04em;
+    }
     .result-card h4 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 0.9rem;
@@ -445,47 +448,27 @@
   </style>
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
   <div class="interview-wrap">
-    <a href="dashboard.html" class="interview-back">← Back to dashboard</a>
+    <a href="dashboard.html" class="interview-back back-btn">← Back</a>
 
-    <!-- Step 1: Company info -->
-    <section class="step active" id="step1">
-      <div class="interview-toni-chip"><img src="assets/toni/Toni_thumbs_up_animation.gif" alt="" /> Chat with Toni</div>
-      <h1 class="step-title">Tell us about your company</h1>
-      <p class="step-desc">A few details so Toni can tailor your chat: no script, no prep. Just you and a relaxed conversation that becomes social-ready content.</p>
-      <form id="formCompany">
-        <div class="form-group">
-          <label for="companyName">Company or product name</label>
-          <input type="text" id="companyName" class="input" placeholder="e.g. MealFlow" required />
-        </div>
-        <div class="form-group">
-          <label for="oneliner">One-liner (what you do)</label>
-          <input type="text" id="oneliner" class="input" placeholder="e.g. A meal planning app for busy families" required />
-        </div>
-        <div class="form-group">
-          <label for="promoting">What are you promoting right now?</label>
-          <input type="text" id="promoting" class="input" placeholder="e.g. Product launch, fundraising, thought leadership" />
-        </div>
-        <button type="submit" class="btn btn-primary">Continue</button>
-      </form>
-    </section>
-
-    <!-- Step 2: Chat-style interview -->
-    <section class="step" id="step2">
+    <!-- Chat-style interview -->
+    <section class="step active" id="step2">
       <div class="step2-header-wrap">
         <img src="assets/toni/Toni_Explains.gif" alt="" class="step2-toni" width="88" height="88" loading="lazy" />
         <div class="step-header-text">
           <h1 class="step-title">Chat with Toni</h1>
-          <p class="step-desc">Casual back-and-forth about <strong id="companyDisplay"></strong>. Toni asks questions in chat. You type your answers. Not a formal interview, just a comfortable exchange.</p>
+          <p class="step-desc">Toni will ask you about <strong id="companyDisplay"></strong>. Just answer naturally.</p>
         </div>
-      </div>
-      <div class="bundle-callout">
-        <strong>What you get in the full bundle (after this chat)</strong>
-        <ul>
-          <li>Guided interview session + short clips</li>
-          <li>LinkedIn post drafts · Blog ideas &amp; article copy</li>
-          <li>Press-ready quotes · Founder story · Complete PR kit download</li>
-        </ul>
       </div>
       <div class="chat-toolbar">
         <p class="chat-toolbar-hint">Want a do-over? Redo clears this chat so you can try again from the first question.</p>
@@ -519,11 +502,11 @@
 
     <!-- Step 4: Result -->
     <section class="step" id="step4">
-      <h1 class="step-title">Your content kit is ready</h1>
-      <p class="step-desc">Here's what we generated from your chat with Toni. Copy, edit, and publish, especially to social.</p>
+      <h1 class="step-title">Your PR kit is ready</h1>
+      <p class="step-desc">Everything below was generated from your conversation. View, edit, and publish from your dashboard.</p>
       <div id="resultContainer"></div>
       <div class="result-actions">
-        <a href="dashboard.html" class="btn btn-primary">Back to dashboard</a>
+        <a href="dashboard.html" class="btn btn-primary">Go to dashboard</a>
         <a href="interview.html" class="btn btn-secondary">Start another PR kit</a>
       </div>
     </section>
@@ -540,33 +523,12 @@
         currentIndex: 0
       };
 
-      (function prefillFromOnboarding() {
+      (function initFromParams() {
         try {
           var params = new URLSearchParams(window.location.search);
-          var company = params.get('company');
-          var oneliner = params.get('oneliner');
-          var goal = params.get('goal');
-          var goalLabels = {
-            fundraising: 'Fundraising',
-            launch: 'Product launch',
-            hiring: 'Hiring',
-            'thought-leadership': 'Thought leadership'
-          };
-          if (company) {
-            var cn = document.getElementById('companyName');
-            if (cn) cn.value = company;
-            state.companyName = company;
-          }
-          if (oneliner) {
-            var ol = document.getElementById('oneliner');
-            if (ol) ol.value = oneliner;
-            state.oneliner = oneliner;
-          }
-          if (goal && goalLabels[goal]) {
-            var pr = document.getElementById('promoting');
-            if (pr && !pr.value.trim()) pr.value = goalLabels[goal];
-            state.promoting = goalLabels[goal];
-          }
+          state.companyName = params.get('company') || '';
+          state.oneliner = params.get('oneliner') || '';
+          state.promoting = params.get('promoting') || params.get('goal') || '';
         } catch (e) {}
       })();
 
@@ -574,6 +536,10 @@
         document.querySelectorAll('.step').forEach(function (s) { s.classList.remove('active'); });
         document.getElementById(stepId).classList.add('active');
       }
+
+      document.querySelector('.back-btn')?.addEventListener('click', function (e) {
+        if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
+      });
 
       function generateTailoredQuestions(company, oneliner, promoting) {
         const c = company || 'your product';
@@ -669,13 +635,9 @@
         showNextQuestion();
       }
 
-      document.getElementById('formCompany').addEventListener('submit', function (e) {
-        e.preventDefault();
-        state.companyName = document.getElementById('companyName').value.trim();
-        state.oneliner = document.getElementById('oneliner').value.trim();
-        state.promoting = document.getElementById('promoting').value.trim();
-
-        document.getElementById('companyDisplay').textContent = state.companyName;
+      // Auto-start chat from URL params
+      (function startChat() {
+        document.getElementById('companyDisplay').textContent = state.companyName || 'your company';
 
         state.tailoredQuestions = generateTailoredQuestions(
           state.companyName,
@@ -688,9 +650,7 @@
         document.getElementById('chatThread').innerHTML = '';
 
         showNextQuestion();
-
-        goToStep('step2');
-      });
+      })();
 
       document.getElementById('btnSend').addEventListener('click', handleSendAnswer);
       document.getElementById('btnNext').addEventListener('click', handleSendAnswer);
@@ -714,14 +674,26 @@
         goToStep('step3');
 
         setTimeout(function () {
-          const result = document.getElementById('resultContainer');
+          var cn = state.companyName || 'your company';
+          var ol = state.oneliner || 'solves a key problem';
+          var a1 = state.answers.q1 || '';
+          var a2 = state.answers.q2 || '';
+          var a3 = state.answers.q3 || '';
+          var a4 = state.answers.q4 || '';
+          var a5 = state.answers.q5 || state.answers.q4 || a2 || 'We\'re building something that matters.';
+
+          var result = document.getElementById('resultContainer');
           result.innerHTML =
-            '<div class="result-card result-card--linkedin"><div class="result-card-heading"><img src="assets/icons/linkedin.svg" alt="" width="22" height="22" /><h4>LinkedIn Post</h4></div><p>' +
-            (state.answers.q1 || '') + '. ' + (state.answers.q2 || '') + ' ' + state.companyName + ' helps with this. ' +
-            (state.answers.q3 ? 'We found that ' + state.answers.q3 + '. ' : '') +
-            (state.answers.q4 ? state.answers.q4 : '') + '</p></div>' +
-            '<div class="result-card"><h4>Blog Headline</h4><p>How ' + state.companyName + ' ' + (state.oneliner || 'solves a key problem') + ': A founder\'s perspective</p></div>' +
-            '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quote</h4></div><p>"' + (state.answers.q5 || state.answers.q4 || state.answers.q2 || 'We\'re building something that matters.') + '"</p></div>';
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">🎥</span><h4>Interview Video + Clips</h4></div><p>Full interview recording and short clips ready for social.</p></div>' +
+            '<div class="result-card result-card--linkedin"><div class="result-card-heading"><img src="assets/icons/linkedin.svg" alt="" width="22" height="22" /><h4>LinkedIn Posts</h4><span class="result-badge">~10 posts</span></div><p>' +
+            a1 + '. ' + a2 + ' ' + cn + ' helps with this. ' +
+            (a3 ? 'We found that ' + a3 + '. ' : '') + (a4 || '') + '</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">𝕏</span><h4>X Threads</h4></div><p>Thread-ready posts about ' + cn + ' optimized for engagement.</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📝</span><h4>Founder Story Article</h4></div><p>The story behind ' + cn + ': why you started and what drives you.</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>SEO Blog Post</h4></div><p>How ' + cn + ' ' + ol + ': A founder\'s perspective</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quotes</h4></div><p>"' + a5 + '"</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">👤</span><h4>Founder Bio</h4></div><p>A polished bio for press kits, speaker pages, and about sections.</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">🏢</span><h4>Startup Boilerplate</h4></div><p>A concise company description for press releases and media kits.</p></div>';
           goToStep('step4');
         }, 3500);
       });

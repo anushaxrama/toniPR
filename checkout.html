@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout · ToniPR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/page-bg.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --text-primary: #0a0a0a;
+      --text-secondary: #525252;
+      --text-muted: #737373;
+      --accent: #D7263D;
+      --toni-cyan: #0cd3fd;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    .checkout-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .checkout-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .checkout-back:hover { color: var(--accent); }
+    .checkout-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .checkout-header h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .checkout-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .checkout-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Order summary */
+    .order-summary {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+    }
+    .order-summary h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .order-plan-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .order-plan-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .order-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+    .order-line + .order-line { border-top: 1px solid var(--border); }
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 0;
+      margin-top: 8px;
+      border-top: 2px solid var(--text-primary);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .order-total-price {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .order-includes {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .order-includes h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .order-includes ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .order-includes li {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+    .order-guarantee {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Payment form */
+    .payment-form {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+    }
+    .payment-form h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(215, 38, 61, 0.08);
+    }
+    .input::placeholder { color: var(--text-muted); }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-checkout:hover { background: #c12235; }
+    .btn-checkout:active { transform: scale(0.98); }
+    .btn-checkout:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .btn-checkout svg {
+      width: 18px;
+      height: 18px;
+    }
+    .checkout-secure {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .checkout-processing {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .checkout-processing.active { display: block; }
+    .checkout-processing .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .checkout-processing p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__wash"></div>
+    <div class="page-bg__art">
+      <div class="page-bg__corner page-bg__corner--tr"></div>
+      <div class="page-bg__corner page-bg__corner--tl"></div>
+      <div class="page-bg__corner page-bg__corner--br"></div>
+      <div class="page-bg__corner page-bg__corner--bl"></div>
+      <div class="page-bg__rift"></div>
+    </div>
+  </div>
+
+  <div class="checkout-wrap">
+    <a href="pricing.html" class="checkout-back" id="backBtn">← Back</a>
+
+    <div class="checkout-header">
+      <h1>Complete your purchase</h1>
+      <p>You're one step away from your PR kit.</p>
+    </div>
+
+    <div class="checkout-grid">
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Order summary</h2>
+        <div class="order-plan-name" id="planName">Starter PR Kit</div>
+        <p class="order-plan-desc" id="planDesc">One session, full bundle. Ideal for trying ToniPR or a launch.</p>
+        <div class="order-line">
+          <span id="planLineLabel">1 PR kit session</span>
+          <span id="planLinePrice">$39.00</span>
+        </div>
+        <div class="order-total">
+          <span>Total</span>
+          <span class="order-total-price" id="planTotal">$39.00</span>
+        </div>
+        <div class="order-includes">
+          <h3>Every session includes</h3>
+          <ul>
+            <li>Interview video + clips</li>
+            <li>LinkedIn posts</li>
+            <li>Founder story</li>
+            <li>SEO blog post</li>
+            <li>X threads</li>
+            <li>Press quotes</li>
+            <li>Founder bio</li>
+            <li>Boilerplate</li>
+          </ul>
+        </div>
+        <p class="order-guarantee">🛡 30-day money-back guarantee</p>
+      </div>
+
+      <!-- Payment Form -->
+      <div class="payment-form" id="paymentForm">
+        <h2>Payment details</h2>
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="input" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="cardName">Name on card</label>
+            <input type="text" id="cardName" class="input" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">Card number</label>
+            <input type="text" id="cardNumber" class="input" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cardExpiry">Expiry</label>
+              <input type="text" id="cardExpiry" class="input" placeholder="MM / YY" maxlength="7" inputmode="numeric" required />
+            </div>
+            <div class="form-group">
+              <label for="cardCvc">CVC</label>
+              <input type="text" id="cardCvc" class="input" placeholder="123" maxlength="4" inputmode="numeric" required />
+            </div>
+          </div>
+          <hr class="form-divider" />
+          <button type="submit" class="btn-checkout" id="btnPay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <span id="btnPayLabel">Pay $39.00</span>
+          </button>
+        </form>
+        <p class="checkout-secure">🔒 Secure checkout — your data is encrypted</p>
+
+        <div class="checkout-processing" id="checkoutProcessing">
+          <div class="spinner"></div>
+          <p>Processing your payment...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('backBtn')?.addEventListener('click', function (e) {
+      if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
+    });
+    (function () {
+      var plans = {
+        starter: {
+          name: 'Starter PR Kit',
+          desc: 'One session, full bundle. Ideal for trying ToniPR or a launch.',
+          lineLabel: '1 PR kit session',
+          price: '$39.00',
+          total: '$39.00'
+        },
+        founder: {
+          name: 'Founder Plan',
+          desc: 'Twelve sessions for the year. Use anytime. Unused sessions roll over.',
+          lineLabel: '12 PR kit sessions (annual)',
+          price: '$299.00',
+          total: '$299.00'
+        }
+      };
+
+      var params = new URLSearchParams(window.location.search);
+      var planKey = params.get('plan') || 'starter';
+      var plan = plans[planKey] || plans.starter;
+
+      document.getElementById('planName').textContent = plan.name;
+      document.getElementById('planDesc').textContent = plan.desc;
+      document.getElementById('planLineLabel').textContent = plan.lineLabel;
+      document.getElementById('planLinePrice').textContent = plan.price;
+      document.getElementById('planTotal').textContent = plan.total;
+      document.getElementById('btnPayLabel').textContent = 'Pay ' + plan.total;
+
+      localStorage.setItem('tonipr_plan', planKey);
+
+      // Card number formatting
+      document.getElementById('cardNumber').addEventListener('input', function (e) {
+        var v = e.target.value.replace(/\D/g, '').substring(0, 16);
+        e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+      });
+
+      // Expiry formatting
+      document.getElementById('cardExpiry').addEventListener('input', function (e) {
+        var v = e.target.value.replace(/\D/g, '').substring(0, 4);
+        if (v.length >= 3) v = v.substring(0, 2) + ' / ' + v.substring(2);
+        e.target.value = v;
+      });
+
+      // CVC — digits only
+      document.getElementById('cardCvc').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+      });
+
+      document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = document.getElementById('btnPay');
+        var form = document.getElementById('checkoutForm');
+        var processing = document.getElementById('checkoutProcessing');
+
+        btn.disabled = true;
+        btn.style.display = 'none';
+        processing.classList.add('active');
+
+        setTimeout(function () {
+          window.location.href = 'onboarding.html';
+        }, 2200);
+      });
+    })();
+  </script>
+</body>
+</html>

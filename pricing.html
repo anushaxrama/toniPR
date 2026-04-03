@@ -6,7 +6,8 @@
   <title>Pricing · ToniPR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/page-bg.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -43,249 +44,8 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Halftone — same system as index (cyan → accent blend on scroll) */
-    .page-bg {
-      --bg-dots-blend: 0;
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      opacity: 1;
-      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
-    }
-    .page-bg.page-bg--hidden .page-bg__corner,
-    .page-bg.page-bg--hidden .page-bg__rift {
-      animation-play-state: paused;
-    }
-    .page-bg__wash {
-      position: absolute;
-      inset: 0;
-      background: #ffffff;
-    }
-    .page-bg__art {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .page-bg__corner {
-      position: absolute;
-      width: min(88vw, 900px);
-      height: min(88vh, 880px);
-      will-change: transform;
-      opacity: 1;
-      background-image:
-        radial-gradient(circle at 1.4px 1.4px, rgb(from var(--toni-cyan) r g b / calc(66% * (1 - var(--bg-dots-blend)))) 1.42px, transparent 1.55px),
-        radial-gradient(circle at 8px 8px, rgb(from var(--toni-cyan) r g b / calc(44% * (1 - var(--bg-dots-blend)))) 1.02px, transparent 1.15px),
-        radial-gradient(circle at 1.4px 1.4px, rgb(from var(--accent) r g b / calc(66% * var(--bg-dots-blend))) 1.42px, transparent 1.55px),
-        radial-gradient(circle at 8px 8px, rgb(from var(--accent) r g b / calc(44% * var(--bg-dots-blend))) 1.02px, transparent 1.15px);
-      background-repeat: repeat;
-    }
-    .page-bg__corner--tr {
-      top: -14%;
-      right: -14%;
-      left: auto;
-      bottom: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 100% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.58) 26%,
-        rgba(0, 0, 0, 0.28) 48%,
-        rgba(0, 0, 0, 0.1) 64%,
-        transparent 88%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 100% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.58) 26%,
-        rgba(0, 0, 0, 0.28) 48%,
-        rgba(0, 0, 0, 0.1) 64%,
-        transparent 88%
-      );
-      animation: pageBgCornerTR 26s ease-in-out infinite;
-    }
-    .page-bg__corner--tl {
-      top: -14%;
-      left: -14%;
-      right: auto;
-      bottom: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.56) 25%,
-        rgba(0, 0, 0, 0.26) 46%,
-        rgba(0, 0, 0, 0.1) 62%,
-        transparent 88%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 0%,
-        #000 0%,
-        rgba(0, 0, 0, 0.56) 25%,
-        rgba(0, 0, 0, 0.26) 46%,
-        rgba(0, 0, 0, 0.1) 62%,
-        transparent 88%
-      );
-      animation: pageBgCornerTL 34s ease-in-out infinite;
-    }
-    .page-bg__corner--br {
-      bottom: -14%;
-      right: -14%;
-      top: auto;
-      left: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 105% 105% at 100% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.6) 27%,
-        rgba(0, 0, 0, 0.28) 50%,
-        rgba(0, 0, 0, 0.1) 66%,
-        transparent 90%
-      );
-      mask-image: radial-gradient(
-        ellipse 105% 105% at 100% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.6) 27%,
-        rgba(0, 0, 0, 0.28) 50%,
-        rgba(0, 0, 0, 0.1) 66%,
-        transparent 90%
-      );
-      animation: pageBgCornerBR 22s ease-in-out infinite;
-    }
-    .page-bg__corner--bl {
-      bottom: -14%;
-      left: -14%;
-      top: auto;
-      right: auto;
-      background-size: 15px 15px, 15px 15px;
-      background-position: 0 0, 7px 8px;
-      -webkit-mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.56) 25%,
-        rgba(0, 0, 0, 0.26) 46%,
-        rgba(0, 0, 0, 0.1) 62%,
-        transparent 88%
-      );
-      mask-image: radial-gradient(
-        ellipse 100% 100% at 0% 100%,
-        #000 0%,
-        rgba(0, 0, 0, 0.56) 25%,
-        rgba(0, 0, 0, 0.26) 46%,
-        rgba(0, 0, 0, 0.1) 62%,
-        transparent 88%
-      );
-      animation: pageBgCornerBL 31s ease-in-out infinite;
-    }
-    @keyframes pageBgCornerTR {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.94;
-      }
-      50% {
-        transform: translate(-22px, 28px) scale(1.03);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 1;
-      }
-    }
-    @keyframes pageBgCornerTL {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.92;
-      }
-      50% {
-        transform: translate(18px, 24px) scale(1.025);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 0.98;
-      }
-    }
-    @keyframes pageBgCornerBR {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.95;
-      }
-      50% {
-        transform: translate(-26px, -20px) scale(1.04);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 1;
-      }
-    }
-    @keyframes pageBgCornerBL {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        background-position: 0 0, 7px 8px;
-        opacity: 0.9;
-      }
-      50% {
-        transform: translate(24px, -18px) scale(1.02);
-        background-position: 26px 20px, 33px 28px;
-        opacity: 0.97;
-      }
-    }
-    .page-bg__rift {
-      position: absolute;
-      inset: -8%;
-      background-image:
-        radial-gradient(
-          circle at 1.5px 1.5px,
-          rgb(from var(--toni-cyan) r g b / calc(23% * (1 - var(--bg-dots-blend)))) 1.05px,
-          transparent 1.2px
-        ),
-        radial-gradient(
-          circle at 1.5px 1.5px,
-          rgb(from var(--accent) r g b / calc(23% * var(--bg-dots-blend))) 1.05px,
-          transparent 1.2px
-        );
-      background-size: 24px 24px;
-      opacity: 0.8;
-      -webkit-mask-image: radial-gradient(
-        75% 72% at 50% 46%,
-        transparent 0%,
-        transparent 44%,
-        rgba(0, 0, 0, 0.18) 54%,
-        rgba(0, 0, 0, 0.46) 63%,
-        rgba(0, 0, 0, 0.22) 74%,
-        transparent 86%
-      );
-      mask-image: radial-gradient(
-        75% 72% at 50% 46%,
-        transparent 0%,
-        transparent 44%,
-        rgba(0, 0, 0, 0.18) 54%,
-        rgba(0, 0, 0, 0.46) 63%,
-        rgba(0, 0, 0, 0.22) 74%,
-        transparent 86%
-      );
-      animation: pageBgRift 48s ease-in-out infinite;
-    }
-    @keyframes pageBgRift {
-      0%, 100% {
-        transform: translate(0, 0);
-        background-position: 0 0;
-        opacity: 0.7;
-      }
-      33% {
-        transform: translate(16px, -20px);
-        background-position: 22px 28px;
-        opacity: 0.84;
-      }
-      66% {
-        transform: translate(-14px, 12px);
-        background-position: -12px 18px;
-        opacity: 0.74;
-      }
-    }
-
     body {
-      font-family: 'Nunito', system-ui, sans-serif;
+      font-family: 'Nunito', sans-serif;
       background-color: #ffffff;
       color: var(--text-primary);
       overflow-x: hidden;
@@ -325,10 +85,43 @@
       pointer-events: none;
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 28px); }
-    .logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(1.45rem, 2.35vw, 1.85rem); letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 6px; min-width: 0; }
-    .logo img { width: 72px; height: 82px; border-radius: 12px; object-fit: contain; object-position: center; flex-shrink: 0; background: transparent; filter: drop-shadow(0 2px 8px rgba(15, 15, 20, 0.12)); }
-    .logo-wordmark { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 0.3em; min-width: 0; }
-    .logo-by { font-family: 'Nunito', sans-serif; font-weight: 500; font-size: clamp(0.82rem, 1.45vw, 0.96rem); color: var(--text-muted); white-space: nowrap; }
+    .logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.45rem, 2.35vw, 1.85rem);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .logo-toni {
+      width: 72px;
+      height: 82px;
+      border-radius: 12px;
+      object-fit: contain;
+      object-position: center;
+      flex-shrink: 0;
+      background: transparent;
+      /* Alpha-aware float — no fill behind transparent PNG */
+      filter: drop-shadow(0 2px 8px rgba(15, 15, 20, 0.12));
+    }
+    .logo-wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+      line-height: 1.05;
+      min-width: 0;
+    }
+    .logo-by {
+      font-weight: 500;
+      font-size: clamp(0.82rem, 1.45vw, 0.96rem);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text-primary); }
@@ -442,14 +235,6 @@
         white-space: nowrap;
       }
     }
-    .pricing-hero-divider {
-      width: min(200px, 55%);
-      height: 2px;
-      margin: 0 auto 0;
-      border-radius: 2px;
-      background: var(--gradient-brand-sheen);
-      opacity: 0.8;
-    }
     .pricing-section { padding: 8px 0 96px; }
     .pricing-model { margin-bottom: 40px; }
     .pricing-model-label {
@@ -467,15 +252,6 @@
       padding: 0;
       border: none;
       background: none;
-    }
-    .pricing-model-label::before {
-      content: '';
-      display: block;
-      width: min(52px, 14vw);
-      height: 3px;
-      margin: 0 auto 16px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #e25e70 0%, #80e2f1 50%, var(--accent) 100%);
     }
     .pricing-model-desc {
       font-size: clamp(1rem, 2vw, 1.08rem);
@@ -786,28 +562,15 @@
     .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-bottom: 16px; }
     .footer-links a { color: var(--text-muted); text-decoration: none; }
     .footer-links a:hover { color: var(--text-primary); }
-    @media (prefers-reduced-motion: reduce) {
-      .page-bg__corner,
-      .page-bg__rift {
-        animation: none !important;
-        transform: none !important;
-      }
-      .page-bg__corner {
-        background-position: 0 0, 7px 8px !important;
-        opacity: 0.94 !important;
-      }
-      .page-bg__rift {
-        background-position: 0 0 !important;
-        opacity: 0.58 !important;
-      }
-      .page-bg {
-        transition: none;
-        --bg-dots-blend: 0 !important;
-      }
-    }
-
     @media (max-width: 1024px) {
       .pricing-cards--3, .pricing-cards--2 { grid-template-columns: 1fr; }
+      .logo-toni {
+        width: 64px;
+        height: 72px;
+      }
+      .logo {
+        font-size: clamp(1.28rem, 4vw, 1.62rem);
+      }
       .nav-links { display: none; }
     }
   </style>
@@ -825,12 +588,13 @@
   </div>
   <nav>
     <div class="nav-inner">
-      <a href="index.html" class="logo"><img src="assets/toni/all-purpose-v2.png" alt="Toni" width="72" height="82" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
+      <a href="index.html" class="logo"><img src="assets/toni/all-purpose-v2.png" alt="Toni" class="logo-toni" width="72" height="82" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
       <div class="nav-links">
         <a href="index.html#how-it-works">How it works</a>
         <a href="index.html#demo">Demo</a>
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
+        <a href="auth.html?mode=login">Log in</a>
       </div>
     </div>
   </nav>
@@ -838,7 +602,7 @@
   <header class="pricing-hero">
     <div class="container">
       <div class="back-link-wrapper">
-        <a href="index.html" class="back-link">← Back to home</a>
+        <a href="index.html" class="back-link back-to-home">← Back</a>
       </div>
       <div id="postSignupBanner" class="post-signup-banner" hidden>
         <p class="post-signup-banner-text"><strong>You're in.</strong> Skim Starter and Founder below, then continue to your dashboard. Your first PR kit starts with a quick company form.</p>
@@ -847,7 +611,6 @@
       <p class="pricing-hero-eyebrow">Plans</p>
       <h1>Pricing built for founders</h1>
       <p class="pricing-hero-lead">One conversation with Toni. A full PR kit every time. Pick the plan that fits how often you ship.</p>
-      <div class="pricing-hero-divider"></div>
     </div>
   </header>
 
@@ -882,7 +645,7 @@
               <li>Everything included, no add-ons</li>
               <li>Discounts apply to Starter, not annual</li>
             </ul>
-            <a href="auth.html" class="btn btn-secondary pricing-btn" data-plan="starter">Get Starter PR Kit</a>
+            <a href="checkout.html?plan=starter" class="btn btn-secondary pricing-btn" data-plan="starter">Get Starter PR Kit</a>
           </div>
           <div class="pricing-card pricing-card-popular">
             <span class="popular-badge">Best value</span>
@@ -895,7 +658,7 @@
               <li>Unused sessions roll over</li>
               <li>Full bundle every time</li>
             </ul>
-            <a href="auth.html" class="btn btn-primary pricing-btn" data-plan="founder">Choose Founder Plan</a>
+            <a href="checkout.html?plan=founder" class="btn btn-primary pricing-btn" data-plan="founder">Choose Founder Plan</a>
           </div>
         </div>
       </div>
@@ -936,6 +699,12 @@
     </div>
   </footer>
   <script>
+    document.querySelector('.back-to-home')?.addEventListener('click', function (e) {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    });
     (function () {
       var nav = document.querySelector('nav');
       var pageBgEl = document.querySelector('.page-bg');
@@ -973,7 +742,8 @@
       var banner = document.getElementById('postSignupBanner');
       if (banner) banner.hidden = false;
       document.querySelectorAll('a.pricing-btn').forEach(function (a) {
-        a.setAttribute('href', 'dashboard.html?welcome=1');
+        var plan = a.getAttribute('data-plan') || 'starter';
+        a.setAttribute('href', 'checkout.html?plan=' + plan);
       });
     })();
     (function () {
