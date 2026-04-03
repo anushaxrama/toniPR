@@ -1,6 +1,5 @@
-/* Fixed corner halftones + center rift — Toni cyan by default (--bg-dots-blend: 0). Blend toward --accent when JS sets --bg-dots-blend (e.g. landing scroll). */
 :root {
-  --toni-cyan: #0cd3fd;
+  --toni-cyan: #D7263D;
   --accent: #D7263D;
 }
 
