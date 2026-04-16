@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
-  <meta property="og:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
-  <meta name="twitter:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
+  <meta name="description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
+  <meta property="og:description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
+  <meta name="twitter:description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
   <title>ToniPR | PR for Founders Building the Future</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -57,6 +57,8 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
@@ -72,7 +74,8 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
       position: relative;
       z-index: 1;
     }
@@ -84,7 +87,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 20px 0;
+      padding: max(12px, env(safe-area-inset-top)) 0 16px;
       background: transparent;
       transition: background var(--transition), border-color var(--transition);
       animation: heroFadeUp 0.6s var(--ease-out-expo) forwards;
@@ -113,7 +116,8 @@
       justify-content: space-between;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 clamp(24px, 4vw, 48px);
+      padding-left: max(clamp(24px, 4vw, 48px), env(safe-area-inset-left));
+      padding-right: max(clamp(24px, 4vw, 48px), env(safe-area-inset-right));
     }
     .logo {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -2248,6 +2252,7 @@
     /* Tighter handoff from product demo to testimonials marquee */
     #examples.social-proof {
       padding-top: 80px;
+      padding-bottom: max(80px, env(safe-area-inset-bottom));
     }
     .section-label {
       font-family: 'Nunito', sans-serif;
@@ -2310,7 +2315,7 @@
         font-size: clamp(1.6rem, 5.5vw, 2.05rem);
       }
     }
-    /* Testimonials: keep headline on one line (tighter sizing + nowrap) */
+    /* Testimonials: one line on wide screens; wrap on narrow */
     #examples .section-title {
       font-size: clamp(1.05rem, 2.35vw + 0.35rem, 2.55rem);
       letter-spacing: -0.045em;
@@ -2318,6 +2323,15 @@
       margin-left: auto;
       margin-right: auto;
       white-space: nowrap;
+    }
+    @media (max-width: 720px) {
+      #examples .section-title {
+        white-space: normal;
+        text-wrap: balance;
+        line-height: 1.18;
+        padding: 0 4px;
+        font-size: clamp(1.28rem, 5.2vw, 1.95rem);
+      }
     }
     .section-desc {
       text-align: center;
@@ -2626,6 +2640,9 @@
       gap: 32px;
     }
     .problem-card {
+      --problem-card-body-size: clamp(1.02rem, 2vw, 1.08rem);
+      container-type: inline-size;
+      container-name: problem-card;
       position: relative;
       overflow: hidden;
       text-align: center;
@@ -2669,14 +2686,21 @@
     .problem-card h3 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 600;
-      font-size: clamp(1.2rem, 2vw, 1.35rem);
+      /* Always at least slightly larger than body; scales with card width but never below body */
+      font-size: max(
+        calc(var(--problem-card-body-size) * 1.12),
+        min(1.42rem, calc(100cqw / 19))
+      );
+      line-height: 1.25;
       margin-bottom: 10px;
       color: var(--text-primary);
       text-align: center;
+      text-wrap: balance;
+      letter-spacing: -0.015em;
     }
     .problem-card p {
       color: #555555;
-      font-size: clamp(1.02rem, 2vw, 1.08rem);
+      font-size: var(--problem-card-body-size);
       line-height: 1.68;
       text-align: center;
     }
@@ -3090,7 +3114,8 @@
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -3294,7 +3319,6 @@
       .section-title { font-size: clamp(1.95rem, 6.5vw, 2.35rem); margin-bottom: 40px; }
       .section-desc { margin-bottom: 36px; }
       section { padding: 60px 0; }
-      .cta-inner { padding: 48px 24px; }
       .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
       .story-section { padding: 80px 0 60px; }
       .story-step {
@@ -3323,6 +3347,101 @@
         margin: 0 0 20px;
       }
       .story-title { font-size: clamp(1.75rem, 6vw, 2.25rem); }
+      .container {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+      }
+      .hero {
+        padding-top: max(72px, calc(env(safe-area-inset-top) + 52px));
+        padding-bottom: 64px;
+      }
+      .hero-splash-inner {
+        padding-left: max(14px, env(safe-area-inset-left));
+        padding-right: max(14px, env(safe-area-inset-right));
+        min-height: min(85vh, 720px);
+      }
+      .hero-splash .hero-cta {
+        width: 100%;
+        max-width: min(22rem, 100%);
+        box-sizing: border-box;
+        min-height: 48px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .hero-splash .hero-brand {
+        gap: 22px;
+      }
+      .demo-section .section-desc--demo {
+        font-size: clamp(0.92rem, 3.5vw, 1.08rem);
+        line-height: 1.55;
+        padding: 0 2px;
+      }
+      .demo-section {
+        padding: 64px 0 56px;
+      }
+      #examples.social-proof {
+        padding-top: 64px;
+      }
+      #examples .section-desc {
+        margin-bottom: 28px;
+        font-size: clamp(0.98rem, 3.2vw, 1.12rem);
+        padding: 0 4px;
+      }
+      .td-results-shell {
+        padding: 14px 12px 14px;
+      }
+      .td-card {
+        padding: 16px 14px 16px 16px;
+        border-radius: 16px;
+      }
+      .td-demo-steps {
+        max-width: min(100%, 100vw - 32px);
+        padding: 10px 12px;
+      }
+      .td-out-panel {
+        min-height: 0;
+      }
+      footer {
+        padding-bottom: max(36px, calc(env(safe-area-inset-bottom) + 20px));
+      }
+      .footer-inner {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+      }
+      .cta-inner {
+        margin: 0 4px;
+        border-radius: 18px;
+        padding: 40px max(18px, env(safe-area-inset-left)) 44px max(18px, env(safe-area-inset-right));
+      }
+      .cta-inner h2 {
+        font-size: clamp(1.65rem, 6vw, 2.35rem);
+      }
+      .pricing-card {
+        padding: 22px 18px;
+      }
+      .section-label {
+        margin-bottom: 18px;
+      }
+      .cta-section {
+        padding: 72px 0 88px;
+      }
+      .testimonials-slider {
+        margin: 0 -4px;
+        padding: 0 4px 8px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero-splash .hero-title-words {
+        font-size: clamp(5.5rem, min(26vw, 34vh), 11rem);
+      }
+      .logo-toni {
+        width: 56px;
+        height: 56px;
+      }
+      .nav-links {
+        width: min(100%, 100vw - 16px);
+      }
     }
   </style>
 </head>
@@ -3386,7 +3505,7 @@
   <header class="hero hero-splash" id="heroStage">
     <div class="hero-splash-inner">
       <div class="hero-brand hero-copy">
-        <h1 class="hero-title" aria-label="Toni PR by Tunepact: Turn a 10-minute chat into your startup's PR kit">
+        <h1 class="hero-title" aria-label="Toni PR by Tunepact: Turn a 5-10-minute chat into your startup's PR kit">
           <span class="hero-title-lockup">
             <span class="hero-title-words">
               <span class="word">Toni</span>
@@ -3398,7 +3517,7 @@
           </span>
         </h1>
         <div class="hero-prose" id="heroProse">
-          <h2 class="hero-tagline">Turn a 10-minute chat into your startup&rsquo;s PR kit</h2>
+          <h2 class="hero-tagline">Turn a 5-10-minute chat into your startup&rsquo;s PR kit</h2>
           <p class="hero-subtag">AI-generated videos, posts, blogs, and your founder story, ready to publish.</p>
         </div>
         <div class="hero-cta-block">
@@ -3471,7 +3590,7 @@
             <div class="story-step-copy">
               <span class="story-label">Solution</span>
               <h2 class="story-title">Talk to Toni like a journalist. Get your PR kit in minutes.</h2>
-              <p class="story-desc">A relaxed 10-minute conversation. No prep needed. Toni turns your answers into posts, articles, and your full PR kit, ready to publish.</p>
+              <p class="story-desc">A relaxed 5-10-minute conversation. No prep needed. Toni turns your answers into posts, articles, and your full PR kit, ready to publish.</p>
             </div>
           </div>
         </div>
@@ -3544,7 +3663,7 @@
     <div class="container">
       <span class="section-label reveal">How it works</span>
       <h2 class="section-title reveal">From one conversation to your full PR kit</h2>
-      <p class="section-desc reveal">Set your goal. Talk to Toni for 10 minutes. Get everything you need to publish, instantly.</p>
+      <p class="section-desc reveal">Set your goal. Talk to Toni for 5-10 minutes. Get everything you need to publish, instantly.</p>
       <div class="steps">
         <div class="step-card reveal">
           <div class="step-number">01</div>
@@ -3553,8 +3672,8 @@
         </div>
         <div class="step-card reveal">
           <div class="step-number">02</div>
-          <h3>Chat with Toni (~10 min)</h3>
-          <p>Tailored questions from your product and story—no prep&nbsp;deck.<br />Speak out loud or type in chat, whichever you&nbsp;prefer.</p>
+          <h3>Chat with Toni (5-10 min)</h3>
+          <p>Tailored questions from your product and story. No prep needed.<br />Speak out loud or type in chat, whichever you&nbsp;prefer.</p>
         </div>
         <div class="step-card reveal">
           <div class="step-number">03</div>
@@ -3955,7 +4074,7 @@
             onerror="this.onerror=null;this.src='assets/toni/happy-toni.jpg';this.classList.add('toni-mascot');"
           />
         </div>
-        <h2>Get your PR kit in the next 10 minutes.</h2>
+        <h2>Get your PR kit in the next 5-10 minutes.</h2>
         <p class="cta-desc">No prep. No writing. Just a quick conversation.<br />Toni turns it into everything you need to publish.</p>
         <a href="auth.html" class="btn btn-primary btn-lg">Start Your PR Kit</a>
       </div>
