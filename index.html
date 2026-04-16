@@ -1226,11 +1226,9 @@
         filter: blur(0);
       }
     }
-    /* RTL wrapper moves the horizontal scrollbar to the top edge (WebKit/Blink) so it sits under “From that interview”. */
     .td-tabs-scroll {
       width: 100%;
       margin-bottom: 12px;
-      direction: rtl;
     }
     .td-tabs {
       display: flex;
@@ -1243,22 +1241,40 @@
       padding-top: 8px;
       padding-bottom: 2px;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: rgb(from var(--accent) r g b / 42%) rgba(0, 0, 0, 0.07);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .td-tabs::-webkit-scrollbar {
-      height: 7px;
+      display: none;
     }
-    .td-tabs::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.07);
+    /* Visible scroll track under tabs (native bar is hidden; matches phone thumbnail strip pattern). */
+    .td-tabs-scroll-ui {
+      direction: ltr;
+      padding: 2px 2px 0;
+      margin-top: 2px;
+    }
+    .td-tabs-scroll-track {
+      position: relative;
+      height: 6px;
       border-radius: 999px;
+      background: rgba(0, 0, 0, 0.08);
     }
-    .td-tabs::-webkit-scrollbar-thumb {
-      background: rgb(from var(--accent) r g b / 45%);
+    .td-tabs-scroll-thumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      min-width: 32px;
       border-radius: 999px;
+      background: rgb(from var(--accent) r g b / 48%);
+      box-shadow: 0 0 0 1px rgb(from var(--accent) r g b / 25%);
+      pointer-events: none;
+      transition: background 0.15s ease;
     }
-    .td-tabs::-webkit-scrollbar-thumb:hover {
-      background: rgb(from var(--accent) r g b / 58%);
+    @media (prefers-reduced-motion: reduce) {
+      .td-tabs-scroll-thumb {
+        transition: none;
+      }
     }
     .td-tab {
       flex: 0 0 auto;
@@ -3176,10 +3192,20 @@
       }
       .hero-toni { order: 2; margin-top: 16px; }
       .hero-mockup { max-width: 420px; margin: 0 auto; min-width: 0; }
+      .demo-section {
+        padding: 52px 0 44px;
+      }
+      .demo-section .section-desc--demo {
+        max-width: min(40rem, 100%);
+        line-height: 1.55;
+      }
+      .demo-founder-kicker {
+        font-size: 0.66rem;
+      }
       .td-layout {
         grid-template-columns: 1fr;
         gap: 0;
-        margin-top: 28px;
+        margin-top: 22px;
       }
       .td-col--interview {
         order: 1;
@@ -3191,33 +3217,142 @@
         order: 3;
         padding-top: 0;
       }
+      .td-interview-card {
+        padding: 16px 14px 14px;
+        gap: 12px;
+        border-radius: 20px;
+        box-shadow: 0 12px 36px rgba(15, 15, 20, 0.06);
+      }
+      .td-demo-steps {
+        font-size: 0.7rem;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        line-height: 1.4;
+        max-width: min(300px, 100%);
+      }
+      .td-phone-media {
+        padding: 10px 8px 14px;
+        min-height: 176px;
+        max-height: min(38vh, 300px);
+      }
+      .td-phone video {
+        max-height: min(32vh, 240px);
+      }
+      .td-interview-caption {
+        font-size: 0.78rem;
+        line-height: 1.45;
+        max-width: min(20rem, 100%);
+      }
+      .td-interview-caption .td-interview-caption-line + .td-interview-caption-line {
+        margin-top: 0.28em;
+      }
       .td-flow {
         flex-direction: column;
-        padding: 8px 0 16px;
+        padding: 4px 0 12px;
         min-height: 0;
       }
       .td-flow-svg {
-        max-width: 56px;
-        min-height: 100px;
-        max-height: 140px;
+        max-width: 52px;
+        min-height: 88px;
+        max-height: 120px;
         transform: rotate(90deg);
         transform-origin: center center;
       }
       .td-out-panel {
         max-height: none;
-        min-height: 380px;
+        min-height: 0;
+        border-radius: 20px;
+      }
+      .td-results-shell {
+        padding: 14px 12px 12px;
+        border-radius: 18px;
+      }
+      .td-out-header {
+        margin-bottom: 8px;
+        font-size: 0.66rem;
+        letter-spacing: 0.14em;
+      }
+      .td-tabs-scroll {
+        margin-bottom: 8px;
+      }
+      .td-tabs {
+        gap: 4px;
+        padding-top: 4px;
+        padding-bottom: 0;
+        scroll-padding-inline: 6px;
+      }
+      .td-tabs-scroll-ui {
+        padding: 1px 0 0;
+        margin-top: 1px;
+      }
+      .td-tabs-scroll-track {
+        height: 5px;
       }
       .td-tab {
-        font-size: 0.65rem;
-        padding: 7px 8px;
+        font-size: 0.62rem;
+        padding: 6px 9px;
+        letter-spacing: 0.03em;
       }
       .td-tab-panels {
         grid-template-rows: minmax(0, 1fr);
+      }
+      .td-tab-panel {
+        padding: 2px 0 6px 0;
+      }
+      .td-card {
+        padding: 14px 14px 14px 16px;
+        border-radius: 16px;
+      }
+      .td-card::before {
+        top: 10px;
+        bottom: 10px;
+      }
+      .td-card-label {
+        font-size: 0.58rem;
+        margin-bottom: 6px;
+      }
+      .td-card h3 {
+        font-size: 0.98rem;
+        margin-bottom: 6px;
+      }
+      .td-card p {
+        font-size: 0.875rem;
+        line-height: 1.52;
+      }
+      .td-rich {
+        margin-top: 10px;
+      }
+      .td-rich p {
+        margin-bottom: 10px;
+      }
+      .td-rich-note {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        margin-bottom: 0.65rem;
+      }
+      .td-mini-h {
+        font-size: 0.66rem;
+      }
+      .td-tab-more {
+        margin-top: 10px;
+        font-size: 0.8rem;
+      }
+      .td-snippet {
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .td-clip-scroll {
+        gap: 8px;
+        margin-top: 8px;
+        padding: 2px 2px 8px 0;
       }
       .td-clip-thumb {
         flex: 0 0 64px;
         width: 64px;
         height: 114px;
+      }
+      .td-strip-scroll {
+        padding: 0 4px 8px;
       }
       .problem-cards,
       .steps,
@@ -3315,6 +3450,21 @@
       }
     }
     @media (max-width: 640px) {
+      .demo-section {
+        padding: 40px 0 34px;
+      }
+      .demo-section .section-desc--demo {
+        margin-bottom: 28px;
+      }
+      .td-layout {
+        margin-top: 16px;
+      }
+      .td-results-shell {
+        padding: 12px 10px 10px;
+      }
+      .td-interview-card {
+        padding: 14px 12px 12px;
+      }
       .hero-content h1 { font-size: 2rem; }
       .section-title { font-size: clamp(1.95rem, 6.5vw, 2.35rem); margin-bottom: 40px; }
       .section-desc { margin-bottom: 36px; }
@@ -3794,6 +3944,11 @@
                     <button type="button" class="td-tab" role="tab" id="td-tab-5" aria-selected="false" aria-controls="td-panel-5" data-td-tab="5">Article</button>
                     <button type="button" class="td-tab" role="tab" id="td-tab-6" aria-selected="false" aria-controls="td-panel-6" data-td-tab="6">Quote</button>
                   </div>
+                  <div class="td-tabs-scroll-ui" aria-hidden="true">
+                    <div class="td-tabs-scroll-track">
+                      <div class="td-tabs-scroll-thumb" id="tdTabsScrollThumb"></div>
+                    </div>
+                  </div>
                 </div>
                 <div class="td-tab-panels">
                   <div id="td-panel-0" class="td-tab-panel" role="tabpanel" aria-labelledby="td-tab-0">
@@ -4250,6 +4405,7 @@
         if (!video || clipBtns.length === 0) return;
 
         var tabRoot = document.getElementById('tdTabs');
+        var tabsScrollThumb = document.getElementById('tdTabsScrollThumb');
         if (tabRoot) {
           var tabBtns = tabRoot.querySelectorAll('.td-tab');
           var tabPanels = document.querySelectorAll('.td-tab-panel');
@@ -4272,6 +4428,32 @@
               tdActivateTab(i);
             });
           });
+          function updateTdTabsScrollbar() {
+            if (!tabsScrollThumb) return;
+            var cw = tabRoot.clientWidth;
+            var sw = tabRoot.scrollWidth;
+            var sl = tabRoot.scrollLeft;
+            if (sw <= cw + 2) {
+              tabsScrollThumb.style.width = '100%';
+              tabsScrollThumb.style.left = '0%';
+              return;
+            }
+            var thumbW = (cw / sw) * 100;
+            var maxScroll = sw - cw;
+            var leftPct = maxScroll <= 0 ? 0 : (sl / maxScroll) * (100 - thumbW);
+            tabsScrollThumb.style.width = thumbW + '%';
+            tabsScrollThumb.style.left = leftPct + '%';
+          }
+          tabRoot.addEventListener('scroll', updateTdTabsScrollbar, { passive: true });
+          window.addEventListener('resize', updateTdTabsScrollbar);
+          if (typeof ResizeObserver !== 'undefined') {
+            var tabsResizeObs = new ResizeObserver(updateTdTabsScrollbar);
+            tabsResizeObs.observe(tabRoot);
+          }
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(updateTdTabsScrollbar);
+          }
+          setTimeout(updateTdTabsScrollbar, 0);
         }
 
         var sources = [
