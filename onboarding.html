@@ -20,7 +20,7 @@
       --text-muted: #737373;
       --accent: #D7263D;
       --accent-emerald: #22c55e;
-      /* Halftone dots — accent red (aligned with marketing page) */
+      /* Halftone dots: accent red (aligned with marketing page) */
       --toni-cyan: #D7263D;
       --radius-sm: 12px;
       --radius-md: 16px;
@@ -589,7 +589,7 @@
         goToStep(1);
       });
 
-      // Step 1 — company details
+      // Step 1: company details
       document.getElementById('btnDetailsNext').addEventListener('click', function () {
         state.company = document.getElementById('company').value.trim();
         state.oneliner = document.getElementById('oneliner').value.trim();
@@ -606,7 +606,7 @@
         goToStep(2);
       });
 
-      // Step 2 — ready
+      // Step 2: ready
       document.getElementById('btnStartInterview').addEventListener('click', function () {
         const params = new URLSearchParams();
         if (state.company) params.set('company', state.company);

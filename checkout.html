@@ -353,7 +353,7 @@
             <span id="btnPayLabel">Pay $39.00</span>
           </button>
         </form>
-        <p class="checkout-secure">🔒 Secure checkout — your data is encrypted</p>
+        <p class="checkout-secure">🔒 Secure checkout: your data is encrypted</p>
 
         <div class="checkout-processing" id="checkoutProcessing">
           <div class="spinner"></div>
@@ -411,7 +411,7 @@
         e.target.value = v;
       });
 
-      // CVC — digits only
+      // CVC: digits only
       document.getElementById('cardCvc').addEventListener('input', function (e) {
         e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
       });

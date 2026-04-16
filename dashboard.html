@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard · ToniPR</title>
-  <meta name="description" content="Your ToniPR dashboard: AI founder interviews, LinkedIn posts, blog content, press quotes, and a full PR kit. See how other founders use ToniPR—examples, spotlights, and guides on the ToniPR blog." />
+  <meta name="description" content="Your ToniPR dashboard: AI founder interviews, LinkedIn posts, blog content, press quotes, and a full PR kit. See how other founders use ToniPR: examples, spotlights, and guides on the ToniPR blog." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -46,7 +46,7 @@
       min-height: 100vh;
     }
 
-    /* Sidebar — refined rail */
+    /* Sidebar: refined rail */
     .sidebar {
       width: 240px;
       min-width: 240px;
@@ -69,7 +69,13 @@
       margin-bottom: 36px;
       letter-spacing: -0.02em;
     }
-    .sidebar-logo img { width: 36px; height: auto; }
+    .sidebar-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
     .sidebar-logo-brand { display: flex; flex-direction: column; gap: 0; }
     .sidebar-logo-by { font-family: 'Nunito', sans-serif; font-weight: 500; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px; }
     .credits-card {
@@ -260,7 +266,7 @@
       color: var(--text-primary);
     }
 
-    /* Ready card — flat panel */
+    /* Ready card: flat panel */
     .ready-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -355,7 +361,7 @@
     }
     .btn svg { width: 18px; height: 18px; margin-right: 8px; }
 
-    /* What you'll get — editorial table of contents */
+    /* What you'll get: editorial table of contents */
     .section-title {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 1.5rem;
@@ -431,7 +437,7 @@
       .kit-list { columns: 1; max-width: none; }
     }
 
-    /* Blog teaser — SEO + discovery */
+    /* Blog teaser: SEO + discovery */
     .dash-blog-section {
       margin-top: 32px;
       margin-bottom: 56px;
@@ -504,7 +510,7 @@
       margin-top: 4px;
     }
 
-    /* Recent interviews — poetic invite */
+    /* Recent interviews: poetic invite */
     .empty-state {
       background: transparent;
       border: 1px dashed var(--border);
@@ -572,7 +578,7 @@
   <div class="app-frame">
   <header class="dashboard-topbar">
     <button type="button" class="nav-drawer-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni.png" alt="" /> ToniPR</a>
+    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni/toni-headshot.png" alt="" /> ToniPR</a>
     <nav class="topbar-util">
       <a href="support.html">Support</a>
       <a href="profile.html">Profile</a>
@@ -584,7 +590,7 @@
   <div class="dashboard-layout">
     <aside class="sidebar" id="sidebar">
       <a href="index.html" class="sidebar-logo">
-        <img src="assets/toni.png" alt="Toni" />
+        <img src="assets/toni/toni-headshot.png" alt="Toni" />
         <span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span>
       </a>
       <div class="credits-card">
@@ -642,7 +648,7 @@
 
       <div id="dashWelcome" class="dash-welcome" role="status">
         <button type="button" class="dash-welcome-dismiss" id="dashWelcomeDismiss" aria-label="Dismiss">×</button>
-        <p><strong>Welcome!</strong> Start your first PR kit below. It takes about 10 minutes — Toni handles the rest.</p>
+        <p><strong>Welcome!</strong> Start your first PR kit below. It takes about 10 minutes. Toni handles the rest.</p>
       </div>
 
       <div class="ready-card">

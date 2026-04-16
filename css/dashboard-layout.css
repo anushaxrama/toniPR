@@ -31,7 +31,13 @@
   color: var(--text-primary, #0a0a0a);
   text-decoration: none;
 }
-.topbar-brand-mini img { width: 28px; height: auto; }
+.topbar-brand-mini img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
 .nav-drawer-toggle {
   display: none;
   align-items: center;

@@ -6,4 +6,5 @@ Bundled from "Toni Designs" archive (site prefers GIFs; JPG/PNG are fallbacks):
   Toni_Thinking.gif            — story bridge (above Problem / Solution flow)
   toni-listens.jpg             — fallback if a GIF fails to load
   happy-toni.jpg               — CTA fallback
-  all-purpose-v2.png           — nav / footer mark on landing (fallback: ../toni.png)
+  toni-headshot.png            — nav / footer / app sidebar mark (circular crop in CSS)
+  all-purpose-v2.png           — legacy full-body mark (optional)

@@ -23,7 +23,7 @@
       if (badge) badge.textContent = '1 session (Starter)';
     } else {
       if (credits) credits.textContent = '11';
-      if (suffix) suffix.textContent = 'remaining this year — use anytime';
+      if (suffix) suffix.textContent = 'remaining this year, use anytime';
       if (badge) badge.textContent = '11 sessions remaining this year';
     }
   }

@@ -18,7 +18,7 @@
     .sidebar-logo { font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:1.25rem; color:var(--text-primary); text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom:32px; }
     .sidebar-logo-brand { display:flex; flex-direction:column; gap:0; }
     .sidebar-logo-by { font-family:'Nunito',sans-serif; font-weight:500; font-size:0.65rem; color:var(--text-muted); letter-spacing:0.04em; text-transform:uppercase; margin-top:2px; }
-    .sidebar-logo img { width:32px; height:auto; }
+    .sidebar-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: contain; flex-shrink: 0; }
     .credits-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:32px; }
     .credits-card-label { font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
     .credits-card-suffix { font-size:0.8rem; font-weight:500; color:var(--text-muted); margin-bottom:12px; }
@@ -74,7 +74,7 @@
   <div class="app-frame">
   <header class="dashboard-topbar">
     <button type="button" class="nav-drawer-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni.png" alt="" /> ToniPR</a>
+    <a href="dashboard.html" class="topbar-brand-mini"><img src="assets/toni/toni-headshot.png" alt="" /> ToniPR</a>
     <nav class="topbar-util">
       <a href="support.html">Support</a>
       <a href="profile.html" aria-current="page">Profile</a>
@@ -85,7 +85,7 @@
   <div class="sidebar-overlay" aria-hidden="true"></div>
   <div class="dashboard-layout">
     <aside class="sidebar" id="sidebar">
-      <a href="index.html" class="sidebar-logo"><img src="assets/toni.png" alt="Toni" /><span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span></a>
+      <a href="index.html" class="sidebar-logo"><img src="assets/toni/toni-headshot.png" alt="Toni" /><span class="sidebar-logo-brand">ToniPR <span class="sidebar-logo-by">by Tunepact</span></span></a>
       <div class="credits-card">
         <div class="credits-card-label">Your plan</div>
         <div class="sidebar-plan-name" id="sidebarPlanName">Founder plan</div>
@@ -93,7 +93,7 @@
         <div class="credits-card-divider"></div>
         <div class="credits-card-label">Sessions</div>
         <div class="credits-card-value" id="creditsValue">11</div>
-        <div class="credits-card-suffix" id="creditsSuffix">remaining this year — use anytime</div>
+        <div class="credits-card-suffix" id="creditsSuffix">remaining this year, use anytime</div>
       </div>
       <nav class="sidebar-nav">
         <a href="dashboard.html"><span class="sidebar-nav-icon">⌂</span> Dashboard</a>

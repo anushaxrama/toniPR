@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
-  <meta property="og:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
-  <meta name="twitter:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story — ready to publish." />
+  <meta name="description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
+  <meta property="og:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
+  <meta name="twitter:description" content="Turn a 10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
   <title>ToniPR | PR for Founders Building the Future</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -129,8 +129,8 @@
     }
     .logo-toni {
       width: 52px;
-      height: auto;
-      border-radius: 8px;
+      height: 52px;
+      border-radius: 50%;
       object-fit: contain;
       object-position: center;
       flex-shrink: 0;
@@ -328,7 +328,7 @@
       position: relative;
       flex: 1;
       width: 100%;
-      /* Horizontal inset only from .hero-splash-inner — avoids double padding / visual drift */
+      /* Horizontal inset only from .hero-splash-inner: avoids double padding / visual drift */
       padding: 0;
       margin: 0 auto;
     }
@@ -1103,404 +1103,1135 @@
       font-size: 0.7rem;
     }
 
-    /* Product demo */
+    /* Product demo: one interview → content kit */
     .demo-section {
-      padding: 80px 0 100px;
+      padding: 88px 0 72px;
       background: transparent;
     }
-    .demo-section .container { display: flex; flex-direction: column; align-items: center; width: 100%; }
-    .demo-section .demo-grid-wrapper { width: 100%; display: flex; justify-content: center; }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: 1fr 56px 1fr;
-      gap: 0;
-      align-items: stretch;
-      max-width: 1060px;
+    .demo-section .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
     }
-
-    /* Interview panel */
-    .demo-interview {
-      position: relative;
-      overflow: hidden;
-      background: #fafafa;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 20px;
-      padding: 0;
-      box-shadow: 0 12px 40px rgba(15, 15, 20, 0.06);
+    .demo-section .section-desc {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .demo-interview-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+    .demo-section .section-desc--demo {
+      max-width: min(52rem, 94vw);
     }
-    .demo-toolbar-dot { display: none; }
-    .demo-toolbar-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .demo-interview-body {
-      padding: 20px 20px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      max-height: 420px;
-      min-height: 420px;
-      overflow-y: auto;
-      scrollbar-width: none;
-      position: relative;
-    }
-    .demo-interview-body::-webkit-scrollbar { display: none; }
-
-    .demo-loading-screen {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      background: #fafafa;
-      z-index: 5;
-      transition: opacity 0.5s ease;
-    }
-    .demo-loading-screen.hidden { opacity: 0; pointer-events: none; }
-    .demo-loading-dots {
-      display: flex;
-      gap: 6px;
-    }
-    .demo-loading-dots span {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.3;
-      animation: loadDot 1.2s ease-in-out infinite;
-    }
-    .demo-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .demo-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes loadDot {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-    .demo-loading-label {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* Chat bubbles */
-    .demo-chat {
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin-bottom: 14px;
-      display: none;
-    }
-    .demo-chat.demo-chat--active {
+    .demo-section .section-desc--demo .section-desc-line {
       display: block;
+      text-align: center;
     }
-    .demo-msg {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      margin-bottom: 5px;
+    .demo-section .section-desc--demo .section-desc-line:first-child {
+      margin-bottom: 0.2em;
     }
-    .demo-msg--toni { flex-direction: row; }
-    .demo-msg--user { flex-direction: row-reverse; }
-
-    .demo-msg-avatar {
-      flex-shrink: 0;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 700;
-    }
-    .demo-msg--toni .demo-msg-avatar {
-      background: #fff;
-      border: 1px solid rgba(0,0,0,0.08);
-      overflow: hidden;
-    }
-    .demo-msg--toni .demo-msg-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .demo-msg--user .demo-msg-avatar {
-      background: var(--text-primary);
-      color: #fff;
-    }
-
-    .demo-msg-bubble {
-      max-width: 82%;
-      padding: 10px 15px;
-      border-radius: 18px;
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-    .demo-msg--toni .demo-msg-bubble {
-      background: #fff;
-      color: var(--text-primary);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-bottom-left-radius: 5px;
-    }
-    .demo-msg--user .demo-msg-bubble {
-      background: var(--text-primary);
-      color: #fff;
-      border-bottom-right-radius: 5px;
-    }
-
-    .demo-chat-answer {
-      font-size: 0.9rem;
-      color: #fff;
-      font-weight: 500;
-      min-height: 1.4em;
-    }
-    .demo-chat-answer .cursor {
-      display: inline-block;
-      width: 2px; height: 1em;
-      background: rgba(255,255,255,0.5);
-      margin-left: 2px;
-      animation: cursorBlink 0.8s step-end infinite;
-      vertical-align: text-bottom;
-      border-radius: 1px;
-    }
-    .demo-chat-answer.typed .cursor { display: none; }
-    @keyframes cursorBlink { 50% { opacity: 0; } }
-
-    .demo-msg--user .demo-msg-avatar {
-      width: 32px; height: 32px;
-      background: transparent;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 2px;
-      padding-bottom: 2px;
-      border-radius: 0;
-    }
-    .demo-msg--user .demo-msg-avatar .bar {
-      width: 3px;
-      background: var(--accent);
-      border-radius: 2px;
-      animation: voiceBar 0.8s ease-in-out infinite;
-    }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(1) { height: 7px; animation-delay: 0s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(2) { height: 12px; animation-delay: 0.1s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(3) { height: 16px; animation-delay: 0.2s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(4) { height: 10px; animation-delay: 0.3s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(5) { height: 14px; animation-delay: 0.15s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(6) { height: 9px; animation-delay: 0.25s; }
-    .demo-msg--user .demo-msg-avatar .bar:nth-child(7) { height: 5px; animation-delay: 0.05s; }
-    @keyframes voiceBar {
-      0%, 100% { transform: scaleY(0.4); transform-origin: bottom; }
-      50% { transform: scaleY(1); transform-origin: bottom; }
-    }
-    .voice-memo-icon { display: none; }
-    .demo-chat-speaker { display: none; }
-    .demo-chat-question { display: none; }
-    .demo-chat-answer-row { display: contents; }
-    .demo-interview-header { display: none; }
-
-    .demo-msg {
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .demo-msg.demo-msg--visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Flow connector */
-    .demo-flow-connector {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      gap: 0;
-    }
-    .demo-flow-line {
-      width: 2px;
-      flex: 1;
-      background: linear-gradient(180deg, transparent 0%, #ddd 20%, #ddd 80%, transparent 100%);
-      border-radius: 2px;
-    }
-    .demo-flow-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: #fafafa;
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      flex-shrink: 0;
-    }
-    .demo-flow-badge svg {
-      width: 16px; height: 16px;
-      color: var(--text-muted);
-    }
-
-    /* Output side */
-    .demo-outputs {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .demo-founder-kicker {
+      display: block;
       width: 100%;
+      max-width: 248px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .demo-founder-kicker::after {
+      content: '';
+      display: block;
+      width: 52px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .td-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(72px, 96px) minmax(0, 1.06fr);
+      gap: 0 10px;
+      align-items: stretch;
+      max-width: 1160px;
+      width: 100%;
+      margin-top: 52px;
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+    }
+    .td-col {
       min-width: 0;
     }
-    .demo-outputs-label {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+    .td-col--interview {
+      display: flex;
+    }
+    .td-col--out {
+      display: flex;
+      padding-top: 6px;
+    }
+    .td-out-panel {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: 480px;
+      max-height: 640px;
+      overflow: hidden;
+      border-radius: 22px;
+    }
+    .td-results {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .td-results-shell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: linear-gradient(165deg, #fafafa 0%, #fff 40%, #f9f9f9 100%);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 12px 40px rgba(15, 15, 20, 0.07);
+      opacity: 0;
+      transform: translateY(12px) scale(0.99);
+      filter: blur(6px);
+      overflow: hidden;
+    }
+    .reveal.td-layout.visible .td-results-shell {
+      animation: tdResultsShellIn 0.75s var(--ease-out-expo) forwards;
+    }
+    @keyframes tdResultsShellIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+        filter: blur(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+    /* RTL wrapper moves the horizontal scrollbar to the top edge (WebKit/Blink) so it sits under “From that interview”. */
+    .td-tabs-scroll {
+      width: 100%;
+      margin-bottom: 12px;
+      direction: rtl;
+    }
+    .td-tabs {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 5px;
+      margin-bottom: 0;
+      direction: ltr;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-top: 8px;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgb(from var(--accent) r g b / 42%) rgba(0, 0, 0, 0.07);
+    }
+    .td-tabs::-webkit-scrollbar {
+      height: 7px;
+    }
+    .td-tabs::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 999px;
+    }
+    .td-tabs::-webkit-scrollbar-thumb {
+      background: rgb(from var(--accent) r g b / 45%);
+      border-radius: 999px;
+    }
+    .td-tabs::-webkit-scrollbar-thumb:hover {
+      background: rgb(from var(--accent) r g b / 58%);
+    }
+    .td-tab {
+      flex: 0 0 auto;
+      min-width: 0;
+      padding: 7px 9px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .demo-output-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      align-items: center;
-    }
-    .demo-output-tab {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 8px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--text-muted);
-      background: transparent;
-      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
       cursor: pointer;
-      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .demo-output-tab img {
-      width: 15px; height: 15px;
-      display: block;
-      object-fit: contain;
-      flex-shrink: 0;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-    }
-    .demo-output-tab:hover {
+    .td-tab:hover {
       color: var(--text-primary);
-      border-color: rgba(0,0,0,0.15);
+      border-color: rgba(0, 0, 0, 0.12);
     }
-    .demo-output-tab:hover img { opacity: 1; }
-    .demo-output-tab:focus-visible {
+    .td-tab:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
-    .demo-output-tab--active {
+    .td-tab--active {
       color: var(--accent);
-      font-weight: 700;
       background: #fff;
-      border-color: var(--accent);
-      box-shadow: 0 1px 4px rgba(215, 38, 61, 0.12);
+      border-color: rgb(from var(--accent) r g b / 45%);
+      box-shadow: 0 2px 10px rgb(from var(--accent) r g b / 12%);
     }
-    .demo-output-tab--active img {
-      opacity: 1;
-    }
-    .demo-output-panels {
+    .td-tab-panels {
       position: relative;
+      flex: 1;
+      min-height: 0;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      align-items: start;
-    }
-    .demo-output-panel {
-      position: relative;
+      grid-template-rows: minmax(0, 1fr);
       overflow: hidden;
+    }
+    .td-tab-panel {
       grid-area: 1 / 1;
-      background: #fafafa;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 12px 40px rgba(15, 15, 20, 0.06);
-      transition: opacity 0.2s ease;
-    }
-    .demo-output-panel:not(.demo-output-panel--inactive) {
-      z-index: 1;
-    }
-    .demo-output-panel--inactive {
+      min-height: 0;
+      max-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 4px 2px 8px 0;
+      scrollbar-width: thin;
+      opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      user-select: none;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .td-tab-panel:not(.td-tab-panel--inactive) {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 1;
+    }
+    .td-tab-panel--inactive {
       z-index: 0;
-      opacity: 0;
-      transition: opacity 0.15s ease, visibility 0s 0.15s;
     }
-    .demo-output-panel--inactive * { pointer-events: none; }
-    .demo-output-panel--quote .product-panel-example {
+    .td-tab-panel .td-card {
+      margin: 0;
+    }
+
+    .td-interview-card {
+      background: linear-gradient(165deg, #fafafa 0%, #ffffff 48%, #f7f7f7 100%);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 16px 48px rgba(15, 15, 20, 0.07);
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      justify-content: flex-start;
+    }
+    .td-interview-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: clamp(1.08rem, 2.2vw, 1.18rem);
-      font-style: italic;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0;
     }
-    .demo-output-more {
+    .td-interview-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgb(from var(--accent) r g b / 12%);
+      animation: tdPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes tdPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.72; transform: scale(0.9); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .td-interview-pill-dot { animation: none; }
+    }
+
+    .td-phone {
+      position: relative;
+      width: 100%;
+      max-width: 248px;
+      margin-top: 8px;
+      border-radius: 28px;
+      padding: 8px 8px 0;
+      background: #0c0c0e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 24px 56px rgba(0, 0, 0, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      overflow: hidden;
+    }
+    .td-phone-notch {
+      width: 38%;
+      height: 22px;
+      margin: 0 auto 0;
+      border-radius: 0 0 14px 14px;
+      background: #0c0c0e;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: none;
+      flex-shrink: 0;
+    }
+    .td-phone-media {
+      position: relative;
+      border-radius: 18px 18px 0 0;
+      overflow: hidden;
+      background: #111;
+      flex-shrink: 0;
+      width: 100%;
+      line-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 10px 18px;
+      min-height: 200px;
+      max-height: min(40vh, 320px);
+    }
+    .td-phone video {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      max-height: min(34vh, 260px);
+      object-fit: contain;
+      object-position: center center;
+      border-radius: 0;
+      background: #111;
+      vertical-align: top;
+    }
+    .td-phone-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgb(from var(--accent) r g b / 90%);
+      padding: 5px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .td-phone-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px 6px 2px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: #0a0a0c;
+    }
+    .td-phone-play {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgb(from var(--accent) r g b / 88%);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .td-phone-play:hover {
+      filter: brightness(1.06);
+    }
+    .td-phone-play:active {
+      transform: scale(0.96);
+    }
+    .td-phone-play svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .td-phone-play .td-phone-icon--pause {
+      display: none;
+    }
+    .td-phone-play.is-playing .td-phone-icon--play {
+      display: none;
+    }
+    .td-phone-play.is-playing .td-phone-icon--pause {
+      display: block;
+    }
+    .td-phone-time {
+      flex: 0 0 auto;
+      font-size: 0.62rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.72);
+      white-space: nowrap;
+    }
+    .td-phone-scrub-wrap {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+    .td-phone-scrub {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.16);
+      outline: none;
+      cursor: pointer;
+    }
+    .td-phone-scrub::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+    .td-phone-scrub::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+    .td-phone-strip-wrap {
+      background: #08080a;
+      border-radius: 0 0 20px 20px;
+      overflow: hidden;
+    }
+    .td-phone-strip {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 7px;
+      width: 100%;
+      padding: 8px 6px 6px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .td-phone-strip::-webkit-scrollbar {
+      display: none;
+    }
+    .td-strip-scroll {
+      padding: 0 6px 10px;
+    }
+    .td-strip-scroll-track {
+      position: relative;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .td-strip-scroll-thumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      min-width: 28px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+      transition: background 0.15s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .td-strip-scroll-thumb {
+        transition: none;
+      }
+    }
+    .td-strip-btn {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      margin: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .td-strip-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    .td-strip-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .td-strip-btn--active {
+      border-color: rgb(from var(--accent) r g b / 55%);
+      box-shadow: 0 0 0 1px rgb(from var(--accent) r g b / 25%);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .td-strip-btn img {
+      display: block;
+      width: 40px;
+      height: 71px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .td-strip-num {
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .td-strip-btn--active .td-strip-num {
+      color: var(--accent-soft);
+    }
+    .td-interview-caption {
+      margin-top: 0;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: min(22rem, 94vw);
+    }
+    .td-interview-caption .td-interview-caption-line {
+      display: block;
+    }
+    .td-interview-caption .td-interview-caption-line + .td-interview-caption-line {
+      margin-top: 0.35em;
+    }
+    .td-interview-caption strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .td-demo-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35em 0.45em;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+      color: var(--text-primary);
+      max-width: min(320px, 100%);
+      margin: 0 auto 10px;
+      padding: 11px 16px;
+      border-radius: 14px;
+      background: rgb(from var(--accent) r g b / 7%);
+      border: 1px solid rgb(from var(--accent) r g b / 14%);
+      text-align: center;
+      box-sizing: border-box;
+      box-shadow: 0 1px 0 rgb(255 255 255 / 6%) inset;
+    }
+    .td-demo-steps-sep {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0;
+      opacity: 0.92;
+      user-select: none;
+    }
+    .td-flow {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: 48px 0 24px;
+    }
+    .td-flow-svg {
+      width: 100%;
+      max-width: 92px;
+      height: auto;
+      min-height: 72px;
+      max-height: min(280px, 58vh);
+      overflow: visible;
+      color: var(--accent);
+      filter: drop-shadow(0 3px 12px rgb(from var(--accent) r g b / 22%));
+    }
+    .td-flow-group {
+      transform-origin: 50% 50%;
+    }
+    .td-flow-path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    .td-flow-head {
+      fill: currentColor;
+      opacity: 0;
+      transform-origin: 96px 48px;
+      transform: scale(0.35);
+    }
+    .reveal.td-layout.visible .td-flow-path {
+      animation: tdFlowDraw 1.2s cubic-bezier(0.33, 1, 0.68, 1) 0.1s forwards,
+        tdFlowStrokePulse 2.4s ease-in-out 1.35s infinite;
+    }
+    .reveal.td-layout.visible .td-flow-head {
+      animation: tdFlowHead 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1s forwards;
+    }
+    .reveal.td-layout.visible .td-flow-group {
+      animation: tdFlowDrift 3.2s ease-in-out 1.45s infinite;
+    }
+    @keyframes tdFlowDraw {
+      0% {
+        stroke-dashoffset: 1;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes tdFlowHead {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes tdFlowDrift {
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(5px, -3px);
+      }
+    }
+    @keyframes tdFlowStrokePulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.72;
+      }
+    }
+
+    .td-out-header {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-left: 2px;
+    }
+    .td-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      border-radius: 18px;
+      padding: 18px 20px 18px 22px;
+      box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.02),
+        0 14px 40px rgba(15, 15, 20, 0.09);
+      text-align: left;
+    }
+    .td-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: var(--gradient-brand-rail);
+      opacity: 1;
+      box-shadow: 0 0 20px rgb(from var(--accent) r g b / 25%);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .td-results-shell {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        animation: none !important;
+      }
+      .td-tab-panel {
+        transition: none;
+      }
+      .td-flow-path,
+      .td-flow-head,
+      .td-flow-group {
+        opacity: 1 !important;
+        animation: none !important;
+        stroke-dashoffset: 0 !important;
+        transform: none !important;
+      }
+      .story-connector .arrow-path {
+        stroke-dashoffset: 0 !important;
+        animation: none !important;
+      }
+      .story-connector .arrow-head {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .story-connector,
+      .story-connector.drawn {
+        opacity: 1 !important;
+      }
+    }
+
+    .td-card-label {
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      opacity: 0.95;
+    }
+    .td-card-label--linkedin,
+    .td-card-label--x,
+    .td-card-label--instagram {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .td-card-label-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      object-fit: contain;
+      display: block;
+    }
+    .td-card h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .td-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.58;
+      margin: 0;
+      font-weight: 500;
+    }
+    .td-card--highlight {
+      background: linear-gradient(135deg, #fff 0%, rgb(from var(--accent) r g b / 7%) 100%);
+      border-color: rgb(from var(--accent) r g b / 15%);
+      box-shadow:
+        0 4px 0 rgb(from var(--accent) r g b / 6%),
+        0 18px 48px rgb(from var(--accent) r g b / 12%);
+    }
+
+    .td-clip-scroll {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 4px 4px 10px 2px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .td-clip-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .td-clip-scroll::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 999px;
+    }
+    .td-clip-thumb {
+      flex: 0 0 72px;
+      width: 72px;
+      height: 128px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      background: #111;
+    }
+    .td-clip-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .td-clip-thumb-play {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      margin: auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgb(from var(--accent) r g b / 88%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+    }
+    .td-clip-thumb-play::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
+    }
+    .td-snippet {
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      line-height: 1.55;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .td-snippet strong {
+      font-weight: 800;
+    }
+    .td-snippet--open {
+      margin-top: 0;
+    }
+    .td-snippet--x {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .td-card--quote .td-quote-block p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .td-card--quote .td-card-label {
+      margin-bottom: 6px;
+    }
+    .td-tab-more {
       display: inline-block;
       margin-top: 14px;
       font-size: 0.84rem;
       font-weight: 700;
-      text-decoration: none;
       color: var(--accent);
-      transition: opacity 0.2s;
+      text-decoration: none;
     }
-    .demo-output-more:hover {
+    .td-tab-more:hover {
       text-decoration: underline;
       text-underline-offset: 3px;
     }
-    .social-post-heading {
+
+    .td-rich {
+      margin-top: 14px;
+    }
+    .td-rich p {
+      margin: 0 0 12px;
+    }
+    .td-rich p:last-child {
+      margin-bottom: 0;
+    }
+    .td-rich-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 0 0 14px;
+      line-height: 1.5;
+    }
+    .td-rich-note--spaced {
+      margin-top: 12px;
+    }
+    .td-clip-hooks {
+      margin: 6px 0 0;
+      padding-left: 1.15rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-style: normal;
+      list-style: disc;
+    }
+    .td-clip-hooks li {
+      margin-bottom: 0.45em;
+    }
+    .td-clip-hooks li:last-child {
+      margin-bottom: 0;
+    }
+    .td-mini-h {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 18px 0 8px;
+    }
+    .td-mini-h:first-child {
+      margin-top: 0;
+    }
+    .td-clip-spec {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .td-clip-spec-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .td-clip-spec-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .td-clip-spec-meta {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .td-clip-spec-caption {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .td-clip-spec-caption strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .td-tweet {
+      margin: 0 0 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fafafa;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .td-tweet:last-child {
+      margin-bottom: 0;
+    }
+    .td-tweet-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .td-tweet p {
+      font-size: 0.86rem;
+      line-height: 1.52;
+      margin: 0;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .td-ig-post {
+      margin-top: 4px;
+      border: 1px solid #dbdbdb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      text-align: left;
+    }
+    .td-ig-post-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #f0f0f0;
+      padding: 10px 12px;
+      border-bottom: 1px solid #efefef;
     }
-    .social-post-heading h4 {
-      margin-bottom: 0;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .social-post-icon {
+    .td-ig-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f58529, #dd2a7b, #515bd4);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      width: 22px; height: 22px;
-      display: block;
     }
-    .social-post-icon img {
-      width: 100%; height: 100%;
-      display: block;
-      object-fit: contain;
+    .td-ig-user {
+      flex: 1;
+      min-width: 0;
     }
-    .demo-output-panel .product-panel-example {
-      font-size: clamp(0.92rem, 1.8vw, 1.02rem);
+    .td-ig-username {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
       color: var(--text-primary);
-      line-height: 1.7;
+      letter-spacing: 0;
+      text-transform: none;
     }
-    .product-panel-quote {
-      font-size: 0.86rem;
+    .td-ig-orig {
+      display: block;
+      font-size: 0.68rem;
       color: var(--text-muted);
-      margin-top: 8px;
-      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .td-ig-more {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .td-ig-media {
+      aspect-ratio: 1;
+      background: #000;
+      position: relative;
+    }
+    .td-ig-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .td-ig-media--logo img {
+      object-fit: contain;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    .td-ig-time {
+      font-size: 0.65rem;
+      color: #8e8e8e;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 0.55em 0 0;
+      font-weight: 600;
+    }
+    .td-ig-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 12px 6px;
+      font-size: 1.05rem;
+      line-height: 1;
+      border-bottom: 1px solid #efefef;
+      color: var(--text-primary);
+    }
+    .td-ig-actions-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .td-ig-actions-save {
+      margin-left: auto;
+      font-size: 1.08rem;
+    }
+    .td-ig-meta {
+      padding: 8px 12px 12px;
+    }
+    .td-ig-likes-count {
+      font-size: 0.82rem;
+      margin: 0 0 6px;
+      color: var(--text-primary);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .td-ig-caption {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .td-ig-tags {
+      display: block;
+      margin-top: 6px;
+      color: #00376b;
+      font-weight: 600;
+    }
+    .td-article-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 6px;
+    }
+    .td-article-dek {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin: 0 0 14px;
+      font-weight: 500;
+    }
+    .td-outline {
+      margin: 14px 0 0;
+      padding-left: 1.15rem;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .td-outline li {
+      margin-bottom: 6px;
+    }
+    .td-outline li:last-child {
+      margin-bottom: 0;
+    }
+    .td-quote-block {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+    .td-quote-block:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+    .td-quote-attr {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-style: normal;
+      font-family: 'Nunito', sans-serif;
     }
 
     /* Section common */
@@ -1513,6 +2244,10 @@
     .social-proof,
     .cta-section {
       background: transparent;
+    }
+    /* Tighter handoff from product demo to testimonials marquee */
+    #examples.social-proof {
+      padding-top: 80px;
     }
     .section-label {
       font-family: 'Nunito', sans-serif;
@@ -1534,7 +2269,7 @@
       background: none;
       box-shadow: none;
     }
-    /* Short rail — same language as card tops, without the label pill */
+    /* Short rail: same language as card tops, without the label pill */
     .section-label::before {
       content: '';
       display: block;
@@ -1574,6 +2309,15 @@
         white-space: normal;
         font-size: clamp(1.6rem, 5.5vw, 2.05rem);
       }
+    }
+    /* Testimonials: keep headline on one line (tighter sizing + nowrap) */
+    #examples .section-title {
+      font-size: clamp(1.05rem, 2.35vw + 0.35rem, 2.55rem);
+      letter-spacing: -0.045em;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      white-space: nowrap;
     }
     .section-desc {
       text-align: center;
@@ -1761,7 +2505,13 @@
       margin: 0.15rem 0 0;
       font-weight: 700;
       color: var(--text-primary);
-      text-wrap: pretty;
+      white-space: nowrap;
+    }
+    @media (max-width: 400px) {
+      .story-transform-close {
+        white-space: normal;
+        text-wrap: pretty;
+      }
     }
     .story-step.reveal-from-right .story-desc-structured,
     .story-step.reveal-from-right .story-desc-structured .story-transform-lead,
@@ -1801,7 +2551,9 @@
       animation: drawArrow 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
     @keyframes drawArrow {
-      to { stroke-dashoffset: 0; }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
     .story-connector .arrow-head {
       fill: var(--accent);
@@ -1814,27 +2566,44 @@
                  headFloat 2.4s ease-in-out 1.8s infinite;
     }
     @keyframes headPop {
-      to { opacity: 1; transform: scale(1) rotate(0deg); }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
     }
     @keyframes headFloat {
-      0%, 100% { transform: scale(1) translate(0, 0); }
-      50% { transform: scale(1.12) translate(2px, -2px); }
+      0%,
+      100% {
+        transform: scale(1) translate(0, 0);
     }
-    /* Right arrow: curves from left side down and right */
+      50% {
+        transform: scale(1.12) translate(2px, -2px);
+      }
+    }
     .story-connector--right {
       justify-content: center;
     }
-    /* Left arrow: mirror the SVG */
     .story-connector--left svg {
       transform: scaleX(-1);
     }
     @media (min-width: 900px) {
-      .story-connector--right { justify-content: center; padding-left: 10%; }
-      .story-connector--left { justify-content: center; padding-right: 10%; }
+      .story-connector--right {
+        justify-content: center;
+        padding-left: 10%;
+      }
+      .story-connector--left {
+        justify-content: center;
+        padding-right: 10%;
+      }
     }
     @media (max-width: 640px) {
-      .story-connector { height: 64px; }
-      .story-connector svg { width: min(240px, 55vw); height: 64px; }
+      .story-connector {
+        height: 64px;
+      }
+      .story-connector svg {
+        width: min(240px, 55vw);
+        height: 64px;
+      }
     }
     /* Toni GIF stickers: no card, no fill; sits on page canvas */
     .toni-sticker {
@@ -1955,6 +2724,7 @@
       color: var(--text-secondary);
       font-size: clamp(1.02rem, 2vw, 1.08rem);
       line-height: 1.68;
+      text-wrap: pretty;
     }
 
     /* How it works */
@@ -1965,39 +2735,38 @@
     .how-section .section-title {
       margin-left: auto;
       margin-right: auto;
-      text-wrap: balance;
-      padding: 0 min(24px, 5vw);
+      padding: 0 min(16px, 4vw);
+      max-width: 100%;
+      font-size: clamp(1.65rem, 4.2vw, 2.65rem);
     }
     .how-section .section-desc {
       margin-left: auto;
       margin-right: auto;
-      max-width: 820px;
+      max-width: min(1040px, 100%);
+      padding: 0 min(16px, 4vw);
+      font-size: clamp(1rem, 1.9vw, 1.18rem);
+      line-height: 1.55;
+    }
+    @media (min-width: 1024px) {
+      .how-section .section-title {
+        white-space: nowrap;
+        font-size: clamp(2rem, 2.5vw, 2.85rem);
+      }
+      .how-section .section-desc {
+        white-space: nowrap;
+        font-size: clamp(0.88rem, 1.05vw, 1.08rem);
+        max-width: none;
+      }
+    }
+    @media (max-width: 1023px) {
+      .how-section .section-desc {
+        max-width: 640px;
+      }
     }
 
     .pricing-cta-section { padding: 80px 0; }
     .pricing-cta-buttons { text-align: center; margin-top: 24px; }
     .btn-lg { padding: 16px 32px; font-size: 1.1rem; }
-    .product-panel-example strong {
-      font-weight: 600;
-    }
-    .product-panel-quote {
-      position: relative;
-      font-size: clamp(0.95rem, 2vw, 1.02rem);
-      color: var(--text-muted);
-      margin-top: 12px;
-      padding-left: 16px;
-      border-left: none;
-    }
-    .product-panel-quote::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      border-radius: 2px;
-      background: var(--accent);
-    }
 
     /* Pricing */
     .pricing-section {
@@ -2340,8 +3109,8 @@
     }
     .footer-toni {
       width: 34px;
-      height: 38px;
-      border-radius: 10px;
+      height: 34px;
+      border-radius: 50%;
       object-fit: contain;
       object-position: center;
       flex-shrink: 0;
@@ -2382,9 +3151,49 @@
       }
       .hero-toni { order: 2; margin-top: 16px; }
       .hero-mockup { max-width: 420px; margin: 0 auto; min-width: 0; }
-      .demo-grid { grid-template-columns: 1fr; }
-      .demo-flow-connector { flex-direction: row; padding: 16px 0; }
-      .demo-flow-line { width: auto; height: 2px; flex: 1; min-height: 0; background: linear-gradient(90deg, transparent 0%, #ddd 20%, #ddd 80%, transparent 100%); }
+      .td-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-top: 28px;
+      }
+      .td-col--interview {
+        order: 1;
+      }
+      .td-col--flow {
+        order: 2;
+      }
+      .td-col--out {
+        order: 3;
+        padding-top: 0;
+      }
+      .td-flow {
+        flex-direction: column;
+        padding: 8px 0 16px;
+        min-height: 0;
+      }
+      .td-flow-svg {
+        max-width: 56px;
+        min-height: 100px;
+        max-height: 140px;
+        transform: rotate(90deg);
+        transform-origin: center center;
+      }
+      .td-out-panel {
+        max-height: none;
+        min-height: 380px;
+      }
+      .td-tab {
+        font-size: 0.65rem;
+        padding: 7px 8px;
+      }
+      .td-tab-panels {
+        grid-template-rows: minmax(0, 1fr);
+      }
+      .td-clip-thumb {
+        flex: 0 0 64px;
+        width: 64px;
+        height: 114px;
+      }
       .problem-cards,
       .steps,
       .pricing-cards,
@@ -2404,7 +3213,7 @@
       }
       .logo-toni {
         width: 64px;
-        height: 72px;
+        height: 64px;
       }
       .logo {
         font-size: clamp(1.28rem, 4vw, 1.62rem);
@@ -2555,7 +3364,7 @@
   <nav id="nav">
     <div class="nav-overlay" id="navOverlay" aria-hidden="true" hidden></div>
     <div class="nav-inner">
-      <a href="index.html" class="logo"><img src="assets/toni/all-purpose-v2.png" alt="Toni" class="logo-toni" width="72" height="82" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
+      <a href="index.html" class="logo"><img src="assets/toni/toni-headshot.png" alt="Toni" class="logo-toni" width="72" height="72" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
       <button type="button" class="nav-menu-toggle" id="navMenuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
         <span class="nav-menu-icon" aria-hidden="true">
           <span class="nav-menu-line"></span>
@@ -2577,7 +3386,7 @@
   <header class="hero hero-splash" id="heroStage">
     <div class="hero-splash-inner">
       <div class="hero-brand hero-copy">
-        <h1 class="hero-title" aria-label="Toni PR by Tunepact — Turn a 10-minute chat into your startup's PR kit">
+        <h1 class="hero-title" aria-label="Toni PR by Tunepact: Turn a 10-minute chat into your startup's PR kit">
           <span class="hero-title-lockup">
             <span class="hero-title-words">
               <span class="word">Toni</span>
@@ -2590,7 +3399,7 @@
         </h1>
         <div class="hero-prose" id="heroProse">
           <h2 class="hero-tagline">Turn a 10-minute chat into your startup&rsquo;s PR kit</h2>
-          <p class="hero-subtag">AI-generated videos, posts, blogs, and your founder story &mdash; ready to publish.</p>
+          <p class="hero-subtag">AI-generated videos, posts, blogs, and your founder story, ready to publish.</p>
         </div>
         <div class="hero-cta-block">
           <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
@@ -2735,22 +3544,22 @@
     <div class="container">
       <span class="section-label reveal">How it works</span>
       <h2 class="section-title reveal">From one conversation to your full PR kit</h2>
-      <p class="section-desc reveal">Set your goal. Talk to Toni for 10 minutes. Get everything you need to publish&mdash;instantly.</p>
+      <p class="section-desc reveal">Set your goal. Talk to Toni for 10 minutes. Get everything you need to publish, instantly.</p>
       <div class="steps">
         <div class="step-card reveal">
           <div class="step-number">01</div>
           <h3>Set your goal</h3>
-          <p>Fundraising, Product Launch, Hiring, or Thought Leadership. We tailor every output to your objective.</p>
+          <p>Fundraising, launch, hiring, or thought leadership—pick what you&rsquo;re&nbsp;driving.<br />Toni aligns every output to that goal, from headlines through your full&nbsp;PR&nbsp;kit.</p>
         </div>
         <div class="step-card reveal">
           <div class="step-number">02</div>
           <h3>Chat with Toni (~10 min)</h3>
-          <p>Based on your product and company, Toni generates questions tailored to what you're promoting. It's casual, with no prep. Just talk (or type).</p>
+          <p>Tailored questions from your product and story—no prep&nbsp;deck.<br />Speak out loud or type in chat, whichever you&nbsp;prefer.</p>
         </div>
         <div class="step-card reveal">
           <div class="step-number">03</div>
           <h3>Get your content kit</h3>
-          <p>Visual and text for LinkedIn &amp; X, blog article, founder bio, press quotes, and more. Copy, paste, publish.</p>
+          <p>Visuals and copy for LinkedIn, X, blog, bio, press quotes, and&nbsp;more.<br />Copy and paste where you&nbsp;publish.</p>
         </div>
       </div>
     </div>
@@ -2758,159 +3567,310 @@
 
   <section id="demo" class="demo-section">
     <div class="container">
-      <span class="section-label reveal">Product Demo</span>
-      <h2 class="section-title reveal">See the product in action</h2>
-      <p class="section-desc reveal">One sample interview — each tab shows a real output Toni generates.</p>
-      <div class="demo-grid-wrapper">
-      <div class="demo-grid">
+      <span class="section-label reveal">One conversation</span>
+      <h2 class="section-title reveal">Interview once. Publish everywhere.</h2>
+      <p class="section-desc section-desc--demo reveal">
+        <span class="section-desc-line">One conversation with Toni becomes short clips you can post, social copy for LinkedIn, X, and Instagram, and quotes ready for press. Enough to promote your business without extra meetings or waiting on anyone&nbsp;else.</span>
+      </p>
 
-        <!-- Interview (app window) -->
-        <div class="demo-interview reveal">
-          <div class="demo-interview-toolbar">
-            <span class="demo-toolbar-title">Interview</span>
+      <div class="td-layout reveal">
+        <div class="td-col td-col--interview">
+          <div class="td-interview-card">
+            <div class="td-interview-pill">
+              <span class="td-interview-pill-dot" aria-hidden="true"></span>
+              Your session with Toni
           </div>
-          <div class="demo-interview-body">
-            <div class="demo-loading-screen" id="demoLoadingScreen">
-              <div class="demo-loading-dots"><span></span><span></span><span></span></div>
-              <span class="demo-loading-label">Loading sample interview</span>
+            <span class="demo-founder-kicker reveal">Meet our founder</span>
+            <p class="td-demo-steps">
+              <span class="td-demo-steps-seg">Toni asks</span><span class="td-demo-steps-sep" aria-hidden="true">&middot;</span><span class="td-demo-steps-seg">you answer</span><span class="td-demo-steps-sep" aria-hidden="true">&middot;</span><span class="td-demo-steps-seg">your kit is built from what you said.</span>
+            </p>
+            <div class="td-phone" id="toni-qa-chapters">
+              <div class="td-phone-notch" aria-hidden="true"></div>
+              <div class="td-phone-media">
+                <span class="td-phone-badge">Q&amp;A <span id="tdClipBadgeNum">1</span> / <span id="tdClipBadgeTotal">6</span></span>
+                <video
+                  id="tdClipVideo"
+                  src="assets/videos/hadi-tunepact-qa-02.mov"
+                  poster="assets/videos/tunepact-qa-poster-02.png"
+                  playsinline
+                  preload="metadata"
+                  controlslist="nodownload"
+                  aria-label="Question 1 of 6: Toni and Hadi on Tunepact"
+                >Your browser does not support the video tag.</video>
             </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">What are you building?</span>
+              <div class="td-phone-toolbar" aria-label="Playback">
+                <button type="button" class="td-phone-play" id="tdClipPlay" aria-label="Play video">
+                  <svg class="td-phone-icon--play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                  <svg class="td-phone-icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>
+                </button>
+                <div class="td-phone-time"><span id="tdClipTimeCur">0:00</span> / <span id="tdClipTimeDur">0:00</span></div>
+                <div class="td-phone-scrub-wrap">
+                  <input type="range" class="td-phone-scrub" id="tdClipScrub" min="0" max="1000" value="0" step="1" aria-label="Seek in video" />
               </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="A meal planning app for busy families."><span class="cursor"></span></span></span>
               </div>
+              <div class="td-phone-strip-wrap">
+                <div class="td-phone-strip" id="tdPhoneStrip" role="tablist" aria-label="Question clips: scroll and tap a thumbnail">
+                  <button type="button" class="td-strip-btn td-strip-btn--active" role="tab" data-td-clip-jump="0" aria-selected="true" aria-label="Play clip 1: Journey to founding Tunepact">
+                    <img src="assets/videos/tunepact-qa-poster-02.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">1</span>
+                  </button>
+                  <button type="button" class="td-strip-btn" role="tab" data-td-clip-jump="1" aria-selected="false" aria-label="Play clip 2: What motivated you to build Tunepact">
+                    <img src="assets/videos/tunepact-qa-poster-03.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">2</span>
+                  </button>
+                  <button type="button" class="td-strip-btn" role="tab" data-td-clip-jump="2" aria-selected="false" aria-label="Play clip 3: Looking ahead, plans for Tunepact">
+                    <img src="assets/videos/tunepact-qa-poster-04.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">3</span>
+                  </button>
+                  <button type="button" class="td-strip-btn" role="tab" data-td-clip-jump="3" aria-selected="false" aria-label="Play clip 4: Making music marketing accessible for every musician">
+                    <img src="assets/videos/tunepact-qa-poster-05.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">4</span>
+                  </button>
+                  <button type="button" class="td-strip-btn" role="tab" data-td-clip-jump="4" aria-selected="false" aria-label="Play clip 5: How AI helps musicians with marketing and content">
+                    <img src="assets/videos/tunepact-qa-poster-01.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">5</span>
+                  </button>
+                  <button type="button" class="td-strip-btn" role="tab" data-td-clip-jump="5" aria-selected="false" aria-label="Play clip 6: Where to find Tunepact">
+                    <img src="assets/videos/tunepact-qa-poster-06.png" alt="" width="40" height="71" loading="lazy" decoding="async" />
+                    <span class="td-strip-num">6</span>
+                  </button>
             </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">What problem does it solve?</span>
+                <div class="td-strip-scroll" aria-hidden="true">
+                  <div class="td-strip-scroll-track">
+                    <div class="td-strip-scroll-thumb" id="tdStripScrollThumb"></div>
               </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="We take the stress out of dinner. Weekly recipes in 30 seconds."><span class="cursor"></span></span></span>
-              </div>
-            </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">What&rsquo;s the biggest dinner-time pain point families tell you about?</span>
-              </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="Deciding what to make. We found they spend 3 hours a week just on that."><span class="cursor"></span></span></span>
-              </div>
-            </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">How does MealFlow actually work for a family on a Tuesday night?</span>
-              </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="You open the app, swipe through three dinners, pick one. Grocery list updates automatically."><span class="cursor"></span></span></span>
-              </div>
-            </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">What made you start building this?</span>
-              </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="My wife and I have three kids. We were spending Sunday nights just arguing about the week's meals."><span class="cursor"></span></span></span>
-              </div>
-            </div>
-            <div class="demo-chat">
-              <div class="demo-msg demo-msg--toni">
-                <span class="demo-msg-avatar"><img src="assets/toni/all-purpose-v2.png" alt="Toni" /></span>
-                <span class="demo-msg-bubble">What&rsquo;s the one thing you want people to remember about MealFlow?</span>
-              </div>
-              <div class="demo-msg demo-msg--user">
-                <span class="demo-msg-avatar" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-                <span class="demo-msg-bubble"><span class="demo-chat-answer" data-text="Dinner shouldn't be stressful. We make it the easiest part of your day."><span class="cursor"></span></span></span>
               </div>
             </div>
+              </div>
+            <p class="td-interview-caption">
+              <span class="td-interview-caption-line"><strong>Hadi</strong> in a real <strong>Toni</strong> session on <strong>Tunepact</strong>.</span>
+              <span class="td-interview-caption-line">Scroll the thumbnails under the phone, then tap one to switch clips.</span>
+            </p>
+              </div>
+            </div>
+
+        <div class="td-col td-col--flow" aria-hidden="true">
+          <div class="td-flow">
+            <svg class="td-flow-svg" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g class="td-flow-group">
+                <path class="td-flow-path" pathLength="1" d="M 6 48 L 74 48" />
+                <polygon class="td-flow-head" points="72,36 96,48 72,60" />
+              </g>
+            </svg>
+              </div>
+              </div>
+
+        <div class="td-col td-col--out">
+          <div class="td-out-panel">
+            <div class="td-results" id="tdResults">
+              <div class="td-results-shell">
+                <div class="td-out-header">From that interview</div>
+                <div class="td-tabs-scroll">
+                  <div class="td-tabs" id="tdTabs" role="tablist" dir="ltr" aria-label="Generated content outputs. Scroll sideways for more tabs.">
+                    <button type="button" class="td-tab td-tab--active" role="tab" id="td-tab-0" aria-selected="true" aria-controls="td-panel-0" data-td-tab="0">Narrative</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-1" aria-selected="false" aria-controls="td-panel-1" data-td-tab="1">Clips</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-2" aria-selected="false" aria-controls="td-panel-2" data-td-tab="2">LinkedIn</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-3" aria-selected="false" aria-controls="td-panel-3" data-td-tab="3">X</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-4" aria-selected="false" aria-controls="td-panel-4" data-td-tab="4">Instagram</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-5" aria-selected="false" aria-controls="td-panel-5" data-td-tab="5">Article</button>
+                    <button type="button" class="td-tab" role="tab" id="td-tab-6" aria-selected="false" aria-controls="td-panel-6" data-td-tab="6">Quote</button>
+                  </div>
+                </div>
+                <div class="td-tab-panels">
+                  <div id="td-panel-0" class="td-tab-panel" role="tabpanel" aria-labelledby="td-tab-0">
+                    <article class="td-card td-card--highlight">
+                      <div class="td-card-label">Podcast &amp; long-form</div>
+                      <h3>Interview narrative &amp; story arc</h3>
+                      <p class="td-rich-note">This narrative follows the same arc as the six Tunepact Q&amp;A clips in the demo (journey, motivation, roadmap, access, how AI helps, where to find us). Use it as a podcast brief, press angle, or founder letter; your ToniPR kit can mirror this structure for <em>your</em> product.</p>
+                      <div class="td-rich">
+                        <p class="td-mini-h">Opening: journey &amp; stack</p>
+                        <p>Hadi frames Tunepact as a <strong>next-generation stack for independents</strong>: not another bolt-on tool, but infrastructure for artists who are building without a major label in the room. The through-line is practical—how you ship, how you show up online, and how you keep the story coherent when you&rsquo;re doing everything yourself.</p>
+                        <p class="td-mini-h">Why Tunepact exists</p>
+                        <p>He roots the company in <strong>Los Angeles</strong>, a love of <strong>music</strong>, and a problem that doesn&rsquo;t go away because you&rsquo;re talented: <strong>getting new music heard</strong>. The bet is blunt: if you&rsquo;re not on a roster, you still deserve <strong>discovery</strong>, <strong>content</strong>, and a real place for your work to live—not a vague pep talk about hustle.</p>
+                        <p class="td-mini-h">Looking ahead</p>
+                        <p><strong>Near term,</strong> Tunepact is focused on helping <strong>independent musicians</strong> market their work and create social-ready material. <strong>Next on the map:</strong> tools for <strong>independent labels</strong> managing rosters. <strong>Longer term,</strong> he talks about a surface where artists can <strong>find and grow audiences</strong>—not only publish into the void. That ladder (artist &rarr; label &rarr; audience) is the roadmap he keeps returning to in the session.</p>
+                        <p class="td-mini-h">No label in the room</p>
+                        <p>When Toni presses on access, Hadi doesn&rsquo;t soften it: <strong>classic label-style services don&rsquo;t scale to every artist.</strong> His answer is to build something <strong>label-shaped</strong> without the gate: richer <strong>data</strong>, <strong>public pages</strong> for releases, <strong>podcasts</strong> and long-form as discovery surfaces, and a path toward helping musicians <strong>find audiences</strong>—the same themes he carries into the Tunepact blog on release strategy, video, and bios.</p>
+                        <p class="td-mini-h">How AI helps (the three-part answer)</p>
+                        <p>On <strong>AI and marketing</strong>, he refuses a single feature slide. AI should help with <strong>discovery</strong> (getting found), <strong>engagement</strong> with the music (not vanity metrics), and <strong>content generation</strong> that keeps you on message—<strong>lightweight</strong> enough that artists aren&rsquo;t turned into prompt engineers. Three lanes, one story: make the work discoverable and the voice still sound human.</p>
+                        <p class="td-mini-h">Closing: where to find Tunepact</p>
+                        <p>The session lands on distribution, not hype: <strong>tunepact.com</strong>, <strong>YouTube</strong>, the <strong>Tunepact podcast</strong>, and socials—so someone who only catches one clip still knows where the rest of the arc lives.</p>
+                        <p class="td-mini-h">Pull for press or podcast</p>
+                        <p><strong>&ldquo;Traditional label services aren&rsquo;t there for every musician. We&rsquo;re building something closer to an AI-powered label service: bring the artist in, enrich the data, make the music discoverable.&rdquo;</strong> Paraphrased from Hadi on access and discovery—use it as a cold open, episode title, or vertical kicker.</p>
+              </div>
+                    </article>
+              </div>
+                  <div id="td-panel-1" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-1" aria-hidden="true" inert>
+                    <article class="td-card">
+                      <div class="td-card-label">Short-form video</div>
+                      <h3>Clip scripts &amp; on-screen copy</h3>
+                      <p class="td-rich-note">Toni gives you vertical clips from this interview. They follow the reel under the phone. Trim them, add captions, and post to <strong>Reels, Shorts, TikTok</strong>, or anywhere you show up.</p>
+                      <div class="td-clip-scroll" role="list" aria-label="Clip previews for Tunepact Q&amp;A questions">
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, first segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, second segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, third segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, fourth segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, fifth segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                        <div class="td-clip-thumb" role="listitem">
+                          <img src="assets/videos/tunepact-qa-clips-poster-hero.png" alt="Tunepact Q&amp;A clip preview, last segment" width="72" height="128" loading="lazy" decoding="async" />
+                          <span class="td-clip-thumb-play" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <p class="td-rich-note td-rich-note--spaced">Ideas for supers or captions (from Toni and Hadi in this session):</p>
+                      <ul class="td-clip-hooks">
+                        <li>AI &times; marketing: discovery, engagement, content</li>
+                        <li>Journey to Tunepact: next-gen stack for independents</li>
+                        <li>Why build this: LA, music, the discovery problem</li>
+                        <li>Looking ahead: artists, indie labels, audiences</li>
+                        <li>&ldquo;Label&rdquo; help without the gate: data, pages, podcasts</li>
+                        <li>Where to find Tunepact</li>
+                      </ul>
+                    </article>
+        </div>
+                  <div id="td-panel-2" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-2" aria-hidden="true" inert>
+                    <article class="td-card">
+                      <div class="td-card-label td-card-label--linkedin">
+                        <img class="td-card-label-icon" src="assets/icons/linkedin.svg" alt="" width="18" height="18" loading="lazy" decoding="async" />
+                        <span>LinkedIn</span>
+                      </div>
+                      <h3>Thought leadership post</h3>
+                      <div class="td-rich">
+                        <p class="td-snippet td-snippet--open"><strong>If you&rsquo;re an indie musician without a label in the room:<br />how does anyone discover your music?</strong></p>
+                        <p>Hadi&rsquo;s answer in this session is blunt: <strong>classic label services don&rsquo;t scale to every artist.</strong> If you&rsquo;re not on a roster, you still need discovery, content, and a place for your story to live online, not another vague pep talk.</p>
+                        <p><strong>Tunepact</strong> is his bet on <strong>three jobs</strong> AI can help with: <strong>discovery</strong>, <strong>engagement</strong> with your music, and <strong>content generation</strong>, plus the longer arc he describes: data that makes you discoverable, public pages, podcasts, and tools that eventually help you <strong>find audiences</strong>, not only ship posts.</p>
+                        <p>We go deeper on release strategy, video, and bios on the Tunepact blog, because <strong>marketing your music</strong> shouldn&rsquo;t depend on gatekeeping.</p>
+                        <p>If you&rsquo;re building without a label: what would you want a &ldquo;label-shaped&rdquo; product to <em>actually do</em> for you this week?</p>
+          </div>
+                      <a href="https://tunepact.com/blog/category/marketing-your-music" class="td-tab-more" rel="noopener noreferrer">Marketing your Music on Tunepact&nbsp;&rarr;</a>
+                    </article>
+              </div>
+                  <div id="td-panel-3" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-3" aria-hidden="true" inert>
+                    <article class="td-card">
+                      <div class="td-card-label td-card-label--x">
+                        <img class="td-card-label-icon" src="assets/icons/x.svg" alt="" width="18" height="18" loading="lazy" decoding="async" />
+                        <span>X / Threads</span>
+                      </div>
+                      <h3>Thread pack (4 posts)</h3>
+                      <p class="td-rich-note">Each block is a ready-to-post unit; order matches a classic problem &rarr; insight &rarr; product &rarr; CTA arc.</p>
+                      <div class="td-tweet">
+                        <div class="td-tweet-label">1 / 4</div>
+                        <p>hot take from our founder session: &ldquo;how does AI help musicians?&rdquo; isn&rsquo;t one feature.<br />it&rsquo;s <strong>discovery + engagement + content</strong> for your music: three lanes, kept light.</p>
+              </div>
+                      <div class="td-tweet">
+                        <div class="td-tweet-label">2 / 4</div>
+                        <p>if you&rsquo;re indie, you&rsquo;ve felt this: <strong>no label in the room</strong> &rarr; no obvious path to audiences.<br />that&rsquo;s the gap <strong>Tunepact</strong> keeps naming in the interview.</p>
+            </div>
+                      <div class="td-tweet">
+                        <div class="td-tweet-label">3 / 4</div>
+                        <p>what we&rsquo;re building: bring artists in, enrich the data, ship <strong>public pages</strong> for the music, use <strong>podcasts</strong> &amp; content so discovery isn&rsquo;t a lottery ticket.</p>
+              </div>
+                      <div class="td-tweet">
+                        <div class="td-tweet-label">4 / 4</div>
+                        <p>want the full arc (roadmap + where to find us)? <strong>tunepact.com</strong>, plus YouTube, Tunepact podcast, socials. DMs open.</p>
+              </div>
+                      <a href="https://tunepact.com/blog/category/marketing-your-music" class="td-tab-more" rel="noopener noreferrer">Browse Marketing your Music&nbsp;&rarr;</a>
+                    </article>
+            </div>
+                  <div id="td-panel-4" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-4" aria-hidden="true" inert>
+                    <article class="td-card">
+                      <div class="td-card-label td-card-label--instagram">
+                        <img class="td-card-label-icon" src="assets/icons/instagram.svg" alt="" width="18" height="18" loading="lazy" decoding="async" />
+                        <span>Instagram</span>
+                      </div>
+                      <h3>Feed post</h3>
+                      <p class="td-rich-note">Caption and hashtags ready to paste. Pair with a clip from the phone reel or a still from the session.</p>
+                      <div class="td-ig-post">
+                        <div class="td-ig-post-header">
+                          <span class="td-ig-avatar" aria-hidden="true">T</span>
+                          <div class="td-ig-user">
+                            <span class="td-ig-username">tunepact</span>
+                            <span class="td-ig-orig">Los Angeles</span>
+                          </div>
+                          <span class="td-ig-more" aria-hidden="true">&middot;&middot;&middot;</span>
+                        </div>
+                        <div class="td-ig-media td-ig-media--logo">
+                          <img src="assets/images/tunepact-instagram-post.png" alt="Tunepact logo" width="400" height="400" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="td-ig-actions" aria-hidden="true">
+                          <div class="td-ig-actions-left">
+                            <span title="Like">&#9825;</span>
+                            <span title="Comment">&#128172;</span>
+                            <span title="Share">&#8599;</span>
+                          </div>
+                          <span class="td-ig-actions-save" title="Save">&#128278;</span>
+                        </div>
+                        <div class="td-ig-meta">
+                          <p class="td-ig-likes-count">1,247 likes</p>
+                          <p class="td-ig-caption">
+                            <strong>tunepact</strong> No label in the room? Discovery still has to happen. From our Toni session with Hadi: tools for <strong>discovery</strong>, <strong>engagement</strong>, and <strong>content</strong> for your music, without turning you into a prompt engineer. Link in bio.
+                            <span class="td-ig-tags">#indiemusic #musicmarketing #ai #founderstory</span>
+                          </p>
+                          <p class="td-ig-time">2 days ago</p>
+                        </div>
+                      </div>
+                      <a href="https://tunepact.com/blog/category/marketing-your-music" class="td-tab-more" rel="noopener noreferrer">Marketing your Music on Tunepact&nbsp;&rarr;</a>
+                    </article>
+                  </div>
+                  <div id="td-panel-5" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-5" aria-hidden="true" inert>
+                    <article class="td-card">
+                      <div class="td-card-label">Article</div>
+                      <p class="td-article-kicker">Music industry &middot; Indie artists</p>
+                      <h3>Discovery Isn&rsquo;t a Feature: What Tunepact&rsquo;s Founder Says About AI, Labels, and Audiences</h3>
+                      <p class="td-article-dek">From the same Toni session as the clips: Hadi on <strong>why</strong> Tunepact exists (music + LA + the discovery cliff), <strong>what</strong> AI is for (discovery, engagement, content), and <strong>where</strong> the product is headed (indie artists, indie labels, then audiences).</p>
+                      <div class="td-rich">
+                        <p>He doesn&rsquo;t hand-wave &ldquo;AI for musicians.&rdquo; He breaks it into <strong>three outcomes</strong>: help people <strong>find</strong> the music, <strong>stay engaged</strong> with it, and <strong>generate content</strong> that tells the story, without turning artists into prompt engineers.</p>
+                        <p>On access, he&rsquo;s explicit: <strong>traditional label-style help isn&rsquo;t available to everyone.</strong> Tunepact is aiming at an <strong>AI-assisted, label-shaped layer</strong>: richer data, public pages for releases, podcasts and long-form content as discovery surfaces, and a path toward helping musicians <strong>find audiences</strong>, not only post into the void.</p>
+              </div>
+                      <p class="td-mini-h">Draft structure (sections)</p>
+                      <ul class="td-outline">
+                        <li><strong>Open:</strong> clip of Toni asking how AI helps; Hadi&rsquo;s three-part answer as the thesis.</li>
+                        <li><strong>Origin story:</strong> passion for music, LA as context, the &ldquo;new music is hard to surface&rdquo; problem.</li>
+                        <li><strong>Roadmap tension:</strong> indie artists and indie labels first; platform for audiences &ldquo;down the road.&rdquo;</li>
+                        <li><strong>CTA:</strong> tunepact.com, YouTube, Tunepact podcast, social &amp; contact (from the closing clip).</li>
+                      </ul>
+                      <a href="https://tunepact.com/blog/category/marketing-your-music" class="td-tab-more" rel="noopener noreferrer">Read Marketing your Music on Tunepact&nbsp;&rarr;</a>
+                    </article>
+              </div>
+                  <div id="td-panel-6" class="td-tab-panel td-tab-panel--inactive" role="tabpanel" aria-labelledby="td-tab-6" aria-hidden="true" inert>
+                    <article class="td-card td-card--quote">
+                      <div class="td-card-label">Press-ready quotes</div>
+                      <h3>Pull quotes for media</h3>
+                      <p class="td-rich-note">Alternate lengths for headlines, on-screen captions for podcast or video (the line at the bottom of the frame), and pull-quote boxes, all in the founder&rsquo;s voice from the session.</p>
+                      <div class="td-quote-block">
+                        <p>&ldquo;We&rsquo;re trying to facilitate <strong>discovery</strong>, <strong>engagement</strong> with their music, and <strong>content generation</strong>: three parts we&rsquo;re focused on with lightweight AI.&rdquo;</p>
+                        <span class="td-quote-attr">Hadi, Tunepact (on how AI helps). Product framing.</span>
+            </div>
+                      <div class="td-quote-block">
+                        <p>&ldquo;Imagine a musician somewhere there&rsquo;s <strong>no label company</strong>. How do they find audiences? How does the music get <strong>discoverable</strong>?&rdquo;</p>
+                        <span class="td-quote-attr">Hadi, Tunepact. Problem framing; works as an on-screen title in podcast or video.</span>
+              </div>
+                      <div class="td-quote-block">
+                        <p>&ldquo;We&rsquo;re building an <strong>AI-powered label service</strong>: bring musicians in, enrich the data, build public pages for the music, and use podcasts and content to pull it all into one place.&rdquo;</p>
+                        <span class="td-quote-attr">Hadi, Tunepact. Mission / press pull.</span>
+            </div>
+                      <a href="https://tunepact.com/blog/category/marketing-your-music" class="td-tab-more" rel="noopener noreferrer">More on marketing your music&nbsp;&rarr;</a>
+                    </article>
           </div>
         </div>
-
-        <!-- Flow connector -->
-        <div class="demo-flow-connector" aria-hidden="true">
-          <div class="demo-flow-line"></div>
-          <div class="demo-flow-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-          <div class="demo-flow-line"></div>
-        </div>
-
-        <!-- Output panels -->
-        <div class="demo-outputs reveal" id="demoOutputSwitcher">
-          <span class="demo-outputs-label">Toni generates</span>
-          <div class="demo-output-tabs" role="tablist" aria-label="Sample output formats">
-            <button type="button" class="demo-output-tab demo-output-tab--active" role="tab" aria-selected="true" aria-controls="demo-out-linkedin" id="demo-tab-linkedin">
-              <img src="assets/icons/linkedin-accent.svg" alt="" width="16" height="16" />
-              <span>LinkedIn</span>
-            </button>
-            <button type="button" class="demo-output-tab" role="tab" aria-selected="false" aria-controls="demo-out-x" id="demo-tab-x">
-              <img src="assets/icons/x.svg" alt="" width="16" height="16" />
-              <span>X</span>
-            </button>
-            <button type="button" class="demo-output-tab" role="tab" aria-selected="false" aria-controls="demo-out-article" id="demo-tab-article">
-              <img src="assets/icons/article.svg" alt="" width="16" height="16" />
-              <span>Article</span>
-            </button>
-            <button type="button" class="demo-output-tab" role="tab" aria-selected="false" aria-controls="demo-out-quote" id="demo-tab-quote">
-              <img src="assets/icons/press-quote.svg" alt="" width="16" height="16" />
-              <span>Press quote</span>
-            </button>
-          </div>
-          <div class="demo-output-panels">
-            <div id="demo-out-linkedin" class="demo-output-panel demo-output-panel--linkedin" role="tabpanel" aria-labelledby="demo-tab-linkedin" aria-hidden="false">
-              <div class="social-post-heading">
-                <span class="social-post-icon" aria-hidden="true"><img src="assets/icons/linkedin-accent.svg" alt="" width="22" height="22" /></span>
-                <h4>LinkedIn post</h4>
-              </div>
-              <div class="product-panel-example">
-                <strong>Everyone talks about "meal prep," but nobody talks about decision fatigue.</strong> At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.
-              </div>
-              <a href="blog/mealflow-decision-fatigue.html" class="demo-output-more">View full example →</a>
-            </div>
-            <div id="demo-out-x" class="demo-output-panel demo-output-panel--x demo-output-panel--inactive" role="tabpanel" aria-labelledby="demo-tab-x" aria-hidden="true" inert>
-              <div class="social-post-heading">
-                <span class="social-post-icon" aria-hidden="true"><img src="assets/icons/x.svg" alt="" width="22" height="22" /></span>
-                <h4>X post</h4>
-              </div>
-              <div class="product-panel-example">
-                Decision fatigue is the real dinner problem. Families spend ~3 hrs/week just choosing what to cook—we built MealFlow to make that under 2 minutes.
-              </div>
-              <a href="blog/mealflow-decision-fatigue.html" class="demo-output-more">See the interview this came from →</a>
-            </div>
-            <div id="demo-out-article" class="demo-output-panel demo-output-panel--article demo-output-panel--inactive" role="tabpanel" aria-labelledby="demo-tab-article" aria-hidden="true" inert>
-              <div class="social-post-heading">
-                <span class="social-post-icon" aria-hidden="true"><img src="assets/icons/article.svg" alt="" width="22" height="22" /></span>
-                <h4>Article preview</h4>
-              </div>
-              <div class="product-panel-example">
-                <strong>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</strong><br /><br />Composite case study: the Chen family—two parents, three kids, four weeknight activities—was losing ~3 hours a week to &quot;what's for dinner?&quot; MealFlow turned their weekly plan into a two-minute ritual and a grocery list that matched reality.
-              </div>
-              <a href="blog/mealflow-planning-article.html" class="demo-output-more">Read full article →</a>
-            </div>
-            <div id="demo-out-quote" class="demo-output-panel demo-output-panel--quote demo-output-panel--inactive" role="tabpanel" aria-labelledby="demo-tab-quote" aria-hidden="true" inert>
-              <div class="social-post-heading">
-                <span class="social-post-icon" aria-hidden="true"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /></span>
-                <h4>Press quote</h4>
-              </div>
-              <div class="product-panel-example">"That's not just time saved. That's less stress at the dinner table."</div>
-              <div class="product-panel-quote">Ready-to-use for parenting blogs, podcasts, and influencer decks.</div>
-              <a href="blog/mealflow-press-quote.html" class="demo-output-more">See more examples →</a>
-            </div>
-          </div>
-        </div>
-
       </div>
+      </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2918,7 +3878,7 @@
   <section id="examples" class="social-proof">
     <div class="container">
       <span class="section-label reveal">Testimonials</span>
-      <h2 class="section-title reveal">What founders are saying after one session</h2>
+      <h2 class="section-title reveal">What founders are saying after one&nbsp;session</h2>
       <p class="section-desc reveal">From early ToniPR users turning one chat into weeks of content.</p>
       <div class="testimonials-slider reveal">
         <div class="testimonials-track">
@@ -3004,7 +3964,7 @@
 
   <footer>
     <div class="footer-inner">
-      <a href="index.html" class="footer-logo"><img src="assets/toni/all-purpose-v2.png" alt="Toni" class="footer-toni" width="34" height="38" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /> ToniPR</a>
+      <a href="index.html" class="footer-logo"><img src="assets/toni/toni-headshot.png" alt="Toni" class="footer-toni" width="34" height="34" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /> ToniPR</a>
       <div class="footer-links">
         <a href="#how-it-works">How it works</a>
         <a href="#demo">Demo</a>
@@ -3094,7 +4054,7 @@
         var p = root.scrollTop / max;
         if (p < 0) p = 0;
         if (p > 1) p = 1;
-        /* smoothstep — slow shift, never harsh */
+        /* smoothstep: slow shift, never harsh */
         p = p * p * (3 - 2 * p);
         /* cap: bottom of page is still mixed, not full red */
         p *= 0.58;
@@ -3163,135 +4123,207 @@
       onScroll();
       window.addEventListener('resize', updateBgDotBlend);
 
-      // Sequential chat reveal with loading screen
-      var demoSection = document.getElementById('demo');
-      var chatBody = document.querySelector('.demo-interview-body');
-      var chatBlocks = document.querySelectorAll('.demo-interview-body .demo-chat');
-      var loadingScreen = document.getElementById('demoLoadingScreen');
-      var chatAnimStarted = false;
-      var userHasScrolled = false;
-      var autoScrolling = false;
+      (function initTdDemoExperience() {
+        var video = document.getElementById('tdClipVideo');
+        var badgeNum = document.getElementById('tdClipBadgeNum');
+        var badgeTotal = document.getElementById('tdClipBadgeTotal');
+        var clipBtns = document.querySelectorAll('.td-strip-btn[data-td-clip-jump]');
+        if (!video || clipBtns.length === 0) return;
 
-      if (chatBody) {
-        chatBody.addEventListener('scroll', function() {
-          if (!autoScrolling) userHasScrolled = true;
-        }, { passive: true });
-      }
-
-      function smoothScrollToBottom() {
-        if (!chatBody || userHasScrolled) return;
-        autoScrolling = true;
-        chatBody.scrollTop = chatBody.scrollHeight;
-        setTimeout(function() { autoScrolling = false; }, 50);
-      }
-
-      function typeText(el, text, charDelay, onDone) {
-        el.innerHTML = '<span class="cursor"></span>';
-        var idx = 0;
-        (function next() {
-          if (idx < text.length) {
-            var cursor = el.querySelector('.cursor');
-            if (cursor) el.insertBefore(document.createTextNode(text[idx]), cursor);
-            idx++;
-            if (idx % 4 === 0) smoothScrollToBottom();
-            setTimeout(next, charDelay);
-          } else {
-            el.classList.add('typed');
-            var c = el.querySelector('.cursor');
-            if (c) c.remove();
-            smoothScrollToBottom();
-            if (onDone) onDone();
+        var tabRoot = document.getElementById('tdTabs');
+        if (tabRoot) {
+          var tabBtns = tabRoot.querySelectorAll('.td-tab');
+          var tabPanels = document.querySelectorAll('.td-tab-panel');
+          function tdActivateTab(idx) {
+            tabBtns.forEach(function (t, j) {
+              var on = j === idx;
+              t.classList.toggle('td-tab--active', on);
+              t.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            tabPanels.forEach(function (p, j) {
+              var on = j === idx;
+              p.classList.toggle('td-tab-panel--inactive', !on);
+              p.setAttribute('aria-hidden', on ? 'false' : 'true');
+              if (on) p.removeAttribute('inert');
+              else p.setAttribute('inert', '');
+            });
           }
-        })();
-      }
-
-      function revealMsg(msg, cb) {
-        msg.classList.add('demo-msg--visible');
-        smoothScrollToBottom();
-        setTimeout(cb, 450);
-      }
-
-      function startConversation() {
-        var pairs = [];
-        chatBlocks.forEach(function(block) {
-          var toniMsg = block.querySelector('.demo-msg--toni');
-          var userMsg = block.querySelector('.demo-msg--user');
-          var answerEl = block.querySelector('.demo-chat-answer[data-text]');
-          pairs.push({ block: block, toni: toniMsg, user: userMsg, answer: answerEl });
-        });
-
-        var i = 0;
-        function nextPair() {
-          if (i >= pairs.length) return;
-          var p = pairs[i];
-          i++;
-          p.block.classList.add('demo-chat--active');
-          revealMsg(p.toni, function() {
-            revealMsg(p.user, function() {
-              var text = p.answer ? (p.answer.getAttribute('data-text') || '') : '';
-              if (p.answer && text) {
-                typeText(p.answer, text, 30, function() {
-                  setTimeout(nextPair, 650);
-                });
-              } else {
-                setTimeout(nextPair, 650);
-              }
+          tabBtns.forEach(function (btn, i) {
+            btn.addEventListener('click', function () {
+              tdActivateTab(i);
             });
           });
         }
 
-        nextPair();
-      }
+        var sources = [
+          'assets/videos/hadi-tunepact-qa-02.mov',
+          'assets/videos/hadi-tunepact-qa-03.mov',
+          'assets/videos/hadi-tunepact-qa-04.mov',
+          'assets/videos/hadi-tunepact-qa-05.mov',
+          'assets/videos/hadi-tunepact-qa-01.mov',
+          'assets/videos/hadi-tunepact-qa-06.mov',
+        ];
+        var posters = [
+          'assets/videos/tunepact-qa-poster-02.png',
+          'assets/videos/tunepact-qa-poster-03.png',
+          'assets/videos/tunepact-qa-poster-04.png',
+          'assets/videos/tunepact-qa-poster-05.png',
+          'assets/videos/tunepact-qa-poster-01.png',
+          'assets/videos/tunepact-qa-poster-06.png',
+        ];
+        var activeIdx = 0;
+        var total = sources.length;
+        if (badgeTotal) badgeTotal.textContent = String(total);
 
-      function runChatSequence() {
-        if (chatAnimStarted || !demoSection) return;
-        var rect = demoSection.getBoundingClientRect();
-        if (rect.top > window.innerHeight * 0.85) return;
-        chatAnimStarted = true;
-        window.removeEventListener('scroll', runChatSequence);
+        var playBtn = document.getElementById('tdClipPlay');
+        var scrub = document.getElementById('tdClipScrub');
+        var timeCur = document.getElementById('tdClipTimeCur');
+        var timeDur = document.getElementById('tdClipTimeDur');
+        var phoneStrip = document.getElementById('tdPhoneStrip');
+        var stripScrollThumb = document.getElementById('tdStripScrollThumb');
 
-        // Show loading screen for 1.5s then fade out and start
-        setTimeout(function() {
-          if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(function() {
-              loadingScreen.remove();
-              if (chatBody) chatBody.scrollTop = 0;
-              startConversation();
-            }, 500);
-          } else {
-            if (chatBody) chatBody.scrollTop = 0;
-            startConversation();
+        function updatePhoneStripScrollbar() {
+          if (!phoneStrip || !stripScrollThumb) return;
+          var cw = phoneStrip.clientWidth;
+          var sw = phoneStrip.scrollWidth;
+          var sl = phoneStrip.scrollLeft;
+          if (sw <= cw + 2) {
+            stripScrollThumb.style.width = '100%';
+            stripScrollThumb.style.left = '0%';
+            return;
           }
-        }, 1500);
-      }
+          var thumbW = (cw / sw) * 100;
+          var maxScroll = sw - cw;
+          var leftPct = maxScroll <= 0 ? 0 : (sl / maxScroll) * (100 - thumbW);
+          stripScrollThumb.style.width = thumbW + '%';
+          stripScrollThumb.style.left = leftPct + '%';
+        }
 
-      window.addEventListener('scroll', runChatSequence, { passive: true });
-      runChatSequence();
+        if (phoneStrip) {
+          phoneStrip.addEventListener('scroll', updatePhoneStripScrollbar, { passive: true });
+          window.addEventListener('resize', updatePhoneStripScrollbar);
+          if (typeof ResizeObserver !== 'undefined') {
+            var stripResizeObs = new ResizeObserver(updatePhoneStripScrollbar);
+            stripResizeObs.observe(phoneStrip);
+          }
+        }
 
-      (function initDemoOutputTabs() {
-        var root = document.getElementById('demoOutputSwitcher');
-        if (!root) return;
-        var tabs = root.querySelectorAll('[role="tab"]');
-        var panels = root.querySelectorAll('[role="tabpanel"]');
-        function activate(panelId) {
-          tabs.forEach(function (tab) {
-            var on = tab.getAttribute('aria-controls') === panelId;
-            tab.setAttribute('aria-selected', on ? 'true' : 'false');
-            tab.classList.toggle('demo-output-tab--active', on);
+        function formatTime(sec) {
+          if (!isFinite(sec) || sec < 0) return '0:00';
+          var m = Math.floor(sec / 60);
+          var s = Math.floor(sec % 60);
+          return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        function updateDurDisp() {
+          var d = video.duration;
+          if (timeDur) timeDur.textContent = formatTime(isFinite(d) ? d : 0);
+        }
+
+        function updateTimeDisp() {
+          if (timeCur) timeCur.textContent = formatTime(video.currentTime);
+          if (scrub && video.duration && isFinite(video.duration)) {
+            scrub.value = String(Math.round((video.currentTime / video.duration) * 1000));
+          }
+        }
+
+        function syncPlayState() {
+          if (!playBtn) return;
+          playBtn.classList.toggle('is-playing', !video.paused);
+          playBtn.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
+        }
+
+        function syncChrome(idx) {
+          clipBtns.forEach(function (b, j) {
+            var on = j === idx;
+            b.classList.toggle('td-strip-btn--active', on);
+            b.setAttribute('aria-selected', on ? 'true' : 'false');
           });
-          panels.forEach(function (panel) {
-            var on = panel.id === panelId;
-            panel.classList.toggle('demo-output-panel--inactive', !on);
-            panel.setAttribute('aria-hidden', on ? 'false' : 'true');
-            if (on) panel.removeAttribute('inert');
-            else panel.setAttribute('inert', '');
+          if (badgeNum) badgeNum.textContent = String(idx + 1);
+          video.setAttribute(
+            'aria-label',
+            'Question ' + (idx + 1) + ' of ' + total + ': Toni session with Hadi on Tunepact'
+          );
+        }
+
+        function scrollStripTo(idx) {
+          var b = clipBtns[idx];
+          if (b && typeof b.scrollIntoView === 'function') {
+            b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        }
+
+        function setClip(i, scrollToPlayer) {
+          var idx = Math.max(0, Math.min(sources.length - 1, i));
+          if (idx === activeIdx) {
+            if (scrollToPlayer) {
+              var phoneEl = document.querySelector('.td-phone');
+              if (phoneEl) phoneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              scrollStripTo(idx);
+            }
+            return;
+          }
+          activeIdx = idx;
+          syncChrome(idx);
+          scrollStripTo(idx);
+          try {
+            video.pause();
+          } catch (e) {}
+          video.src = sources[idx];
+          video.poster = posters[idx];
+          video.load();
+          syncPlayState();
+          if (scrollToPlayer) {
+            var phone = document.querySelector('.td-phone');
+            if (phone) phone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+
+        video.addEventListener('loadedmetadata', function () {
+          updateDurDisp();
+          updateTimeDisp();
+        });
+        video.addEventListener('timeupdate', updateTimeDisp);
+        video.addEventListener('play', syncPlayState);
+        video.addEventListener('pause', syncPlayState);
+        video.addEventListener('ended', syncPlayState);
+
+        if (scrub) {
+          scrub.addEventListener('input', function () {
+            if (!video.duration || !isFinite(video.duration)) return;
+            var v = parseInt(scrub.value, 10);
+            if (Number.isNaN(v)) return;
+            video.currentTime = (v / 1000) * video.duration;
+            if (timeCur) timeCur.textContent = formatTime(video.currentTime);
           });
         }
-        tabs.forEach(function (tab) {
-          tab.addEventListener('click', function () {
-            activate(tab.getAttribute('aria-controls'));
+
+        if (playBtn) {
+          playBtn.addEventListener('click', function () {
+            if (video.paused) {
+              video.play().catch(function () {});
+            } else {
+              video.pause();
+            }
+            syncPlayState();
           });
+        }
+
+        clipBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var j = parseInt(btn.getAttribute('data-td-clip-jump'), 10);
+            if (Number.isNaN(j)) return;
+            setClip(j, true);
+          });
+        });
+
+        syncChrome(0);
+        syncPlayState();
+        updateDurDisp();
+        updateTimeDisp();
+        updatePhoneStripScrollbar();
+        requestAnimationFrame(function () {
+          updatePhoneStripScrollbar();
         });
       })();
     })();
