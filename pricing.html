@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing · ToniPR</title>
+  <title>Pricing · ToniPR | Plans for small business, consultants &amp; teams</title>
+  <meta name="description" content="ToniPR pricing: one AI interview becomes LinkedIn posts, articles, quotes, and more. Plans for founders, consultants, and small teams. No big agency retainer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/page-bg.css" />
+  <link rel="stylesheet" href="css/platform-logo.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -214,9 +216,10 @@
       margin-right: auto;
       text-wrap: balance;
     }
-    @media (min-width: 640px) {
+    @media (min-width: 900px) {
       .pricing-hero h1 {
         white-space: nowrap;
+        text-wrap: unset;
       }
     }
     .pricing-hero-lead {
@@ -229,11 +232,6 @@
       line-height: 1.55;
       padding: 0 clamp(4px, 1.5vw, 12px);
       box-sizing: border-box;
-    }
-    @media (min-width: 960px) {
-      .pricing-hero-lead {
-        white-space: nowrap;
-      }
     }
     .pricing-section { padding: 8px 0 96px; }
     .pricing-model { margin-bottom: 40px; }
@@ -538,6 +536,83 @@
       line-height: 1.6;
     }
     .post-signup-banner .btn { display: inline-flex; }
+    .pricing-faq {
+      padding: 56px 0 0;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .pricing-faq h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.45rem, 3vw, 1.85rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 28px;
+      color: var(--text-primary);
+    }
+    .pricing-faq-list {
+      text-align: left;
+    }
+    .pricing-faq-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+    .pricing-faq-item summary {
+      padding: 16px 20px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      list-style: none;
+      color: var(--text-primary);
+      position: relative;
+      padding-right: 40px;
+    }
+    .pricing-faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .pricing-faq-item summary::after {
+      content: '+';
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    .pricing-faq-item[open] summary::after {
+      content: '\2212';
+    }
+    .pricing-faq-item p {
+      padding: 0 20px 16px;
+      margin: 0;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+    .pricing-faq-more {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    .pricing-faq-more a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .pricing-faq-more a:hover {
+      text-decoration: underline;
+    }
+    .footer-tagline {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: min(36rem, 100%);
+      margin: 0 auto 14px;
+      line-height: 1.55;
+    }
     footer {
       position: relative;
       padding: 52px 0 48px;
@@ -588,12 +663,13 @@
   </div>
   <nav>
     <div class="nav-inner">
-      <a href="index.html" class="logo"><img src="assets/toni/toni-headshot.png" alt="Toni" class="logo-toni" width="72" height="72" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
+      <a href="index.html" class="logo logo--platform-mark" aria-label="ToniPR home"><img src="assets/toni/toni-header-logo.png" alt="" class="logo-platform-img" width="180" height="44" /></a>
       <div class="nav-links">
         <a href="index.html#how-it-works">How it works</a>
         <a href="index.html#demo">Demo</a>
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
+        <a href="faq.html">FAQ</a>
         <a href="auth.html?mode=login">Log in</a>
       </div>
     </div>
@@ -605,12 +681,12 @@
         <a href="index.html" class="back-link back-to-home">← Back</a>
       </div>
       <div id="postSignupBanner" class="post-signup-banner" hidden>
-        <p class="post-signup-banner-text"><strong>You're in.</strong> Skim Starter and Founder below, then continue to your dashboard. Your first PR kit starts with a quick company form.</p>
+        <p class="post-signup-banner-text"><strong>You're in.</strong> Skim Starter and Founder below, then continue to your dashboard. Your first content kit starts with a quick company form.</p>
         <a href="dashboard.html?welcome=1" class="btn btn-primary">Continue to dashboard</a>
       </div>
       <p class="pricing-hero-eyebrow">Plans</p>
-      <h1>Pricing built for founders</h1>
-      <p class="pricing-hero-lead">One conversation with Toni. A full PR kit every time. Pick the plan that fits how often you ship.</p>
+      <h1>Pricing for how you show up online</h1>
+      <p class="pricing-hero-lead">One conversation with Toni. A full content kit every time. Pick the plan that fits founders, consultants, and small teams.</p>
     </div>
   </header>
 
@@ -626,7 +702,7 @@
             <li>LinkedIn &amp; X</li>
             <li>Blog &amp; articles</li>
             <li>Press quotes</li>
-            <li>Founder story</li>
+            <li>Your story</li>
             <li>Full PR kit</li>
           </ul>
         </div>
@@ -672,7 +748,7 @@
           </li>
           <li class="info-step">
             <div class="info-step-num">02</div>
-            <p>Each time you get the full kit: posts, articles, quotes, founder story. No add-ons or upsells.</p>
+            <p>Each time you get the full kit: posts, articles, quotes, and your business story. No add-ons or upsells.</p>
           </li>
           <li class="info-step">
             <div class="info-step-num">03</div>
@@ -682,6 +758,33 @@
       </div>
 
       <p class="pricing-guarantee">Worth trying. We're here if you have questions.</p>
+
+      <div class="pricing-faq">
+        <h2>Pricing FAQ</h2>
+        <div class="pricing-faq-list">
+          <details class="pricing-faq-item">
+            <summary>What&rsquo;s the difference between Starter and Founder?</summary>
+            <p><strong>Starter</strong> is a one-time purchase for <strong>one session</strong> at the current launch price ($39). <strong>Founder</strong> is <strong>$299 per year</strong> for <strong>12 sessions</strong> you can use anytime. Both include the same full content bundle each time—no watered-down version on Starter.</p>
+          </details>
+          <details class="pricing-faq-item">
+            <summary>What counts as one session, and what&rsquo;s included in the price?</summary>
+            <p>One session is one AI interview with Toni (about 5–10 minutes, no prep). Each session includes the full kit: social posts, articles, press-style quotes, your story, and the rest of the bundle shown above. There are <strong>no add-ons or per-item fees</strong>—the price is for the whole package.</p>
+          </details>
+          <details class="pricing-faq-item">
+            <summary>Do unused Founder sessions expire? What does &ldquo;roll over&rdquo; mean?</summary>
+            <p>On the <strong>Founder</strong> plan, sessions you don&rsquo;t use in a year <strong>carry forward</strong>—they roll over so you don&rsquo;t lose what you paid for. Starter is a single session, so there&rsquo;s nothing to roll over.</p>
+          </details>
+          <details class="pricing-faq-item">
+            <summary>Does the Starter promo or discount apply to the Founder plan?</summary>
+            <p><strong>No.</strong> Launch and promotional pricing apply to <strong>Starter only</strong>. The annual Founder plan is already priced as the best value per session (about $25 each vs. the list price).</p>
+          </details>
+          <details class="pricing-faq-item">
+            <summary>Is there a money-back guarantee?</summary>
+            <p>Yes. We offer a <strong>30-day money-back guarantee</strong> if ToniPR isn&rsquo;t a fit—same terms you&rsquo;ll see at checkout.</p>
+          </details>
+        </div>
+        <p class="pricing-faq-more"><a href="faq.html">General FAQ</a></p>
+      </div>
     </div>
   </section>
 
@@ -693,8 +796,10 @@
         <a href="index.html#demo">Demo</a>
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
+        <a href="faq.html">FAQ</a>
         <a href="auth.html">Get started</a>
       </div>
+      <p class="footer-tagline">ToniPR helps business owners and experts turn conversations into content—startups and beyond.</p>
       <p class="footer-copy">© 2025 ToniPR by Tunepact. All rights reserved.</p>
     </div>
   </footer>

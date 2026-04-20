@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/page-bg.css" />
+  <link rel="stylesheet" href="css/platform-logo.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -53,6 +54,8 @@
     }
 
     .logo-row {
+      display: flex;
+      align-items: center;
       width: 100%;
       max-width: 1100px;
       margin-bottom: 24px;
@@ -70,6 +73,14 @@
       text-decoration: none;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
+    }
+    .logo.logo--platform-mark {
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      font-size: 0;
+      line-height: 0;
+      letter-spacing: normal;
     }
 
     /* Progress */
@@ -471,7 +482,7 @@
   </div>
   <div class="onboarding">
     <header class="logo-row">
-      <a href="index.html" class="logo">ToniPR <span style="font-weight:500;font-size:0.75rem;color:var(--text-muted)">by Tunepact</span></a>
+      <a href="index.html" class="logo logo--platform-mark" aria-label="ToniPR home"><img src="assets/toni/toni-header-logo.png" alt="" class="logo-platform-img" width="180" height="44" /></a>
     </header>
 
     <div class="progress-wrap">
@@ -492,7 +503,7 @@
           <div class="welcome-hero">
             <h1 class="welcome-title">Talk for 5-10 minutes.<br />Get a full PR kit.</h1>
             <p class="welcome-desc">No prep needed. Toni asks the questions, you just answer.</p>
-            <button type="button" class="btn btn-primary welcome-cta" id="btnStart">Start Your PR Kit</button>
+            <button type="button" class="btn btn-primary welcome-cta" id="btnStart">Get your content kit</button>
           </div>
         </div>
       </section>
@@ -530,14 +541,14 @@
             <li>Full interview video + short clips</li>
             <li>~10 LinkedIn posts</li>
             <li>Founder story article</li>
-            <li>SEO blog post</li>
+            <li>Blog article for your site</li>
             <li>X threads</li>
             <li>Founder bio + press quotes</li>
             <li>Startup boilerplate</li>
           </ul>
           <p class="ready-note">Copy, paste, publish. No back and forth. 30-day money-back guarantee.</p>
         </div>
-        <button type="button" class="btn btn-primary interview-cta" id="btnStartInterview">Start Your PR Kit (5-10 min)</button>
+        <button type="button" class="btn btn-primary interview-cta" id="btnStartInterview">Get your content kit (5-10 min)</button>
         <div class="btn-row" style="margin-top: 16px;">
           <button type="button" class="btn btn-link" id="btnReadyBack">Back</button>
         </div>

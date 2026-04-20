@@ -40,11 +40,21 @@
       z-index: 1;
     }
     .interview-back {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 12px);
+      left: calc(env(safe-area-inset-left, 0px) + 12px);
+      z-index: 50;
       display: inline-block;
       font-size: 0.9rem;
+      font-weight: 600;
       color: var(--text-secondary);
       text-decoration: none;
-      margin-bottom: 32px;
+      padding: 6px 4px 6px 0;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 8px;
     }
     .interview-back:hover { color: var(--accent); }
     .step { display: none; }
@@ -442,6 +452,11 @@
     }
     @media (max-width: 540px) {
       .interview-wrap { padding: 32px 16px 64px; }
+      .interview-back {
+        top: calc(env(safe-area-inset-top, 0px) + 10px);
+        left: calc(env(safe-area-inset-left, 0px) + 10px);
+        font-size: 0.875rem;
+      }
       .chat-toolbar { flex-direction: column; align-items: stretch; }
       .btn-redo { width: 100%; }
     }
@@ -458,8 +473,8 @@
       <div class="page-bg__rift"></div>
     </div>
   </div>
+  <a href="dashboard.html" class="interview-back back-btn">← Back</a>
   <div class="interview-wrap">
-    <a href="dashboard.html" class="interview-back back-btn">← Back</a>
 
     <!-- Chat-style interview -->
     <section class="step active" id="step2">
@@ -690,7 +705,7 @@
             (a3 ? 'We found that ' + a3 + '. ' : '') + (a4 || '') + '</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">𝕏</span><h4>X Threads</h4></div><p>Thread-ready posts about ' + cn + ' optimized for engagement.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📝</span><h4>Founder Story Article</h4></div><p>The story behind ' + cn + ': why you started and what drives you.</p></div>' +
-            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>SEO Blog Post</h4></div><p>How ' + cn + ' ' + ol + ': A founder\'s perspective</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>Blog article</h4></div><p>How ' + cn + ' ' + ol + ': a founder\'s perspective—ready to publish on your site.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quotes</h4></div><p>"' + a5 + '"</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">👤</span><h4>Founder Bio</h4></div><p>A polished bio for press kits, speaker pages, and about sections.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">🏢</span><h4>Startup Boilerplate</h4></div><p>A concise company description for press releases and media kits.</p></div>';

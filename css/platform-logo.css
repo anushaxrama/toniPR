@@ -1,0 +1,28 @@
+/* ToniPR wordmark — shared tokens so marketing + app shell stay proportional. */
+:root {
+  /* ~15% above prior nav size; aligns with ~0.9rem link text in the bar */
+  --logo-mark-height: clamp(37px, 0.805rem + 3.91vw, 46px);
+  --logo-mark-max-width: min(322px, 78vw);
+}
+.logo.logo--platform-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  gap: 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: none;
+  flex-shrink: 0;
+  font-size: 0;
+  line-height: 0;
+  letter-spacing: normal;
+}
+.logo.logo--platform-mark .logo-platform-img {
+  display: block;
+  height: var(--logo-mark-height);
+  width: auto;
+  max-width: var(--logo-mark-max-width);
+  object-fit: contain;
+}

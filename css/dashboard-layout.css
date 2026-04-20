@@ -1,4 +1,11 @@
 /* Shared app shell: top bar + sidebar + mobile drawer */
+/* Topbar ≈ 87% of marketing logo height; sidebar one step up — keeps hierarchy cohesive */
+:root {
+  --logo-mark-height-topbar: clamp(32px, 0.63rem + 4.14vw, 39px);
+  --logo-mark-max-width-topbar: min(276px, 66vw);
+  --logo-mark-height-sidebar: clamp(39px, 0.92rem + 3.22vw, 51px);
+  --logo-mark-max-width-sidebar: min(299px, 100%);
+}
 .app-frame {
   display: flex;
   flex-direction: column;
@@ -24,6 +31,7 @@
 .topbar-brand-mini {
   display: none;
   align-items: center;
+  align-self: center;
   gap: 8px;
   font-family: 'Bricolage Grotesque', system-ui, sans-serif;
   font-weight: 700;
@@ -31,10 +39,16 @@
   color: var(--text-primary, #0a0a0a);
   text-decoration: none;
 }
-.topbar-brand-mini img {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+/* Compact top bar: slightly smaller than main nav; still matches ~0.875rem util links */
+.topbar-brand-mini.logo--platform-mark {
+  padding: 0;
+  border-radius: 0;
+}
+.topbar-brand-mini.logo--platform-mark .logo-platform-img {
+  height: var(--logo-mark-height-topbar);
+  width: auto;
+  max-width: var(--logo-mark-max-width-topbar);
+  border-radius: 0;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -120,4 +134,17 @@
     padding-top: 4px;
     border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
   }
+}
+
+/* Sidebar wordmark: a touch larger than top bar; requires css/platform-logo.css on the page. */
+.sidebar-logo.logo--platform-mark {
+  gap: 0;
+  align-items: center;
+}
+.sidebar-logo.logo--platform-mark .logo-platform-img {
+  height: var(--logo-mark-height-sidebar);
+  width: auto;
+  max-width: var(--logo-mark-max-width-sidebar);
+  border-radius: 0;
+  object-fit: contain;
 }

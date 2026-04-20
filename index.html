@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
-  <meta property="og:description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
-  <meta name="twitter:description" content="Turn a 5-10-minute chat into your startup's PR kit. AI-generated videos, posts, blogs, and your founder story, ready to publish." />
-  <title>ToniPR | PR for Founders Building the Future</title>
+  <meta name="description" content="ToniPR turns a short chat into LinkedIn posts, articles, videos, and press-ready quotes—built from your expertise. Small business content, consultant marketing, and credibility without a big agency." />
+  <meta property="og:title" content="ToniPR | AI content kit for small business, consultants &amp; teams" />
+  <meta property="og:description" content="Turn one short chat into posts, articles, clips, and quotes for LinkedIn and more. Built for owners, consultants, and experts—not only startups." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ToniPR | AI content kit for small business &amp; consultants" />
+  <meta name="twitter:description" content="ToniPR turns a short chat into LinkedIn posts, articles, videos, and quotes from your expertise. Small business content and consultant marketing without the agency." />
+  <title>ToniPR | AI Content Kit for Small Business, Consultants &amp; Teams</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/page-bg.css" />
+  <link rel="stylesheet" href="css/platform-logo.css" />
   <link rel="preload" href="assets/toni/Toni_thumbs_up_animation.gif" as="image" />
   <link rel="preload" href="assets/toni/Toni_Thinking.gif" as="image" />
   <style>
@@ -1154,6 +1158,35 @@
       margin: 8px auto 0;
       border-radius: 999px;
       background: var(--accent);
+    }
+
+    .audience-strip-section {
+      padding: 48px 0 40px;
+      text-align: center;
+    }
+    .audience-strip-section .container {
+      max-width: 1080px;
+    }
+    .audience-strip-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .audience-strip {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(0.94rem, 2vw, 1.04rem);
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin: 0 auto;
+      max-width: min(48rem, 100%);
+    }
+    .audience-strip strong {
+      color: var(--text-primary);
+      font-weight: 700;
     }
 
     .td-layout {
@@ -2357,6 +2390,16 @@
       font-size: clamp(1.1rem, 2.2vw, 1.22rem);
       line-height: 1.65;
     }
+    #features .section-desc {
+      max-width: min(56rem, 100%);
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+    @media (min-width: 900px) {
+      #features .section-desc .challenge-dek-line {
+        white-space: nowrap;
+      }
+    }
 
     /* Story flow */
     .story-section {
@@ -3106,6 +3149,29 @@
     .step-card.reveal:nth-child(3) {
       transition-delay: 0.16s;
     }
+    /* Who it’s for: same reveal as sections; body trails label */
+    .audience-strip-section .audience-strip.reveal {
+      transition-delay: 0.07s;
+    }
+    /* When story + strip + challenge share the viewport, challenge follows the strip */
+    #features .section-label.reveal {
+      transition-delay: 0.12s;
+    }
+    #features .section-title.reveal {
+      transition-delay: 0.18s;
+    }
+    #features .section-desc.reveal {
+      transition-delay: 0.24s;
+    }
+    #features .problem-card.reveal:nth-child(1) {
+      transition-delay: 0.3s;
+    }
+    #features .problem-card.reveal:nth-child(2) {
+      transition-delay: 0.38s;
+    }
+    #features .problem-card.reveal:nth-child(3) {
+      transition-delay: 0.46s;
+    }
     /* Footer */
     footer {
       position: relative;
@@ -3170,6 +3236,13 @@
     }
     .footer-links a:hover {
       color: var(--text-secondary);
+    }
+    .footer-tagline {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: min(36rem, 100%);
+      margin: 0 auto 14px;
+      line-height: 1.55;
     }
     .footer-copy {
       font-size: 0.8rem;
@@ -3633,7 +3706,7 @@
   <nav id="nav">
     <div class="nav-overlay" id="navOverlay" aria-hidden="true" hidden></div>
     <div class="nav-inner">
-      <a href="index.html" class="logo"><img src="assets/toni/toni-headshot.png" alt="Toni" class="logo-toni" width="72" height="72" onerror="this.onerror=null;this.src='assets/toni/toni-nav-mark.png';" /><span class="logo-wordmark">ToniPR<span class="logo-by">by Tunepact</span></span></a>
+      <a href="index.html" class="logo logo--platform-mark" aria-label="ToniPR home"><img src="assets/toni/toni-header-logo.png" alt="ToniPR by Tunepact" class="logo-platform-img" width="220" height="40" /></a>
       <button type="button" class="nav-menu-toggle" id="navMenuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
         <span class="nav-menu-icon" aria-hidden="true">
           <span class="nav-menu-line"></span>
@@ -3646,8 +3719,9 @@
         <a href="#demo">Demo</a>
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
+        <a href="faq.html">FAQ</a>
         <a href="auth.html?mode=login">Log in</a>
-        <a href="auth.html" class="btn btn-primary">Start Your PR Kit</a>
+        <a href="auth.html" class="btn btn-primary">Get your content kit</a>
       </div>
     </div>
   </nav>
@@ -3655,7 +3729,7 @@
   <header class="hero hero-splash" id="heroStage">
     <div class="hero-splash-inner">
       <div class="hero-brand hero-copy">
-        <h1 class="hero-title" aria-label="Toni PR by Tunepact: Turn a 5-10-minute chat into your startup's PR kit">
+        <h1 class="hero-title" aria-label="Toni PR by Tunepact: Turn a short chat into a content kit for your business">
           <span class="hero-title-lockup">
             <span class="hero-title-words">
               <span class="word">Toni</span>
@@ -3667,11 +3741,11 @@
           </span>
         </h1>
         <div class="hero-prose" id="heroProse">
-          <h2 class="hero-tagline">Turn a 5-10-minute chat into your startup&rsquo;s PR kit</h2>
-          <p class="hero-subtag">AI-generated videos, posts, blogs, and your founder story, ready to publish.</p>
+          <h2 class="hero-tagline">Turn a short chat into a content kit your business can publish everywhere</h2>
+          <p class="hero-subtag">AI-generated videos, posts, and articles from your expertise—ready for LinkedIn and the channels clients trust.</p>
         </div>
         <div class="hero-cta-block">
-          <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Start Your PR Kit</a>
+          <a href="auth.html" class="btn btn-primary hero-cta" id="heroCta">Get your content kit</a>
         </div>
       </div>
     </div>
@@ -3712,8 +3786,8 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Problem</span>
-              <h2 class="story-title">You know what makes your startup different. The world doesn&rsquo;t see it.</h2>
-              <p class="story-desc">Turning your story into content, posts, and press takes time you don&rsquo;t have. Toni turns one conversation into everything you need to be seen.</p>
+              <h2 class="story-title">You know what makes your business different. The world doesn&rsquo;t always see it.</h2>
+              <p class="story-desc">Turning your expertise into content, posts, and trust-building copy takes time you don&rsquo;t have. Toni turns one conversation into everything you need to be seen.</p>
             </div>
           </div>
         </div>
@@ -3739,8 +3813,8 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Solution</span>
-              <h2 class="story-title">Talk to Toni like a journalist. Get your PR kit in minutes.</h2>
-              <p class="story-desc">A relaxed 5-10-minute conversation. No prep needed. Toni turns your answers into posts, articles, and your full PR kit, ready to publish.</p>
+              <h2 class="story-title">Talk to Toni like a journalist. Get your content kit in minutes.</h2>
+              <p class="story-desc">A relaxed short chat. No prep needed. Toni turns your answers into posts, articles, and your full content kit, ready to publish.</p>
             </div>
           </div>
         </div>
@@ -3766,13 +3840,13 @@
             <div class="story-step-accent" aria-hidden="true"></div>
             <div class="story-step-copy">
               <span class="story-label">Transformation</span>
-              <h2 class="story-title">Get your full PR kit instantly</h2>
+              <h2 class="story-title">Get your full content kit instantly</h2>
               <div class="story-desc story-desc-structured">
                 <p class="story-transform-lead">From one conversation, you get:</p>
                 <ul class="story-transform-list">
                   <li>Full interview video + short clips</li>
-                  <li>Founder story + SEO blog post</li>
-                  <li>Press quotes + startup boilerplate</li>
+                  <li>Your story + blog article for your site</li>
+                  <li>Press quotes + company boilerplate</li>
                   <li>LinkedIn posts + X threads</li>
                 </ul>
                 <p class="story-transform-close">Copy, paste, and publish the same day.</p>
@@ -3784,26 +3858,33 @@
     </div>
   </section>
 
+  <section class="audience-strip-section" aria-labelledby="audience-strip-heading">
+    <div class="container">
+      <span id="audience-strip-heading" class="audience-strip-label reveal">Who it&rsquo;s for</span>
+      <p class="audience-strip reveal"><strong>Founders, consultants, advisors, professional services, and small teams</strong>—if you need credible content and a steadier presence online, you&rsquo;re in the right place.</p>
+    </div>
+  </section>
+
   <section id="features" class="problem-section">
     <div class="container">
       <span class="section-label reveal">The Challenge</span>
-      <h2 class="section-title reveal">Traditional PR is broken. Here&rsquo;s why founders are switching.</h2>
-      <p class="section-desc reveal">Expensive. Slow. Generic.<br />Traditional PR wasn&rsquo;t built for how startups move today.</p>
+      <h2 class="section-title reveal">Traditional PR is broken. Here&rsquo;s why owners and experts are switching.</h2>
+      <p class="section-desc reveal"><span class="challenge-dek-lead">Expensive. Slow. Generic.</span><br /><span class="challenge-dek-line">Traditional PR wasn&rsquo;t built for busy people who still need to show up credibly online.</span></p>
       <div class="problem-cards">
         <div class="problem-card reveal">
           <div class="problem-card-num">01</div>
-          <h3>$5K/month for content you barely use</h3>
-          <p>PR agencies charge thousands monthly.<br />ToniPR gives you everything you need for a fraction of the cost.</p>
+          <h3>No time to keep up with content</h3>
+          <p>You&rsquo;re serving clients and running the business—not a full-time marketing desk.<br />ToniPR packs interviews into posts, articles, and clips you can actually use.</p>
         </div>
         <div class="problem-card reveal">
           <div class="problem-card-num">02</div>
-          <h3>Weeks of back-and-forth</h3>
-          <p>Traditional PR takes weeks to produce content.<br />Toni delivers your full PR kit in minutes.</p>
+          <h3>Hard to sound credible online</h3>
+          <p>Prospects look you up first; generic posts don&rsquo;t build trust.<br />Toni pulls from what you actually said so your expertise shows through.</p>
         </div>
         <div class="problem-card reveal">
           <div class="problem-card-num">03</div>
-          <h3>Doesn&rsquo;t sound like you</h3>
-          <p>Most PR content feels templated.<br />Toni uses your real voice, so your story actually sounds like you.</p>
+          <h3>Inconsistent presence</h3>
+          <p>Unsure what to post, so channels go quiet when you&rsquo;re busy.<br />One conversation becomes weeks of directionally aligned content.</p>
         </div>
       </div>
     </div>
@@ -3812,18 +3893,18 @@
   <section id="how-it-works" class="how-section">
     <div class="container">
       <span class="section-label reveal">How it works</span>
-      <h2 class="section-title reveal">From one conversation to your full PR kit</h2>
+      <h2 class="section-title reveal">From one conversation to your full content kit</h2>
       <p class="section-desc reveal">Set your goal. Talk to Toni for 5-10 minutes. Get everything you need to publish, instantly.</p>
       <div class="steps">
         <div class="step-card reveal">
           <div class="step-number">01</div>
           <h3>Set your goal</h3>
-          <p>Fundraising, launch, hiring, or thought leadership—choose what you&rsquo;re focused on.<br />Toni aligns every output to that goal, from headlines through your full&nbsp;PR&nbsp;kit.</p>
+          <p>Pick what you need most right now—trust, leads, a launch, hiring, or simply showing up online.<br />Everything Toni creates follows that one&nbsp;focus.</p>
         </div>
         <div class="step-card reveal">
           <div class="step-number">02</div>
           <h3>Chat with Toni (5-10 min)</h3>
-          <p>Tailored questions from your product and story. No prep needed.<br />Speak out loud or type in chat, whichever you&nbsp;prefer.</p>
+          <p>Tailored questions from your business and expertise. No prep needed.<br />Speak out loud or type in chat, whichever you&nbsp;prefer.</p>
         </div>
         <div class="step-card reveal">
           <div class="step-number">03</div>
@@ -3849,7 +3930,7 @@
               <span class="td-interview-pill-dot" aria-hidden="true"></span>
               Your session with Toni
           </div>
-            <span class="demo-founder-kicker reveal">Meet our founder</span>
+            <span class="demo-founder-kicker reveal">See a real session</span>
             <p class="td-demo-steps">
               <span class="td-demo-steps-seg">Toni asks</span><span class="td-demo-steps-sep" aria-hidden="true">&middot;</span><span class="td-demo-steps-seg">you answer</span><span class="td-demo-steps-sep" aria-hidden="true">&middot;</span><span class="td-demo-steps-seg">your kit is built from what you said.</span>
             </p>
@@ -3955,7 +4036,7 @@
                     <article class="td-card td-card--highlight">
                       <div class="td-card-label">Podcast &amp; long-form</div>
                       <h3>Interview narrative &amp; story arc</h3>
-                      <p class="td-rich-note">This narrative follows the same arc as the six Tunepact Q&amp;A clips in the demo (journey, motivation, roadmap, access, how AI helps, where to find us). Use it as a podcast brief, press angle, or founder letter; your ToniPR kit can mirror this structure for <em>your</em> product.</p>
+                      <p class="td-rich-note">This narrative follows the same arc as the six Tunepact Q&amp;A clips in the demo (journey, motivation, roadmap, access, how AI helps, where to find us). Use it as a podcast brief, press angle, or leadership letter; your ToniPR kit can mirror this structure for <em>your</em> business.</p>
                       <div class="td-rich">
                         <p class="td-mini-h">Opening: journey &amp; stack</p>
                         <p>Hadi frames Tunepact as a <strong>next-generation stack for independents</strong>: not another bolt-on tool, but infrastructure for artists who are building without a major label in the room. The through-line is practical—how you ship, how you show up online, and how you keep the story coherent when you&rsquo;re doing everything yourself.</p>
@@ -4152,8 +4233,8 @@
   <section id="examples" class="social-proof">
     <div class="container">
       <span class="section-label reveal">Testimonials</span>
-      <h2 class="section-title reveal">What founders are saying after one&nbsp;session</h2>
-      <p class="section-desc reveal">From early ToniPR users turning one chat into weeks of content.</p>
+      <h2 class="section-title reveal">What people are saying after one&nbsp;session</h2>
+      <p class="section-desc reveal">From early ToniPR users turning one chat into weeks of content—founders, consultants, and small teams included.</p>
       <div class="testimonials-slider reveal">
         <div class="testimonials-track">
           <div class="testimonials">
@@ -4229,9 +4310,9 @@
             onerror="this.onerror=null;this.src='assets/toni/happy-toni.jpg';this.classList.add('toni-mascot');"
           />
         </div>
-        <h2>Get your PR kit in the next 5-10 minutes.</h2>
+        <h2>Get your content kit in the next 5-10 minutes.</h2>
         <p class="cta-desc">No prep. No writing. Just a quick conversation.<br />Toni turns it into everything you need to publish.</p>
-        <a href="auth.html" class="btn btn-primary btn-lg">Start Your PR Kit</a>
+        <a href="auth.html" class="btn btn-primary btn-lg">Get your content kit</a>
       </div>
     </div>
   </section>
@@ -4244,8 +4325,10 @@
         <a href="#demo">Demo</a>
         <a href="pricing.html">Pricing</a>
         <a href="blog/index.html">Blog</a>
+        <a href="faq.html">FAQ</a>
         <a href="pricing.html">Get started</a>
       </div>
+      <p class="footer-tagline">ToniPR helps business owners and experts turn conversations into content—startups and beyond.</p>
       <p class="footer-copy">© 2025 ToniPR by Tunepact. All rights reserved.</p>
     </div>
   </footer>
