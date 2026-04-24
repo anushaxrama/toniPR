@@ -530,6 +530,7 @@
 
   <script>
     (function () {
+      const FLOW_VERSION = '20260424';
       const steps = document.querySelectorAll('.step');
       const progressFill = document.getElementById('progressFill');
       const progressSteps = document.querySelectorAll('.progress-step');
@@ -541,6 +542,13 @@
         oneliner: '',
         promoting: ''
       };
+
+      function buildFlowUrl(path, params) {
+        const searchParams = params instanceof URLSearchParams ? new URLSearchParams(params.toString()) : new URLSearchParams(params || '');
+        searchParams.set('v', FLOW_VERSION);
+        const qs = searchParams.toString();
+        return path + (qs ? '?' + qs : '');
+      }
 
       function readStoredProfile() {
         try {
@@ -609,8 +617,7 @@
         if (state.company) params.set('company', state.company);
         if (state.oneliner) params.set('oneliner', state.oneliner);
         if (state.promoting) params.set('promoting', state.promoting);
-        const qs = params.toString();
-        window.location.href = 'interview.html' + (qs ? '?' + qs : '');
+        window.location.href = buildFlowUrl('interview.html', params);
       });
       document.getElementById('btnReadyBack').addEventListener('click', function () {
         goToStep(0);

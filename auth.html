@@ -476,6 +476,15 @@
 
   <script>
     (function () {
+      var FLOW_VERSION = '20260424';
+
+      function buildFlowUrl(path, params) {
+        var searchParams = params instanceof URLSearchParams ? new URLSearchParams(params.toString()) : new URLSearchParams(params || '');
+        searchParams.set('v', FLOW_VERSION);
+        var qs = searchParams.toString();
+        return path + (qs ? '?' + qs : '');
+      }
+
       document.getElementById('authBackLink').addEventListener('click', function (e) {
         e.preventDefault();
         if (window.history.length > 1) {
@@ -513,8 +522,7 @@
       function buildDashboardUrl() {
         var params = new URLSearchParams(window.location.search);
         params.delete('mode');
-        var qs = params.toString();
-        return 'dashboard.html' + (qs ? '?' + qs : '');
+        return buildFlowUrl('dashboard.html', params);
       }
 
       function readJsonStorage(key) {
@@ -575,7 +583,7 @@
         saveSignupIntake();
         localStorage.setItem('tonipr_session', '1');
         localStorage.setItem('tonipr_new_signup', '1');
-        window.location.href = 'pricing.html?from=signup';
+        window.location.href = buildFlowUrl('pricing.html', { from: 'signup' });
       });
 
       document.getElementById('btnGoogleAuth').addEventListener('click', function () {
@@ -584,7 +592,7 @@
         if (signupActive) {
           saveSignupIntake();
           localStorage.setItem('tonipr_new_signup', '1');
-          window.location.href = 'pricing.html?from=signup';
+          window.location.href = buildFlowUrl('pricing.html', { from: 'signup' });
         } else {
           localStorage.removeItem('tonipr_new_signup');
           window.location.href = buildDashboardUrl();
