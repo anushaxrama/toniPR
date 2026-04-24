@@ -306,6 +306,24 @@
       color: var(--text-muted);
       margin-top: 5px;
     }
+    .signup-intake {
+      margin: 22px 0 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .signup-intake h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .signup-intake p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
 
     .auth-footer {
       text-align: center;
@@ -424,6 +442,22 @@
               <input type="password" id="signupPassword" class="input" placeholder="••••••••" required minlength="8" />
               <p class="form-hint">At least 8 characters</p>
             </div>
+            <div class="signup-intake">
+              <h2>What are you building?</h2>
+              <p>We use this to personalize your onboarding and Toni's interview questions.</p>
+              <div class="form-group">
+                <label for="signupCompany">Company or product name</label>
+                <input type="text" id="signupCompany" class="input" placeholder="e.g. MealFlow" autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label for="signupOneliner">One-liner (what you do)</label>
+                <input type="text" id="signupOneliner" class="input" placeholder="e.g. A meal planning app for busy families" autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="signupPromoting">What are you promoting right now?</label>
+                <input type="text" id="signupPromoting" class="input" placeholder="e.g. Product launch, fundraising, thought leadership" autocomplete="off" />
+              </div>
+            </div>
             <button type="submit" class="btn btn-primary">Create account</button>
           </form>
 
@@ -483,6 +517,52 @@
         return 'dashboard.html' + (qs ? '?' + qs : '');
       }
 
+      function readJsonStorage(key) {
+        try {
+          return JSON.parse(localStorage.getItem(key) || '{}');
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function writeJsonStorage(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+
+      function getSignupIntake() {
+        return {
+          name: document.getElementById('signupName').value.trim(),
+          email: document.getElementById('signupEmail').value.trim(),
+          company: document.getElementById('signupCompany').value.trim(),
+          oneliner: document.getElementById('signupOneliner').value.trim(),
+          promoting: document.getElementById('signupPromoting').value.trim()
+        };
+      }
+
+      function saveSignupIntake() {
+        var intake = getSignupIntake();
+        var profile = readJsonStorage('tonipr_profile');
+        writeJsonStorage('tonipr_profile', Object.assign({}, profile, {
+          name: intake.name || profile.name || '',
+          email: intake.email || profile.email || ''
+        }));
+        writeJsonStorage('tonipr_onboarding_profile', {
+          company: intake.company,
+          oneliner: intake.oneliner,
+          promoting: intake.promoting
+        });
+      }
+
+      (function hydrateSignupIntake() {
+        var profile = readJsonStorage('tonipr_profile');
+        var onboardingProfile = readJsonStorage('tonipr_onboarding_profile');
+        if (profile.name) document.getElementById('signupName').value = profile.name;
+        if (profile.email) document.getElementById('signupEmail').value = profile.email;
+        if (onboardingProfile.company) document.getElementById('signupCompany').value = onboardingProfile.company;
+        if (onboardingProfile.oneliner) document.getElementById('signupOneliner').value = onboardingProfile.oneliner;
+        if (onboardingProfile.promoting) document.getElementById('signupPromoting').value = onboardingProfile.promoting;
+      })();
+
       document.getElementById('formLogin').addEventListener('submit', function (e) {
         e.preventDefault();
         localStorage.setItem('tonipr_session', '1');
@@ -492,6 +572,7 @@
 
       document.getElementById('formSignup').addEventListener('submit', function (e) {
         e.preventDefault();
+        saveSignupIntake();
         localStorage.setItem('tonipr_session', '1');
         localStorage.setItem('tonipr_new_signup', '1');
         window.location.href = 'pricing.html?from=signup';
@@ -501,6 +582,7 @@
         localStorage.setItem('tonipr_session', '1');
         var signupActive = document.getElementById('formSignup').classList.contains('active');
         if (signupActive) {
+          saveSignupIntake();
           localStorage.setItem('tonipr_new_signup', '1');
           window.location.href = 'pricing.html?from=signup';
         } else {

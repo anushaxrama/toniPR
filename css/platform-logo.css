@@ -26,3 +26,13 @@
   max-width: var(--logo-mark-max-width);
   object-fit: contain;
 }
+
+/* Footer: same wordmark as nav/header, scaled down for the rail */
+.footer-logo.logo--platform-mark {
+  font-family: inherit;
+  margin-bottom: 0;
+}
+.footer-logo.logo--platform-mark .logo-platform-img {
+  height: clamp(28px, 0.5rem + 2.75vw, 33px);
+  max-width: min(210px, 82vw);
+}

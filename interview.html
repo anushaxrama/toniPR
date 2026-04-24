@@ -130,6 +130,22 @@
       line-height: 1.6;
     }
     .tailored-intro strong { color: var(--text-primary); }
+    .prep-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .prep-card .form-group:last-child {
+      margin-bottom: 0;
+    }
+    .prep-note {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 14px;
+    }
     .interview-qa { margin-bottom: 28px; }
     .interview-question {
       font-size: 1rem;
@@ -475,9 +491,34 @@
   </div>
   <a href="dashboard.html" class="interview-back back-btn">← Back</a>
   <div class="interview-wrap">
+    <section class="step active" id="step1">
+      <h1 class="step-title">Set up this session</h1>
+      <p class="step-desc">Give Toni a little direction so the interview can focus on what you want to accomplish right now.</p>
+      <div class="tailored-intro">
+        <p><strong id="prepCompanyDisplay">Your company</strong><span id="prepCompanySummary"></span></p>
+      </div>
+      <div class="prep-card">
+        <div class="form-group">
+          <label for="sessionGoal">What are you hoping to accomplish with this session?</label>
+          <textarea id="sessionGoal" class="textarea" placeholder="e.g. I want sharper messaging for an upcoming launch and content I can post this week."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="sessionAudience">Who are you trying to reach or influence right now?</label>
+          <input type="text" id="sessionAudience" class="input" placeholder="e.g. Potential customers, investors, press, hiring candidates" />
+        </div>
+        <div class="form-group">
+          <label for="sessionFocus">Anything Toni should make sure to ask about?</label>
+          <textarea id="sessionFocus" class="textarea" placeholder="e.g. Our new feature launch, founder story, traction, differentiation, fundraising"></textarea>
+        </div>
+        <p class="prep-note">These answers shape Toni's next questions so the conversation leads to more useful posts, quotes, and story angles.</p>
+      </div>
+      <div class="chat-actions">
+        <button type="button" class="btn btn-primary" id="btnStartChat">Continue to Toni's questions</button>
+      </div>
+    </section>
 
     <!-- Chat-style interview -->
-    <section class="step active" id="step2">
+    <section class="step" id="step2">
       <div class="step2-header-wrap">
         <img src="assets/toni/Toni_Explains.gif" alt="" class="step2-toni" width="88" height="88" loading="lazy" />
         <div class="step-header-text">
@@ -487,7 +528,10 @@
       </div>
       <div class="chat-toolbar">
         <p class="chat-toolbar-hint">Want a do-over? Redo clears this chat so you can try again from the first question.</p>
-        <button type="button" class="btn-redo" id="btnRedoInterview">Redo chat</button>
+        <div class="chat-actions" style="margin-top: 0;">
+          <button type="button" class="btn btn-secondary" id="btnEditPrep">Edit session brief</button>
+          <button type="button" class="btn-redo" id="btnRedoInterview">Redo chat</button>
+        </div>
       </div>
       <form id="formInterview">
         <div class="chat-thread" id="chatThread"></div>
@@ -533,17 +577,37 @@
         companyName: '',
         oneliner: '',
         promoting: '',
+        sessionGoal: '',
+        sessionAudience: '',
+        sessionFocus: '',
         answers: {},
         tailoredQuestions: [],
         currentIndex: 0
       };
 
+      function readJsonStorage(key) {
+        try {
+          return JSON.parse(localStorage.getItem(key) || '{}');
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function writeJsonStorage(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+
       (function initFromParams() {
         try {
           var params = new URLSearchParams(window.location.search);
-          state.companyName = params.get('company') || '';
-          state.oneliner = params.get('oneliner') || '';
-          state.promoting = params.get('promoting') || params.get('goal') || '';
+          var profile = readJsonStorage('tonipr_onboarding_profile');
+          var brief = readJsonStorage('tonipr_session_brief');
+          state.companyName = params.get('company') || profile.company || '';
+          state.oneliner = params.get('oneliner') || profile.oneliner || '';
+          state.promoting = params.get('promoting') || params.get('goal') || profile.promoting || '';
+          state.sessionGoal = params.get('sessionGoal') || brief.sessionGoal || '';
+          state.sessionAudience = params.get('sessionAudience') || brief.sessionAudience || '';
+          state.sessionFocus = params.get('sessionFocus') || brief.sessionFocus || '';
         } catch (e) {}
       })();
 
@@ -556,10 +620,44 @@
         if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
       });
 
-      function generateTailoredQuestions(company, oneliner, promoting) {
+      function syncSessionInputs() {
+        document.getElementById('sessionGoal').value = state.sessionGoal;
+        document.getElementById('sessionAudience').value = state.sessionAudience;
+        document.getElementById('sessionFocus').value = state.sessionFocus;
+      }
+
+      function saveSessionBrief() {
+        writeJsonStorage('tonipr_session_brief', {
+          sessionGoal: state.sessionGoal,
+          sessionAudience: state.sessionAudience,
+          sessionFocus: state.sessionFocus
+        });
+      }
+
+      function captureSessionBrief() {
+        state.sessionGoal = document.getElementById('sessionGoal').value.trim();
+        state.sessionAudience = document.getElementById('sessionAudience').value.trim();
+        state.sessionFocus = document.getElementById('sessionFocus').value.trim();
+        saveSessionBrief();
+      }
+
+      function refreshCompanyContext() {
+        var company = state.companyName || 'Your company';
+        var summary = [];
+        if (state.oneliner) summary.push(state.oneliner);
+        if (state.promoting) summary.push('Promoting: ' + state.promoting);
+        document.getElementById('companyDisplay').textContent = state.companyName || 'your company';
+        document.getElementById('prepCompanyDisplay').textContent = company;
+        document.getElementById('prepCompanySummary').textContent = summary.length ? ' · ' + summary.join(' · ') : ' · Toni will use what you share here to guide the interview.';
+      }
+
+      function generateTailoredQuestions(company, oneliner, promoting, sessionGoal, sessionAudience, sessionFocus) {
         const c = company || 'your product';
         const o = (oneliner || '').toLowerCase();
         const p = (promoting || '').toLowerCase();
+        const g = (sessionGoal || '').trim();
+        const a = (sessionAudience || '').trim();
+        const f = (sessionFocus || '').trim();
 
         var userWord = 'users';
         if (/\b(families|parents|moms|dads)\b/i.test(o)) userWord = 'families';
@@ -573,12 +671,26 @@
         else if (/finance|money|invest|budget/i.test(o)) domainHint = 'money ';
         else if (/productivity|work|task/i.test(o)) domainHint = 'work ';
 
+        var focusPrompt = f
+          ? "Make sure you touch on " + f + " too."
+          : "Feel free to include any founder-story or traction details that matter.";
+        var goalPrompt = g
+          ? "You said this session should help with " + g + ". Why is that especially important right now?"
+          : "What's the most important story or angle you want this session to help you tell right now?";
+        var audiencePrompt = a
+          ? "When " + a + " hear about " + c + ", what usually clicks fastest for them?"
+          : "Who usually resonates fastest with " + c + ", and what makes it click for them?";
+        var proofPrompt = p
+          ? "Since you're promoting " + p + ", what's the proof point, insight, or momentum signal that makes that story credible?"
+          : "What's the strongest proof point, insight, or momentum signal that makes your story credible?";
+
         return [
           { id: 'q1', text: "So tell me: what exactly is " + c + "? What are you building?" },
-          { id: 'q2', text: "That sounds great! So what's the biggest " + domainHint + "problem that " + c + " solves? I'd love to hear the story behind it." },
-          { id: 'q3', text: "When " + userWord + " try " + c + ", what do they tell you is the biggest pain point? What keeps coming up?" },
-          { id: 'q4', text: "What's the most surprising or valuable insight you've learned from your " + userWord + "? Something that really stuck with you?" },
-          { id: 'q5', text: "Last one: if someone's skeptical about " + c + " or what you're doing, what would you say to them? How do you win them over?" }
+          { id: 'q2', text: goalPrompt },
+          { id: 'q3', text: "That sounds great. What's the biggest " + domainHint + "problem that " + c + " solves for " + userWord + "? I'd love to hear the story behind it. " + focusPrompt },
+          { id: 'q4', text: audiencePrompt },
+          { id: 'q5', text: proofPrompt },
+          { id: 'q6', text: "Last one: if someone's skeptical about " + c + " or what you're doing, what would you say to them? How do you win them over?" }
         ];
       }
 
@@ -620,7 +732,8 @@
 
         var msg = q.text;
         if (idx === 0) {
-          msg = "Hey! I'm excited to learn about " + state.companyName + ". So tell me: what exactly is " + state.companyName + "? What are you building?";
+          var company = state.companyName || 'your company';
+          msg = "Hey! I'm excited to learn about " + company + ". So tell me: what exactly is " + company + "? What are you building?";
         }
         appendChatMsg('toni', msg);
 
@@ -650,22 +763,31 @@
         showNextQuestion();
       }
 
-      // Auto-start chat from URL params
-      (function startChat() {
-        document.getElementById('companyDisplay').textContent = state.companyName || 'your company';
-
+      function startChat() {
+        captureSessionBrief();
         state.tailoredQuestions = generateTailoredQuestions(
           state.companyName,
           state.oneliner,
-          state.promoting
+          state.promoting,
+          state.sessionGoal,
+          state.sessionAudience,
+          state.sessionFocus
         );
         state.answers = {};
         state.currentIndex = 0;
 
         document.getElementById('chatThread').innerHTML = '';
 
+        goToStep('step2');
         showNextQuestion();
+      }
+
+      (function initPrepStep() {
+        syncSessionInputs();
+        refreshCompanyContext();
       })();
+
+      document.getElementById('btnStartChat').addEventListener('click', startChat);
 
       document.getElementById('btnSend').addEventListener('click', handleSendAnswer);
       document.getElementById('btnNext').addEventListener('click', handleSendAnswer);
@@ -695,7 +817,9 @@
           var a2 = state.answers.q2 || '';
           var a3 = state.answers.q3 || '';
           var a4 = state.answers.q4 || '';
-          var a5 = state.answers.q5 || state.answers.q4 || a2 || 'We\'re building something that matters.';
+          var a5 = state.answers.q5 || '';
+          var a6 = state.answers.q6 || state.answers.q5 || state.answers.q4 || a2 || 'We\'re building something that matters.';
+          var sessionGoal = state.sessionGoal || state.promoting || 'the story you want to tell right now';
 
           var result = document.getElementById('resultContainer');
           result.innerHTML =
@@ -705,22 +829,20 @@
             (a3 ? 'We found that ' + a3 + '. ' : '') + (a4 || '') + '</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">𝕏</span><h4>X Threads</h4></div><p>Thread-ready posts about ' + cn + ' optimized for engagement.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📝</span><h4>Founder Story Article</h4></div><p>The story behind ' + cn + ': why you started and what drives you.</p></div>' +
-            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>Blog article</h4></div><p>How ' + cn + ' ' + ol + ': a founder\'s perspective—ready to publish on your site.</p></div>' +
-            '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quotes</h4></div><p>"' + a5 + '"</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>Blog article</h4></div><p>How ' + cn + ' ' + ol + ': a founder\'s perspective on ' + sessionGoal + '—ready to publish on your site.</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quotes</h4></div><p>"' + (a5 || a6) + '"</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">👤</span><h4>Founder Bio</h4></div><p>A polished bio for press kits, speaker pages, and about sections.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">🏢</span><h4>Startup Boilerplate</h4></div><p>A concise company description for press releases and media kits.</p></div>';
           goToStep('step4');
         }, 3500);
       });
 
+      document.getElementById('btnEditPrep').addEventListener('click', function () {
+        goToStep('step1');
+      });
+
       document.getElementById('btnRedoInterview').addEventListener('click', function () {
-        state.currentIndex = 0;
-        state.answers = {};
-        document.getElementById('chatThread').innerHTML = '';
-        var te = document.getElementById('chatTranscript');
-        te.value = '';
-        te.dataset.id = '';
-        if (state.tailoredQuestions.length) showNextQuestion();
+        startChat();
       });
     })();
   </script>

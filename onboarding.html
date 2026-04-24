@@ -491,8 +491,7 @@
       </div>
       <div class="progress-steps">
         <span class="progress-step" data-step="0">Welcome</span>
-        <span class="progress-step" data-step="1">Details</span>
-        <span class="progress-step" data-step="2">Ready</span>
+        <span class="progress-step" data-step="1">Ready</span>
       </div>
     </div>
 
@@ -502,51 +501,24 @@
         <div class="welcome-wrap">
           <div class="welcome-hero">
             <h1 class="welcome-title">Talk for 5-10 minutes.<br />Get a full PR kit.</h1>
-            <p class="welcome-desc">No prep needed. Toni asks the questions, you just answer.</p>
+            <p class="welcome-desc">A few quick prompts, then Toni asks the questions and turns your answers into a full PR kit.</p>
             <button type="button" class="btn btn-primary welcome-cta" id="btnStart">Get your content kit</button>
           </div>
         </div>
       </section>
 
-      <!-- Step 1: Tell us about your company -->
+      <!-- Step 1: Ready -->
       <section class="step" data-step="1" id="step1">
-        <h2 class="step-title">Tell us about your company</h2>
-        <p class="step-desc">Just a few quick details so Toni can personalize your interview.</p>
-        <div class="form-group">
-          <label for="company">Company or product name</label>
-          <input type="text" id="company" class="input" placeholder="e.g. MealFlow" autocomplete="organization" />
-        </div>
-        <div class="form-group">
-          <label for="oneliner">One-liner (what you do)</label>
-          <input type="text" id="oneliner" class="input" placeholder="e.g. A meal planning app for busy families" autocomplete="off" />
-        </div>
-        <div class="form-group">
-          <label for="promoting">What are you promoting right now?</label>
-          <input type="text" id="promoting" class="input" placeholder="e.g. Product launch, fundraising, thought leadership" autocomplete="off" />
-        </div>
-        <div class="btn-row">
-          <button type="button" class="btn btn-primary" id="btnDetailsNext">Continue</button>
-          <button type="button" class="btn btn-link" id="btnDetailsBack">Back</button>
-          <button type="button" class="btn btn-link" id="btnDetailsSkip">Skip</button>
-        </div>
-      </section>
-
-      <!-- Step 2: Ready -->
-      <section class="step" data-step="2" id="step2">
         <h2 class="step-title">You're all set</h2>
-        <p class="step-desc">Block about 5-10 minutes. Toni handles the rest.</p>
+        <p class="step-desc">We already have your company details from signup. Next you'll fill out one short form about what you want from this session, then Toni takes it from there.</p>
         <div class="ready-card">
-          <h3>After the interview you get</h3>
+          <h3>What happens next</h3>
           <ul class="ready-list">
-            <li>Full interview video + short clips</li>
-            <li>~10 LinkedIn posts</li>
-            <li>Founder story article</li>
-            <li>Blog article for your site</li>
-            <li>X threads</li>
-            <li>Founder bio + press quotes</li>
-            <li>Startup boilerplate</li>
+            <li>Fill out one short session-planning form</li>
+            <li>Chat with Toni for about 5-10 minutes</li>
+            <li>Get your PR kit in your dashboard after the interview</li>
           </ul>
-          <p class="ready-note">Copy, paste, publish. No back and forth. 30-day money-back guarantee.</p>
+          <p class="ready-note">This keeps the interview focused on what you want to accomplish right now.</p>
         </div>
         <button type="button" class="btn btn-primary interview-cta" id="btnStartInterview">Get your content kit (5-10 min)</button>
         <div class="btn-row" style="margin-top: 16px;">
@@ -561,13 +533,44 @@
       const steps = document.querySelectorAll('.step');
       const progressFill = document.getElementById('progressFill');
       const progressSteps = document.querySelectorAll('.progress-step');
-      const totalSteps = 3;
+      const totalSteps = 2;
 
       let currentStep = 0;
       const state = {
         company: '',
-        oneliner: ''
+        oneliner: '',
+        promoting: ''
       };
+
+      function readStoredProfile() {
+        try {
+          return JSON.parse(localStorage.getItem('tonipr_onboarding_profile') || '{}');
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function persistProfile() {
+        localStorage.setItem('tonipr_onboarding_profile', JSON.stringify({
+          company: state.company,
+          oneliner: state.oneliner,
+          promoting: state.promoting
+        }));
+      }
+
+      (function initDetails() {
+        var params;
+        try {
+          params = new URLSearchParams(window.location.search);
+        } catch (e) {
+          params = new URLSearchParams();
+        }
+        var stored = readStoredProfile();
+        state.company = params.get('company') || stored.company || '';
+        state.oneliner = params.get('oneliner') || stored.oneliner || '';
+        state.promoting = params.get('promoting') || stored.promoting || '';
+        persistProfile();
+      })();
 
       function updateProgress() {
         const pct = ((currentStep + 1) / totalSteps) * 100;
@@ -600,24 +603,7 @@
         goToStep(1);
       });
 
-      // Step 1: company details
-      document.getElementById('btnDetailsNext').addEventListener('click', function () {
-        state.company = document.getElementById('company').value.trim();
-        state.oneliner = document.getElementById('oneliner').value.trim();
-        state.promoting = document.getElementById('promoting').value.trim();
-        goToStep(2);
-      });
-      document.getElementById('btnDetailsBack').addEventListener('click', function () {
-        goToStep(0);
-      });
-      document.getElementById('btnDetailsSkip').addEventListener('click', function () {
-        state.company = document.getElementById('company').value.trim();
-        state.oneliner = document.getElementById('oneliner').value.trim();
-        state.promoting = document.getElementById('promoting').value.trim();
-        goToStep(2);
-      });
-
-      // Step 2: ready
+      // Step 1: ready
       document.getElementById('btnStartInterview').addEventListener('click', function () {
         const params = new URLSearchParams();
         if (state.company) params.set('company', state.company);
@@ -627,7 +613,7 @@
         window.location.href = 'interview.html' + (qs ? '?' + qs : '');
       });
       document.getElementById('btnReadyBack').addEventListener('click', function () {
-        goToStep(1);
+        goToStep(0);
       });
 
       updateProgress();
