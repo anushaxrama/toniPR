@@ -209,6 +209,10 @@
       color: var(--text-muted);
       margin-top: 6px;
     }
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
 
     /* Buttons */
     .btn-row {
@@ -492,6 +496,7 @@
       <div class="progress-steps">
         <span class="progress-step" data-step="0">Welcome</span>
         <span class="progress-step" data-step="1">Ready</span>
+        <span class="progress-step" data-step="2">Session brief</span>
       </div>
     </div>
 
@@ -525,22 +530,47 @@
           <button type="button" class="btn btn-link" id="btnReadyBack">Back</button>
         </div>
       </section>
+
+      <!-- Step 2: Session brief -->
+      <section class="step" data-step="2" id="step2">
+        <h2 class="step-title">Set up this session</h2>
+        <p class="step-desc">Tell Toni what you want to get out of this interview so the conversation starts in the right place.</p>
+        <div class="form-group">
+          <label for="sessionGoal">What are you hoping to accomplish with this session?</label>
+          <textarea id="sessionGoal" class="input textarea" placeholder="e.g. I want clearer messaging for an upcoming launch and content I can use this week."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="sessionAudience">Who are you trying to reach or influence right now?</label>
+          <input type="text" id="sessionAudience" class="input" placeholder="e.g. Potential customers, investors, press, hiring candidates" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="sessionFocus">Anything Toni should make sure to ask about?</label>
+          <textarea id="sessionFocus" class="input textarea" placeholder="e.g. Our launch, founder story, traction, differentiation, fundraising"></textarea>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btnSessionNext">Continue to Toni's questions</button>
+          <button type="button" class="btn btn-link" id="btnSessionBack">Back</button>
+        </div>
+      </section>
     </main>
   </div>
 
   <script>
     (function () {
-      const FLOW_VERSION = '20260424';
+      const FLOW_VERSION = '20260424b';
       const steps = document.querySelectorAll('.step');
       const progressFill = document.getElementById('progressFill');
       const progressSteps = document.querySelectorAll('.progress-step');
-      const totalSteps = 2;
+      const totalSteps = 3;
 
       let currentStep = 0;
       const state = {
         company: '',
         oneliner: '',
-        promoting: ''
+        promoting: '',
+        sessionGoal: '',
+        sessionAudience: '',
+        sessionFocus: ''
       };
 
       function buildFlowUrl(path, params) {
@@ -558,12 +588,41 @@
         }
       }
 
+      function readStoredBrief() {
+        try {
+          return JSON.parse(localStorage.getItem('tonipr_session_brief') || '{}');
+        } catch (e) {
+          return {};
+        }
+      }
+
       function persistProfile() {
         localStorage.setItem('tonipr_onboarding_profile', JSON.stringify({
           company: state.company,
           oneliner: state.oneliner,
           promoting: state.promoting
         }));
+      }
+
+      function persistBrief() {
+        localStorage.setItem('tonipr_session_brief', JSON.stringify({
+          sessionGoal: state.sessionGoal,
+          sessionAudience: state.sessionAudience,
+          sessionFocus: state.sessionFocus
+        }));
+      }
+
+      function syncBriefInputs() {
+        document.getElementById('sessionGoal').value = state.sessionGoal;
+        document.getElementById('sessionAudience').value = state.sessionAudience;
+        document.getElementById('sessionFocus').value = state.sessionFocus;
+      }
+
+      function captureBrief() {
+        state.sessionGoal = document.getElementById('sessionGoal').value.trim();
+        state.sessionAudience = document.getElementById('sessionAudience').value.trim();
+        state.sessionFocus = document.getElementById('sessionFocus').value.trim();
+        persistBrief();
       }
 
       (function initDetails() {
@@ -574,10 +633,16 @@
           params = new URLSearchParams();
         }
         var stored = readStoredProfile();
+        var brief = readStoredBrief();
         state.company = params.get('company') || stored.company || '';
         state.oneliner = params.get('oneliner') || stored.oneliner || '';
         state.promoting = params.get('promoting') || stored.promoting || '';
+        state.sessionGoal = params.get('sessionGoal') || brief.sessionGoal || '';
+        state.sessionAudience = params.get('sessionAudience') || brief.sessionAudience || '';
+        state.sessionFocus = params.get('sessionFocus') || brief.sessionFocus || '';
         persistProfile();
+        persistBrief();
+        syncBriefInputs();
       })();
 
       function updateProgress() {
@@ -613,14 +678,28 @@
 
       // Step 1: ready
       document.getElementById('btnStartInterview').addEventListener('click', function () {
+        goToStep(2);
+      });
+      document.getElementById('btnReadyBack').addEventListener('click', function () {
+        goToStep(0);
+      });
+
+      // Step 2: session brief
+      document.getElementById('btnSessionNext').addEventListener('click', function () {
+        captureBrief();
         const params = new URLSearchParams();
         if (state.company) params.set('company', state.company);
         if (state.oneliner) params.set('oneliner', state.oneliner);
         if (state.promoting) params.set('promoting', state.promoting);
+        if (state.sessionGoal) params.set('sessionGoal', state.sessionGoal);
+        if (state.sessionAudience) params.set('sessionAudience', state.sessionAudience);
+        if (state.sessionFocus) params.set('sessionFocus', state.sessionFocus);
+        params.set('brief', '1');
         window.location.href = buildFlowUrl('interview.html', params);
       });
-      document.getElementById('btnReadyBack').addEventListener('click', function () {
-        goToStep(0);
+      document.getElementById('btnSessionBack').addEventListener('click', function () {
+        captureBrief();
+        goToStep(1);
       });
 
       updateProgress();

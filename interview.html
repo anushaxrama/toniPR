@@ -489,7 +489,7 @@
       <div class="page-bg__rift"></div>
     </div>
   </div>
-  <a href="dashboard.html?v=20260424" class="interview-back back-btn">← Back</a>
+  <a href="dashboard.html?v=20260424b" class="interview-back back-btn">← Back</a>
   <div class="interview-wrap">
     <section class="step active" id="step1">
       <h1 class="step-title">Set up this session</h1>
@@ -565,8 +565,8 @@
       <p class="step-desc">Everything below was generated from your conversation. View, edit, and publish from your dashboard.</p>
       <div id="resultContainer"></div>
       <div class="result-actions">
-        <a href="dashboard.html?v=20260424" class="btn btn-primary">Go to dashboard</a>
-        <a href="interview.html?v=20260424" class="btn btn-secondary">Start another PR kit</a>
+        <a href="dashboard.html?v=20260424b" class="btn btn-primary">Go to dashboard</a>
+        <a href="interview.html?v=20260424b" class="btn btn-secondary">Start another PR kit</a>
       </div>
     </section>
   </div>
@@ -580,6 +580,7 @@
         sessionGoal: '',
         sessionAudience: '',
         sessionFocus: '',
+        hasPrefilledBrief: false,
         answers: {},
         tailoredQuestions: [],
         currentIndex: 0
@@ -608,6 +609,7 @@
           state.sessionGoal = params.get('sessionGoal') || brief.sessionGoal || '';
           state.sessionAudience = params.get('sessionAudience') || brief.sessionAudience || '';
           state.sessionFocus = params.get('sessionFocus') || brief.sessionFocus || '';
+          state.hasPrefilledBrief = params.get('brief') === '1' || !!params.get('sessionGoal') || !!params.get('sessionAudience') || !!params.get('sessionFocus');
         } catch (e) {}
       })();
 
@@ -765,6 +767,7 @@
 
       function startChat() {
         captureSessionBrief();
+        refreshCompanyContext();
         state.tailoredQuestions = generateTailoredQuestions(
           state.companyName,
           state.oneliner,
@@ -785,6 +788,9 @@
       (function initPrepStep() {
         syncSessionInputs();
         refreshCompanyContext();
+        if (state.hasPrefilledBrief) {
+          startChat();
+        }
       })();
 
       document.getElementById('btnStartChat').addEventListener('click', startChat);
