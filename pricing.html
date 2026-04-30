@@ -208,15 +208,15 @@
     .pricing-hero h1 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.55rem, 6.2vw, 4rem);
+      font-size: clamp(2.3rem, 5.1vw, 3.45rem);
       letter-spacing: -0.035em;
-      line-height: 1.08;
+      line-height: 1.04;
       margin-bottom: 14px;
       margin-left: auto;
       margin-right: auto;
       text-wrap: balance;
     }
-    @media (min-width: 900px) {
+    @media (min-width: 768px) {
       .pricing-hero h1 {
         white-space: nowrap;
         text-wrap: unset;
@@ -284,19 +284,35 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       text-align: center;
+      margin-bottom: 8px;
+    }
+    .pricing-includes-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-muted);
       margin-bottom: 10px;
+      line-height: 1;
+    }
+    .pricing-includes-hint-icon {
+      font-size: 0.9rem;
+      color: var(--accent);
     }
     .pricing-includes-grid {
       display: flex;
       flex-wrap: nowrap;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 8px;
       list-style: none;
       overflow-x: auto;
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
-      padding: 2px 0 4px;
+      padding: 2px 12px 8px;
+      scroll-padding-inline: 12px;
     }
     .pricing-includes-grid li {
       font-size: 0.78rem;
@@ -503,6 +519,13 @@
       border-radius: 12px;
       background: var(--bg-card);
       border: 1px solid var(--border);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+    }
+    .info-step:hover {
+      transform: translateY(-3px);
+      background: rgba(215, 38, 61, 0.03);
+      border-color: rgba(215, 38, 61, 0.2);
+      box-shadow: 0 14px 28px rgba(215, 38, 61, 0.08);
     }
     .info-step-num {
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -511,6 +534,11 @@
       color: var(--accent);
       margin-bottom: 8px;
       letter-spacing: 0.04em;
+      transition: color 0.22s ease, transform 0.22s ease;
+    }
+    .info-step:hover .info-step-num {
+      color: #b91c30;
+      transform: translateX(1px);
     }
     .info-step p {
       color: var(--text-secondary);
@@ -732,7 +760,7 @@
       </div>
       <p class="pricing-hero-eyebrow">Plans</p>
       <h1>Pricing for how you show up online</h1>
-      <p class="pricing-hero-lead">One conversation with Toni. A full content kit every time. Pick the plan that fits founders, consultants, and small teams.</p>
+      <p class="pricing-hero-lead">One conversation with Toni. A full content kit every time. Pick the plan that fits your goals.</p>
     </div>
   </header>
 
@@ -743,13 +771,18 @@
         <p class="pricing-model-desc">One session on Starter. Twelve per year on Founder; unused roll over.</p>
         <div class="pricing-includes">
           <p class="pricing-includes-title">Every session includes</p>
+          <div class="pricing-includes-hint" aria-hidden="true">
+            <span>Scroll to see all</span>
+            <span class="pricing-includes-hint-icon">↔</span>
+          </div>
           <ul class="pricing-includes-grid">
-            <li>AI interview</li>
-            <li>LinkedIn &amp; X</li>
-            <li>Blog &amp; articles</li>
-            <li>Press quotes</li>
-            <li>Your story</li>
-            <li>Full PR kit</li>
+            <li>5-10 min Toni interview</li>
+            <li>LinkedIn + Instagram posts</li>
+            <li>X threads</li>
+            <li>Blog article + founder story</li>
+            <li>Press quotes + boilerplate</li>
+            <li>Interview video + short clips</li>
+            <li>Ready-to-publish PR kit</li>
           </ul>
         </div>
         <div class="pricing-cards pricing-cards--2">
