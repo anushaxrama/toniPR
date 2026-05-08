@@ -61,6 +61,43 @@
       transition: color 0.2s;
     }
     .back-link:hover { color: var(--accent); }
+    .article-context {
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 244, 245, 0.98));
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      box-shadow: 0 14px 32px rgba(215, 38, 61, 0.08);
+    }
+    .article-breadcrumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .article-breadcrumbs a {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .article-breadcrumbs a:hover { color: var(--accent); }
+    .article-breadcrumb-sep { color: rgba(215, 38, 61, 0.28); }
+    .article-breadcrumb-current { color: var(--text-muted); }
+    .article-context-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(215, 38, 61, 0.08);
+      border: 1px solid rgba(215, 38, 61, 0.16);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
 
     .article-hero { padding: 140px 0 48px; }
     .article-featured-image {
@@ -125,12 +162,24 @@
         <div class="back-link-wrapper">
           <a href="index.html" class="back-link back-to-blog">← Back</a>
         </div>
+        <div class="article-context" aria-label="Blog location">
+          <div class="article-breadcrumbs">
+            <a href="../index.html">Home</a>
+            <span class="article-breadcrumb-sep">›</span>
+            <a href="index.html">Blog</a>
+            <span class="article-breadcrumb-sep">›</span>
+            <a href="index.html#guides-resources">ToniPR Articles</a>
+            <span class="article-breadcrumb-sep">›</span>
+            <span class="article-breadcrumb-current">How to Build Your Founder Narrative</span>
+          </div>
+          <span class="article-context-pill">Guide · Founder narrative</span>
+        </div>
         <div class="article-featured-image">
           <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80" alt="Founder and team meeting" />
         </div>
         <span class="article-tag">Guide · Founder narrative</span>
         <h1>How to Build Your Founder Narrative</h1>
-        <p class="article-meta">March 2025 · 5 min read</p>
+        <p class="article-meta">March 2025 · 8 min read</p>
       </div>
     </header>
     <div class="article-body">
@@ -149,6 +198,27 @@
 
         <h2>Where to use it</h2>
         <p>Your founder narrative belongs in pitch decks, LinkedIn posts, blog articles, and press interviews. The same core story, adapted for each channel. Consistency builds recognition.</p>
+
+        <h2>What strong founder stories usually include</h2>
+        <p>A good narrative does not read like a resume. It gives people a reason to care, then shows why you are uniquely believable. That usually means including a moment of tension, a clear change in perspective, and a concrete reason the problem felt urgent enough to build around.</p>
+        <p>For example, saying "we saw a market opportunity" is forgettable. Saying "we watched our own team lose hours every week to the same broken workflow, and none of the existing tools respected how people actually work" is much more specific. Specificity is what makes the story sound lived-in rather than rehearsed.</p>
+
+        <h2>How to keep it from sounding too polished</h2>
+        <p>The best founder narratives have edges. They mention what was frustrating, what surprised you, or what you got wrong before the current version clicked. That honesty creates trust. It signals that the company is grounded in reality instead of hiding behind generic startup language.</p>
+        <p>It also helps to use your natural vocabulary. If you would never say "unlocking synergies" in a conversation, do not put it in your narrative. Readers are very good at sensing when a founder story was over-edited into something that no longer sounds human.</p>
+
+        <h2>A simple structure you can reuse</h2>
+        <ul>
+          <li><strong>Start with the friction:</strong> what kept happening that bothered you enough to pay attention?</li>
+          <li><strong>Name the turning point:</strong> when did the problem become impossible to ignore?</li>
+          <li><strong>Show the insight:</strong> what did you realize that others were missing?</li>
+          <li><strong>Connect it to the product:</strong> how does that belief show up in what you are building now?</li>
+        </ul>
+        <p>This is the version you can stretch or compress depending on format. It can become a one-line intro for a podcast, a one-paragraph founder bio, or a long-form blog post for your site.</p>
+
+        <h2>How ToniPR helps shape the story</h2>
+        <p>Most founders do not struggle because they have no story. They struggle because the story lives in fragments: a customer anecdote here, a mission statement there, a good answer buried in an interview, and a sharp one-liner that only comes out in conversation. ToniPR helps pull those fragments into one narrative thread.</p>
+        <p>That matters because once the thread is clear, content gets easier. You are not inventing new positioning every time you post. You are reinforcing the same central idea in different formats, which is exactly how recognition compounds.</p>
 
         <div class="article-cta">
           <h3>Get your narrative in 5-10 minutes</h3>

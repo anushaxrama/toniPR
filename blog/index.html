@@ -65,51 +65,139 @@
     .use-tonipr-intro a:hover { text-decoration: underline; }
     .use-tonipr-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-bottom: 28px;
     }
     .use-tonipr-card {
       display: block;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 24px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      border-radius: 22px;
+      overflow: hidden;
       text-decoration: none;
-      color: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-      border-left: 4px solid var(--accent);
+      color: var(--text-primary);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      box-shadow: 0 20px 44px rgba(215, 38, 61, 0.08);
     }
     .use-tonipr-card:hover {
-      border-color: rgba(215, 38, 61, 0.25);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-      transform: translateY(-2px);
+      border-color: rgba(215, 38, 61, 0.42);
+      box-shadow: 0 24px 52px rgba(215, 38, 61, 0.14);
+      transform: translateY(-6px);
     }
     .use-tonipr-card:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
+    .use-tonipr-card-cover,
+    .article-card-image,
+    .example-card-image {
+      position: relative;
+      height: 232px;
+      padding: 24px 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.96), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(215, 38, 61, 0.16), transparent 34%),
+        radial-gradient(circle at 84% 86%, rgba(215, 38, 61, 0.14), transparent 30%),
+        linear-gradient(135deg, #fffefe 0%, #fff7f8 50%, #ffecef 100%);
+      border-bottom: 1px solid rgba(215, 38, 61, 0.1);
+    }
+    .use-tonipr-card-cover::before,
+    .article-card-image::before,
+    .example-card-image::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(215, 38, 61, 0.1);
+      pointer-events: none;
+    }
+    .card-cover-title {
+      position: relative;
+      z-index: 1;
+      max-width: calc(100% - 176px);
+      min-height: 4.9em;
+      margin: 0;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.28rem, 1.4vw, 1.62rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: #1f2937;
+      text-shadow: none;
+      text-wrap: balance;
+      overflow: hidden;
+    }
+    .card-cover-toni {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      width: 148px;
+      min-width: 148px;
+      max-width: 148px;
+      filter: drop-shadow(0 12px 18px rgba(215, 38, 61, 0.12));
+      pointer-events: none;
+      user-select: none;
+    }
+    .card-cover-tone-rose {
+      background:
+        radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.96), transparent 30%),
+        radial-gradient(circle at 80% 18%, rgba(215, 38, 61, 0.18), transparent 36%),
+        radial-gradient(circle at 88% 84%, rgba(215, 38, 61, 0.12), transparent 30%),
+        linear-gradient(135deg, #fffdfd 0%, #fff3f5 48%, #ffe7eb 100%);
+    }
+    .card-cover-tone-plum {
+      background:
+        radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.96), transparent 30%),
+        radial-gradient(circle at 82% 20%, rgba(215, 38, 61, 0.16), transparent 35%),
+        radial-gradient(circle at 88% 84%, rgba(215, 38, 61, 0.1), transparent 28%),
+        linear-gradient(135deg, #ffffff 0%, #fff5f6 52%, #ffeef1 100%);
+    }
+    .use-tonipr-card-body,
+    .article-card-body,
+    .example-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 24px 24px 26px;
+    }
     .use-tonipr-card-tag {
-      font-size: 0.65rem;
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(215, 38, 61, 0.08);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
     .use-tonipr-card h3 {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: 8px;
+      font-size: 1.5rem;
+      font-weight: 650;
+      line-height: 1.25;
+      margin-bottom: 12px;
       color: var(--text-primary);
     }
     .use-tonipr-card p {
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: var(--text-secondary);
-      line-height: 1.5;
+      line-height: 1.62;
       margin: 0;
+    }
+    .use-tonipr-card-meta {
+      display: block;
+      margin-top: 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
     .use-tonipr-cta {
       display: inline-flex;
@@ -172,32 +260,89 @@
       white-space: nowrap;
     }
     .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-item-dropdown { position: relative; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
     .nav-links a:hover { color: var(--accent); }
     .nav-links a.btn-primary { color: #fff; }
     .nav-links a.btn-primary:hover { color: #fff; }
-    .blog-hero-back-nav {
-      display: flex;
-      justify-content: flex-start;
-      margin: 0 0 1.75rem;
-    }
-    .blog-hero-back-link {
-      display: flex;
+    .nav-dropdown-toggle {
+      display: inline-flex;
       align-items: center;
-      gap: 0.4em;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(10, 10, 10, 0.12);
-      padding-bottom: 4px;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      gap: 8px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: color 0.2s ease;
     }
-    .blog-hero-back-link:hover {
+    .nav-dropdown-toggle:hover,
+    .nav-item-dropdown.is-open .nav-dropdown-toggle,
+    .nav-dropdown-toggle.is-active {
       color: var(--accent);
-      border-bottom-color: rgba(215, 38, 61, 0.35);
+    }
+    .nav-dropdown-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+    .nav-dropdown-caret {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+    .nav-item-dropdown.is-open .nav-dropdown-caret {
+      transform: rotate(180deg);
+    }
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 50%;
+      width: min(320px, 78vw);
+      padding: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 22px 54px rgba(15, 15, 20, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transform: translateX(-50%) translateY(8px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      z-index: 120;
+    }
+    .nav-item-dropdown.is-open .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-link {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .nav-dropdown-link:hover {
+      background: rgba(215, 38, 61, 0.06);
+    }
+    .nav-dropdown-title {
+      color: var(--text-primary);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .nav-dropdown-desc {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
     }
     .btn {
       display: inline-flex; align-items: center; padding: 10px 20px; border-radius: 12px;
@@ -205,63 +350,98 @@
     }
     .btn-primary { background: var(--accent); color: white; }
     .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--text-primary);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .btn-secondary:hover { transform: translateY(-1px); }
 
     .blog-hero {
       padding: 160px 0 140px;
-      text-align: center;
     }
     .blog-hero-shell {
-      max-width: 760px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: clamp(28px, 4vw, 42px);
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.97)),
-        linear-gradient(135deg, rgba(215, 38, 61, 0.06), rgba(215, 38, 61, 0.015));
-      border: 1px solid rgba(215, 38, 61, 0.12);
-      box-shadow: 0 24px 56px rgba(215, 38, 61, 0.07);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      padding: 0;
+      display: block;
     }
-    .blog-hero-kicker {
-      display: inline-flex;
+    .blog-hero-copy {
+      min-width: 0;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .blog-hero-eyebrow {
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: rgba(215, 38, 61, 0.08);
-      border: 1px solid rgba(215, 38, 61, 0.14);
+      gap: 10px;
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: fit-content;
+      margin: 0 0 16px;
       color: var(--accent);
-      font-size: 0.76rem;
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 18px;
     }
-    .blog-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .blog-hero-copy {
+      text-align: center;
+    }
+    .blog-hero-eyebrow::before {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: rgba(215, 38, 61, 0.28);
+    }
+    .blog-hero-eyebrow::after {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: rgba(215, 38, 61, 0.28);
+    }
+    .blog-hero h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2.9rem, 6.2vw, 4.9rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.94;
+      margin-bottom: 20px;
+      max-width: 21ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .blog-hero-desc {
-      font-size: 1.22rem;
+      font-size: 1.18rem;
       color: var(--text-secondary);
-      max-width: min(46rem, 100%);
+      max-width: 42rem;
       margin: 0 auto;
       line-height: 1.7;
       text-wrap: pretty;
     }
     .blog-hero-note {
-      margin: 18px auto 0;
-      max-width: 34rem;
-      font-size: 0.92rem;
-      font-weight: 600;
+      margin: 18px 0 0;
+      max-width: 32rem;
+      font-size: 0.98rem;
+      font-weight: 500;
       color: var(--text-muted);
       letter-spacing: 0.01em;
       line-height: 1.6;
     }
+    .blog-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
     .blog-hero-tags {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      margin-top: 24px;
+      margin-top: 18px;
     }
     .blog-hero-tag {
       display: inline-flex;
@@ -275,65 +455,90 @@
       font-size: 0.83rem;
       font-weight: 600;
       line-height: 1;
+      text-decoration: none;
     }
-    .blog-pipeline-section {
-      padding: 0 0 72px;
-    }
-    .blog-pipeline-shell {
-      border-radius: 24px;
-      border: 1px solid rgba(0, 0, 0, 0.07);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 250, 0.96)),
-        linear-gradient(135deg, rgba(215, 38, 61, 0.04), rgba(215, 38, 61, 0));
-      box-shadow: 0 18px 40px rgba(15, 15, 20, 0.03);
-      padding: clamp(22px, 4vw, 30px);
-    }
-    .blog-pipeline-top {
-      margin-bottom: 18px;
-    }
-    .blog-pipeline-desc {
-      max-width: 42rem;
-      font-size: 0.98rem;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      margin-bottom: 22px;
-    }
-    .blog-pipeline-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .blog-pipeline-card {
-      border-radius: 18px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.84);
-      padding: 18px;
-    }
-    .blog-pipeline-num {
-      display: inline-flex;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-      background: rgba(215, 38, 61, 0.1);
+    .blog-hero-tag:hover {
+      border-color: rgba(215, 38, 61, 0.22);
       color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 12px;
     }
-    .blog-pipeline-card h3 {
+    .blog-search-section {
+      padding: 0 0 56px;
+    }
+    .blog-search-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 10px 0 0;
+    }
+    .blog-search-title {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.08rem;
-      line-height: 1.28;
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      text-align: center;
     }
-    .blog-pipeline-card p {
-      font-size: 0.92rem;
-      line-height: 1.65;
+    .blog-search-form {
+      display: block;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .blog-search-input {
+      width: 100%;
+      border: 1px solid rgba(215, 38, 61, 0.16);
+      border-radius: 16px;
+      padding: 16px 18px;
+      font: inherit;
+      font-size: 0.98rem;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 10px 24px rgba(215, 38, 61, 0.04);
+    }
+    .blog-search-input::placeholder { color: rgba(82, 82, 82, 0.65); }
+    .blog-search-input:focus {
+      outline: 2px solid rgba(215, 38, 61, 0.22);
+      outline-offset: 2px;
+      border-color: rgba(215, 38, 61, 0.4);
+    }
+    .blog-search-chips {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 0 12px;
+      margin-bottom: 22px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .blog-search-chips::-webkit-scrollbar { display: none; }
+    .blog-search-chip {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.92);
       color: var(--text-secondary);
-      margin: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .blog-search-chip:hover,
+    .blog-search-chip.is-active {
+      border-color: rgba(215, 38, 61, 0.28);
+      background: linear-gradient(135deg, rgba(232, 58, 82, 0.96), rgba(215, 38, 61, 0.92));
+      color: #fff;
+    }
+    .blog-search-empty {
+      display: none;
+      margin-top: 18px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+    .blog-search-empty.is-visible {
+      display: block;
     }
     .blog-track-section {
       padding: 0 0 72px;
@@ -419,8 +624,10 @@
       margin: -20px 0 32px;
     }
     .spotlight-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at top right, rgba(215, 38, 61, 0.08), transparent 32%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 247, 0.98));
+      border: 1px solid rgba(215, 38, 61, 0.12);
       border-radius: 16px;
       padding: 48px;
       display: grid;
@@ -449,10 +656,12 @@
     .spotlight-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; }
     .spotlight-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 16px; }
     .spotlight-preview {
-      background: var(--bg-card);
+      background:
+        radial-gradient(circle at top right, rgba(215, 38, 61, 0.06), transparent 38%),
+        rgba(255, 255, 255, 0.92);
       border-radius: 12px;
       padding: 24px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(215, 38, 61, 0.1);
     }
     .spotlight-preview blockquote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); line-height: 1.65; }
 
@@ -479,6 +688,7 @@
       max-width: none;
       font-size: clamp(1.85rem, 2.6vw, 2.35rem);
       white-space: nowrap;
+      text-align: center;
     }
     .example-desc {
       font-size: 1.05rem;
@@ -489,75 +699,67 @@
     }
     .example-cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
     }
     .example-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      border-radius: 22px;
       overflow: hidden;
       text-decoration: none;
-      color: inherit;
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
-      transition: all 0.3s ease;
-      border-left: 4px solid var(--accent);
+      transition: all 0.25s ease;
+      box-shadow: 0 20px 44px rgba(215, 38, 61, 0.08);
     }
-    .example-card-image {
-      height: 140px;
-      background: var(--bg-elevated);
-      overflow: hidden;
-    }
-    .example-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .example-card-body { padding: 24px; }
     .example-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(215, 38, 61, 0.3);
-      box-shadow: 0 12px 40px rgba(215, 38, 61, 0.08);
+      transform: translateY(-6px);
+      border-color: rgba(215, 38, 61, 0.42);
+      box-shadow: 0 24px 52px rgba(215, 38, 61, 0.14);
     }
     .example-card-tag {
-      font-size: 0.7rem;
-      font-weight: 600;
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(215, 38, 61, 0.08);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      font-size: 0.68rem;
+      font-weight: 700;
       color: var(--accent);
       letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-    .example-card-tag--linkedin {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .example-card-tag--linkedin img {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      display: block;
+      margin-bottom: 14px;
     }
     .example-card-body .example-card-tag { margin-bottom: 8px; }
     .example-card h3 {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.5rem;
+      font-weight: 650;
       margin-bottom: 12px;
-      line-height: 1.4;
+      line-height: 1.25;
+      color: var(--text-primary);
     }
     .example-card p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.62;
       flex-grow: 1;
     }
+    .example-card-meta {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
     .example-card-link {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--accent);
-      margin-top: 20px;
+      margin-top: 12px;
     }
 
     .articles-grid {
@@ -566,55 +768,86 @@
     .articles-grid h2 { margin-bottom: 32px; }
     .article-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 30px;
+    }
+    body.is-search-filtered .article-cards,
+    body.is-search-filtered .use-tonipr-grid,
+    body.is-search-filtered .example-cards {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+      justify-content: center;
     }
     .article-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      border-radius: 22px;
       overflow: hidden;
-      transition: all 0.4s ease;
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 20px 44px rgba(215, 38, 61, 0.08);
     }
     .article-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(0, 0, 0, 0.12);
+      border-color: rgba(215, 38, 61, 0.42);
+      box-shadow: 0 24px 52px rgba(215, 38, 61, 0.14);
     }
-    .article-card-image {
-      height: 180px;
-      background: var(--bg-elevated);
-      overflow: hidden;
+    .article-card-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(215, 38, 61, 0.08);
+      border: 1px solid rgba(215, 38, 61, 0.14);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
     }
-    .article-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .article-card-tag--guide { color: #f39fb4; }
+    .article-card-tag--story { color: #f39fb4; }
+    .article-card h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 650;
+      margin-bottom: 12px;
+      line-height: 1.25;
+      color: var(--text-primary);
     }
-    .article-card-body { padding: 24px; }
-    .article-card-tag { font-size: 0.7rem; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; }
-    .article-card-tag--guide { color: #b91c30; }
-    .article-card-tag--story { color: var(--accent); }
-    .article-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; line-height: 1.35; }
-    .article-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
+    .article-card p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.62;
+      flex-grow: 1;
+    }
     .article-card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
+      margin-top: 18px;
     }
-    .article-card-date { font-size: 0.85rem; color: var(--text-muted); }
+    .article-card-date { font-size: 0.88rem; color: var(--text-muted); }
     .article-card-read-more {
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       text-decoration: none;
       color: var(--accent);
       transition: color 0.2s;
     }
     .article-card-read-more:hover {
       color: #e83a52;
+    }
+    .use-tonipr-card-cover .card-cover-title,
+    .article-card-image .card-cover-title,
+    .example-card-image .card-cover-title {
+      max-width: calc(100% - 176px);
+      min-height: 4.9em;
+      margin-top: 0;
+      font-size: clamp(1.28rem, 1.45vw, 1.68rem);
+      line-height: 1;
+      color: #1f2937;
+      overflow: hidden;
     }
 
     footer {
@@ -638,7 +871,24 @@
       .blog-hero { padding: 136px 0 92px; }
       .blog-hero-shell { border-radius: 22px; }
       .blog-hero-desc { font-size: 1.05rem; }
-      .blog-pipeline-grid { grid-template-columns: 1fr; }
+      .blog-hero-shell { grid-template-columns: 1fr; }
+      .blog-hero-eyebrow {
+        grid-column: auto;
+        justify-self: flex-start;
+        margin: 0 0 18px;
+      }
+      .blog-hero h1 { max-width: none; }
+      .blog-hero-copy { text-align: left; }
+      .blog-hero-actions,
+      .blog-hero-tags { justify-content: flex-start; }
+      .blog-hero-desc { margin: 0; }
+      .blog-hero-copy { max-width: none; }
+      .blog-search-shell {
+        padding: 6px 0 0;
+      }
+      .blog-search-form {
+        max-width: none;
+      }
       .example-banner .section-title { white-space: normal; }
       footer .footer-tagline { white-space: normal; }
       .blog-track-grid { grid-template-columns: 1fr; }
@@ -646,6 +896,22 @@
       .spotlight-image { max-width: 120px; margin: 0 auto; }
       .article-cards { grid-template-columns: 1fr; }
       .example-cards { grid-template-columns: 1fr; }
+      .use-tonipr-grid { grid-template-columns: 1fr; }
+      .card-cover-title {
+        max-width: calc(100% - 144px);
+        min-height: auto;
+        font-size: 1.12rem;
+        line-height: 1.04;
+      }
+      .card-cover-toni {
+        width: 126px;
+        min-width: 126px;
+        max-width: 126px;
+        right: 10px;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+      }
       .nav-links { display: none; }
     }
   </style>
@@ -668,6 +934,30 @@
         <a href="../index.html">Home</a>
         <a href="../index.html#story">Story</a>
         <a href="../index.html#demo">Demo</a>
+        <div class="nav-item-dropdown" data-blog-dropdown>
+          <button type="button" class="nav-dropdown-toggle is-active" aria-expanded="false" aria-controls="blogNavMenu">
+            <span>Blog</span>
+            <span class="nav-dropdown-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="nav-dropdown-menu" id="blogNavMenu">
+            <a href="index.html" class="nav-dropdown-link">
+              <span class="nav-dropdown-title">All Blog</span>
+              <span class="nav-dropdown-desc">Browse the full ToniPR blog</span>
+            </a>
+            <a href="#guides-resources" class="nav-dropdown-link">
+              <span class="nav-dropdown-title">ToniPR Articles</span>
+              <span class="nav-dropdown-desc">Educational posts that promote ToniPR</span>
+            </a>
+            <a href="#customer-stories" class="nav-dropdown-link">
+              <span class="nav-dropdown-title">Customer Stories</span>
+              <span class="nav-dropdown-desc">Interview-powered blogs and founder stories</span>
+            </a>
+            <a href="#example-mealflow" class="nav-dropdown-link">
+              <span class="nav-dropdown-title">Resources &amp; Examples</span>
+              <span class="nav-dropdown-desc">Examples, outputs, and publishable proof assets</span>
+            </a>
+          </div>
+        </div>
         <a href="../pricing.html">Pricing</a>
         <a href="../auth.html?v=20260424" class="btn btn-primary">Get your content kit</a>
       </div>
@@ -676,48 +966,39 @@
 
   <header class="blog-hero" id="blog-top">
     <div class="container">
-      <nav class="blog-hero-back-nav" aria-label="Back to marketing site">
-        <a href="../index.html" class="blog-hero-back-link" id="backBtn" aria-label="Back to ToniPR home"><span aria-hidden="true">←</span> Back</a>
-      </nav>
       <div class="blog-hero-shell">
-        <span class="blog-hero-kicker">ToniPR Journal</span>
-        <h1>Blog</h1>
-        <p class="blog-hero-desc">Ideas, stories, and practical inspiration for founders, consultants, advisors, and small teams building more trust, visibility, and momentum online.</p>
-        <p class="blog-hero-note">A curated mix of founder stories, customer examples, and useful guidance you can actually learn from.</p>
-        <div class="blog-hero-tags" aria-label="Blog themes">
-          <span class="blog-hero-tag">Founder stories</span>
-          <span class="blog-hero-tag">Customer examples</span>
-          <span class="blog-hero-tag">SEO-friendly content</span>
+        <span class="blog-hero-eyebrow">ToniPR Blog</span>
+        <div class="blog-hero-copy">
+          <h1>Ideas, stories, and inspiration all in one place.</h1>
+          <p class="blog-hero-desc">Start here for fresh article ideas, founder stories, and examples of what Toni can turn into something people actually want to read.</p>
+          <div class="blog-hero-actions">
+            <a href="#guides-resources" class="btn btn-primary">Read ToniPR Articles</a>
+            <a href="#customer-stories" class="btn btn-secondary">See Customer Stories</a>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="blog-pipeline-section" aria-labelledby="blog-pipeline-heading">
+  <section class="blog-search-section" aria-labelledby="blog-search-heading">
     <div class="container">
-      <div class="blog-pipeline-shell">
-        <div class="blog-pipeline-top">
-          <span class="section-label">Interview to SEO</span>
-          <h2 class="section-title" id="blog-pipeline-heading">How ToniPR turns conversations into publishable blog content</h2>
+      <div class="blog-search-shell">
+        <div class="blog-search-chips" aria-label="Blog categories">
+          <button type="button" class="blog-search-chip is-active" data-search-chip="">All</button>
+          <button type="button" class="blog-search-chip" data-search-chip="tonipr">ToniPR Articles</button>
+          <button type="button" class="blog-search-chip" data-search-chip="customer">Customer Stories</button>
+          <button type="button" class="blog-search-chip" data-search-chip="founder">Founder stories</button>
+          <button type="button" class="blog-search-chip" data-search-chip="linkedin">LinkedIn</button>
+          <button type="button" class="blog-search-chip" data-search-chip="seo">SEO</button>
+          <button type="button" class="blog-search-chip" data-search-chip="press">Press quotes</button>
+          <button type="button" class="blog-search-chip" data-search-chip="consultant">Consultants</button>
+          <button type="button" class="blog-search-chip" data-search-chip="small business">Small business</button>
         </div>
-        <p class="blog-pipeline-desc">One interview becomes a polished article with a clearer angle, stronger proof points, and a format that is easier to publish and reuse.</p>
-        <div class="blog-pipeline-grid">
-          <article class="blog-pipeline-card">
-            <span class="blog-pipeline-num">01</span>
-            <h3>Capture the raw founder language</h3>
-            <p>The interview surfaces the phrases, objections, and customer stakes that make long-form content feel specific instead of templated.</p>
-          </article>
-          <article class="blog-pipeline-card">
-            <span class="blog-pipeline-num">02</span>
-            <h3>Shape it into an SEO-ready article</h3>
-            <p>The dashboard organizes that conversation into a title, summary, meta description, and an outline that can actually be reviewed quickly.</p>
-          </article>
-          <article class="blog-pipeline-card">
-            <span class="blog-pipeline-num">03</span>
-            <h3>Publish and compound credibility</h3>
-            <p>The blog becomes a living archive of founder stories, guides, and proof-driven content that keeps working after the interview ends.</p>
-          </article>
+        <h2 class="blog-search-title" id="blog-search-heading">Search blog posts</h2>
+        <div class="blog-search-form">
+          <input type="search" id="blogSearchInput" class="blog-search-input" placeholder="Search blog posts..." aria-label="Search blog posts" />
         </div>
+        <p class="blog-search-empty" id="blogSearchEmpty">No visible cards match that search yet. Try a broader word like <strong>founder</strong>, <strong>guide</strong>, or <strong>customer</strong>.</p>
       </div>
     </div>
   </section>
@@ -726,28 +1007,143 @@
     <div class="container">
       <span class="section-label" id="blog-tracks-heading">Browse by type</span>
       <div class="blog-track-grid">
-        <a class="blog-track-card" href="#customer-stories">
-          <span class="blog-track-badge">Customer Stories</span>
-          <h2>See the outputs ToniPR creates for real users</h2>
-          <p>Examples generated from ToniPR interviews, including founder stories, customer spotlights, case-study style posts, and press-ready assets.</p>
-          <ul class="blog-track-list">
-            <li>Founder spotlights</li>
-            <li>Generated blog posts</li>
-            <li>Press quote examples</li>
-          </ul>
-          <span class="blog-track-link">Explore customer stories →</span>
-        </a>
-        <a class="blog-track-card" href="#guides-resources">
+        <a class="blog-track-card" href="#guides-resources" data-search-terms="tonipr founder founders consultants consultant small business guide content">
           <span class="blog-track-badge">Guides &amp; Resources</span>
-          <h2>Read ToniPR content built to educate and attract</h2>
-          <p>Editorial and SEO-style content for founders, consultants, and small teams who want better positioning, stronger visibility, and clearer messaging.</p>
+          <h2>Learn what to post and publish</h2>
+          <p>Simple guides to help founders, consultants, and small teams share their story more clearly online.</p>
           <ul class="blog-track-list">
-            <li>Founder guides</li>
-            <li>Consultant content tips</li>
-            <li>Small-business resources</li>
+            <li>Founder tips</li>
+            <li>Content ideas</li>
+            <li>Small-business help</li>
           </ul>
-          <span class="blog-track-link">Explore guides and resources →</span>
+          <span class="blog-track-link">Read guides and resources →</span>
         </a>
+        <a class="blog-track-card" href="#customer-stories" data-search-terms="customer founder founders founder stories linkedin press press quotes article">
+          <span class="blog-track-badge">Customer Stories</span>
+          <h2>See real examples from ToniPR interviews</h2>
+          <p>Examples of what ToniPR can create from one interview, like posts, articles, quotes, and founder stories.</p>
+          <ul class="blog-track-list">
+            <li>Founder stories</li>
+            <li>Articles and posts</li>
+            <li>Quote examples</li>
+          </ul>
+          <span class="blog-track-link">See customer stories →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="guides-resources" class="articles-grid">
+    <div class="container">
+      <span class="section-label">Guides &amp; Resources</span>
+      <h2 class="section-title">ToniPR Articles</h2>
+      <p class="section-intro">These are ToniPR-authored articles for founders, consultants, small teams, and curious new visitors who want simple ideas for showing up more clearly online.</p>
+      <div class="article-cards">
+        <div class="article-card" data-search-terms="tonipr consultants consultant linkedin guide">
+          <div class="article-card-image">
+            <h3 class="card-cover-title">Consultant credibility.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Consultants &amp; advisors</span>
+            <h3>Content for Consultants: Credibility Without Living in Google Docs</h3>
+            <p>Build trust on LinkedIn and beyond when client work always wins the calendar.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">Apr 2026 · 6 min read</span>
+              <a href="content-consultants-credibility.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr small business linkedin guide">
+          <div class="article-card-image card-cover-tone-rose">
+            <h3 class="card-cover-title">Look legit online.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Small business</span>
+            <h3>Small Business LinkedIn Presence Without a Marketing Hire</h3>
+            <p>Practical ideas for looking credible and staying visible online.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">Apr 2026 · 6 min read</span>
+              <a href="small-business-linkedin-presence.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr founder founders founder stories guide linkedin">
+          <div class="article-card-image card-cover-tone-plum">
+            <h3 class="card-cover-title">Build a founder story.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Founder narrative</span>
+            <h3>How to Build Your Founder Narrative</h3>
+            <p>Your story is your biggest asset. Learn how to articulate your founder journey for investors, press, and LinkedIn.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">Mar 2025 · 8 min read</span>
+              <a href="how-founders-promote-themselves.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr press press quotes guide">
+          <div class="article-card-image card-cover-tone-rose">
+            <h3 class="card-cover-title">Quotes that travel.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Founder promotion</span>
+            <h3>5 Press Quotes That Land Podcast Invites</h3>
+            <p>What makes a quote usable, memorable, and likely to travel beyond your own channels? A practical guide to stronger founder quotes.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">Feb 2025 · 7 min read</span>
+              <a href="press-quotes-that-land-podcast-invites.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr guide content ideas">
+          <div class="article-card-image">
+            <h3 class="card-cover-title">What to say online.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Content ideas</span>
+            <h3>What to Post When You Don't Know What to Say</h3>
+            <p>A simple starting point for anyone who wants to post more often without overthinking every idea.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">May 2025 · 6 min read</span>
+              <a href="what-to-post-when-you-dont-know.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr seo guide article content">
+          <div class="article-card-image card-cover-tone-plum">
+            <h3 class="card-cover-title">One interview, many posts.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · SEO content</span>
+            <h3>How to Turn One Interview Into a Week of Content</h3>
+            <p>Learn how one strong conversation can become multiple useful pieces, including an SEO article and follow-up posts.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">May 2025 · 7 min read</span>
+              <a href="turn-one-interview-into-content.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="article-card" data-search-terms="tonipr consultants consultant small business website guide">
+          <div class="article-card-image card-cover-tone-rose">
+            <h3 class="card-cover-title">A clearer About page.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="article-card-body">
+            <span class="article-card-tag article-card-tag--guide">Guide · Website basics</span>
+            <h3>How to Write an About Page That Sounds Like You</h3>
+            <p>Make your website feel more human, especially for consultants and small business teams meeting new visitors online.</p>
+            <div class="article-card-footer">
+              <span class="article-card-date">May 2025 · 6 min read</span>
+              <a href="about-page-that-sounds-like-you.html" class="article-card-read-more">Read more</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -758,76 +1154,83 @@
       <h2 id="use-tonipr-heading" class="section-title">See what ToniPR creates from real interviews</h2>
       <p class="use-tonipr-sub">Generated outputs, founder spotlights, and proof of what one session can become</p>
       <p class="use-tonipr-intro">
-        Explore customer-facing content generated from ToniPR sessions: founder stories, long-form blog posts, press quotes, and spotlight-style profiles. This is the proof layer of the platform, showing what one conversation can turn into.
+        Explore customer-facing outputs generated from ToniPR sessions: LinkedIn posts, long-form articles, press quotes, and spotlight-style founder stories.
       </p>
       <div class="use-tonipr-grid">
-        <a class="use-tonipr-card" href="mealflow-decision-fatigue.html">
-          <div class="use-tonipr-card-tag">Customer story</div>
-          <h3>Generated LinkedIn post example</h3>
-          <p>See how one ToniPR interview becomes a finished social post with a clear angle and founder voice.</p>
+        <a class="use-tonipr-card" href="mealflow-decision-fatigue.html" data-search-terms="customer linkedin post">
+          <div class="use-tonipr-card-cover">
+            <h3 class="card-cover-title">A LinkedIn post that lands.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">LinkedIn post</div>
+            <h3>Generated LinkedIn post example</h3>
+            <p>See how one ToniPR interview becomes a polished LinkedIn post with a clear angle, strong framing, and founder voice.</p>
+            <span class="use-tonipr-card-meta">Mar 2025 · 7 min read</span>
+          </div>
         </a>
-        <a class="use-tonipr-card" href="mealflow-planning-article.html">
-          <div class="use-tonipr-card-tag">Customer story</div>
-          <h3>Generated long-form article</h3>
-          <p>Follow one customer interview as it turns into a polished article for a founder or company site.</p>
+        <a class="use-tonipr-card" href="mealflow-planning-article.html" data-search-terms="customer seo article">
+          <div class="use-tonipr-card-cover card-cover-tone-plum">
+            <h3 class="card-cover-title">One interview, one case study.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">Customer story</div>
+            <h3>Generated long-form article</h3>
+            <p>Follow one customer interview as it turns into a polished SEO article for a founder or company site.</p>
+            <span class="use-tonipr-card-meta">Mar 2025 · 9 min read</span>
+          </div>
         </a>
-        <a class="use-tonipr-card" href="mealflow-press-quote.html">
-          <div class="use-tonipr-card-tag">Customer story</div>
-          <h3>Generated press quote example</h3>
-          <p>Review a ready-to-use quote asset created from the same interview for press, podcasts, and decks.</p>
+        <a class="use-tonipr-card" href="mealflow-press-quote.html" data-search-terms="customer press press quotes quote">
+          <div class="use-tonipr-card-cover card-cover-tone-rose">
+            <h3 class="card-cover-title">A quote worth repeating.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">Press quote</div>
+            <h3>Generated press quote example</h3>
+            <p>Review a ready-to-use founder quote that could travel into press, podcasts, and customer proof.</p>
+            <span class="use-tonipr-card-meta">Mar 2025 · 6 min read</span>
+          </div>
         </a>
-        <a class="use-tonipr-card" href="spotlight-founder.html">
-          <div class="use-tonipr-card-tag">Customer story</div>
-          <h3>Founder spotlight &amp; PR kit flow</h3>
-          <p>A deeper look at founder story output from a Toni-style interview.</p>
+        <a class="use-tonipr-card" href="spotlight-founder.html" data-search-terms="customer founder founders founder stories spotlight">
+          <div class="use-tonipr-card-cover card-cover-tone-plum">
+            <h3 class="card-cover-title">A founder story that sticks.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">Customer story</div>
+            <h3>Founder spotlight &amp; PR kit flow</h3>
+            <p>A deeper look at founder story output from a Toni-style interview.</p>
+            <span class="use-tonipr-card-meta">Mar 2025 · 7 min read</span>
+          </div>
+        </a>
+        <a class="use-tonipr-card" href="brightpath-advisors-content-engine.html" data-search-terms="customer consultants consultant small business content engine">
+          <div class="use-tonipr-card-cover">
+            <h3 class="card-cover-title">One interview, a month of credibility content.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">Customer story</div>
+            <h3>BrightPath Advisors content engine</h3>
+            <p>See how one founder interview became a full month of trust-building content for consultants and a small business advisory team.</p>
+            <span class="use-tonipr-card-meta">May 2025 · 8 min read</span>
+          </div>
+        </a>
+        <a class="use-tonipr-card" href="lumen-creative-founder-story.html" data-search-terms="customer founder founders founder stories spotlight">
+          <div class="use-tonipr-card-cover card-cover-tone-rose">
+            <h3 class="card-cover-title">A studio story clients actually remember.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
+          </div>
+          <div class="use-tonipr-card-body">
+            <div class="use-tonipr-card-tag">Founder spotlight</div>
+            <h3>Lumen Creative founder spotlight</h3>
+            <p>A deeper founder-story example showing how ToniPR can shape a memorable narrative for a creative business.</p>
+            <span class="use-tonipr-card-meta">May 2025 · 7 min read</span>
+          </div>
         </a>
       </div>
       <a href="#guides-resources" class="btn btn-primary use-tonipr-cta">Browse guides &amp; resources</a>
-    </div>
-  </section>
-
-  <section id="example-mealflow" class="example-section">
-    <div class="container">
-      <div class="example-banner">
-        <span class="example-badge">Customer Story Example</span>
-        <h2 class="section-title">See how one customer interview becomes multiple assets</h2>
-        <p class="example-desc">Below is a real-style ToniPR example from a founder building MealFlow. One session produces multiple outputs for the same customer story: social posts, long-form content, and press-ready lines.</p>
-      </div>
-      <div class="example-cards">
-        <a href="mealflow-decision-fatigue.html" class="example-card">
-          <div class="example-card-image">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Family meal planning" />
-          </div>
-          <div class="example-card-body">
-            <span class="example-card-tag example-card-tag--linkedin"><img src="../assets/icons/linkedin.svg" alt="" width="16" height="16" /> LinkedIn Post</span>
-            <h3>Everyone talks about "meal prep," but nobody talks about decision fatigue</h3>
-            <p>At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.</p>
-            <span class="example-card-link">View full example →</span>
-          </div>
-        </a>
-        <a href="mealflow-planning-article.html" class="example-card">
-          <div class="example-card-image">
-            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80" alt="Meal prep and planning" />
-          </div>
-          <div class="example-card-body">
-            <span class="example-card-tag">Article</span>
-            <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
-            <p>Longer composite case study: real-feel family routines, stats, and how MealFlow turns weekly planning into a two-minute ritual.</p>
-            <span class="example-card-link">Read full article →</span>
-          </div>
-        </a>
-        <a href="mealflow-press-quote.html" class="example-card">
-          <div class="example-card-image">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Family dinner at the table" />
-          </div>
-          <div class="example-card-body">
-            <span class="example-card-tag">Press Quote</span>
-            <h3>"That's not just time saved. That's less stress at the dinner table."</h3>
-            <p>Ready-to-use for parenting blogs, podcasts, and influencer decks.</p>
-            <span class="example-card-link">See full example →</span>
-          </div>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -836,14 +1239,14 @@
       <span class="section-label">Customer Story</span>
       <h2 class="section-title">Featured founder spotlight</h2>
       <p class="section-intro">A founder-story example generated from a ToniPR interview. Use this type of piece to show what Toni can publish for customers after a single session.</p>
-      <div class="spotlight-card">
+      <div class="spotlight-card" data-search-terms="customer founder founders founder stories spotlight article">
         <div class="spotlight-image">
           <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80" alt="Developer at work" />
         </div>
         <div>
           <span class="spotlight-badge">Spotlight</span>
           <h2>Building AI Tools for Developers</h2>
-          <p class="spotlight-meta">Founder story from a ToniPR interview</p>
+          <p class="spotlight-meta">Founder story from a ToniPR interview · 7 min read</p>
           <p>How one founder went from engineer to CEO, and why developer productivity became the mission. A deep dive into building tools that engineers actually want to use.</p>
           <a href="spotlight-founder.html" class="btn btn-primary">Read full story</a>
         </div>
@@ -855,68 +1258,53 @@
     </div>
   </section>
 
-  <section id="guides-resources" class="articles-grid">
+  <section id="example-mealflow" class="example-section">
     <div class="container">
-      <span class="section-label">Guides &amp; Resources</span>
-      <h2 class="section-title">Educational content that brings people into ToniPR</h2>
-      <p class="section-intro">These are ToniPR-authored articles meant to educate readers, rank organically, and help visitors understand how to improve their visibility before they ever start a session.</p>
-      <div class="article-cards">
-        <div class="article-card">
-          <div class="article-card-image">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Consultant at work" />
+      <div class="example-banner">
+        <span class="example-badge">Customer Story Example</span>
+        <h2 class="section-title">See how one customer interview becomes multiple assets</h2>
+        <p class="example-desc">Below is a real-style ToniPR example from a founder building MealFlow. One session produces multiple outputs for the same customer story, from a LinkedIn post to a deeper case-study article and a press-ready quote.</p>
+      </div>
+      <div class="example-cards">
+        <a href="mealflow-decision-fatigue.html" class="example-card" data-search-terms="customer linkedin post">
+          <div class="example-card-image">
+            <h3 class="card-cover-title">The dinner problem, in one post.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
           </div>
-          <div class="article-card-body">
-            <span class="article-card-tag article-card-tag--guide">Guide · Consultants &amp; advisors</span>
-            <h3>Content for Consultants: Credibility Without Living in Google Docs</h3>
-            <p>Build trust on LinkedIn and beyond when client work always wins the calendar.</p>
-            <div class="article-card-footer">
-              <span class="article-card-date">Apr 2026</span>
-              <a href="content-consultants-credibility.html" class="article-card-read-more">Read more</a>
-            </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">LinkedIn post</span>
+            <h3>Everyone talks about "meal prep," but nobody talks about decision fatigue</h3>
+            <p>At MealFlow, we found that families spend 3 hours a week just deciding what to cook. We built our app to take the guesswork out of dinner.</p>
+            <span class="example-card-meta">Mar 2025 · 7 min read</span>
+            <span class="example-card-link">View post →</span>
           </div>
-        </div>
-        <div class="article-card">
-          <div class="article-card-image">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Small business team" />
+        </a>
+        <a href="mealflow-planning-article.html" class="example-card" data-search-terms="customer seo article">
+          <div class="example-card-image card-cover-tone-plum">
+            <h3 class="card-cover-title">A richer customer story.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
           </div>
-          <div class="article-card-body">
-            <span class="article-card-tag article-card-tag--guide">Guide · Small business</span>
-            <h3>Small Business LinkedIn Presence Without a Marketing Hire</h3>
-            <p>Practical ideas for looking credible and staying visible online.</p>
-            <div class="article-card-footer">
-              <span class="article-card-date">Apr 2026</span>
-              <a href="small-business-linkedin-presence.html" class="article-card-read-more">Read more</a>
-            </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">Article</span>
+            <h3>How MealFlow Cut Meal Planning from 3 Hours to 2 Minutes</h3>
+            <p>Longer composite case study: real-feel family routines, stats, and how MealFlow turns weekly planning into a two-minute ritual.</p>
+            <span class="example-card-meta">Mar 2025 · 9 min read</span>
+            <span class="example-card-link">Read article →</span>
           </div>
-        </div>
-        <div class="article-card">
-          <div class="article-card-image">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Founder and team" />
+        </a>
+        <a href="mealflow-press-quote.html" class="example-card" data-search-terms="customer press press quotes quote">
+          <div class="example-card-image card-cover-tone-rose">
+            <h3 class="card-cover-title">One sharp founder line.</h3>
+            <img src="../assets/toni/toni-headshot.png" alt="" class="card-cover-toni" width="180" height="180" loading="lazy" />
           </div>
-          <div class="article-card-body">
-            <span class="article-card-tag article-card-tag--guide">Guide · Founder narrative</span>
-            <h3>How to Build Your Founder Narrative</h3>
-            <p>Your story is your biggest asset. Learn how to articulate your founder journey for investors, press, and LinkedIn.</p>
-            <div class="article-card-footer">
-              <span class="article-card-date">Mar 2025</span>
-              <a href="how-founders-promote-themselves.html" class="article-card-read-more">Read more</a>
-            </div>
+          <div class="example-card-body">
+            <span class="example-card-tag">Press quote</span>
+            <h3>How one founder soundbite becomes a publishable article angle</h3>
+            <p>A press-ready founder quote built from a single memorable line and the interview behind it.</p>
+            <span class="example-card-meta">Mar 2025 · 6 min read</span>
+            <span class="example-card-link">View quote →</span>
           </div>
-        </div>
-        <div class="article-card">
-          <div class="article-card-image">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="Developer at laptop" />
-          </div>
-          <div class="article-card-body">
-            <span class="article-card-tag article-card-tag--guide">Guide · Founder promotion</span>
-            <h3>5 Press Quotes That Land Podcast Invites</h3>
-            <p>What makes a quote usable, memorable, and likely to travel beyond your own channels? A practical guide to stronger founder quotes.</p>
-            <div class="article-card-footer">
-              <span class="article-card-date">Feb 2025</span>
-              <a href="#" class="article-card-read-more">Read more</a>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -934,6 +1322,65 @@
     });
     (function () {
       var nav = document.querySelector('nav');
+      var blogDropdown = document.querySelector('[data-blog-dropdown]');
+      var blogDropdownToggle = blogDropdown ? blogDropdown.querySelector('.nav-dropdown-toggle') : null;
+      var blogSearchInput = document.getElementById('blogSearchInput');
+      var blogSearchEmpty = document.getElementById('blogSearchEmpty');
+      var blogTrackSection = document.querySelector('.blog-track-section');
+      var searchableCards = Array.prototype.slice.call(document.querySelectorAll('.article-card, .use-tonipr-card, .example-card, .dash-blog-example, .spotlight-card'));
+      var blogSearchChipValues = Array.prototype.slice.call(document.querySelectorAll('[data-search-chip]')).map(function (chip) {
+        return (chip.getAttribute('data-search-chip') || '').trim().toLowerCase();
+      }).filter(Boolean);
+      var searchSections = [
+        { element: document.querySelector('#guides-resources'), selector: '.article-card' },
+        { element: document.querySelector('#customer-stories'), selector: '.use-tonipr-card' },
+        { element: document.querySelector('#founder-spotlight'), selector: '.spotlight-card' },
+        { element: document.querySelector('#example-mealflow'), selector: '.example-card' }
+      ];
+      function closeBlogDropdown() {
+        if (!blogDropdown || !blogDropdownToggle) return;
+        blogDropdown.classList.remove('is-open');
+        blogDropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+      function scrollToFirstVisibleSection() {
+        var firstVisibleSection = searchSections.find(function (sectionConfig) {
+          return sectionConfig.element && sectionConfig.element.style.display !== 'none';
+        });
+        if (!firstVisibleSection || !firstVisibleSection.element) return;
+        var navOffset = 110;
+        var targetTop = window.scrollY + firstVisibleSection.element.getBoundingClientRect().top - navOffset;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+      }
+      function updateBlogSearch(query) {
+        if (!searchableCards.length) return;
+        var term = (query || '').trim().toLowerCase();
+        var tokens = term ? term.split(/\s+/).filter(Boolean) : [];
+        var isChipQuery = blogSearchChipValues.indexOf(term) !== -1;
+        var visibleCount = 0;
+        searchableCards.forEach(function (card) {
+          var termList = (card.getAttribute('data-search-terms') || '').toLowerCase();
+          var haystack = (termList + ' ' + card.textContent).toLowerCase();
+          var matches = !term || (isChipQuery ? termList.indexOf(term) !== -1 : tokens.every(function (token) {
+            return haystack.indexOf(token) !== -1;
+          }));
+          card.style.display = matches ? '' : 'none';
+          if (matches) visibleCount++;
+        });
+        if (blogTrackSection) {
+          blogTrackSection.style.display = term ? 'none' : '';
+        }
+        document.body.classList.toggle('is-search-filtered', !!term);
+        searchSections.forEach(function (sectionConfig) {
+          if (!sectionConfig.element) return;
+          var visibleItems = Array.prototype.slice.call(sectionConfig.element.querySelectorAll(sectionConfig.selector)).filter(function (item) {
+            return item.style.display !== 'none';
+          });
+          sectionConfig.element.style.display = (!term || visibleItems.length) ? '' : 'none';
+        });
+        if (blogSearchEmpty) {
+          blogSearchEmpty.classList.toggle('is-visible', !!term && visibleCount === 0);
+        }
+      }
       if (nav) {
         function onScrollNav() {
           if (window.scrollY > 50) nav.classList.add('scrolled');
@@ -941,6 +1388,40 @@
         }
         onScrollNav();
         window.addEventListener('scroll', onScrollNav, { passive: true });
+      }
+      if (blogDropdown && blogDropdownToggle) {
+        blogDropdownToggle.addEventListener('click', function () {
+          if (blogDropdown.classList.contains('is-open')) closeBlogDropdown();
+          else {
+            blogDropdown.classList.add('is-open');
+            blogDropdownToggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+        document.addEventListener('click', function (e) {
+          if (!blogDropdown.contains(e.target)) closeBlogDropdown();
+        });
+        window.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeBlogDropdown();
+        });
+      }
+      if (blogSearchInput) {
+        blogSearchInput.addEventListener('input', function () {
+          document.querySelectorAll('[data-search-chip]').forEach(function (chip) {
+            chip.classList.toggle('is-active', chip.getAttribute('data-search-chip') === blogSearchInput.value);
+          });
+          updateBlogSearch(blogSearchInput.value);
+        });
+        document.querySelectorAll('[data-search-chip]').forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            var value = chip.getAttribute('data-search-chip') || '';
+            blogSearchInput.value = value;
+            document.querySelectorAll('[data-search-chip]').forEach(function (btn) {
+              btn.classList.toggle('is-active', btn === chip);
+            });
+            updateBlogSearch(value);
+            if (value) scrollToFirstVisibleSection();
+          });
+        });
       }
     })();
   </script>

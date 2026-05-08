@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Write an About Page That Sounds Like You | ToniPR Blog</title>
+  <meta name="description" content="A straightforward guide to writing an About page that feels clear, human, and easy for new visitors to understand." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/page-bg.css" />
+  <link rel="stylesheet" href="../css/platform-logo.css?v=2" />
+  <style>
+    :root { --bg:#ffffff; --bg-card:#fafafa; --text-primary:#0a0a0a; --text-secondary:#525252; --text-muted:#737373; --accent:#D7263D; --border:rgba(0,0,0,0.08); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Nunito', sans-serif; background-color:#fff; color:var(--text-primary); overflow-x:hidden; line-height:1.7; -webkit-font-smoothing:antialiased; position:relative; }
+    .container { max-width:720px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+    article { position:relative; z-index:1; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:transparent; transition:background 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.5s cubic-bezier(0.16,1,0.3,1); }
+    nav.scrolled { background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:0 24px; }
+    .back-link-wrapper { text-align:left; margin-bottom:24px; }
+    .back-link { display:inline-block; font-size:0.9rem; color:var(--text-secondary); text-decoration:none; transition:color 0.2s; }
+    .back-link:hover { color:var(--accent); }
+    .article-context { margin-bottom:28px; padding:18px 20px; border-radius:22px; background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,244,245,0.98)); border:1px solid rgba(215,38,61,0.14); box-shadow:0 14px 32px rgba(215,38,61,0.08); }
+    .article-breadcrumbs { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px; font-size:0.88rem; color:var(--text-secondary); line-height:1.5; }
+    .article-breadcrumbs a { color:var(--text-primary); text-decoration:none; }
+    .article-breadcrumbs a:hover { color:var(--accent); }
+    .article-breadcrumb-sep { color:rgba(215,38,61,0.28); }
+    .article-breadcrumb-current { color:var(--text-muted); }
+    .article-context-pill { display:inline-flex; align-items:center; padding:8px 14px; border-radius:999px; background:rgba(215,38,61,0.08); border:1px solid rgba(215,38,61,0.16); color:var(--accent); font-size:0.8rem; font-weight:700; line-height:1; }
+    .article-hero { padding:140px 0 48px; }
+    .article-featured-image { width:100%; max-width:720px; margin:0 auto 40px; border-radius:12px; overflow:hidden; aspect-ratio:16/10; }
+    .article-featured-image img { width:100%; height:100%; object-fit:cover; display:block; }
+    .article-tag { font-size:0.75rem; font-weight:600; color:var(--accent); letter-spacing:0.1em; margin-bottom:12px; }
+    .article-hero h1 { font-family:'Bricolage Grotesque', sans-serif; font-size:clamp(2rem,4vw,2.75rem); font-weight:700; line-height:1.25; margin-bottom:20px; }
+    .article-meta { font-size:0.95rem; color:var(--text-muted); margin-bottom:32px; }
+    .article-body { padding:0 0 80px; }
+    .article-body p { margin-bottom:24px; color:var(--text-secondary); }
+    .article-body h2 { font-family:'Bricolage Grotesque', sans-serif; font-size:1.5rem; font-weight:600; margin:48px 0 16px; }
+    .article-body ul { margin:0 0 24px 1.15em; color:var(--text-secondary); }
+    .article-body li { margin-bottom:0.6em; }
+    .article-cta { background:var(--bg-card); border-radius:16px; padding:32px; margin-top:48px; border:1px solid var(--border); }
+    .article-cta h3 { font-family:'Bricolage Grotesque', sans-serif; font-size:1.25rem; margin-bottom:12px; }
+    .article-cta p { margin-bottom:20px; }
+    .btn { display:inline-flex; align-items:center; padding:12px 24px; border-radius:8px; font-weight:600; text-decoration:none; background:var(--accent); color:white; }
+    .btn:hover { transform:translateY(-1px); }
+  </style>
+</head>
+<body>
+  <div class="page-bg page-bg--calm" aria-hidden="true"><div class="page-bg__wash"></div><div class="page-bg__art"><div class="page-bg__corner page-bg__corner--tr"></div><div class="page-bg__corner page-bg__corner--tl"></div><div class="page-bg__corner page-bg__corner--br"></div><div class="page-bg__corner page-bg__corner--bl"></div><div class="page-bg__rift"></div></div></div>
+  <nav><div class="nav-inner"><a href="../index.html" class="logo logo--platform-mark" aria-label="ToniPR home"><img src="../assets/toni/toni-header-logo.png?v=2" alt="" class="logo-platform-img" width="180" height="44" /></a><div class="nav-links"><a href="index.html">Blog</a><a href="../pricing.html">Pricing</a></div></div></nav>
+  <article>
+    <header class="article-hero">
+      <div class="container">
+        <div class="back-link-wrapper"><a href="index.html" class="back-link back-to-blog">← Back</a></div>
+        <div class="article-context" aria-label="Blog location">
+          <div class="article-breadcrumbs">
+            <a href="../index.html">Home</a><span class="article-breadcrumb-sep">›</span><a href="index.html">Blog</a><span class="article-breadcrumb-sep">›</span><a href="index.html#guides-resources">ToniPR Articles</a><span class="article-breadcrumb-sep">›</span><span class="article-breadcrumb-current">How to Write an About Page That Sounds Like You</span>
+          </div>
+          <span class="article-context-pill">Guide · Website basics</span>
+        </div>
+        <div class="article-featured-image"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80" alt="Desk with laptop and page drafts" /></div>
+        <span class="article-tag">Guide · Website basics</span>
+        <h1>How to Write an About Page That Sounds Like You</h1>
+        <p class="article-meta">May 2025 · 6 min read</p>
+      </div>
+    </header>
+    <div class="article-body">
+      <div class="container">
+        <p>A lot of About pages sound like they were written for nobody in particular. They list credentials, use broad words like “passionate” and “innovative,” and still leave a new visitor unsure what the business actually does. A good About page should feel simple, human, and easy to understand.</p>
+
+        <h2>Start with what you do and who you help</h2>
+        <p>The first job of an About page is clarity. Before the reader learns your backstory, they should understand what you do and who it is for. If that part is fuzzy, the rest of the page will not help much.</p>
+
+        <h2>Tell the story behind the work</h2>
+        <p>Once the basics are clear, give people a reason to remember you. What led you here? What problem keeps pulling you back? What do you care about that shapes how you work? You do not need a dramatic founder origin story. You just need a real explanation that sounds like a person, not a brochure.</p>
+
+        <h2>Keep it grounded</h2>
+        <ul>
+          <li><strong>Use specific language:</strong> say what you actually do instead of abstract phrases.</li>
+          <li><strong>Sound like yourself:</strong> if you would not say it out loud, it probably does not belong here.</li>
+          <li><strong>Make it useful:</strong> help the reader understand how you think, not just what you have done.</li>
+        </ul>
+
+        <h2>Make the reader feel oriented</h2>
+        <p>A good About page should reduce confusion. By the end, a reader should know what kind of person or team is behind the business, what you believe, and whether you feel like the right fit for them.</p>
+
+        <h2>Why interviews help</h2>
+        <p>Many people struggle to write About pages because their best language comes out in conversation, not on command. Talking through your story often produces clearer, warmer, more believable wording than staring at a blank page. That is part of what makes ToniPR useful: it helps pull natural language into usable content.</p>
+
+        <div class="article-cta">
+          <h3>Turn your story into something readable</h3>
+          <p>ToniPR helps you talk through what you do, why you do it, and how to say it clearly across your website and content.</p>
+          <a href="../auth.html?v=20260424" class="btn">Start your AI interview</a>
+        </div>
+      </div>
+    </div>
+  </article>
+  <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      function onScroll() {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+    document.querySelector('.back-to-blog')?.addEventListener('click', function (e) {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  </script>
+</body>
+</html>
