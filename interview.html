@@ -565,7 +565,7 @@
       <p class="step-desc">Everything below was generated from your conversation. View, edit, and publish from your dashboard.</p>
       <div id="resultContainer"></div>
       <div class="result-actions">
-        <a href="dashboard.html?v=20260424b" class="btn btn-primary">Go to dashboard</a>
+        <a href="dashboard.html?v=20260424b&published=1#dash-section-blog" class="btn btn-primary">Go to dashboard</a>
         <a href="interview.html?v=20260424b" class="btn btn-secondary">Start another PR kit</a>
       </div>
     </section>
@@ -596,6 +596,95 @@
 
       function writeJsonStorage(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
+      }
+
+      function slugify(value) {
+        return (value || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .replace(/-{2,}/g, '-');
+      }
+
+      function formatPublishDate() {
+        try {
+          return new Date().toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+        } catch (e) {
+          return 'Today';
+        }
+      }
+
+      function buildBlogDraft(cn, ol, a1, a2, a3, a4, a5, a6, sessionGoal) {
+        var topic = (sessionGoal || state.promoting || 'your biggest growth story').trim();
+        var audience = (state.sessionAudience || 'high-intent prospects').trim();
+        var focus = (state.sessionFocus || 'the customer problem and why it matters').trim();
+        var safeOneliner = (ol || 'is solving an important problem').trim();
+        var cleanCompany = (cn || 'Your company').trim();
+        var title = 'How ' + cleanCompany + ' is turning ' + topic + ' into a trust-building growth engine';
+        var excerpt = a2
+          ? a2
+          : cleanCompany + ' is using founder-led storytelling to make ' + topic + ' easier to understand and easier to trust.';
+        var narrative = a3
+          ? a3
+          : cleanCompany + ' keeps returning to the same insight: clear customer language beats generic marketing every time.';
+        var proof = a5 || a6 || 'A sharp point of view and a repeatable content engine create momentum over time.';
+
+        return {
+          id: 'blog-' + (slugify(cleanCompany) || 'company') + '-' + Date.now(),
+          status: 'Ready to publish',
+          publishedLabel: 'Published from interview',
+          title: title,
+          slug: slugify(title),
+          companyName: cleanCompany,
+          topic: topic,
+          audience: audience,
+          focus: focus,
+          summary: excerpt,
+          excerpt: 'Generated from your Toni interview for people searching for ' + topic + ', founder context, and proof that ' + cleanCompany + ' understands the problem deeply.',
+          seoTitle: title + ' | ToniPR',
+          metaDescription: 'A founder-led SEO article generated from a ToniPR interview about ' + cleanCompany + ', ' + topic + ', and the signals that make the story credible.',
+          keywords: [
+            cleanCompany,
+            topic,
+            audience,
+            'founder story',
+            'SEO content'
+          ],
+          publishedAt: formatPublishDate(),
+          readingTime: '6 min read',
+          sections: [
+            {
+              heading: 'What ' + cleanCompany + ' is building',
+              body: (a1 || (cleanCompany + ' ' + safeOneliner + '.')) + ' This is the foundational story your buyers, partners, and press contacts need first.'
+            },
+            {
+              heading: 'Why this matters right now',
+              body: excerpt + ' Publishing this angle as a blog post helps search, sales conversations, and credibility compound instead of disappearing inside one-off social posts.'
+            },
+            {
+              heading: 'The customer problem behind the story',
+              body: narrative + ' ToniPR turns that insight into long-form content that is clearer, more discoverable, and easier for future readers to act on.'
+            },
+            {
+              heading: 'Proof points worth publishing',
+              body: (a4 ? a4 + ' ' : '') + proof + ' This gives the article enough specificity to feel grounded rather than generic.'
+            },
+            {
+              heading: 'How ToniPR uses the interview for SEO',
+              body: 'The interview surfaces founder language, customer stakes, and momentum signals. ToniPR packages that into a draft that can be published on your blog, linked across your dashboard, and reused across your broader content kit.'
+            }
+          ]
+        };
+      }
+
+      function persistGeneratedBundle(payload) {
+        writeJsonStorage('tonipr_generated_blog_article', payload.blogArticle);
+        writeJsonStorage('tonipr_generated_content_bundle', payload);
+        localStorage.setItem('tonipr_recent_publish_notice', '1');
       }
 
       (function initFromParams() {
@@ -826,6 +915,15 @@
           var a5 = state.answers.q5 || '';
           var a6 = state.answers.q6 || state.answers.q5 || state.answers.q4 || a2 || 'We\'re building something that matters.';
           var sessionGoal = state.sessionGoal || state.promoting || 'the story you want to tell right now';
+          var blogDraft = buildBlogDraft(cn, ol, a1, a2, a3, a4, a5, a6, sessionGoal);
+
+          persistGeneratedBundle({
+            companyName: cn,
+            generatedAt: Date.now(),
+            blogArticle: blogDraft,
+            pressQuote: a5 || a6,
+            linkedinSummary: [a1, a2, a3, a4].filter(Boolean).join(' ').trim()
+          });
 
           var result = document.getElementById('resultContainer');
           result.innerHTML =
@@ -835,7 +933,7 @@
             (a3 ? 'We found that ' + a3 + '. ' : '') + (a4 || '') + '</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">𝕏</span><h4>X Threads</h4></div><p>Thread-ready posts about ' + cn + ' optimized for engagement.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📝</span><h4>Founder Story Article</h4></div><p>The story behind ' + cn + ': why you started and what drives you.</p></div>' +
-            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>Blog article</h4></div><p>How ' + cn + ' ' + ol + ': a founder\'s perspective on ' + sessionGoal + '—ready to publish on your site.</p></div>' +
+            '<div class="result-card"><div class="result-card-heading"><span class="result-icon">📄</span><h4>Blog article</h4></div><p><strong>' + blogDraft.title + '</strong><br>' + blogDraft.summary + '</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><img src="assets/icons/press-quote.svg" alt="" width="22" height="22" /><h4>Press Quotes</h4></div><p>"' + (a5 || a6) + '"</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">👤</span><h4>Founder Bio</h4></div><p>A polished bio for press kits, speaker pages, and about sections.</p></div>' +
             '<div class="result-card"><div class="result-card-heading"><span class="result-icon">🏢</span><h4>Startup Boilerplate</h4></div><p>A concise company description for press releases and media kits.</p></div>';

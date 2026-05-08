@@ -42,10 +42,41 @@
     .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 24px; border-radius:var(--radius-sm); font-weight:600; font-size:0.9rem; cursor:pointer; text-decoration:none; border:none; font-family:inherit; transition:all 0.2s; }
     .btn-primary { background:var(--accent); color:white; }
     .btn-primary:hover { background:var(--accent-soft); transform:translateY(-1px); }
-    .empty-state { background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-md); padding:64px 40px; text-align:center; }
+    .workspace-intro { max-width:760px; margin-bottom:28px; }
+    .workspace-intro p { color:var(--text-secondary); line-height:1.7; font-size:0.98rem; }
+    .blog-workspace { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(280px,0.9fr); gap:20px; align-items:start; }
+    .article-shell,
+    .workspace-side-card,
+    .empty-state { background:rgba(255,255,255,0.96); border:1px solid var(--border); border-radius:24px; box-shadow:0 20px 48px rgba(15,15,20,0.04); }
+    .article-shell { padding:30px; }
+    .article-status { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(215,38,61,0.08); color:var(--accent); font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; }
+    .article-shell h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2rem,3.8vw,2.8rem); line-height:1.06; letter-spacing:-0.04em; margin-bottom:14px; max-width:16ch; }
+    .article-meta { display:flex; flex-wrap:wrap; gap:12px; color:var(--text-muted); font-size:0.88rem; margin-bottom:18px; }
+    .article-excerpt { font-size:1rem; line-height:1.8; color:var(--text-secondary); margin-bottom:26px; max-width:64ch; }
+    .article-section { padding:20px 0; border-top:1px solid rgba(0,0,0,0.06); }
+    .article-section:first-of-type { border-top:none; padding-top:0; }
+    .article-section h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.15rem; line-height:1.3; margin-bottom:10px; letter-spacing:-0.02em; }
+    .article-section p { color:var(--text-secondary); line-height:1.8; }
+    .workspace-side { display:grid; gap:16px; }
+    .workspace-side-card { padding:22px; }
+    .workspace-side-card h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.05rem; margin-bottom:12px; letter-spacing:-0.02em; }
+    .workspace-side-card p { color:var(--text-secondary); font-size:0.92rem; line-height:1.65; margin-bottom:14px; }
+    .keyword-list { display:flex; flex-wrap:wrap; gap:10px; }
+    .keyword-chip { display:inline-flex; padding:8px 12px; border-radius:999px; background:var(--bg-warm); border:1px solid var(--border); color:var(--text-secondary); font-size:0.8rem; font-weight:600; }
+    .seo-list { list-style:none; display:grid; gap:12px; }
+    .seo-list li { color:var(--text-secondary); font-size:0.9rem; line-height:1.55; }
+    .seo-list strong { display:block; color:var(--text-primary); margin-bottom:4px; font-size:0.76rem; letter-spacing:0.08em; text-transform:uppercase; }
+    .workspace-actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-secondary { background:var(--bg-warm); color:var(--text-primary); border:1px solid var(--border); }
+    .btn-secondary:hover { background:#ebebeb; }
+    .empty-state { padding:64px 40px; text-align:center; }
     .empty-state-icon { width:64px; height:64px; margin:0 auto 24px; background:var(--bg-elevated); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.75rem; }
     .empty-state h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.2rem; font-weight:600; margin-bottom:8px; }
     .empty-state p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:24px; max-width:400px; margin-left:auto; margin-right:auto; }
+    .is-hidden { display:none !important; }
+    @media (max-width: 980px) {
+      .blog-workspace { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -99,18 +130,101 @@
     </aside>
     <main class="main">
       <h1>Blog + Founder Story</h1>
-      <div class="empty-state">
+      <div class="workspace-intro">
+        <p>Your interview-powered article lives here. ToniPR turns founder context, proof points, and positioning into a draft that is easier to review, publish, and repurpose for search visibility.</p>
+      </div>
+      <div class="empty-state" id="blogWorkspaceEmpty">
         <div class="empty-state-icon">📄</div>
         <h3>No content yet</h3>
         <p>Start your PR kit to draft blog articles and founder-story content from your interview. Your long-form content will appear here.</p>
         <a href="auth.html" class="btn btn-primary">Start Your PR Kit</a>
+      </div>
+      <div class="blog-workspace is-hidden" id="blogWorkspace">
+        <article class="article-shell" aria-labelledby="workspaceArticleTitle">
+          <span class="article-status" id="workspaceStatus">Ready to publish</span>
+          <h2 id="workspaceArticleTitle">Your generated article title will appear here</h2>
+          <div class="article-meta">
+            <span id="workspaceCompany">Company</span>
+            <span id="workspaceDate">Today</span>
+            <span id="workspaceReadTime">6 min read</span>
+          </div>
+          <p class="article-excerpt" id="workspaceExcerpt">The generated summary and positioning angle will appear here after an interview.</p>
+          <div id="workspaceSections"></div>
+        </article>
+        <aside class="workspace-side">
+          <div class="workspace-side-card">
+            <h3>SEO framing</h3>
+            <ul class="seo-list">
+              <li><strong>SEO title</strong><span id="workspaceSeoTitle">Generated after your interview.</span></li>
+              <li><strong>Meta description</strong><span id="workspaceMetaDescription">A concise search snippet appears here once the draft exists.</span></li>
+              <li><strong>Primary audience</strong><span id="workspaceAudience">High-intent prospects</span></li>
+            </ul>
+          </div>
+          <div class="workspace-side-card">
+            <h3>Keyword clusters</h3>
+            <div class="keyword-list" id="workspaceKeywords">
+              <span class="keyword-chip">Founder story</span>
+              <span class="keyword-chip">SEO draft</span>
+            </div>
+          </div>
+          <div class="workspace-side-card">
+            <h3>Next steps</h3>
+            <p>Use this draft as the source for your public blog, founder story page, and any long-form SEO content you want ToniPR to anchor.</p>
+            <div class="workspace-actions">
+              <a href="dashboard.html#dash-section-blog" class="btn btn-primary">Back to dashboard</a>
+              <a href="blog/index.html" class="btn btn-secondary">Browse public blog</a>
+            </div>
+          </div>
+        </aside>
       </div>
     </main>
   </div>
   </div>
   <script src="js/dashboard-shell.js"></script>
   <script>
-    (function(){var p=JSON.parse(localStorage.getItem('tonipr_profile')||'{}');if(p.name){var n=document.querySelector('.sidebar-user-name');var c=document.querySelector('.sidebar-user-company');var a=document.querySelector('.sidebar-user-avatar');if(n)n.textContent=p.name;if(c)c.textContent=p.company||'';if(a)a.textContent=(p.name.split(' ').map(function(x){return x[0];}).join('')||'U').substring(0,2).toUpperCase();}})();
+    (function(){
+      function readJsonStorage(key){
+        try { return JSON.parse(localStorage.getItem(key) || 'null'); }
+        catch (e) { return null; }
+      }
+
+      var p = readJsonStorage('tonipr_profile') || {};
+      if (p.name) {
+        var n = document.querySelector('.sidebar-user-name');
+        var c = document.querySelector('.sidebar-user-company');
+        var a = document.querySelector('.sidebar-user-avatar');
+        if (n) n.textContent = p.name;
+        if (c) c.textContent = p.company || '';
+        if (a) a.textContent = (p.name.split(' ').map(function(x){ return x[0]; }).join('') || 'U').substring(0,2).toUpperCase();
+      }
+
+      var article = readJsonStorage('tonipr_generated_blog_article');
+      if (!article || !article.title) return;
+
+      var empty = document.getElementById('blogWorkspaceEmpty');
+      var workspace = document.getElementById('blogWorkspace');
+      if (empty) empty.classList.add('is-hidden');
+      if (workspace) workspace.classList.remove('is-hidden');
+
+      var sections = Array.isArray(article.sections) ? article.sections : [];
+      document.getElementById('workspaceStatus').textContent = article.status || 'Ready to publish';
+      document.getElementById('workspaceArticleTitle').textContent = article.title;
+      document.getElementById('workspaceCompany').textContent = article.companyName || p.company || 'Your company';
+      document.getElementById('workspaceDate').textContent = article.publishedAt || 'Today';
+      document.getElementById('workspaceReadTime').textContent = article.readingTime || '6 min read';
+      document.getElementById('workspaceExcerpt').textContent = article.excerpt || article.summary || 'Your generated blog excerpt will appear here.';
+      document.getElementById('workspaceSeoTitle').textContent = article.seoTitle || article.title;
+      document.getElementById('workspaceMetaDescription').textContent = article.metaDescription || article.summary || 'Your generated search description will appear here.';
+      document.getElementById('workspaceAudience').textContent = article.audience || 'High-intent prospects';
+      document.getElementById('workspaceSections').innerHTML = sections.map(function(section){
+        return '<section class="article-section"><h3>' + section.heading + '</h3><p>' + section.body + '</p></section>';
+      }).join('');
+
+      var keywords = Array.isArray(article.keywords) ? article.keywords : [];
+      document.getElementById('workspaceKeywords').innerHTML = keywords.map(function(keyword){
+        return '<span class="keyword-chip">' + keyword + '</span>';
+      }).join('') || '<span class="keyword-chip">Founder story</span><span class="keyword-chip">SEO draft</span>';
+    })();
   </script>
 </body>
 </html>
